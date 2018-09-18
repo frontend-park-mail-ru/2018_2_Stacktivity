@@ -141,7 +141,7 @@ body {
 .circle.green    { background: #43AC4C }
 .circle.grey     { background: #aaaaaa }
 
-.index_nav {
+.navigation {
     position: absolute;
     top: 0;
     left: 50%;
@@ -153,7 +153,7 @@ body {
     right: 260px;
 }
 
-#signin_link {
+#signup_link {
     top: 200px;
     left: 320px;
 }
