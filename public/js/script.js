@@ -1,21 +1,23 @@
-'use strict'
+'use strict';
 
-import {NavigationComponent} from "./components/nav/nav.js"
+import {NavigationComponent} from "./components/nav/nav.js";
+import {LeaderboardComponent} from "./components/leaderboard/leaderboard.js";
 
-const root = document.getElementById("root")
-const navigation = new NavigationComponent({el: root})
+const root = document.getElementById("root");
+const navigation = new NavigationComponent({el: root});
 
-let is_logged_in = 0
+let is_logged_in = 0;
 
 let user = {
 	username: "Silvman",
 	avatar: "silvatar.png",
-}
+};
+
 
 function createMenu() {
-	let is_page = false
+	let is_page = false;
 
-	root.innerHTML = Handlebars.templates["header"]({is_page, desc: "No desc",})
+	root.innerHTML = Handlebars.templates["header"]({is_page, desc: "No desc",});
 
 	if (is_logged_in) {
 		navigation.data = {
@@ -37,9 +39,9 @@ function createMenu() {
 					class: ["big", "red"],
 					id: "profile_link",
 					href: "profile",
-				},
+				}
 			]
-		}
+		};
 	} else {
 		navigation.data = {
 			links: [
@@ -62,23 +64,24 @@ function createMenu() {
 					href: "signup",
 				},
 			]
-		}
+		};
 	}
 
-	navigation.render()
+	navigation.render();
 
 	// аватарка
 	if (is_logged_in) {
-		document.getElementById("profile_link").innerHTML = "<span><img src=\"../" + user.avatar + "\" class=\"avatar\" /></span>"
+		document.getElementById("profile_link").innerHTML = "<span><img src=\"../" + user.avatar + "\" class=\"avatar\" /></span>";
 	}
 
-	root.innerHTML += Handlebars.templates["menu"]()
+	root.innerHTML += Handlebars.templates["menu"]();
 }
 
-function createSingUp() {
-	let is_page = true
 
-	root.innerHTML = Handlebars.templates["header"]({is_page, desc: "Signing up",})
+function createSingUp() {
+	let is_page = true;
+
+	root.innerHTML = Handlebars.templates["header"]({is_page, desc: "Signing up",});
 
 	navigation.data = {
 		links: [
@@ -95,12 +98,12 @@ function createSingUp() {
 				href: "/",
 			}
 		]
-	}
-	navigation.render()
+	};
+	navigation.render();
 
 
-	let content = document.createElement("main")
-	content.classList.add("page_content")
+	let content = document.createElement("main");
+	content.classList.add("page_content");
 
 	let formContext = {
 		commonError: "Several fixes is required",
@@ -131,26 +134,27 @@ function createSingUp() {
 				error: "Passwords do not match"
 			},
 		]
-	}
+	};
 
 	// просто загрушка для интерактива,  убрать когда будут жсоны
 	content.addEventListener('submit', function (event) {
-		event.preventDefault()
+		event.preventDefault();
 		Array.from(document.getElementsByClassName("error")).forEach(function (elem) {
 			elem.classList.remove("hidden")
-		})
-	})
+		});
+	});
 
-	content.innerHTML = Handlebars.templates.user_form(formContext)
+	content.innerHTML = Handlebars.templates.user_form(formContext);
 
-	root.appendChild(content)
+	root.appendChild(content);
 
 }
 
-function createLogin() {
-	let is_page = true
 
-	root.innerHTML = Handlebars.templates["header"]({is_page, desc: "Login",})
+function createLogin() {
+	let is_page = true;
+
+	root.innerHTML = Handlebars.templates["header"]({is_page, desc: "Login",});
 
 	navigation.data = {
 		links: [
@@ -167,13 +171,13 @@ function createLogin() {
 				href: "/",
 			}
 		]
-	}
-	navigation.render()
+	};
+	navigation.render();
 
 	// компонент меню!
 
-	let content = document.createElement("main")
-	content.classList.add("page_content")
+	let content = document.createElement("main");
+	content.classList.add("page_content");
 
 	let formContext = {
 		commonError: "Wrong user or password",
@@ -190,55 +194,118 @@ function createLogin() {
 				placeholder: "Password",
 			}
 		]
-	}
+	};
 
 	// просто загрушка для интерактива, нужно убрать
 	content.addEventListener('submit', function (event) {
-		event.preventDefault()
+		event.preventDefault();
 		Array.from(document.getElementsByClassName("error")).forEach(function (elem) {
-			elem.classList.remove("hidden")
-		})
-	})
+			elem.classList.remove("hidden");
+		});
+	});
 
-	content.innerHTML = Handlebars.templates.user_form(formContext)
+	content.innerHTML = Handlebars.templates.user_form(formContext);
 
-	root.appendChild(content)
+	root.appendChild(content);
 
 }
+
+
+function createLeaderboard() {
+    let is_page = true;
+
+    root.innerHTML = Handlebars.templates["header"]({is_page, desc: "Leaderboard"});
+
+    navigation.data = {
+        links: [
+            {
+                content: "<-",
+                class: ["tiny", "grey"],
+                id: "return_link",
+                href: "/",
+            }
+        ]
+    };
+    navigation.render();
+
+    let content = document.createElement("main");
+    content.classList.add("page_content");
+
+    const leaderboard = new LeaderboardComponent({el: content});
+    leaderboard.data = {
+		users: [
+			{
+				username: "user_1",
+				scores: "123456"
+			},
+			{
+                username: "user_2",
+                scores: "987654322"
+			},
+			{
+                username: "user_3",
+                scores: "8976543"
+			}
+		],
+		pagination: [
+			{
+				symbol: "<-",
+				href: ""
+			},
+            {
+                symbol: "1",
+                href: ""
+            },
+            {
+                symbol: "2",
+                href: ""
+            },
+            {
+                symbol: "->",
+                href: ""
+            }
+		]
+	};
+	leaderboard.render();
+
+	root.appendChild(content);
+}
+
 
 const pages = {
 	menu: createMenu,
 	signup: createSingUp,
 	login: createLogin,
-}
+	leaderboard: createLeaderboard
+};
 
-createMenu()
+createMenu();
 
 root.addEventListener('click', function (event) {
-	console.log(event.target)
+	console.log(event.target);
 
-	let target = event.target
+	let target = event.target;
 
 	if (!(target instanceof HTMLAnchorElement)) {
-		target = target.closest('a')
+		target = target.closest('a');
 
 		if (!target) {
-			return
+			return;
 		}
 	}
 
-	event.preventDefault()
-	const link = target
+	event.preventDefault();
+	const link = target;
 
 	console.log({
 		href: link.href,
 		dataHref: link.dataset.href
-	})
+	});
 
-	root.innerHTML = ''
+	root.innerHTML = '';
 
 	if (link.dataset.href !== "/")
-		pages[link.dataset.href]()
+		pages[link.dataset.href]();
 	else
-		pages.menu()
-})
+		pages.menu();
+});
