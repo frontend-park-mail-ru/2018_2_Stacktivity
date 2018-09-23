@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "prestart": "npm run hand",
-    "hand": "node_modules/.bin/handlebars public/js/templates -f public/js/handlebars.precompile.js",
+    "hand": "node_modules/.bin/handlebars public/js/components/* -f public/js/handlebars.precompile.js",
     "test": "echo 'under construction\n'"
   },
   "dependencies": {

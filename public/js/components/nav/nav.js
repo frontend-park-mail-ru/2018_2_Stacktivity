@@ -16,16 +16,16 @@ export class NavigationComponent {
 			return;
 		}
 
-		this._render()
+		this._render();
 	}
 
 	_render () {
-		this._el.innerHTML += Handlebars.templates.nav(this._data)
+		this._el.innerHTML += Handlebars.templates.nav(this._data);
 
 		// важно, без этого переходы не работают!
 		this._data.links.forEach(function (el) {
-			document.getElementById(el.id).dataset.href = el.href
-		})
+			document.getElementById(el.id).dataset.href = el.href;
+		});
 
 	}
 }

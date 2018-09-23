@@ -1,4 +1,6 @@
 /* ---- style ---- */
+@import "../js/components/nav/nav.css";
+@import "../js/components/leaderboard/leaderboard.css";
 
 body {
     background: #fff;
@@ -140,13 +142,6 @@ body {
 .circle.sea_blue { background: #169DA4 }
 .circle.green    { background: #43AC4C }
 .circle.grey     { background: #aaaaaa }
-
-.navigation {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
-}
 
 #about_link {
     top: 280px;
@@ -333,43 +328,6 @@ button.submit {
 }
 
 .clear { clear: both; }
-
-.leaderboard {
-    border-collapse: initial;
-    border-bottom: 5px #355FA2 solid;
-    border-top: 5px #355FA2 solid;
-    border-radius: 40px;
-    background: transparent;
-    width: 800px;
-    padding: 20px;
-    font-size: 26px;
-}
-
-.leaderboard table {
-    width: 100%;
-}
-
-.leaderboard th {
-    font-weight: bold;
-    text-align: left;
-    background: #ddd;
-    padding: 10px;
-}
-
-.leaderboard th.username {
-    width: 30%;
-}
-
-.leaderboard th.score {
-    width: 70%;
-
-}
-
-
-.leaderboard td {
-    background: #eee;
-    padding: 8px;
-}
 
 .hidden {
     display: none;
