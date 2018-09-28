@@ -1,6 +1,6 @@
 /* ---- style ---- */
-@import "../js/components/nav/nav.css";
-@import "../js/components/leaderboard/leaderboard.css";
+@import "../js/components/Nav/Nav.css";
+@import "../js/components/Leaderboard/Leaderboard.css";
 
 body {
     background: #fff;

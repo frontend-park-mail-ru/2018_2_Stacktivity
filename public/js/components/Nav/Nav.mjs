@@ -20,9 +20,9 @@ export class NavigationComponent {
 	}
 
 	_render () {
-		this._el.innerHTML += Handlebars.templates.nav(this._data);
+		this._el.innerHTML += Handlebars.templates.Nav(this._data);
 
-		// важно, без этого переходы не работают!
+		// important, links don't work without it!
 		this._data.links.forEach(function (el) {
 			document.getElementById(el.id).dataset.href = el.href;
 		});

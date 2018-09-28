@@ -1,4 +1,4 @@
-export class LeaderboardComponent {
+export class UserFormComponent {
     constructor ({el = document.body} = {}) {
         this._el = el;
     }
@@ -20,6 +20,6 @@ export class LeaderboardComponent {
     }
 
     _render () {
-        this._el.innerHTML += Handlebars.templates.leaderboard(this._data);
+        this._el.innerHTML += Handlebars.templates.UserForm(this._data);
     }
 }

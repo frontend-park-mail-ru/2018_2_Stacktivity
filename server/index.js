@@ -92,7 +92,7 @@ app.get('/profile', function (req, res) {
 	res.json(users[username]);
 });
 
-app.get('/leaderboard', function (req, res) {
+app.get('/Leaderboard', function (req, res) {
 	const scorelist = Object.values(users)
 		.sort((l, r) => r.score - l.score)
 		.map(user => {
