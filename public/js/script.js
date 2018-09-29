@@ -5,228 +5,349 @@ import {LeaderboardComponent} from "./components/Leaderboard/Leaderboard.mjs";
 import {MenuComponent} from "./components/Menu/Menu.mjs";
 import {HeaderComponent} from "./components/Header/Header.mjs";
 import {UserFormComponent} from "./components/UserForm/UserForm.mjs";
-
+import {AjaxModule} from "./modules/ajax.js";
 
 const root = document.getElementById("root");
 
-let is_logged_in = 0;
+let curUser = {};
 
-let user = {
-	username: "Silvman",
-	avatar: "silvatar.png",
-};
-
+function switchPage(name) {
+	if (pages.hasOwnProperty(name)) {
+		root.innerHTML = "";
+		pages[name]();
+	} else {
+		root.innerHTML = "";
+		createMenu();
+	}
+}
 
 function createMenu() {
+	const header = new HeaderComponent({el: root});
+	const navigation = new NavigationComponent({el: root});
+	const menu = new MenuComponent({el: root});
+
 	let is_page = false;
 
-    const header = new HeaderComponent({el: root});
-    header.data = {is_page, desc: "No desc"};
+	header.data = {is_page, desc: "No desc"};
 	header.render();
 
-    const navigation = new NavigationComponent({el: root});
+	AjaxModule.doGet({path: "/session"})
+		.then(resp => {
+			if (resp.status === 200) {
+				return resp.json();
+			}
 
-	if (is_logged_in) {
-		navigation.data = {
-			links: [
-				{
-					content: "About",
-					class: ["medium", "sea_blue"],
-					id: "about_link",
-					href: "about",
-				},
-				{
-					content: "Logout",
-					class: ["small", "grey"],
-					id: "logout_link",
-					href: "about",
-				},
-				{
-					content: user.username, // вместо аватарки
-					class: ["big", "red"],
-					id: "profile_link",
-					href: "profile",
+			return Promise.reject(new Error("no login"))
+		})
+		.then(user => {
+			navigation.data = {
+				links: [
+					{
+						content: "About",
+						class: ["medium", "sea_blue"],
+						id: "about_link",
+						href: "about",
+					},
+					{
+						content: "Logout",
+						class: ["small", "grey"],
+						id: "logout_link",
+						href: "logout",
+					},
+					{
+						content: user.username, // вместо аватарки
+						class: ["big", "red"],
+						id: "profile_link",
+						href: "profile",
+					}
+				]
+			};
+
+			navigation.render();
+
+			// аватарка
+
+			if (user.avatar) {
+				document.getElementById("profile_link").innerHTML =
+					"<span><img src=\"../" +
+					user.avatar + "\" class=\"avatar\" /></span>";
+			}
+
+			document.getElementById("logout_link").addEventListener("click", (event) => {
+				console.log(event.target);
+				console.log("bjak");
+
+				let link = event.target;
+
+				if (!(link instanceof HTMLAnchorElement)) {
+					link = link.closest('a');
+
+					if (!link) {
+						return;
+					}
 				}
-			]
-		};
-	} else {
-		navigation.data = {
-			links: [
-				{
-					content: "About",
-					class: ["medium", "sea_blue"],
-					id: "about_link",
-					href: "about",
-				},
-				{
-					content: "Login",
-					class: ["small", "green"],
-					id: "login_link",
-					href: "login",
-				},
-				{
-					content: "Sign up",
-					class: ["big", "red"],
-					id: "signup_link",
-					href: "signup",
-				},
-			]
-		};
-	}
-	navigation.render();
 
-	// аватарка
-    // TODO: What is happening here?
-	if (is_logged_in) {
-		document.getElementById("profile_link").innerHTML =
-            "<span><img src=\"../" +
-            user.avatar + "\" class=\"avatar\" /></span>";
-	}
+				event.preventDefault();
+				event.stopPropagation();
 
-	const menu = new MenuComponent({el: root});
-	menu.render();
+				console.log({
+					href: link.href,
+					dataHref: link.dataset.href
+				});
+
+
+				AjaxModule.doDelete({path: "/session"})
+					.then(resp => {
+						if (resp.status === 200) {
+							switchPage("menu");
+						} else {
+							return Promise.reject(new Error(resp.status))
+						}
+					})
+					.catch(err => {
+						console.log(err);
+						switchPage("menu");
+					})
+			});
+
+			menu.render();
+		})
+		.catch(err => {
+			console.log(err);
+
+			navigation.data = {
+				links: [
+					{
+						content: "About",
+						class: ["medium", "sea_blue"],
+						id: "about_link",
+						href: "about",
+					},
+					{
+						content: "Login",
+						class: ["small", "green"],
+						id: "login_link",
+						href: "login",
+					},
+					{
+						content: "Sign up",
+						class: ["big", "red"],
+						id: "signup_link",
+						href: "signup",
+					},
+				]
+			};
+
+			navigation.render();
+			menu.render();
+		})
 }
 
 
-function createSingUp() {
-    let is_page = true;
-
+function createSignUp() {
     const header = new HeaderComponent({el: root});
-    header.data = {is_page, desc: "Sign Up"};
+	const navigation = new NavigationComponent({el: root});
+
+	let is_page = true;
+
+	header.data = {is_page, desc: "Sign Up"};
     header.render();
 
-    const navigation = new NavigationComponent({el: root});
-	navigation.data = {
-		links: [
-			{
-				content: "Login",
-				class: ["small", "green", "page"],
-				id: "login_link",
-				href: "login",
-			},
-			{
-				content: "<-",
-				class: ["tiny", "grey"],
-				id: "return_link",
-				href: "/",
+	AjaxModule.doGet({path: "/session"})
+		.then(resp => {
+			if (resp.status === 200) {
+				return Promise.reject(new Error("You are already registereg and even logged in!"));
 			}
-		]
-	};
-	navigation.render();
 
+			navigation.data = {
+				links: [
+					{
+						content: "Login",
+						class: ["small", "green", "page"],
+						id: "login_link",
+						href: "login",
+					},
+					{
+						content: "<-",
+						class: ["tiny", "grey"],
+						id: "return_link",
+						href: "/",
+					}
+				]
+			};
+			navigation.render();
 
-	let content = document.createElement("main");
-	content.classList.add("page_content");
+			let content = document.createElement("main");
+			content.classList.add("page_content");
 
-	let formContext = {
-		commonError: "Several fixes is required",
-		submitText: "Submit",
-		fields: [
-			{
-				name: "username",
-				type: "text",
-				placeholder: "Username",
-				error: "Username must be bigger than 3 and less than 20 " +
-                "symbols and shouldn't contain anything bad"
-			},
-			{
-				name: "email",
-				type: "email",
-				placeholder: "E-Mail",
-				error: "This is not an e-mail"
-			},
-			{
-				name: "password",
-				type: "password",
-				placeholder: "Password",
-				error: "Password must be bigger than 6 and less than 36 symbols"
-			},
-			{
-				name: "password",
-				type: "password",
-				placeholder: "Confirm password",
-				error: "Passwords do not match"
-			},
-		]
-	};
+			const signInForm = new UserFormComponent({el: content});
+			signInForm.data = {
+				id: "signup_form",
+				commonError: "Several fixes is required",
+				submitText: "Submit",
+				fields: [
+					{
+						name: "username",
+						type: "text",
+						placeholder: "Username",
+						error: "Username must be bigger than 3 and less than 20 " +
+							"symbols and shouldn't contain anything bad"
+					},
+					{
+						name: "email",
+						type: "email",
+						placeholder: "E-Mail",
+						error: "This is not an e-mail"
+					},
+					{
+						name: "password1",
+						type: "password",
+						placeholder: "Password",
+						error: "Password must be bigger than 6 and less than 36 symbols"
+					},
+					{
+						name: "password2",
+						type: "password",
+						placeholder: "Confirm password",
+						error: "Passwords do not match"
+					},
+				]
+			};
+			signInForm.render();
 
-	// просто загрушка для интерактива,  убрать когда будут жсоны
-	content.addEventListener('submit', function (event) {
-		event.preventDefault();
-		Array.from(document.getElementsByClassName("error"))
-            .forEach(function (elem) {
-			elem.classList.remove("hidden")
+			root.appendChild(content);
+
+			content.addEventListener('submit', function (event) {
+				event.preventDefault();
+				console.log("debug sign up", signInForm.getObject());
+				AjaxModule.doPost({path: "/user", body: signInForm.getObject()})
+					.then(resp => {
+						if (resp.status === 201 || resp.status === 400) {
+							return resp.json()
+						}
+
+						if (resp.status === 500) {
+							return Promise.reject(new Error(resp.status))
+						}
+					})
+					.then(data => {
+						if (data["ValidateSuccess"]) {
+							switchPage("menu");
+						} else {
+							// TODO нормальная валидация ошибок!
+							Array.from(document.getElementsByClassName("error"))
+								.forEach(function (elem) {
+									elem.classList.remove("hidden");
+								});
+						}
+					})
+					.catch(err => {
+						console.log(err);
+						switchPage("menu");
+					});
+			});
+		})
+		.catch(err => {
+			console.log(err);
+			switchPage("menu");
 		});
-	});
-
-	const signInForm = new UserFormComponent({el: content});
-	signInForm.data = formContext;
-	signInForm.render();
-
-	root.appendChild(content);
-
 }
+
 
 
 function createLogin() {
+    const header = new HeaderComponent({el: root});
+	const navigation = new NavigationComponent({el: root});
+
 	let is_page = true;
 
-    const header = new HeaderComponent({el: root});
     header.data = {is_page, desc: "Login"};
     header.render();
 
-    const navigation = new NavigationComponent({el: root});
-	navigation.data = {
-		links: [
-			{
-				content: "Sign up",
-				class: ["big", "red", "page"],
-				id: "signup_link",
-				href: "signup",
-			},
-			{
-				content: "<-",
-				class: ["tiny", "grey"],
-				id: "return_link",
-				href: "/",
+    AjaxModule.doGet({path: "/session"})
+		.then(resp => {
+			if (resp.status === 200) {
+				return Promise.reject(new Error("You are already logged in!"));
 			}
-		]
-	};
-	navigation.render();
 
-	let content = document.createElement("main");
-	content.classList.add("page_content");
+			navigation.data = {
+				links: [
+					{
+						content: "Sign up",
+						class: ["big", "red", "page"],
+						id: "signup_link",
+						href: "signup",
+					},
+					{
+						content: "<-",
+						class: ["tiny", "grey"],
+						id: "return_link",
+						href: "/",
+					}
+				]
+			};
+			navigation.render();
 
-	const loginForm = new UserFormComponent({el: content});
-	let formContext = {
-		commonError: "Wrong user or password",
-		submitText: "Login",
-		fields: [
-			{
-				name: "username",
-				type: "text",
-				placeholder: "Username",
-			},
-			{
-				name: "password",
-				type: "password",
-				placeholder: "Password",
-			}
-		]
-	};
-	loginForm.data = formContext;
-	loginForm.render();
+			let content = document.createElement("main");
+			content.classList.add("page_content");
 
-	// просто загрушка для интерактива, нужно убрать
-	content.addEventListener('submit', function (event) {
-		event.preventDefault();
-		Array.from(document.getElementsByClassName("error")).forEach(function (elem) {
-			elem.classList.remove("hidden");
+			const loginForm = new UserFormComponent({el: content});
+			loginForm.data = {
+				id: "login_form",
+				commonError: "Wrong user or password",
+				submitText: "Login",
+				fields: [
+					{
+						name: "username",
+						type: "text",
+						placeholder: "Username",
+					},
+					{
+						name: "password",
+						type: "password",
+						placeholder: "Password",
+					}
+				]
+			};
+			loginForm.render();
+
+			root.appendChild(content);
+
+
+			content.addEventListener('submit', function (event) {
+				event.preventDefault();
+				console.log("debug login", loginForm.getObject());
+				AjaxModule.doPost({path: "/session", body: loginForm.getObject()})
+					.then(resp => {
+						if (resp.status === 201 || resp.status === 400) {
+							return resp.json()
+						}
+
+						if (resp.status === 500) {
+							return Promise.reject(new Error(resp.status))
+						}
+					})
+					.then(data => {
+						if (data["ValidateSuccess"]) {
+							switchPage("menu");
+						} else {
+							// TODO нормальная валидация ошибок!
+							Array.from(document.getElementsByClassName("error"))
+								.forEach(function (elem) {
+									elem.classList.remove("hidden");
+								});
+						}
+					})
+					.catch(err => {
+						console.log(err);
+						switchPage("menu");
+					});
+			});
+		})
+		.catch(err => {
+			console.log(err);
+			switchPage("menu");
 		});
-	});
-
-	root.appendChild(content);
-
 }
 
 
@@ -250,53 +371,55 @@ function createLeaderboard() {
     };
     navigation.render();
 
-    let content = document.createElement("main");
-    content.classList.add("page_content");
 
-    const leaderboard = new LeaderboardComponent({el: content});
-    leaderboard.data = {
-		users: [
-			{
-				username: "user_1",
-				scores: "123456"
-			},
-			{
-                username: "user_2",
-                scores: "987654322"
-			},
-			{
-                username: "user_3",
-                scores: "8976543"
+    AjaxModule.doGet({path: "/user"})
+		.then(resp => {
+			if (resp.status === 200) {
+				return resp.json()
 			}
-		],
-		pagination: [
-			{
-				symbol: "<-",
-				href: ""
-			},
-            {
-                symbol: "1",
-                href: ""
-            },
-            {
-                symbol: "2",
-                href: ""
-            },
-            {
-                symbol: "->",
-                href: ""
-            }
-		]
-	};
-	leaderboard.render();
 
-	root.appendChild(content);
+			return Promise.reject(new Error(resp.status))
+		})
+		.then(data => {
+			let content = document.createElement("main");
+			content.classList.add("page_content");
+
+			const leaderboard = new LeaderboardComponent({el: content});
+
+			leaderboard.data = {
+				users: data,
+				pagination: [
+					{
+						symbol: "<-",
+						href: ""
+					},
+					{
+						symbol: "1",
+						href: ""
+					},
+					{
+						symbol: "2",
+						href: ""
+					},
+					{
+						symbol: "->",
+						href: ""
+					}
+				]
+			};
+			leaderboard.render();
+			root.appendChild(content);
+		})
+		.catch(err => {
+			console.log(err);
+			switchPage("menu");
+		});
 }
 
 
 const pages = {
 	menu: createMenu,
-	signup: createSingUp,
+	signup: createSignUp,
 	login: createLogin,
 	leaderboard: createLeaderboard
 };
@@ -306,28 +429,23 @@ createMenu();
 root.addEventListener('click', function (event) {
 	console.log(event.target);
 
-	let target = event.target;
+	let link = event.target;
 
-	if (!(target instanceof HTMLAnchorElement)) {
-		target = target.closest('a');
+	if (!(link instanceof HTMLAnchorElement)) {
+		link = link.closest('a');
 
-		if (!target) {
+		if (!link) {
 			return;
 		}
 	}
 
 	event.preventDefault();
-	const link = target;
 
 	console.log({
 		href: link.href,
 		dataHref: link.dataset.href
 	});
 
-	root.innerHTML = '';
-
-	if (link.dataset.href !== "/")
-		pages[link.dataset.href]();
-	else
-		pages.menu();
+	switchPage(link.dataset.href);
 });
+

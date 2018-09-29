@@ -19,6 +19,14 @@ export class NavigationComponent {
 		this._render();
 	}
 
+	generate_content (data = {}) {
+		if (data = {}) {
+
+		}
+
+
+	}
+
 	_render () {
 		this._el.innerHTML += Handlebars.templates.Nav(this._data);
 

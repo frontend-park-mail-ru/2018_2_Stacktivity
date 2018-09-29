@@ -1,10 +1,10 @@
-<form class="user_form" method="post">
+<form class="user_form" id="{{id}}" method="post">
 	<div class="error main hidden">{{commonError}}</div>
 
 	{{#fields}}
 		<fieldset>
 			<input class="input_block" name="{{name}}" type="{{type}}" placeholder="{{placeholder}}" />
-			{{#if error}}<span class="error hidden">{{error}}</span>{{/if}}
+			<span class="error hidden">{{error}}</span>
 		</fieldset>
 	{{/fields}}
 

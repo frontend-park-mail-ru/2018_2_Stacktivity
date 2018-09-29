@@ -1,13 +1,16 @@
 const noop = () => null;
 
+const base_path = "http://localhost:3001";
+
 export class AjaxModule {
-	static _ajax({callback = noop, method = "GET", path = "/", body}) {
-		if (method === "GET" || method === "HEAD") {
+	static _ajax({method = "GET", path = "/", body}) {
+		path = base_path + path;
+
+		if (method === "GET" || method === "HEAD" || method === "DELETE") {
 			return fetch(path, {
 				method: method,
-				// headers: headers,
-				// mode: "cors",
-				// credentials: "include",
+				mode: "cors",
+				credentials: "include",
 			})
 		} else {
 			let headers = {}, sendBody = "";
@@ -23,8 +26,8 @@ export class AjaxModule {
 				method: method,
 				headers: headers,
 				body: sendBody,
-				// mode: "cors",
-				// credentials: "include",
+				mode: "cors",
+				credentials: "include",
 			})
 		}
 	}
@@ -59,5 +62,9 @@ export class AjaxModule {
 
 	static doPost(params = {}) {
 		return this._ajax({...params, method: 'POST'});
+	}
+
+	static doDelete(params = {}) {
+		return this._ajax({...params, method: 'DELETE'});
 	}
 }

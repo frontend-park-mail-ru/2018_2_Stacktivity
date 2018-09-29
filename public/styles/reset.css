@@ -50,3 +50,8 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+a {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+}

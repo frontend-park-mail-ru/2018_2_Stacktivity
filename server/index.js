@@ -23,16 +23,16 @@ const users = {
 		score: 1,
 	},
 	'constaconst': {
-		username: 'silvman',
+		username: 'constaconst',
 		email: 'stack@blep.dev',
 		password: 'password',
-		score: 1,
+		score: 2,
 	},
 	'falcon': {
-		username: 'silvman',
+		username: 'falcon',
 		email: 'stack@blep.dev',
 		password: 'password',
-		score: 1,
+		score: 3,
 	},
 };
 
@@ -64,6 +64,8 @@ app.post('/signup', function (req, res) {
 });
 
 app.post('/login', function (req, res) {
+	console.log(req.body);
+
 	const password = req.body.password;
 	const username = req.body.username;
 	if (!password || !username) {
@@ -98,8 +100,7 @@ app.get('/Leaderboard', function (req, res) {
 		.map(user => {
 			return {
 				username: user.username,
-				email: user.email,
-				score: user.score,
+				scores: user.score,
 			}
 		});
 
