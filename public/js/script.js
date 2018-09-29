@@ -5,11 +5,13 @@ import {LeaderboardComponent} from "./components/Leaderboard/Leaderboard.mjs";
 import {MenuComponent} from "./components/Menu/Menu.mjs";
 import {HeaderComponent} from "./components/Header/Header.mjs";
 import {UserFormComponent} from "./components/UserForm/UserForm.mjs";
+import {AboutComponent} from "./components/About/About.mjs";
+import {ProfileComponent} from "./components/Profile/Profile.mjs";
 
 
 const root = document.getElementById("root");
 
-let is_logged_in = 0;
+let is_logged_in = 1;
 
 let user = {
 	username: "Silvman",
@@ -198,23 +200,22 @@ function createLogin() {
 	content.classList.add("page_content");
 
 	const loginForm = new UserFormComponent({el: content});
-	let formContext = {
-		commonError: "Wrong user or password",
-		submitText: "Login",
-		fields: [
-			{
-				name: "username",
-				type: "text",
-				placeholder: "Username",
-			},
-			{
-				name: "password",
-				type: "password",
-				placeholder: "Password",
-			}
-		]
-	};
-	loginForm.data = formContext;
+    loginForm.data = {
+        commonError: "Wrong user or password",
+        submitText: "Login",
+        fields: [
+            {
+                name: "username",
+                type: "text",
+                placeholder: "Username",
+            },
+            {
+                name: "password",
+                type: "password",
+                placeholder: "Password",
+            }
+        ]
+    };
 	loginForm.render();
 
 	// просто загрушка для интерактива, нужно убрать
@@ -294,11 +295,71 @@ function createLeaderboard() {
 }
 
 
+function createAbout() {
+    let is_page = true;
+    const header = new HeaderComponent({el: root});
+    header.data = {is_page, desc: "About"};
+    header.render();
+
+    const navigation = new NavigationComponent({el: root});
+    navigation.data = {
+        links: [
+            {
+                content: "<-",
+                class: ["tiny", "grey"],
+                id: "return_link",
+                href: "/",
+            }
+        ]
+    };
+    navigation.render();
+
+    let content = document.createElement("main");
+    content.classList.add("page_content");
+
+    const about = new AboutComponent({el: content});
+    about.render();
+
+    root.appendChild(content);
+}
+
+
+function createProfile() {
+    let is_page = true;
+    const header = new HeaderComponent({el: root});
+    header.data = {is_page, desc: "Profile"};
+    header.render();
+
+    const navigation = new NavigationComponent({el: root});
+    navigation.data = {
+        links: [
+            {
+                content: "<-",
+                class: ["tiny", "grey"],
+                id: "return_link",
+                href: "/",
+            }
+        ]
+    };
+    navigation.render();
+
+    let content = document.createElement("main");
+    content.classList.add("page_content");
+
+    const profile = new ProfileComponent({el: content});
+    profile.render();
+
+    root.appendChild(content);
+}
+
+
 const pages = {
 	menu: createMenu,
 	signup: createSingUp,
 	login: createLogin,
-	leaderboard: createLeaderboard
+	leaderboard: createLeaderboard,
+    about: createAbout,
+    profile: createProfile
 };
 
 createMenu();

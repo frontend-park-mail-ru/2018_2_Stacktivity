@@ -1,0 +1,32 @@
+<form class="user_form" method="post">
+    <div class="error main hidden">Some fields are not valid</div>
+
+    <h1 class="score">Your score: 200</h1>
+
+    <fieldset>
+        <label for="usernameInput">Username: <a href="#">[change]</a> </label>
+        <input class="profile_input" id="usernameInput" name="username" type="text" value="Silvman" readonly/>
+        <span class="error hidden">Username must be bigger than 3 and less than 20 symbols and shouldn't contain anything bad</span>
+    </fieldset>
+
+    <fieldset>
+        <label for="emailInput">E-mail: <a href="#">[change]</a></label>
+        <input class="profile_input" id="emailInput" name="email" type="email" value="e@mail.dev" readonly/>
+        <span class="error hidden">This is not an e-mail</span>
+    </fieldset>
+
+    <fieldset>
+        <label for="passwordInput">Password: <a href="#">[change]</a></label>
+        <input class="profile_input" id="passwordInput" name="password" type="password" value="******" readonly/>
+        <span class="error hidden">Password must be bigger than 6 and less than 36 symbols</span>
+    </fieldset>
+
+    <fieldset>
+        <label for="avatarInput">Avatar: <a href="#">[change]</a></label>
+        <img src="../public/silvatar.png" class="profile_avatar">
+        <input class="profile_input hidden" id="avatarInput" name="password" type="file" value="******"/>
+        <span class="error hidden">Your avatar is very big!</span>
+    </fieldset>
+
+    <button class="submit">Update settings</button>
+</form>
