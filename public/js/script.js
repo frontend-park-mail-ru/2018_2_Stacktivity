@@ -1,10 +1,13 @@
 'use strict';
 
-import {NavigationComponent} from "./components/nav/nav.js";
-import {LeaderboardComponent} from "./components/leaderboard/leaderboard.js";
+import {NavigationComponent} from "./components/Nav/Nav.mjs";
+import {LeaderboardComponent} from "./components/Leaderboard/Leaderboard.mjs";
+import {MenuComponent} from "./components/Menu/Menu.mjs";
+import {HeaderComponent} from "./components/Header/Header.mjs";
+import {UserFormComponent} from "./components/UserForm/UserForm.mjs";
+
 
 const root = document.getElementById("root");
-const navigation = new NavigationComponent({el: root});
 
 let is_logged_in = 0;
 
@@ -17,7 +20,12 @@ let user = {
 function createMenu() {
 	let is_page = false;
 
-	root.innerHTML = Handlebars.templates["header"]({is_page, desc: "No desc",});
+    const header = new HeaderComponent({el: root});
+    header.data = {is_page, desc: "No desc"};
+	header.render();
+
+    // Why can't I do {el: root} ?
+    const navigation = new NavigationComponent(root);
 
 	if (is_logged_in) {
 		navigation.data = {
@@ -66,15 +74,19 @@ function createMenu() {
 			]
 		};
 	}
-
 	navigation.render();
 
 	// аватарка
+    // TODO: What is happening here?
 	if (is_logged_in) {
-		document.getElementById("profile_link").innerHTML = "<span><img src=\"../" + user.avatar + "\" class=\"avatar\" /></span>";
+		document.getElementById("profile_link").innerHTML =
+            "<span><img src=\"../" +
+            user.avatar + "\" class=\"avatar\" /></span>";
 	}
 
-	root.innerHTML += Handlebars.templates["menu"]();
+    // Why can't I do {el: root} ?
+	const menu = new MenuComponent(root);
+	menu.render();
 }
 
 
@@ -214,8 +226,11 @@ function createLogin() {
 function createLeaderboard() {
     let is_page = true;
 
-    root.innerHTML = Handlebars.templates["header"]({is_page, desc: "Leaderboard"});
+    const header = new HeaderComponent(root);
+    header.data = {is_page, desc: 'Leaderboard"'};
+    header.render();
 
+    const navigation = new NavigationComponent(root);
     navigation.data = {
         links: [
             {
