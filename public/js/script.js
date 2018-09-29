@@ -24,8 +24,7 @@ function createMenu() {
     header.data = {is_page, desc: "No desc"};
 	header.render();
 
-    // Why can't I do {el: root} ?
-    const navigation = new NavigationComponent(root);
+    const navigation = new NavigationComponent({el: root});
 
 	if (is_logged_in) {
 		navigation.data = {
@@ -84,17 +83,19 @@ function createMenu() {
             user.avatar + "\" class=\"avatar\" /></span>";
 	}
 
-    // Why can't I do {el: root} ?
-	const menu = new MenuComponent(root);
+	const menu = new MenuComponent({el: root});
 	menu.render();
 }
 
 
 function createSingUp() {
-	let is_page = true;
+    let is_page = true;
 
-	root.innerHTML = Handlebars.templates["header"]({is_page, desc: "Signing up",});
+    const header = new HeaderComponent({el: root});
+    header.data = {is_page, desc: "Sign Up"};
+    header.render();
 
+    const navigation = new NavigationComponent({el: root});
 	navigation.data = {
 		links: [
 			{
@@ -125,7 +126,8 @@ function createSingUp() {
 				name: "username",
 				type: "text",
 				placeholder: "Username",
-				error: "Username must be bigger than 3 and less than 20 symbols and shouldn't contain anything bad"
+				error: "Username must be bigger than 3 and less than 20 " +
+                "symbols and shouldn't contain anything bad"
 			},
 			{
 				name: "email",
@@ -151,12 +153,15 @@ function createSingUp() {
 	// просто загрушка для интерактива,  убрать когда будут жсоны
 	content.addEventListener('submit', function (event) {
 		event.preventDefault();
-		Array.from(document.getElementsByClassName("error")).forEach(function (elem) {
+		Array.from(document.getElementsByClassName("error"))
+            .forEach(function (elem) {
 			elem.classList.remove("hidden")
 		});
 	});
 
-	content.innerHTML = Handlebars.templates.user_form(formContext);
+	const signInForm = new UserFormComponent({el: content});
+	signInForm.data = formContext;
+	signInForm.render();
 
 	root.appendChild(content);
 
@@ -166,8 +171,11 @@ function createSingUp() {
 function createLogin() {
 	let is_page = true;
 
-	root.innerHTML = Handlebars.templates["header"]({is_page, desc: "Login",});
+    const header = new HeaderComponent({el: root});
+    header.data = {is_page, desc: "Login"};
+    header.render();
 
+    const navigation = new NavigationComponent({el: root});
 	navigation.data = {
 		links: [
 			{
@@ -186,11 +194,10 @@ function createLogin() {
 	};
 	navigation.render();
 
-	// компонент меню!
-
 	let content = document.createElement("main");
 	content.classList.add("page_content");
 
+	const loginForm = new UserFormComponent({el: content});
 	let formContext = {
 		commonError: "Wrong user or password",
 		submitText: "Login",
@@ -207,6 +214,8 @@ function createLogin() {
 			}
 		]
 	};
+	loginForm.data = formContext;
+	loginForm.render();
 
 	// просто загрушка для интерактива, нужно убрать
 	content.addEventListener('submit', function (event) {
@@ -216,8 +225,6 @@ function createLogin() {
 		});
 	});
 
-	content.innerHTML = Handlebars.templates.user_form(formContext);
-
 	root.appendChild(content);
 
 }
@@ -226,11 +233,11 @@ function createLogin() {
 function createLeaderboard() {
     let is_page = true;
 
-    const header = new HeaderComponent(root);
-    header.data = {is_page, desc: 'Leaderboard"'};
+    const header = new HeaderComponent({el: root});
+    header.data = {is_page, desc: "Leaderboard"};
     header.render();
 
-    const navigation = new NavigationComponent(root);
+    const navigation = new NavigationComponent({el: root});
     navigation.data = {
         links: [
             {
