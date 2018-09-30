@@ -112,3 +112,15 @@ const port = process.env.PORT || 3000;
 app.listen(port, function () {
 	console.log(`Server listening port ${port}`);
 });
+
+app.get('/me', function (req, res) {
+    const id = req.cookies['sessionid'];
+    const email = ids[id];
+    if (!email || !users[email]) {
+        return res.status(401).end();
+    }
+
+    users[ email ].score += 1;
+
+    res.json(users[ email ]);
+});
