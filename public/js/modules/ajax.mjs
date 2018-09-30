@@ -1,6 +1,4 @@
-const noop = () => null;
-
-const base_path = "http://localhost:3000";
+import {base_path} from "../config.js";
 
 export class AjaxModule {
 	static _ajax({method = "GET", path = "/", body}) {

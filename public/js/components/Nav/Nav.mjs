@@ -84,29 +84,7 @@ export class NavigationComponent {
 				]
 			},
 
-			leaderboard: {
-				links: [
-					{
-						content: "<-",
-						class: ["tiny", "grey"],
-						id: "return_link",
-						href: "/",
-					}
-				]
-			},
-
-			about: {
-				links: [
-					{
-						content: "<-",
-						class: ["tiny", "grey"],
-						id: "return_link",
-						href: "/",
-					}
-				]
-			},
-
-			profile: {
+			return_link: {
 				links: [
 					{
 						content: "<-",
@@ -120,17 +98,13 @@ export class NavigationComponent {
 	}
 
 	render(name) {
-		this._render(name);
-	}
-
-	_render(name) {
 		this._el.innerHTML += Handlebars.templates.Nav(this._pageNavigations[name]);
 
 		// important, links don't work without it!
 		this._pageNavigations[name].links.forEach(function (el) {
 			document.getElementById(el.id).dataset.href = el.href;
-		});
 
+		});
 	}
 }
 

@@ -1,4 +1,4 @@
-import {AjaxModule} from "../../modules/ajax.js";
+import {AjaxModule} from "../../modules/ajax.mjs";
 
 export class UserFormComponent {
 	constructor({el = document.body} = {}) {

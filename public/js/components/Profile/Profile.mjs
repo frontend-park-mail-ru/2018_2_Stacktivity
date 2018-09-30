@@ -1,4 +1,4 @@
-import {AjaxModule} from "../../modules/ajax.js";
+import {AjaxModule} from "../../modules/ajax.mjs";
 
 export class ProfileComponent {
 	constructor({el = document.body} = {}) {
@@ -32,9 +32,6 @@ export class ProfileComponent {
 
 				return Promise.reject(new Error(resp.status));
 			})
-			.then(data => {
-				return Promise.resolve();
-			});
 	};
 
 	render() {
