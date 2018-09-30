@@ -1,3 +1,5 @@
+# 2018_2_Stacktivity
+
 ## SPA
 
 Сервер запускаем с помощью
@@ -18,3 +20,4 @@ npm start
 ```
 npm run hand
 ```
+
