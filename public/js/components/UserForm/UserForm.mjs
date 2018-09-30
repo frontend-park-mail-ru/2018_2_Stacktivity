@@ -81,11 +81,12 @@ export class UserFormComponent {
                     input.value)) {
                     if (!isLogin)
                         err.classList.remove("hidden");
-                } else {
+
+					isValid = false;
+				} else {
                     if (!isLogin)
                         err.classList.add("hidden");
                 }
-                isValid = false;
             }
         }
 
@@ -116,11 +117,11 @@ export class UserFormComponent {
 				if (data.ValidateSuccess) {
 					return Promise.resolve();
 				} else {
-					// TODO нормальная валидация ошибок!
-					Array.from(document.getElementsByClassName("error"))
-						.forEach(function (elem) {
-							elem.classList.remove("hidden");
-						});
+					// // TODO нормальная валидация ошибок от сервера!
+					// Array.from(document.getElementsByClassName("error"))
+					// 	.forEach(function (elem) {
+					// 		elem.classList.remove("hidden");
+					// 	});
 
 					return false
 				}

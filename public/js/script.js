@@ -107,14 +107,14 @@ function createSignUp() {
 					},
 					{
 						name: "password1",
-						validationType: "passwordValidate",
+						validationType: "validate_password",
 						type: "password",
 						placeholder: "Password",
 						error: "Password must be bigger than 6 and less than 36 symbols"
 					},
 					{
 						name: "password2",
-						validationType: "passwordValidateRepeat",
+						validationType: "validate_password_repeat",
 						type: "password",
 						placeholder: "Confirm password",
 						error: "Passwords do not match"
@@ -124,8 +124,6 @@ function createSignUp() {
 			signInForm.render();
 
 			root.appendChild(content);
-
-			console.log(signInForm.getErrorfield("passwordValidateRepeat"));
 
 			content.addEventListener("submit", function (event) {
 				event.preventDefault();
@@ -178,13 +176,13 @@ function createLogin() {
 				fields: [
 					{
 						name: "username",
-						validationType: "usernameValidate",
+						validationType: "validate_username",
 						type: "text",
 						placeholder: "Username",
 					},
 					{
 						name: "password",
-						validationType: "passwordValidate",
+						validationType: "validate_password",
 						type: "password",
 						placeholder: "Password",
 					}
