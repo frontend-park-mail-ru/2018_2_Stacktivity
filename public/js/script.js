@@ -92,7 +92,7 @@ function createSignUp() {
 				fields: [
 					{
 						name: "username",
-						validationType: "usernameValidate",
+						validationType: "validate_username",
 						type: "text",
 						placeholder: "Username",
 						error: "Username must be bigger than 3 and less than 20 " +
@@ -100,7 +100,7 @@ function createSignUp() {
 					},
 					{
 						name: "email",
-						validationType: "emailValidate",
+						validationType: "validate_email",
 						type: "email",
 						placeholder: "E-Mail",
 						error: "This is not an e-mail"
