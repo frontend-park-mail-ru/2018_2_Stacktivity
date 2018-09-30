@@ -12,10 +12,10 @@ import {ProfileComponent} from "./components/Profile/Profile.mjs";
 
 const root = document.getElementById("root");
 
-function switchPage(name) {
+function switchPage(name, param) {
 	if (pages.hasOwnProperty(name)) {
 		root.innerHTML = "";
-		pages[name]();
+		pages[name](param);
 	} else {
 		root.innerHTML = "";
 		createMenu();
@@ -334,14 +334,15 @@ function createLogin() {
 }
 
 
-function createLeaderboard() {
+function createLeaderboard(page) {
 	let is_page = true;
 
 	const header = new HeaderComponent({el: root});
+	const navigation = new NavigationComponent({el: root});
+
 	header.data = {is_page, desc: "Leaderboard"};
 	header.render();
 
-	const navigation = new NavigationComponent({el: root});
 	navigation.data = {
 		links: [
 			{
@@ -354,8 +355,11 @@ function createLeaderboard() {
 	};
 	navigation.render();
 
+	if (!page || page <= 0) {
+		page = 1;
+	}
 
-	AjaxModule.doGet({path: "/user"})
+	AjaxModule.doGet({path: `/user/?page=${page}`})
 		.then(resp => {
 			if (resp.status === 200) {
 				return resp.json();
@@ -370,28 +374,34 @@ function createLeaderboard() {
 			const leaderboard = new LeaderboardComponent({el: content});
 
 			leaderboard.data = {
-				users: data,
-				pagination: [
-					{
-						symbol: "<-",
-						href: ""
-					},
-					{
-						symbol: "1",
-						href: ""
-					},
-					{
-						symbol: "2",
-						href: ""
-					},
-					{
-						symbol: "->",
-						href: ""
-					}
-				]
+				users: data
 			};
 			leaderboard.render();
+
 			root.appendChild(content);
+
+
+			document.getElementById("prev_page_link").addEventListener('click', (event) => {
+				event.preventDefault();
+				event.stopImmediatePropagation();
+				page -= 1;
+
+				console.log(page);
+				switchPage("leaderboard", page);
+
+			});
+
+			document.getElementById("next_page_link").addEventListener('click', (event) => {
+				event.preventDefault();
+				event.stopImmediatePropagation();
+				page += 1;
+
+				console.log(page);
+
+
+				switchPage("leaderboard", page);
+			});
+
 		})
 		.catch(err => {
 			console.log(err);

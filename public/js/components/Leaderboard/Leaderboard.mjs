@@ -21,5 +21,6 @@ export class LeaderboardComponent {
 
     _render () {
         this._el.innerHTML += Handlebars.templates.Leaderboard(this._data);
-    }
+
+	}
 }
