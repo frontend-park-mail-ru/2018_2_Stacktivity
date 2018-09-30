@@ -13,11 +13,11 @@ import {ProfileComponent} from "./components/Profile/Profile.mjs";
 const root = document.getElementById("root");
 
 function switchPage(name, param) {
+	root.innerHTML = "";
+
 	if (pages.hasOwnProperty(name)) {
-		root.innerHTML = "";
 		pages[name](param);
 	} else {
-		root.innerHTML = "";
 		createMenu();
 	}
 }
@@ -41,69 +41,24 @@ function createMenu() {
 			return Promise.reject(new Error("no login"));
 		})
 		.then(user => {
-			navigation.data = {
-				links: [
-					{
-						content: "About",
-						class: ["medium", "sea_blue"],
-						id: "about_link",
-						href: "about",
-					},
-					{
-						content: "Logout",
-						class: ["small", "grey"],
-						id: "logout_link",
-						href: "logout",
-					},
-					{
-						content: user.username, // вместо аватарки
-						class: ["big", "red"],
-						id: "profile_link",
-						href: "profile",
-					}
-				]
-			};
-
-			navigation.render();
-
+			navigation.render("menu_auth");
 			// аватарка
 
+			let profile_link = document.getElementById("profile_link");
 			if (user.avatar) {
-				document.getElementById("profile_link").innerHTML =
+				profile_link.innerHTML =
 					"<span><img src=\"../" +
 					user.avatar + "\" class=\"avatar\" /></span>";
+			} else {
+				profile_link.innerHTML = `<span>${user.username}</span>`;
 			}
-
 
 			menu.render();
 		})
 		.catch(err => {
 			console.log(err);
 
-			navigation.data = {
-				links: [
-					{
-						content: "About",
-						class: ["medium", "sea_blue"],
-						id: "about_link",
-						href: "about",
-					},
-					{
-						content: "Login",
-						class: ["small", "green"],
-						id: "login_link",
-						href: "login",
-					},
-					{
-						content: "Sign up",
-						class: ["big", "red"],
-						id: "signup_link",
-						href: "signup",
-					},
-				]
-			};
-
-			navigation.render();
+			navigation.render("menu");
 			menu.render();
 		});
 }
@@ -124,23 +79,7 @@ function createSignUp() {
 				return Promise.reject(new Error("You are already registereg and even logged in!"));
 			}
 
-			navigation.data = {
-				links: [
-					{
-						content: "Login",
-						class: ["small", "green", "page"],
-						id: "login_link",
-						href: "login",
-					},
-					{
-						content: "<-",
-						class: ["tiny", "grey"],
-						id: "return_link",
-						href: "/",
-					}
-				]
-			};
-			navigation.render();
+			navigation.render("signup");
 
 			let content = document.createElement("main");
 			content.classList.add("page_content");
@@ -190,36 +129,19 @@ function createSignUp() {
 
 			content.addEventListener("submit", function (event) {
 				event.preventDefault();
-				console.log("debug sign up", signInForm.getObject());
 
-				signInForm.frontVadidate();
-
-
-				AjaxModule.doPost({path: "/user", body: signInForm.getObject()})
-					.then(resp => {
-						if (resp.status === 201 || resp.status === 400) {
-							return resp.json();
-						}
-
-						if (resp.status === 500) {
-							return Promise.reject(new Error(resp.status));
-						}
-					})
-					.then(data => {
-						if (data.ValidateSuccess) {
+				if (signInForm.frontVadidate()) {
+					signInForm.sendData({path: "/user"})
+						.then((res) => {
+							if (res) {
+								switchPage("menu");
+							}
+						})
+						.catch((err) => {
+							console.log(err);
 							switchPage("menu");
-						} else {
-							// TODO нормальная валидация ошибок!
-							Array.from(document.getElementsByClassName("error"))
-								.forEach(function (elem) {
-									elem.classList.remove("hidden");
-								});
-						}
-					})
-					.catch(err => {
-						console.log(err);
-						switchPage("menu");
-					});
+						})
+				}
 			});
 		})
 		.catch(err => {
@@ -243,24 +165,7 @@ function createLogin() {
 			if (resp.status === 200) {
 				return Promise.reject(new Error("You are already logged in!"));
 			}
-
-			navigation.data = {
-				links: [
-					{
-						content: "Sign up",
-						class: ["big", "red", "page"],
-						id: "signup_link",
-						href: "signup",
-					},
-					{
-						content: "<-",
-						class: ["tiny", "grey"],
-						id: "return_link",
-						href: "/",
-					}
-				]
-			};
-			navigation.render();
+			navigation.render("login");
 
 			let content = document.createElement("main");
 			content.classList.add("page_content");
@@ -289,42 +194,21 @@ function createLogin() {
 
 			root.appendChild(content);
 
-
-			console.log(document.getElementById("passwordValidate"));
-
-			console.log();
-
 			content.addEventListener("submit", function (event) {
 				event.preventDefault();
-				console.log("debug login", loginForm.getObject());
 
-				loginForm.frontVadidate();
-
-				AjaxModule.doPost({path: "/session", body: loginForm.getObject()})
-					.then(resp => {
-						if (resp.status === 201 || resp.status === 400) {
-							return resp.json();
-						}
-
-						if (resp.status === 500) {
-							return Promise.reject(new Error(resp.status));
-						}
-					})
-					.then(data => {
-						if (data.ValidateSuccess) {
+				if (loginForm.frontVadidate()) {
+					loginForm.sendData({path: "/session"})
+						.then((res) => {
+							if (res) {
+								switchPage("menu");
+							}
+						})
+						.catch((err) => {
+							console.log(err);
 							switchPage("menu");
-						} else {
-							// TODO нормальная валидация ошибок!
-							Array.from(document.getElementsByClassName("error"))
-								.forEach(function (elem) {
-									elem.classList.remove("hidden");
-								});
-						}
-					})
-					.catch(err => {
-						console.log(err);
-						switchPage("menu");
-					});
+						});
+				}
 			});
 		})
 		.catch(err => {
@@ -343,17 +227,7 @@ function createLeaderboard(page) {
 	header.data = {is_page, desc: "Leaderboard"};
 	header.render();
 
-	navigation.data = {
-		links: [
-			{
-				content: "<-",
-				class: ["tiny", "grey"],
-				id: "return_link",
-				href: "/",
-			}
-		]
-	};
-	navigation.render();
+	navigation.render("leaderboard");
 
 	if (!page || page <= 0) {
 		page = 1;
@@ -397,8 +271,6 @@ function createLeaderboard(page) {
 				page += 1;
 
 				console.log(page);
-
-
 				switchPage("leaderboard", page);
 			});
 
@@ -417,17 +289,7 @@ function createAbout() {
 	header.render();
 
 	const navigation = new NavigationComponent({el: root});
-	navigation.data = {
-		links: [
-			{
-				content: "<-",
-				class: ["tiny", "grey"],
-				id: "return_link",
-				href: "/",
-			}
-		]
-	};
-	navigation.render();
+	navigation.render("about");
 
 	let content = document.createElement("main");
 	content.classList.add("page_content");
@@ -446,27 +308,44 @@ function createProfile() {
 	header.render();
 
 	const navigation = new NavigationComponent({el: root});
-	navigation.data = {
-		links: [
-			{
-				content: "<-",
-				class: ["tiny", "grey"],
-				id: "return_link",
-				href: "/",
+	navigation.render("profile");
+
+	AjaxModule.doGet({path: "/session"})
+		.then((resp) => {
+			if (resp.status === 200) {
+				return resp.json();
 			}
-		]
-	};
-	navigation.render();
 
-	let content = document.createElement("main");
-	content.classList.add("page_content");
+			return Promise.reject(new Error("no login"));
+		})
+		.then(user => {
+			let content = document.createElement("main");
+			content.classList.add("page_content");
 
-	const profile = new ProfileComponent({el: content});
-	profile.render();
+			const profile = new ProfileComponent({el: content});
+			profile.data = user;
+			profile.render();
 
-	root.appendChild(content);
+			root.appendChild(content);
+
+			content.addEventListener("submit", (event) => {
+				event.preventDefault();
+				profile.sendData()
+					.then(() => {
+						switchPage("profile");
+					})
+					.catch((err) => {
+						console.log(err);
+						switchPage("menu");
+					});
+			});
+
+		})
+		.catch(err => {
+			console.log(err);
+			switchPage("menu");
+		});
 }
-
 
 const pages = {
 	menu: createMenu,

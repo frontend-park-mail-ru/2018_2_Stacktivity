@@ -1,3 +1,5 @@
+import {AjaxModule} from "../../modules/ajax.js";
+
 export class UserFormComponent {
 	constructor({el = document.body} = {}) {
 		this._el = el;
@@ -25,7 +27,7 @@ export class UserFormComponent {
 
 	getObject() {
 		return Array.from(document.getElementById(this._data.id).elements).reduce((acc, val) => {
-			if (val.name !== "") {
+			if (val.value !== "") {
 				acc[val.name] = val.value;
 			}
 			return acc;
@@ -58,6 +60,32 @@ export class UserFormComponent {
 	serverValidate(data) {
 		// server validation
 	}
+
+	sendData(params = {}) {
+		return AjaxModule.doPost({...params, body: this.getObject()})
+			.then(resp => {
+				if (resp.status === 201 || resp.status === 400) {
+					return resp.json();
+				}
+
+				if (resp.status === 500) {
+					return Promise.reject(new Error(resp.status));
+				}
+			})
+			.then(data => {
+				if (data.ValidateSuccess) {
+					return Promise.resolve();
+				} else {
+					// TODO нормальная валидация ошибок!
+					Array.from(document.getElementsByClassName("error"))
+						.forEach(function (elem) {
+							elem.classList.remove("hidden");
+						});
+
+					return false
+				}
+			})
+	};
 
 	_render() {
 		this._el.innerHTML += Handlebars.templates.UserForm(this._data);

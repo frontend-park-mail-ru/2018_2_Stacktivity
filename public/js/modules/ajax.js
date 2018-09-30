@@ -32,30 +32,6 @@ export class AjaxModule {
 		}
 	}
 
-	static _ajax_xhr({callback = noop, method = "GET", path = "/", body} = {}) {
-		const xhr = new XMLHttpRequest();
-		xhr.open(method, path, true);
-		xhr.withCredentials = true;
-
-		if (body) {
-			xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-		}
-
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState !== 4) {
-				return;
-			}
-
-			callback(xhr);
-		};
-
-		if (body) {
-			xhr.send(JSON.stringify(body));
-		} else {
-			xhr.send();
-		}
-	}
-
 	static doGet(params = {}) {
 		return this._ajax({...params, method: "GET"});
 	}
@@ -67,4 +43,8 @@ export class AjaxModule {
 	static doDelete(params = {}) {
 		return this._ajax({...params, method: "DELETE"});
 	}
+
+	static doPut(params = {}) {
+		return this._ajax({...params, method: "PUT"});
+	};
 }

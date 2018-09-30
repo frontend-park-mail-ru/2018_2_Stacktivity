@@ -1,26 +1,26 @@
 export class LeaderboardComponent {
-    constructor ({el = document.body} = {}) {
-        this._el = el;
-    }
+	constructor({el = document.body} = {}) {
+		this._el = el;
+	}
 
-    get data () {
-        return this._data;
-    }
+	get data() {
+		return this._data;
+	}
 
-    set data (data) {
-        this._data = data;
-    }
+	set data(data) {
+		this._data = data;
+	}
 
-    render () {
-        if (!this._data) {
-            return;
-        }
+	render() {
+		if (!this._data) {
+			return;
+		}
 
-        this._render();
-    }
+		this._render();
+	}
 
-    _render () {
-        this._el.innerHTML += Handlebars.templates.Leaderboard(this._data);
+	_render() {
+		this._el.innerHTML += Handlebars.templates.Leaderboard(this._data);
 
 	}
 }
