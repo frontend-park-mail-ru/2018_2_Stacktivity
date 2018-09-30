@@ -32,7 +32,7 @@ function createMenu() {
 	header.data = {is_page, desc: "No desc"};
 	header.render();
 
-	AjaxModule.doGet({path: "/session"})
+	AjaxModule.doGet({path: "/me"})
 		.then((resp) => {
 			if (resp.status === 200) {
 				return resp.json();
@@ -118,7 +118,7 @@ function createSignUp() {
 	header.data = {is_page, desc: "Sign Up"};
 	header.render();
 
-	AjaxModule.doGet({path: "/session"})
+	AjaxModule.doGet({path: "/me"})
 		.then(resp => {
 			if (resp.status === 200) {
 				return Promise.reject(new Error("You are already registereg and even logged in!"));
@@ -145,57 +145,55 @@ function createSignUp() {
 			let content = document.createElement("main");
 			content.classList.add("page_content");
 
-			const signInForm = new UserFormComponent({el: content});
-			signInForm.data = {
+			const signUpForm = new UserFormComponent({el: content});
+            signUpForm.data = {
 				id: "signup_form",
 				commonError: "Several fixes is required",
 				submitText: "Submit",
 				fields: [
 					{
 						name: "username",
-						validationType: "usernameValidate",
+						validationType: "validate_username",
 						type: "text",
 						placeholder: "Username",
-						error: "Username must be bigger than 3 and less than 20 " +
+						error: "Username must be bigger than 4 and less than 20 " +
 							"symbols and shouldn\'t contain anything bad"
 					},
 					{
 						name: "email",
-						validationType: "emailValidate",
+						validationType: "validate_email",
 						type: "email",
 						placeholder: "E-Mail",
 						error: "This is not an e-mail"
 					},
 					{
 						name: "password1",
-						validationType: "passwordValidate",
+						validationType: "validate_password",
 						type: "password",
 						placeholder: "Password",
-						error: "Password must be bigger than 6 and less than 36 symbols"
+						error: "Password must be bigger than 4 and less than 20 symbols"
 					},
 					{
 						name: "password2",
-						validationType: "passwordValidateRepeat",
+						validationType: "validate_password_repeat",
 						type: "password",
 						placeholder: "Confirm password",
 						error: "Passwords do not match"
 					},
 				]
 			};
-			signInForm.render();
+            signUpForm.render();
 
 			root.appendChild(content);
 
-			console.log(signInForm.getErrorfield("passwordValidateRepeat"));
-
 			content.addEventListener("submit", function (event) {
 				event.preventDefault();
-				console.log("debug sign up", signInForm.getObject());
+				console.log("debug sign up", signUpForm.getObject());
 
-				signInForm.frontVadidate();
+				if (!signUpForm.frontVadidate()) return;
 
 
-				AjaxModule.doPost({path: "/user", body: signInForm.getObject()})
+				AjaxModule.doPost({path: "/user", body: signUpForm.getObject()})
 					.then(resp => {
 						if (resp.status === 201 || resp.status === 400) {
 							return resp.json();
@@ -238,7 +236,7 @@ function createLogin() {
 	header.data = {is_page, desc: "Login"};
 	header.render();
 
-	AjaxModule.doGet({path: "/session"})
+	AjaxModule.doGet({path: "/me"})
 		.then(resp => {
 			if (resp.status === 200) {
 				return Promise.reject(new Error("You are already logged in!"));
@@ -273,13 +271,13 @@ function createLogin() {
 				fields: [
 					{
 						name: "username",
-						validationType: "usernameValidate",
+						validationType: "validate_username",
 						type: "text",
 						placeholder: "Username",
 					},
 					{
 						name: "password",
-						validationType: "passwordValidate",
+						validationType: "validate_password",
 						type: "password",
 						placeholder: "Password",
 					}
@@ -290,17 +288,13 @@ function createLogin() {
 			root.appendChild(content);
 
 
-			console.log(document.getElementById("passwordValidate"));
-
-			console.log();
-
 			content.addEventListener("submit", function (event) {
 				event.preventDefault();
 				console.log("debug login", loginForm.getObject());
 
-				loginForm.frontVadidate();
+				if (!loginForm.frontVadidate()) return;
 
-				AjaxModule.doPost({path: "/session", body: loginForm.getObject()})
+				AjaxModule.doPost({path: "/me", body: loginForm.getObject()})
 					.then(resp => {
 						if (resp.status === 201 || resp.status === 400) {
 							return resp.json();
@@ -490,7 +484,7 @@ root.addEventListener("click", function (event) {
 	});
 
 	if (link.dataset.href === "logout") {
-		AjaxModule.doDelete({path: "/session"})
+		AjaxModule.doDelete({path: "/me"})
 			.then(resp => {
 				if (resp.status === 200) {
 					switchPage("menu");

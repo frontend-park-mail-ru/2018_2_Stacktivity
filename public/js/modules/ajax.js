@@ -1,6 +1,6 @@
 const noop = () => null;
 
-const base_path = "http://localhost:3001";
+const base_path = "http://localhost:3000";
 
 export class AjaxModule {
 	static _ajax({method = "GET", path = "/", body}) {

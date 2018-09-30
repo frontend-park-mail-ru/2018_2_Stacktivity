@@ -19,10 +19,6 @@ export class UserFormComponent {
 		this._render();
 	}
 
-	getErrorfield(name) {
-		return document.getElementById(name).getElementsByClassName("error")[0];
-	}
-
 	getObject() {
 		return Array.from(document.getElementById(this._data.id).elements).reduce((acc, val) => {
 			if (val.name !== "") {
@@ -33,27 +29,71 @@ export class UserFormComponent {
 	}
 
 	frontVadidate() {
-		if (this._data.id === "signup_form") {
-			let err = this.getErrorfield("passwordValidateRepeat");
+        let isValid = true;
+        const isLogin = this._data.id === "login_form";
+        const formElem = document.getElementById(this._data.id);
 
-			err.classList.remove("hidden");
-			err.innerText = "Hello!";
+	    for (const elem of formElem.getElementsByClassName("validate")) {
+	        let input = elem.getElementsByTagName("input")[0];
+            let err = elem.getElementsByClassName("error")[0];
 
-			console.log(this.getErrorfield("passwordValidateRepeat"));
-		}
+            console.log("Validate " + input.name + ": " + input.value);
 
-		if (this._data.id === "login_form") {
-			let err = this.getErrorfield("passwordValidate");
+	        if (input.classList.contains("validate_username")) {
+	            if (!this._usernameValidate(input.value)) {
+	                if (!isLogin)
+                        err.classList.remove("hidden");
 
-			err.classList.remove("hidden");
-			err.innerText = "Hi!";
+                    isValid = false;
+                } else {
+                    if (!isLogin)
+	                    err.classList.add("hidden");
+                }
+            }
+            if (input.classList.contains("validate_email")) {
+                if (!this._emailValidate(input.value)) {
+                    if (!isLogin)
+                        err.classList.remove("hidden");
 
-			console.log(this.getErrorfield("passwordValidate"));
-		}
-		// frontend validation
+                    isValid = false;
+                } else {
+                    if (!isLogin)
+                        err.classList.add("hidden");
+                }
+            }
+            if (input.classList.contains("validate_password")) {
+                if (!this._passwordValidate(input.value)) {
+                    if (!isLogin)
+                        err.classList.remove("hidden");
 
-		return true;
-	}
+                    isValid = false;
+                } else {
+                    if (!isLogin)
+                        err.classList.add("hidden");
+                }
+            }
+            if (input.classList.contains("validate_password_repeat")) {
+                const password1 = document.getElementsByClassName(
+                    "validate_password");
+                if (!this._doublePasswordValidate(password1[0].value,
+                    input.value)) {
+                    if (!isLogin)
+                        err.classList.remove("hidden");
+                } else {
+                    if (!isLogin)
+                        err.classList.add("hidden");
+                }
+                isValid = false;
+            }
+        }
+
+        if (isLogin && !isValid) {
+            formElem.getElementsByClassName("common_error")[0]
+                .classList.remove("hidden");
+        }
+
+        return isValid;
+    }
 
 	serverValidate(data) {
 		// server validation
@@ -61,5 +101,70 @@ export class UserFormComponent {
 
 	_render() {
 		this._el.innerHTML += Handlebars.templates.UserForm(this._data);
+	}
+
+	_hasCorrectSymbols(word) {
+        const CORRECT_PATTERN = /^[-0-9a-z@_\-.]+$/i;
+        return CORRECT_PATTERN.test(word);
+	}
+
+	_hasCorrectLendth(word) {
+		const MIN_LEN = 4;
+		const MAX_LEN = 20;
+
+		const len = word.length;
+		return len >= MIN_LEN && len <= MAX_LEN;
+	}
+
+	_usernameValidate(username) {
+		let isValid = true;
+
+		if (!this._hasCorrectSymbols(username)) {
+			isValid = false;
+		}
+        if (!this._hasCorrectLendth(username)) {
+            isValid = false;
+        }
+
+        return isValid;
+	}
+
+	_emailValidate(email) {
+        const  EMAIL_PATTERN = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let isValid = true;
+        if (!EMAIL_PATTERN.test(email)) {
+        	isValid = false;
+		}
+
+		return isValid;
+	}
+
+	_passwordValidate(password) {
+        let isValid = true;
+
+        if (!this._hasCorrectSymbols(password)) {
+            isValid = false;
+        }
+        if (!this._hasCorrectLendth(password)) {
+            isValid = false;
+        }
+
+        return isValid;
+	}
+
+	_doublePasswordValidate(password1, password2) {
+		let isValid = true;
+
+		if (!this._passwordValidate(password1)) {
+			isValid = false;
+		}
+		if (!this._passwordValidate(password2)) {
+			isValid = false;
+		}
+        if (password1 !== password2) {
+            isValid = false;
+		}
+
+		return isValid;
 	}
 }
