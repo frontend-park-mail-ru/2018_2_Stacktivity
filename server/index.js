@@ -38,29 +38,54 @@ const users = {
 
 const ids = {};
 
-app.post('/signup', function (req, res) {
-	const username = req.body.username;
-	const password = req.body.password;
-	const email = req.body.email;
-	if (
-		!username || !password || !email || !age ||
-		!password.match(/^\S{4,}$/) ||
-		!email.match(/@/) ||
-		!(typeof age === 'number' && age > 10 && age < 100)
-	) {
-		return res.status(400).json({error: 'Не валидные данные пользователя'});
-	}
-	if (users[username]) {
-		return res.status(400).json({error: 'Пользователь уже существует'});
-	}
+app.post('/user', function (req, res) {
+	// const username = req.body.username;
+	// const password = req.body.password;
+	// const email = req.body.email;
+	// if (
+	// 	!username || !password || !email || !age ||
+	// 	!password.match(/^\S{4,}$/) ||
+	// 	!email.match(/@/) ||
+	// 	!(typeof age === 'number' && age > 10 && age < 100)
+	// ) {
+	// 	return res.status(400).json({error: 'Не валидные данные пользователя'});
+	// }
+	// if (users[username]) {
+	// 	return res.status(400).json({error: 'Пользователь уже существует'});
+	// }
+    //
+	// const id = uuid();
+	// const user = {username, password, email, score: 0};
+	// ids[id] = username;
+	// users[username] = user;
 
-	const id = uuid();
-	const user = {username, password, email, score: 0};
-	ids[id] = username;
-	users[username] = user;
+	//res.cookie('sessionid', id, {expires: new Date(Date.now() + 1000 * 60 * 10)});
+	res.status(201).json(
+        {
+            "ValidateSuccess": false,
+            "user": {
+                "username": "j.sparrow",
+                "email": "captaina@blackpearl.sea",
+                "avatar": "avatar.jpg",
+                "score": 0
+            },
+            "usernameValidate": {
+                "success": true,
+                "error": {
+                    "message": "Can't find user with id #42\n"
+                }
+            },
+            "emailValidate": {
+                "success": true,
+                "error": {
+                    "message": "Can't find user with id #42\n"
+                }
+            },
 
-	res.cookie('sessionid', id, {expires: new Date(Date.now() + 1000 * 60 * 10)});
-	res.status(201).json({id});
+            "error": {
+                "message": "Can't find user with id #42\n"
+            }
+        });
 });
 
 app.post('/login', function (req, res) {

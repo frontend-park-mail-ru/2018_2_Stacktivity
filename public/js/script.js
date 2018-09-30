@@ -56,8 +56,6 @@ function createMenu() {
 			menu.render();
 		})
 		.catch(err => {
-			console.log(err);
-
 			navigation.render("menu");
 			menu.render();
 		});
@@ -128,7 +126,7 @@ function createSignUp() {
 			content.addEventListener("submit", function (event) {
 				event.preventDefault();
 
-				if (signInForm.frontVadidate()) {
+				if (signInForm.frontValidate()) {
 					signInForm.sendData({path: "/user"})
 						.then((res) => {
 							if (res) {
@@ -136,14 +134,12 @@ function createSignUp() {
 							}
 						})
 						.catch((err) => {
-							console.log(err);
 							switchPage("menu");
 						})
 				}
 			});
 		})
 		.catch(err => {
-			console.log(err);
 			switchPage("menu");
 		});
 }
@@ -195,7 +191,7 @@ function createLogin() {
 			content.addEventListener("submit", function (event) {
 				event.preventDefault();
 
-				if (loginForm.frontVadidate()) {
+				if (loginForm.frontValidate()) {
 					loginForm.sendData({path: "/session"})
 						.then((res) => {
 							if (res) {
@@ -203,14 +199,12 @@ function createLogin() {
 							}
 						})
 						.catch((err) => {
-							console.log(err);
 							switchPage("menu");
 						});
 				}
 			});
 		})
 		.catch(err => {
-			console.log(err);
 			switchPage("menu");
 		});
 }
@@ -258,7 +252,6 @@ function createLeaderboard(page) {
 				event.stopImmediatePropagation();
 				page -= 1;
 
-				console.log(page);
 				switchPage("leaderboard", page);
 
 			});
@@ -268,13 +261,11 @@ function createLeaderboard(page) {
 				event.stopImmediatePropagation();
 				page += 1;
 
-				console.log(page);
 				switchPage("leaderboard", page);
 			});
 
 		})
 		.catch(err => {
-			console.log(err);
 			switchPage("menu");
 		});
 }
@@ -333,14 +324,12 @@ function createProfile() {
 						switchPage("profile");
 					})
 					.catch((err) => {
-						console.log(err);
 						switchPage("menu");
 					});
 			});
 
 		})
 		.catch(err => {
-			console.log(err);
 			switchPage("menu");
 		});
 }
@@ -357,7 +346,6 @@ const pages = {
 createMenu();
 
 root.addEventListener("click", function (event) {
-	console.log(event.target);
 
 	let link = event.target;
 
@@ -371,11 +359,6 @@ root.addEventListener("click", function (event) {
 
 	event.preventDefault();
 
-	console.log({
-		href: link.href,
-		dataHref: link.dataset.href
-	});
-
 	if (link.dataset.href === "logout") {
 		AjaxModule.doDelete({path: "/session"})
 			.then(resp => {
@@ -386,7 +369,6 @@ root.addEventListener("click", function (event) {
 				}
 			})
 			.catch(err => {
-				console.log(err);
 				switchPage("menu");
 			});
 	} else {

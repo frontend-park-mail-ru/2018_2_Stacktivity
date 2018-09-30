@@ -21,6 +21,15 @@ export class UserFormComponent {
 		this._render();
 	}
 
+    getErrorfield(name) {
+        for (const elem of document.getElementById(this._data.id).
+            getElementsByClassName("validate")) {
+            if (elem.getElementsByTagName("input")[0].classList.contains(name)) {
+                return elem.getElementsByClassName("error")[0];
+            }
+        }
+    }
+
 	getObject() {
 		return Array.from(document.getElementById(this._data.id).elements).reduce((acc, val) => {
 			if (val.value !== "") {
@@ -30,7 +39,7 @@ export class UserFormComponent {
 		}, {}); // harvesting values from form into the object
 	}
 
-	frontVadidate() {
+	frontValidate() {
         let isValid = true;
         const isLogin = this._data.id === "login_form";
         const formElem = document.getElementById(this._data.id);
@@ -39,54 +48,44 @@ export class UserFormComponent {
 	        let input = elem.getElementsByTagName("input")[0];
             let err = elem.getElementsByClassName("error")[0];
 
-            console.log("Validate " + input.name + ": " + input.value);
-
 	        if (input.classList.contains("validate_username")) {
-	            if (!this._usernameValidate(input.value)) {
-	                if (!isLogin)
-                        err.classList.remove("hidden");
+                const isValidField = this._usernameValidate(input.value);
 
-                    isValid = false;
-                } else {
-                    if (!isLogin)
-	                    err.classList.add("hidden");
+                if (!isLogin) {
+                    this._switchShowingError(err, isValidField);
                 }
+
+                isValid = isValidField ? isValid : false;
             }
             if (input.classList.contains("validate_email")) {
-                if (!this._emailValidate(input.value)) {
-                    if (!isLogin)
-                        err.classList.remove("hidden");
+                const isValidField = this._emailValidate(input.value);
 
-                    isValid = false;
-                } else {
-                    if (!isLogin)
-                        err.classList.add("hidden");
+                if (!isLogin) {
+                    this._switchShowingError(err, isValidField);
                 }
+
+                isValid = isValidField ? isValid : false;
             }
             if (input.classList.contains("validate_password")) {
-                if (!this._passwordValidate(input.value)) {
-                    if (!isLogin)
-                        err.classList.remove("hidden");
+                const isValidField = this._passwordValidate(input.value);
 
-                    isValid = false;
-                } else {
-                    if (!isLogin)
-                        err.classList.add("hidden");
+                if (!isLogin) {
+                    this._switchShowingError(err, isValidField);
                 }
+
+                isValid = isValidField ? isValid : false;
             }
             if (input.classList.contains("validate_password_repeat")) {
                 const password1 = document.getElementsByClassName(
                     "validate_password");
-                if (!this._doublePasswordValidate(password1[0].value,
-                    input.value)) {
-                    if (!isLogin)
-                        err.classList.remove("hidden");
+                const isValidField = this._doublePasswordValidate(
+                    password1[0].value, input.value);
 
-					isValid = false;
-				} else {
-                    if (!isLogin)
-                        err.classList.add("hidden");
+                if (!isLogin) {
+                    this._switchShowingError(err, isValidField);
                 }
+
+                isValid = isValidField ? isValid : false;
             }
         }
 
@@ -99,7 +98,44 @@ export class UserFormComponent {
     }
 
 	serverValidate(data) {
-		// server validation
+	    if (data.ValidateSuccess) return true;
+
+	    if (this._data.id === "login_form") {
+            document.getElementsByClassName("common_error")[0]
+                .classList.remove("hidden");
+            return false;
+        }
+
+        if (data.usernameValidate.success) {
+            this._switchShowingError(
+                this.getErrorfield("validate_username"), true);
+        } else {
+            this._switchShowingError(
+                this.getErrorfield("validate_username"), false);
+        }
+        if (data.emailValidate.success) {
+            this._switchShowingError(
+                this.getErrorfield("validate_email"), true);
+        } else {
+            this._switchShowingError(
+                this.getErrorfield("validate_email"), false);
+        }
+        if (data.passwordValidate.success) {
+            this._switchShowingError(
+                this.getErrorfield("validate_password"), true);
+        } else {
+            this._switchShowingError(
+                this.getErrorfield("validate_password"), false);
+        }
+        if (data.passwordRepeatValidate.success) {
+            this._switchShowingError(
+                this.getErrorfield("validate_password_repeat"), true);
+        } else {
+            this._switchShowingError(
+                this.getErrorfield("validate_password_repeat"), false);
+        }
+
+        return false;
 	}
 
 	sendData(params = {}) {
@@ -114,16 +150,8 @@ export class UserFormComponent {
 				}
 			})
 			.then(data => {
-				if (data.ValidateSuccess) {
+				if (this.serverValidate(data)) {
 					return Promise.resolve();
-				} else {
-					// // TODO нормальная валидация ошибок от сервера!
-					// Array.from(document.getElementsByClassName("error"))
-					// 	.forEach(function (elem) {
-					// 		elem.classList.remove("hidden");
-					// 	});
-
-					return false
 				}
 			})
 	};
@@ -196,4 +224,12 @@ export class UserFormComponent {
 
 		return isValid;
 	}
+
+	_switchShowingError(err, isValid) {
+        if (isValid) {
+            err.classList.add("hidden");
+        } else {
+            err.classList.remove("hidden");
+        }
+    }
 }
