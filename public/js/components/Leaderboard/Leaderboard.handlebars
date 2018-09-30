@@ -1,0 +1,28 @@
+<div class="leaderboard">
+    <table>
+        <thead>
+        <tr>
+            <th class="username">Username</th>
+            <th class="score">Scores</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each users}}
+            <tr>
+                <td>
+                    {{username}}
+                </td>
+                <td>
+                    {{score}}
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+    <ul class="pagination">
+        {{#each pagination}}
+            <li><a href="{{href}}">{{symbol}}</a></li>
+        {{/each}}
+    </ul>
+</div>
