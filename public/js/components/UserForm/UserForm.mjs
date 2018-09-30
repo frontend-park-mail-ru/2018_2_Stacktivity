@@ -19,6 +19,10 @@ export class UserFormComponent {
 		this._render();
 	}
 
+	getErrorfield(name) {
+		return document.getElementById(name).getElementsByClassName("error")[0];
+	}
+
 	getObject() {
 		return Array.from(document.getElementById(this._data.id).elements).reduce((acc, val) => {
 			if (val.name !== "") {
@@ -29,9 +33,26 @@ export class UserFormComponent {
 	}
 
 	frontVadidate() {
+		if (this._data.id === "signup_form") {
+			let err = this.getErrorfield("passwordValidateRepeat");
+
+			err.classList.remove("hidden");
+			err.innerText = "Hello!";
+
+			console.log(this.getErrorfield("passwordValidateRepeat"));
+		}
+
+		if (this._data.id === "login_form") {
+			let err = this.getErrorfield("passwordValidate");
+
+			err.classList.remove("hidden");
+			err.innerText = "Hi!";
+
+			console.log(this.getErrorfield("passwordValidate"));
+		}
 		// frontend validation
 
-		return true
+		return true;
 	}
 
 	serverValidate(data) {

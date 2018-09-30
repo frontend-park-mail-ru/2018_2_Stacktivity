@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 import {NavigationComponent} from "./components/Nav/Nav.mjs";
 import {LeaderboardComponent} from "./components/Leaderboard/Leaderboard.mjs";
@@ -11,9 +11,6 @@ import {ProfileComponent} from "./components/Profile/Profile.mjs";
 
 
 const root = document.getElementById("root");
-
-let is_logged_in = 1;
-let curUser = {};
 
 function switchPage(name) {
 	if (pages.hasOwnProperty(name)) {
@@ -36,12 +33,12 @@ function createMenu() {
 	header.render();
 
 	AjaxModule.doGet({path: "/session"})
-		.then(resp => {
+		.then((resp) => {
 			if (resp.status === 200) {
 				return resp.json();
 			}
 
-			return Promise.reject(new Error("no login"))
+			return Promise.reject(new Error("no login"));
 		})
 		.then(user => {
 			navigation.data = {
@@ -77,42 +74,6 @@ function createMenu() {
 					user.avatar + "\" class=\"avatar\" /></span>";
 			}
 
-			document.getElementById("logout_link").addEventListener("click", (event) => {
-				console.log(event.target);
-				console.log("bjak");
-
-				let link = event.target;
-
-				if (!(link instanceof HTMLAnchorElement)) {
-					link = link.closest('a');
-
-					if (!link) {
-						return;
-					}
-				}
-
-				event.preventDefault();
-				event.stopPropagation();
-
-				console.log({
-					href: link.href,
-					dataHref: link.dataset.href
-				});
-
-
-				AjaxModule.doDelete({path: "/session"})
-					.then(resp => {
-						if (resp.status === 200) {
-							switchPage("menu");
-						} else {
-							return Promise.reject(new Error(resp.status))
-						}
-					})
-					.catch(err => {
-						console.log(err);
-						switchPage("menu");
-					})
-			});
 
 			menu.render();
 		})
@@ -144,18 +105,18 @@ function createMenu() {
 
 			navigation.render();
 			menu.render();
-		})
+		});
 }
 
 
 function createSignUp() {
-    const header = new HeaderComponent({el: root});
+	const header = new HeaderComponent({el: root});
 	const navigation = new NavigationComponent({el: root});
 
 	let is_page = true;
 
 	header.data = {is_page, desc: "Sign Up"};
-    header.render();
+	header.render();
 
 	AjaxModule.doGet({path: "/session"})
 		.then(resp => {
@@ -192,25 +153,29 @@ function createSignUp() {
 				fields: [
 					{
 						name: "username",
+						validationType: "usernameValidate",
 						type: "text",
 						placeholder: "Username",
 						error: "Username must be bigger than 3 and less than 20 " +
-							"symbols and shouldn't contain anything bad"
+							"symbols and shouldn\'t contain anything bad"
 					},
 					{
 						name: "email",
+						validationType: "emailValidate",
 						type: "email",
 						placeholder: "E-Mail",
 						error: "This is not an e-mail"
 					},
 					{
 						name: "password1",
+						validationType: "passwordValidate",
 						type: "password",
 						placeholder: "Password",
 						error: "Password must be bigger than 6 and less than 36 symbols"
 					},
 					{
 						name: "password2",
+						validationType: "passwordValidateRepeat",
 						type: "password",
 						placeholder: "Confirm password",
 						error: "Passwords do not match"
@@ -221,21 +186,27 @@ function createSignUp() {
 
 			root.appendChild(content);
 
-			content.addEventListener('submit', function (event) {
+			console.log(signInForm.getErrorfield("passwordValidateRepeat"));
+
+			content.addEventListener("submit", function (event) {
 				event.preventDefault();
 				console.log("debug sign up", signInForm.getObject());
+
+				signInForm.frontVadidate();
+
+
 				AjaxModule.doPost({path: "/user", body: signInForm.getObject()})
 					.then(resp => {
 						if (resp.status === 201 || resp.status === 400) {
-							return resp.json()
+							return resp.json();
 						}
 
 						if (resp.status === 500) {
-							return Promise.reject(new Error(resp.status))
+							return Promise.reject(new Error(resp.status));
 						}
 					})
 					.then(data => {
-						if (data["ValidateSuccess"]) {
+						if (data.ValidateSuccess) {
 							switchPage("menu");
 						} else {
 							// TODO нормальная валидация ошибок!
@@ -258,17 +229,16 @@ function createSignUp() {
 }
 
 
-
 function createLogin() {
-    const header = new HeaderComponent({el: root});
+	const header = new HeaderComponent({el: root});
 	const navigation = new NavigationComponent({el: root});
 
 	let is_page = true;
 
-    header.data = {is_page, desc: "Login"};
-    header.render();
+	header.data = {is_page, desc: "Login"};
+	header.render();
 
-    AjaxModule.doGet({path: "/session"})
+	AjaxModule.doGet({path: "/session"})
 		.then(resp => {
 			if (resp.status === 200) {
 				return Promise.reject(new Error("You are already logged in!"));
@@ -303,11 +273,13 @@ function createLogin() {
 				fields: [
 					{
 						name: "username",
+						validationType: "usernameValidate",
 						type: "text",
 						placeholder: "Username",
 					},
 					{
 						name: "password",
+						validationType: "passwordValidate",
 						type: "password",
 						placeholder: "Password",
 					}
@@ -318,21 +290,28 @@ function createLogin() {
 			root.appendChild(content);
 
 
-			content.addEventListener('submit', function (event) {
+			console.log(document.getElementById("passwordValidate"));
+
+			console.log();
+
+			content.addEventListener("submit", function (event) {
 				event.preventDefault();
 				console.log("debug login", loginForm.getObject());
+
+				loginForm.frontVadidate();
+
 				AjaxModule.doPost({path: "/session", body: loginForm.getObject()})
 					.then(resp => {
 						if (resp.status === 201 || resp.status === 400) {
-							return resp.json()
+							return resp.json();
 						}
 
 						if (resp.status === 500) {
-							return Promise.reject(new Error(resp.status))
+							return Promise.reject(new Error(resp.status));
 						}
 					})
 					.then(data => {
-						if (data["ValidateSuccess"]) {
+						if (data.ValidateSuccess) {
 							switchPage("menu");
 						} else {
 							// TODO нормальная валидация ошибок!
@@ -356,33 +335,33 @@ function createLogin() {
 
 
 function createLeaderboard() {
-    let is_page = true;
+	let is_page = true;
 
-    const header = new HeaderComponent({el: root});
-    header.data = {is_page, desc: "Leaderboard"};
-    header.render();
+	const header = new HeaderComponent({el: root});
+	header.data = {is_page, desc: "Leaderboard"};
+	header.render();
 
-    const navigation = new NavigationComponent({el: root});
-    navigation.data = {
-        links: [
-            {
-                content: "<-",
-                class: ["tiny", "grey"],
-                id: "return_link",
-                href: "/",
-            }
-        ]
-    };
-    navigation.render();
+	const navigation = new NavigationComponent({el: root});
+	navigation.data = {
+		links: [
+			{
+				content: "<-",
+				class: ["tiny", "grey"],
+				id: "return_link",
+				href: "/",
+			}
+		]
+	};
+	navigation.render();
 
 
-    AjaxModule.doGet({path: "/user"})
+	AjaxModule.doGet({path: "/user"})
 		.then(resp => {
 			if (resp.status === 200) {
-				return resp.json()
+				return resp.json();
 			}
 
-			return Promise.reject(new Error(resp.status))
+			return Promise.reject(new Error(resp.status));
 		})
 		.then(data => {
 			let content = document.createElement("main");
@@ -422,60 +401,60 @@ function createLeaderboard() {
 
 
 function createAbout() {
-    let is_page = true;
-    const header = new HeaderComponent({el: root});
-    header.data = {is_page, desc: "About"};
-    header.render();
+	let is_page = true;
+	const header = new HeaderComponent({el: root});
+	header.data = {is_page, desc: "About"};
+	header.render();
 
-    const navigation = new NavigationComponent({el: root});
-    navigation.data = {
-        links: [
-            {
-                content: "<-",
-                class: ["tiny", "grey"],
-                id: "return_link",
-                href: "/",
-            }
-        ]
-    };
-    navigation.render();
+	const navigation = new NavigationComponent({el: root});
+	navigation.data = {
+		links: [
+			{
+				content: "<-",
+				class: ["tiny", "grey"],
+				id: "return_link",
+				href: "/",
+			}
+		]
+	};
+	navigation.render();
 
-    let content = document.createElement("main");
-    content.classList.add("page_content");
+	let content = document.createElement("main");
+	content.classList.add("page_content");
 
-    const about = new AboutComponent({el: content});
-    about.render();
+	const about = new AboutComponent({el: content});
+	about.render();
 
-    root.appendChild(content);
+	root.appendChild(content);
 }
 
 
 function createProfile() {
-    let is_page = true;
-    const header = new HeaderComponent({el: root});
-    header.data = {is_page, desc: "Profile"};
-    header.render();
+	let is_page = true;
+	const header = new HeaderComponent({el: root});
+	header.data = {is_page, desc: "Profile"};
+	header.render();
 
-    const navigation = new NavigationComponent({el: root});
-    navigation.data = {
-        links: [
-            {
-                content: "<-",
-                class: ["tiny", "grey"],
-                id: "return_link",
-                href: "/",
-            }
-        ]
-    };
-    navigation.render();
+	const navigation = new NavigationComponent({el: root});
+	navigation.data = {
+		links: [
+			{
+				content: "<-",
+				class: ["tiny", "grey"],
+				id: "return_link",
+				href: "/",
+			}
+		]
+	};
+	navigation.render();
 
-    let content = document.createElement("main");
-    content.classList.add("page_content");
+	let content = document.createElement("main");
+	content.classList.add("page_content");
 
-    const profile = new ProfileComponent({el: content});
-    profile.render();
+	const profile = new ProfileComponent({el: content});
+	profile.render();
 
-    root.appendChild(content);
+	root.appendChild(content);
 }
 
 
@@ -484,19 +463,19 @@ const pages = {
 	signup: createSignUp,
 	login: createLogin,
 	leaderboard: createLeaderboard,
-    about: createAbout,
-    profile: createProfile
+	about: createAbout,
+	profile: createProfile
 };
 
 createMenu();
 
-root.addEventListener('click', function (event) {
+root.addEventListener("click", function (event) {
 	console.log(event.target);
 
 	let link = event.target;
 
 	if (!(link instanceof HTMLAnchorElement)) {
-		link = link.closest('a');
+		link = link.closest("a");
 
 		if (!link) {
 			return;
@@ -510,6 +489,21 @@ root.addEventListener('click', function (event) {
 		dataHref: link.dataset.href
 	});
 
-	switchPage(link.dataset.href);
+	if (link.dataset.href === "logout") {
+		AjaxModule.doDelete({path: "/session"})
+			.then(resp => {
+				if (resp.status === 200) {
+					switchPage("menu");
+				} else {
+					return Promise.reject(new Error(resp.status));
+				}
+			})
+			.catch(err => {
+				console.log(err);
+				switchPage("menu");
+			});
+	} else {
+		switchPage(link.dataset.href);
+	}
 });
 

@@ -11,7 +11,7 @@ export class AjaxModule {
 				method: method,
 				mode: "cors",
 				credentials: "include",
-			})
+			});
 		} else {
 			let headers = {}, sendBody = "";
 			if (body) {
@@ -28,17 +28,17 @@ export class AjaxModule {
 				body: sendBody,
 				mode: "cors",
 				credentials: "include",
-			})
+			});
 		}
 	}
 
-	static _ajax_xhr({callback = noop, method = 'GET', path = '/', body} = {}) {
+	static _ajax_xhr({callback = noop, method = "GET", path = "/", body} = {}) {
 		const xhr = new XMLHttpRequest();
 		xhr.open(method, path, true);
 		xhr.withCredentials = true;
 
 		if (body) {
-			xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+			xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
 		}
 
 		xhr.onreadystatechange = function () {
@@ -57,14 +57,14 @@ export class AjaxModule {
 	}
 
 	static doGet(params = {}) {
-		return this._ajax({...params, method: 'GET'});
+		return this._ajax({...params, method: "GET"});
 	}
 
 	static doPost(params = {}) {
-		return this._ajax({...params, method: 'POST'});
+		return this._ajax({...params, method: "POST"});
 	}
 
 	static doDelete(params = {}) {
-		return this._ajax({...params, method: 'DELETE'});
+		return this._ajax({...params, method: "DELETE"});
 	}
 }

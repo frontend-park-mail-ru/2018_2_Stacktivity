@@ -2,7 +2,7 @@
 	<div class="error main hidden">{{commonError}}</div>
 
 	{{#fields}}
-		<fieldset>
+		<fieldset {{#if validationType}}id="{{validationType}}"{{/if}}>
 			<input class="input_block" name="{{name}}" type="{{type}}" placeholder="{{placeholder}}" />
 			<span class="error hidden">{{error}}</span>
 		</fieldset>
