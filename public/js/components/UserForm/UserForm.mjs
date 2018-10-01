@@ -201,7 +201,7 @@ export class UserFormComponent {
      *
      * @return {boolean} is valid?
      */
-    static _hasCorrectSymbols(word) {
+    _hasCorrectSymbols(word) {
         const CORRECT_PATTERN = /^[-0-9a-z@_\-.]+$/i;
         return CORRECT_PATTERN.test(word);
     }
@@ -212,7 +212,7 @@ export class UserFormComponent {
      *
      * @return {boolean} is valid?
      */
-    static _hasCorrectLendth(word) {
+    _hasCorrectLendth(word) {
         const MIN_LEN = 4;
         const MAX_LEN = 20;
 
@@ -245,7 +245,7 @@ export class UserFormComponent {
      *
      * @return {boolean} is valid?
      */
-    static _emailValidate(email) {
+    _emailValidate(email) {
         const EMAIL_PATTERN = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let isValid = true;
         if (!EMAIL_PATTERN.test(email)) {
@@ -301,7 +301,7 @@ export class UserFormComponent {
      * @param {Object, boolean} err - field in DOM with error message;
      * isValid - activate/deactivate
      */
-    static _switchShowingError(err, isValid) {
+    _switchShowingError(err, isValid) {
         if (isValid) {
             err.classList.add("hidden");
         } else {
