@@ -1,8 +1,7 @@
 /** @module modules/router */
 
-import {AjaxModule} from "./ajax.mjs";
-
 export const root = document.getElementById("root");
+
 
 /** Router is providing navigation */
 class Router {

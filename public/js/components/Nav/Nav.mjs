@@ -109,14 +109,15 @@ export class NavigationComponent {
 	}
 
 
-	/** 
+	/** Render the template to the end of root element and set ups dataset.page of links
 	 *
+     * @param {string} navName - name of the set of links which should be wsed
 	 */
-    render(actionName) {
-		this._el.innerHTML += Handlebars.templates.Nav(this._pageNavigations[actionName]);
+    render(navName) {
+		this._el.innerHTML += Handlebars.templates.Nav(this._pageNavigations[navName]);
 
 		// important, links don't work without it!
-		this._pageNavigations[actionName].links.forEach(function (el) {
+		this._pageNavigations[navName].links.forEach(function (el) {
 			let link = document.getElementById(el.id);
 			link.dataset.page = router.getNameByPath(el.href);
 		});

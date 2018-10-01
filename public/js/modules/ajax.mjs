@@ -2,8 +2,18 @@
 
 import {base_path} from "../config.js";
 
+
 /** AjaxModule is providing http requests to the nackend server */
 export class AjaxModule {
+
+    /** Basic method that provides async HTTP requests
+	 *
+     * @param method - GET, POST, PUT etc
+     * @param path - API path
+     * @param body - Request body
+     * @return {Promise<Response>}
+     * @private
+     */
 	static _ajax({method = "GET", path = "/", body}) {
 		path = base_path + path;
 
@@ -33,18 +43,46 @@ export class AjaxModule {
 		}
 	}
 
+
+    /**
+	 * Method that shortcuts GET method
+	 *
+     * @param params - {path, body}
+     * @return {Promise<Response>}
+     */
 	static doGet(params = {}) {
 		return this._ajax({...params, method: "GET"});
 	}
 
+
+    /**
+     * Method that shortcuts POST method
+     *
+     * @param params - {path, body}
+     * @return {Promise<Response>}
+     */
 	static doPost(params = {}) {
 		return this._ajax({...params, method: "POST"});
 	}
 
+
+    /**
+     * Method that shortcuts DELETE method
+     *
+     * @param params - {path, body}
+     * @return {Promise<Response>}
+     */
 	static doDelete(params = {}) {
 		return this._ajax({...params, method: "DELETE"});
 	}
 
+
+    /**
+     * Method that shortcuts PUT method
+     *
+     * @param params - {path, body}
+     * @return {Promise<Response>}
+     */
 	static doPut(params = {}) {
 		return this._ajax({...params, method: "PUT"});
 	};
