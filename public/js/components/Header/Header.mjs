@@ -1,25 +1,39 @@
+/** @module components/Header */
+
+
+/** Renders header in the application pages (logo, descpiption) */
 export class HeaderComponent {
-    constructor ({el = document.body} = {}) {
+
+    /** Create the header component
+     *
+     * @param el - root element for the header
+     */
+    constructor({el = document.body} = {}) {
         this._el = el;
     }
 
-    get data () {
+    /** Get data object which will be used when render
+     *
+     * @return {Object}
+     */
+    get data() {
         return this._data;
     }
 
-    set data (data) {
+    /** Set data object which will be used when render
+     *
+     * @param {Object} data
+     */
+    set data(data) {
         this._data = data;
     }
 
-    render () {
+    /** Render the template into the end of root element */
+    render() {
         if (!this._data) {
             return;
         }
 
-        this._render();
-    }
-
-    _render () {
         this._el.innerHTML += Handlebars.templates.Header(this._data);
     }
 }

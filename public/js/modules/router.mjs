@@ -16,7 +16,7 @@ class Router {
 	 * Regester the new action to invoke
 	 *
 	 * @param {string} name - Name of action
-	 * @param {string} path - Path to display in navbar
+     * @param {string} path - Path to display in navbar
 	 * @param {function} action - Action to invore
 	 *
 	 * @return {Router} - Current object instance

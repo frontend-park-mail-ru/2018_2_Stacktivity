@@ -1,6 +1,15 @@
+/** @module components/Nav */
+
 import {router} from "../../modules/router.mjs";
 
+
+/** Renders navigation block in the application pages */
 export class NavigationComponent {
+
+    /** Create the navigation component
+     *
+     * @param el - root element for the header
+     */
 	constructor({el = document.body} = {}) {
 		this._el = el;
 
@@ -99,11 +108,15 @@ export class NavigationComponent {
 		};
 	}
 
-	render(name) {
-		this._el.innerHTML += Handlebars.templates.Nav(this._pageNavigations[name]);
+
+	/** 
+	 *
+	 */
+    render(actionName) {
+		this._el.innerHTML += Handlebars.templates.Nav(this._pageNavigations[actionName]);
 
 		// important, links don't work without it!
-		this._pageNavigations[name].links.forEach(function (el) {
+		this._pageNavigations[actionName].links.forEach(function (el) {
 			let link = document.getElementById(el.id);
 			link.dataset.page = router.getNameByPath(el.href);
 		});
