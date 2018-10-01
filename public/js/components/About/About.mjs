@@ -1,9 +1,20 @@
+/** @module components/About */
+
+
+/** Renders about page */
 export class AboutComponent {
-    constructor ({el = document.body} = {}) {
+
+    /** Create the about component
+     *
+     * @param el - root element for the component
+     */
+    constructor({el = document.body} = {}) {
         this._el = el;
     }
 
-    render () {
+
+    /** Render the template into the end of root element */
+    render() {
         this._el.innerHTML += Handlebars.templates.About();
     }
 }

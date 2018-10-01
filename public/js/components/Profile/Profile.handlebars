@@ -4,27 +4,21 @@
     <h1 class="score">Your score: {{score}}</h1>
 
     <fieldset>
-        <label for="usernameInput">Username: <a href="#">[change]</a> </label>
-        <input class="profile_input" id="usernameInput" name="username" type="text" value="{{username}}"/>
-        <span class="error hidden">Username must be bigger than 3 and less than 20 symbols and shouldn't contain anything bad</span>
-    </fieldset>
-
-    <fieldset>
-        <label for="emailInput">E-mail: <a href="#">[change]</a></label>
+        <label for="emailInput">E-mail:</label>
         <input class="profile_input" id="emailInput" name="email" type="email" value="{{email}}"/>
         <span class="error hidden">This is not an e-mail</span>
     </fieldset>
 
-<!--    <fieldset>
-        <label for="passwordInput">Password: <a href="#">[change]</a></label>
+    <fieldset>
+        <label for="passwordInput">Password:</label>
         <input class="profile_input" id="passwordInput" name="password" type="password" value="******"/>
         <span class="error hidden">Password must be bigger than 6 and less than 36 symbols</span>
-    </fieldset>-->
+    </fieldset>
 
     <fieldset>
-        <label for="avatarInput">Avatar: <a href="#">[change]</a></label>
-		{{#if avatar}}<img src="{{avatar}}" class="profile_avatar">{{/if}}
-		<input class="profile_input hidden" id="avatarInput" name="file" type="file" value="******"/>
+        <label for="avatarInput">Avatar:</label>
+        {{#if avatar}}<img src="{{avatar}}" class="profile_avatar">{{/if}}
+        <input class="profile_input hidden" id="avatarInput" name="file" type="file" value="******"/>
         <span class="error hidden">Your avatar is very big!</span>
     </fieldset>
 

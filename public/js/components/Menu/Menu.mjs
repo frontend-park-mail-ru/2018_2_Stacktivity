@@ -1,9 +1,20 @@
+/** @module components/Menu */
+
+
+/** Renders menu in the application main page */
 export class MenuComponent {
-    constructor ({el = document.body} = {}) {
+
+    /** Create the menu component
+     *
+     * @param el - root element for the menu
+     */
+    constructor({el = document.body} = {}) {
         this._el = el;
     }
 
-    render () {
+
+    /** Render the template into the end of root element */
+    render() {
         this._el.innerHTML += Handlebars.templates.Menu();
     }
 }

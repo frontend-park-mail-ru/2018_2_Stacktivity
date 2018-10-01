@@ -10,9 +10,7 @@ body {
 .index_header {
     width: 1200px;
     height: 440px;
-    /*margin: 0 auto;*/
     overflow: hidden;
-    /*position: relative;*/
 
     position: absolute;
     left: 50%;
@@ -41,9 +39,7 @@ body {
 .page_header {
     width: 1200px;
     height: 440px;
-    /*margin: 0 auto;*/
     overflow: hidden;
-    /*position: relative;*/
 
     position: absolute;
     left: 50%;

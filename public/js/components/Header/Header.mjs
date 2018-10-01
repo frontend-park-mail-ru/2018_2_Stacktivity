@@ -12,6 +12,7 @@ export class HeaderComponent {
         this._el = el;
     }
 
+
     /** Get data object which will be used when render
      *
      * @return {Object}
@@ -20,6 +21,7 @@ export class HeaderComponent {
         return this._data;
     }
 
+
     /** Set data object which will be used when render
      *
      * @param {Object} data
@@ -27,6 +29,7 @@ export class HeaderComponent {
     set data(data) {
         this._data = data;
     }
+
 
     /** Render the template into the end of root element */
     render() {

@@ -8,19 +8,21 @@ import {root} from "../modules/router.mjs";
  * Draws the about page
  */
 export function createAbout() {
-	let is_page = true;
-	const header = new HeaderComponent({el: root});
-	header.data = {is_page, desc: "About"};
-	header.render();
+    let is_page = true;
+    let content = document.createElement("main");
 
-	const navigation = new NavigationComponent({el: root});
-	navigation.render("return_link");
+    const header = new HeaderComponent({el: root});
+    const navigation = new NavigationComponent({el: root});
+    const about = new AboutComponent({el: content});
 
-	let content = document.createElement("main");
-	content.classList.add("page_content");
+    header.data = {is_page, desc: "About"};
+    header.render();
 
-	const about = new AboutComponent({el: content});
-	about.render();
+    navigation.render("return_link");
 
-	root.appendChild(content);
+    content.classList.add("page_content");
+
+    about.render();
+
+    root.appendChild(content);
 }
