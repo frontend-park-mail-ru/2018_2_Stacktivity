@@ -1,18 +1,36 @@
 import {AjaxModule} from "../../modules/ajax.mjs";
 
+/** @module components/UserForm */
+
+
+/** Renders input forms */
 export class UserFormComponent {
+
+    /** Create the header component
+     *
+     * @param el - root element for the form
+     */
 	constructor({el = document.body} = {}) {
 		this._el = el;
 	}
 
+    /** Get data object which will be used when render
+     *
+     * @return {Object}
+     */
 	get data() {
 		return this._data;
 	}
 
+    /** Set data object which will be used when render
+     *
+     * @param {Object} data
+     */
 	set data(data) {
 		this._data = data;
 	}
 
+    /** Render the template into the end of root element */
 	render() {
 		if (!this._data) {
 			return;
@@ -21,6 +39,12 @@ export class UserFormComponent {
 		this._render();
 	}
 
+    /** Get DOM field that contains error message
+     *
+     * @param {string} name of input field is linked with the error
+     *
+     * @return {Object} error field
+     */
     getErrorfield(name) {
         for (const elem of document.getElementById(this._data.id).
             getElementsByClassName("validate")) {
@@ -30,6 +54,10 @@ export class UserFormComponent {
         }
     }
 
+    /** Get DOM form field
+     *
+     * @return {Object} form field
+     */
 	getObject() {
 		return Array.from(document.getElementById(this._data.id).elements).reduce((acc, val) => {
 			if (val.value !== "") {
@@ -39,6 +67,10 @@ export class UserFormComponent {
 		}, {}); // harvesting values from form into the object
 	}
 
+    /** Validate form input and activate/deactivate error message
+     *
+     * @return {boolean} is input valid?
+     */
 	frontValidate() {
         let isValid = true;
         const isLogin = this._data.id === "login_form";
@@ -97,6 +129,12 @@ export class UserFormComponent {
         return isValid;
     }
 
+    /** Validate form by server response
+     *
+     * @param {Object} data about validation from server
+     *
+     * @return {boolean} error field
+     */
 	serverValidate(data) {
 	    if (data.ValidateSuccess) return true;
 
@@ -138,6 +176,12 @@ export class UserFormComponent {
         return false;
 	}
 
+    /** HTTP action that sends updated profile data
+     *
+     * @param {Object} params from form
+     *
+     * @return {Promise}
+     */
 	sendData(params = {}) {
 		return AjaxModule.doPost({...params, body: this.getObject()})
 			.then(resp => {
@@ -156,15 +200,28 @@ export class UserFormComponent {
 			})
 	};
 
+    /** Render the template into the end of root element */
 	_render() {
 		this._el.innerHTML += Handlebars.templates.UserForm(this._data);
 	}
 
+    /** Validate string on correct symbols
+     *
+     * @param {string} word for validate
+     *
+     * @return {boolean} is valid?
+     */
 	_hasCorrectSymbols(word) {
         const CORRECT_PATTERN = /^[-0-9a-z@_\-.]+$/i;
         return CORRECT_PATTERN.test(word);
 	}
 
+    /** Validate string on correct length
+     *
+     * @param {string} word ro validate
+     *
+     * @return {boolean} is valid?
+     */
 	_hasCorrectLendth(word) {
 		const MIN_LEN = 4;
 		const MAX_LEN = 20;
@@ -173,6 +230,12 @@ export class UserFormComponent {
 		return len >= MIN_LEN && len <= MAX_LEN;
 	}
 
+    /** Validate username
+     *
+     * @param {string} username for validate
+     *
+     * @return {boolean} is valid?
+     */
 	_usernameValidate(username) {
 		let isValid = true;
 
@@ -186,6 +249,12 @@ export class UserFormComponent {
         return isValid;
 	}
 
+    /** Validate username
+     *
+     * @param {string} email for validate
+     *
+     * @return {boolean} is valid?
+     */
 	_emailValidate(email) {
         const  EMAIL_PATTERN = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let isValid = true;
@@ -196,6 +265,12 @@ export class UserFormComponent {
 		return isValid;
 	}
 
+    /** Validate username
+     *
+     * @param {string} password for validate
+     *
+     * @return {boolean} is valid?
+     */
 	_passwordValidate(password) {
         let isValid = true;
 
@@ -209,6 +284,12 @@ export class UserFormComponent {
         return isValid;
 	}
 
+    /** Validate username
+     *
+     * @param {string} password1, password2 for validate
+     *
+     * @return {boolean} is valid and matched?
+     */
 	_doublePasswordValidate(password1, password2) {
 		let isValid = true;
 
@@ -225,6 +306,11 @@ export class UserFormComponent {
 		return isValid;
 	}
 
+    /** Validate username
+     *
+     * @param {Object, boolean} err - field in DOM with error message;
+     * isValid - activate/deactivate
+     */
 	_switchShowingError(err, isValid) {
         if (isValid) {
             err.classList.add("hidden");
