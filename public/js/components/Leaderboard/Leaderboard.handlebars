@@ -1,0 +1,27 @@
+<div class="leaderboard">
+    <table>
+        <thead>
+        <tr>
+            <th class="username">Username</th>
+            <th class="score">Scores</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each users}}
+            <tr>
+                <td>
+                    {{username}}
+                </td>
+                <td>
+                    {{score}}
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+	<ul class="pagination">
+		<li><a href="#" id="prev_page_link"><-</a></li>
+        <li><a href="#" id="next_page_link">-></a></li>
+    </ul>
+</div>

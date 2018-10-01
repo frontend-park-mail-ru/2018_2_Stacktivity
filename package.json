@@ -1,0 +1,33 @@
+{
+  "name": "blep_design",
+  "version": "1.0.0",
+  "description": "SPA",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "prestart": "npm run hand",
+    "doc": "./node_modules/.bin/jsdoc -c jsdoc_settings.json public/js/*",
+    "hand": "node_modules/.bin/handlebars public/js/components/* -f public/js/handlebars.precompile.js",
+    "test": "echo 'under construction\n'"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "express-history-api-fallback": "^2.2.1",
+    "handlebars": "^4.0.12",
+    "jsdoc": "^3.5.5",
+    "morgan": "^1.9.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.6.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "fest": "^0.12.1"
+  }
+}
