@@ -10,34 +10,33 @@ export class UserFormComponent {
      *
      * @param el - root element for the form
      */
-	constructor({el = document.body} = {}) {
-		this._el = el;
-	}
+    constructor({el = document.body} = {}) {
+        this._el = el;
+    }
 
     /** Get data object which will be used when render
      *
      * @return {Object}
      */
-	get data() {
-		return this._data;
-	}
+    get data() {
+        return this._data;
+    }
 
     /** Set data object which will be used when render
      *
      * @param {Object} data
      */
-	set data(data) {
-		this._data = data;
-	}
+    set data(data) {
+        this._data = data;
+    }
 
     /** Render the template into the end of root element */
-	render() {
-		if (!this._data) {
-			return;
-		}
-
-		this._render();
-	}
+    render() {
+        if (!this._data) {
+            return;
+        }
+        this._render();
+    }
 
     /** Get DOM field that contains error message
      *
@@ -58,29 +57,28 @@ export class UserFormComponent {
      *
      * @return {Object} form field
      */
-	getObject() {
-		return Array.from(document.getElementById(this._data.id).elements).reduce((acc, val) => {
-			if (val.value !== "") {
-				acc[val.name] = val.value;
-			}
-			return acc;
-		}, {}); // harvesting values from form into the object
-	}
+    getObject() {
+        return Array.from(document.getElementById(this._data.id).elements).
+            reduce((acc, val) => {
+                if (val.value !== "") {
+                    acc[val.name] = val.value;
+                }
+                return acc;
+            }, {}); // harvesting values from form into the object
+    }
 
     /** Validate form input and activate/deactivate error message
      *
      * @return {boolean} is input valid?
      */
-	frontValidate() {
+    frontValidate() {
         let isValid = true;
         const isLogin = this._data.id === "login_form";
         const formElem = document.getElementById(this._data.id);
-
-	    for (const elem of formElem.getElementsByClassName("validate")) {
-	        let input = elem.getElementsByTagName("input")[0];
+        for (const elem of formElem.getElementsByClassName("validate")) {
+            let input = elem.getElementsByTagName("input")[0];
             let err = elem.getElementsByClassName("error")[0];
-
-	        if (input.classList.contains("validate_username")) {
+            if (input.classList.contains("validate_username")) {
                 const isValidField = this._usernameValidate(input.value);
 
                 if (!isLogin) {
@@ -108,10 +106,8 @@ export class UserFormComponent {
                 isValid = isValidField ? isValid : false;
             }
             if (input.classList.contains("validate_password_repeat")) {
-                const password1 = document.getElementsByClassName(
-                    "validate_password");
-                const isValidField = this._doublePasswordValidate(
-                    password1[0].value, input.value);
+                const password1 = document.getElementsByClassName("validate_password");
+                const isValidField = this._doublePasswordValidate(password1[0].value, input.value);
 
                 if (!isLogin) {
                     this._switchShowingError(err, isValidField);
@@ -122,8 +118,8 @@ export class UserFormComponent {
         }
 
         if (isLogin && !isValid) {
-            formElem.getElementsByClassName("common_error")[0]
-                .classList.remove("hidden");
+            formElem.getElementsByClassName("common_error")[0].
+                classList.remove("hidden");
         }
 
         return isValid;
@@ -135,46 +131,40 @@ export class UserFormComponent {
      *
      * @return {boolean} error field
      */
-	serverValidate(data) {
-	    if (data.ValidateSuccess) return true;
+    serverValidate(data) {
+        if (data.ValidateSuccess) {
+            return true;
+        }
 
-	    if (this._data.id === "login_form") {
-            document.getElementsByClassName("common_error")[0]
-                .classList.remove("hidden");
+        if (this._data.id === "login_form") {
+            document.getElementsByClassName("common_error")[0].
+                classList.remove("hidden");
             return false;
         }
 
         if (data.usernameValidate.success) {
-            this._switchShowingError(
-                this.getErrorfield("validate_username"), true);
+            this._switchShowingError(this.getErrorfield("validate_username"), true);
         } else {
-            this._switchShowingError(
-                this.getErrorfield("validate_username"), false);
+            this._switchShowingError(this.getErrorfield("validate_username"), false);
         }
         if (data.emailValidate.success) {
-            this._switchShowingError(
-                this.getErrorfield("validate_email"), true);
+            this._switchShowingError(this.getErrorfield("validate_email"), true);
         } else {
-            this._switchShowingError(
-                this.getErrorfield("validate_email"), false);
+            this._switchShowingError(this.getErrorfield("validate_email"), false);
         }
         if (data.passwordValidate.success) {
-            this._switchShowingError(
-                this.getErrorfield("validate_password"), true);
+            this._switchShowingError(this.getErrorfield("validate_password"), true);
         } else {
-            this._switchShowingError(
-                this.getErrorfield("validate_password"), false);
+            this._switchShowingError(this.getErrorfield("validate_password"), false);
         }
         if (data.passwordRepeatValidate.success) {
-            this._switchShowingError(
-                this.getErrorfield("validate_password_repeat"), true);
+            this._switchShowingError(this.getErrorfield("validate_password_repeat"), true);
         } else {
-            this._switchShowingError(
-                this.getErrorfield("validate_password_repeat"), false);
+            this._switchShowingError(this.getErrorfield("validate_password_repeat"), false);
         }
 
         return false;
-	}
+    }
 
     /** HTTP action that sends updated profile data
      *
@@ -182,28 +172,28 @@ export class UserFormComponent {
      *
      * @return {Promise}
      */
-	sendData(params = {}) {
-		return AjaxModule.doPost({...params, body: this.getObject()})
-			.then(resp => {
-				if (resp.status === 201 || resp.status === 400) {
-					return resp.json();
-				}
+    sendData(params = {}) {
+        return AjaxModule.doPost({...params, body: this.getObject()}).
+            then((resp) => {
+                if (resp.status === 201 || resp.status === 400) {
+                    return resp.json();
+                }
 
-				if (resp.status === 500) {
-					return Promise.reject(new Error(resp.status));
-				}
-			})
-			.then(data => {
-				if (this.serverValidate(data)) {
-					return Promise.resolve();
-				}
-			})
-	};
+                if (resp.status === 500) {
+                    return Promise.reject(new Error(resp.status));
+                }
+            }).
+            then((data) => {
+                if (this.serverValidate(data)) {
+                    return Promise.resolve();
+                }
+            });
+    }
 
     /** Render the template into the end of root element */
-	_render() {
-		this._el.innerHTML += Handlebars.templates.UserForm(this._data);
-	}
+    _render() {
+        this._el.innerHTML += Handlebars.templates.UserForm(this._data);
+    }
 
     /** Validate string on correct symbols
      *
@@ -211,10 +201,10 @@ export class UserFormComponent {
      *
      * @return {boolean} is valid?
      */
-	_hasCorrectSymbols(word) {
+    static _hasCorrectSymbols(word) {
         const CORRECT_PATTERN = /^[-0-9a-z@_\-.]+$/i;
         return CORRECT_PATTERN.test(word);
-	}
+    }
 
     /** Validate string on correct length
      *
@@ -222,13 +212,13 @@ export class UserFormComponent {
      *
      * @return {boolean} is valid?
      */
-	_hasCorrectLendth(word) {
-		const MIN_LEN = 4;
-		const MAX_LEN = 20;
+    static _hasCorrectLendth(word) {
+        const MIN_LEN = 4;
+        const MAX_LEN = 20;
 
-		const len = word.length;
-		return len >= MIN_LEN && len <= MAX_LEN;
-	}
+        const len = word.length;
+        return len >= MIN_LEN && len <= MAX_LEN;
+    }
 
     /** Validate username
      *
@@ -236,18 +226,18 @@ export class UserFormComponent {
      *
      * @return {boolean} is valid?
      */
-	_usernameValidate(username) {
-		let isValid = true;
+    _usernameValidate(username) {
+        let isValid = true;
 
-		if (!this._hasCorrectSymbols(username)) {
-			isValid = false;
-		}
+        if (!this._hasCorrectSymbols(username)) {
+            isValid = false;
+        }
         if (!this._hasCorrectLendth(username)) {
             isValid = false;
         }
 
         return isValid;
-	}
+    }
 
     /** Validate username
      *
@@ -255,15 +245,15 @@ export class UserFormComponent {
      *
      * @return {boolean} is valid?
      */
-	_emailValidate(email) {
-        const  EMAIL_PATTERN = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    static _emailValidate(email) {
+        const EMAIL_PATTERN = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let isValid = true;
         if (!EMAIL_PATTERN.test(email)) {
-        	isValid = false;
-		}
+            isValid = false;
+        }
 
-		return isValid;
-	}
+        return isValid;
+    }
 
     /** Validate username
      *
@@ -271,7 +261,7 @@ export class UserFormComponent {
      *
      * @return {boolean} is valid?
      */
-	_passwordValidate(password) {
+    _passwordValidate(password) {
         let isValid = true;
 
         if (!this._hasCorrectSymbols(password)) {
@@ -282,7 +272,7 @@ export class UserFormComponent {
         }
 
         return isValid;
-	}
+    }
 
     /** Validate username
      *
@@ -290,28 +280,28 @@ export class UserFormComponent {
      *
      * @return {boolean} is valid and matched?
      */
-	_doublePasswordValidate(password1, password2) {
-		let isValid = true;
+    _doublePasswordValidate(password1, password2) {
+        let isValid = true;
 
-		if (!this._passwordValidate(password1)) {
-			isValid = false;
-		}
-		if (!this._passwordValidate(password2)) {
-			isValid = false;
-		}
+        if (!this._passwordValidate(password1)) {
+            isValid = false;
+        }
+        if (!this._passwordValidate(password2)) {
+            isValid = false;
+        }
         if (password1 !== password2) {
             isValid = false;
-		}
+        }
 
-		return isValid;
-	}
+        return isValid;
+    }
 
     /** Validate username
      *
      * @param {Object, boolean} err - field in DOM with error message;
      * isValid - activate/deactivate
      */
-	_switchShowingError(err, isValid) {
+    static _switchShowingError(err, isValid) {
         if (isValid) {
             err.classList.add("hidden");
         } else {
