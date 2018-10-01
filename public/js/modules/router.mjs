@@ -55,8 +55,13 @@ class Router {
         if (this._routes[name]) {
             root.innerHTML = "";
             this._currentRoute = name;
+            let path = this._routes[name].path;
 
-            window.history.pushState({lastRoute: this._currentRoute}, "", this._routes[name].path);
+            if (param) {
+                path += `\\${param}`;
+            }
+
+            window.history.pushState({lastRoute: this._currentRoute}, "", path);
             this._routes[name].action(param);
         }
 
