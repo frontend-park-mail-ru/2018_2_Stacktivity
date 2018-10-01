@@ -1,63 +1,105 @@
-import {createMenu} from "../pages/menu.mjs";
-import {createSignUp} from "../pages/signup.mjs";
-import {createLogin} from "../pages/login.mjs";
-import {createLeaderboard} from "../pages/leaderboard.mjs";
-import {createAbout} from "../pages/about.mjs";
-import {createProfile} from "../pages/profile.mjs";
+/** @module modules/router */
+
 import {AjaxModule} from "./ajax.mjs";
 
 export const root = document.getElementById("root");
 
-export function switchPage(name, param) {
-	root.innerHTML = "";
+/** Router is providing navigation */
+class Router {
+	/** Create the router */
+	constructor() {
+		this._routes = {};
+		this._currentRoute = null;
+	}
 
-	if (pages.hasOwnProperty(name)) {
-		pages[name](param);
-	} else {
-		createMenu();
+	/**
+	 * Regester the new action to invoke
+	 *
+	 * @param {string} name - Name of action
+	 * @param {string} path - Path to display in navbar
+	 * @param {function} action - Action to invore
+	 *
+	 * @return {Router} - Current object instance
+	 */
+	add(name, path, action) {
+		this._routes[name] = {path, action};
+		return this;
+	}
+
+	/**
+	 * Returns name of the action with given path
+	 *
+	 * @param {string} path - path string
+	 *
+	 * @return {string|null} - Name of the action or null
+	 */
+	getNameByPath(path) {
+		for (const name in this._routes) {
+			if (this._routes.hasOwnProperty(name) &&
+				this._routes[name].path === path) {
+				return name;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Executes action by the name
+	 *
+	 * @param {string} name - name of the action
+	 * @param param - argument for action
+	 *
+	 * @return {Router} - Current object instance
+	 */
+	open(name = "menu", param) {
+		if (this._routes[name]) {
+			root.innerHTML = "";
+			this._currentRoute = name;
+
+			window.history.pushState({lastRoute: this._currentRoute}, "", this._routes[name].path);
+			this._routes[name].action(param);
+		}
+
+		return this;
 	}
 }
 
-export const pages = {
-	menu: createMenu,
-	signup: createSignUp,
-	login: createLogin,
-	leaderboard: createLeaderboard,
-	about: createAbout,
-	profile: createProfile
-};
+export let router = new Router();
 
-root.addEventListener("click", function (event) {
 
-	let link = event.target;
+/**
+ * @function getEventTarget - Returns <a> element
+ * @param target - Element on which event was called
+ * @return element <a>
+ */
+function getEventTarget(target) { // для перехода по ссылкам без перезагрузки
+	if (!(target instanceof HTMLAnchorElement)) {
+		target = target.closest("a");
 
-	if (!(link instanceof HTMLAnchorElement)) {
-		link = link.closest("a");
-
-		if (!link) {
-			return;
+		if (!target) {
+			return null;
 		}
 	}
 
-	event.preventDefault();
+	return target;
+}
 
-	if (link.dataset.href === "logout") {
-		AjaxModule.doDelete({path: "/session"})
-			.then(resp => {
-				if (resp.status === 200) {
-					switchPage("menu");
-				} else {
-					return Promise.reject(new Error(resp.status));
-				}
-			})
-			.catch(err => {
-				switchPage("menu");
-			});
-	} else {
-		switchPage(link.dataset.href);
+root.addEventListener("click", function (event) {
+	let link = getEventTarget(event.target);
+	if (!link) {
+		return;
 	}
+
+	event.preventDefault();
+	router.open(link.dataset.page);
 });
 
-export function start() {
-	switchPage("menu");
-}
+window.addEventListener('popstate', function (event) {
+	event.preventDefault();
+
+	if (event.state.lastRoute) {
+		router.open(event.state.lastRoute);
+	}
+
+});

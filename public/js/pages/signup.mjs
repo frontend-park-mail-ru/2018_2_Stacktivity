@@ -2,8 +2,12 @@ import {HeaderComponent} from "../components/Header/Header.mjs";
 import {NavigationComponent} from "../components/Nav/Nav.mjs";
 import {AjaxModule} from "../modules/ajax.mjs";
 import {UserFormComponent} from "../components/UserForm/UserForm.mjs";
-import {root, switchPage} from "../modules/router.mjs";
+import {root, router} from "../modules/router.mjs";
 
+/**
+ * @function createSignUp
+ * Draws the signup page
+ */
 export function createSignUp() {
 	const header = new HeaderComponent({el: root});
 	const navigation = new NavigationComponent({el: root});
@@ -16,7 +20,7 @@ export function createSignUp() {
 	AjaxModule.doGet({path: "/session"})
 		.then(resp => {
 			if (resp.status === 200) {
-				return Promise.reject(new Error("You are already registereg and even logged in!"));
+				return Promise.reject(new Error("You are already registered and even logged in!"));
 			}
 
 			navigation.render("signup");
@@ -72,16 +76,16 @@ export function createSignUp() {
 					signInForm.sendData({path: "/user"})
 						.then((res) => {
 							if (res) {
-								switchPage("menu");
+								router.open("menu");
 							}
 						})
 						.catch((err) => {
-							switchPage("menu");
+							router.open("menu");
 						})
 				}
 			});
 		})
 		.catch(err => {
-			switchPage("menu");
+			router.open("menu");
 		});
 }

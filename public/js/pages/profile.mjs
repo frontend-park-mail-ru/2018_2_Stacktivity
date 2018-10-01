@@ -2,8 +2,12 @@ import {HeaderComponent} from "../components/Header/Header.mjs";
 import {NavigationComponent} from "../components/Nav/Nav.mjs";
 import {AjaxModule} from "../modules/ajax.mjs";
 import {ProfileComponent} from "../components/Profile/Profile.mjs";
-import {root, switchPage} from "../modules/router.mjs";
+import {root, router} from "../modules/router.mjs";
 
+/**
+ * @function createProfile
+ * Draws the profile page
+ */
 export function createProfile() {
 	let is_page = true;
 	const header = new HeaderComponent({el: root});
@@ -35,15 +39,15 @@ export function createProfile() {
 				event.preventDefault();
 				profile.sendData()
 					.then(() => {
-						switchPage("profile");
+						router.open("profile");
 					})
 					.catch(() => {
-						switchPage("menu");
+						router.open("menu");
 					});
 			});
 
 		})
 		.catch(() => {
-			switchPage("menu");
+			router.open("menu");
 		});
 }

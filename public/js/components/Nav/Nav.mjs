@@ -1,3 +1,5 @@
+import {router} from "../../modules/router.mjs";
+
 export class NavigationComponent {
 	constructor({el = document.body} = {}) {
 		this._el = el;
@@ -10,19 +12,19 @@ export class NavigationComponent {
 						content: "About",
 						class: ["medium", "sea_blue"],
 						id: "about_link",
-						href: "about",
+						href: "/about",
 					},
 					{
 						content: "Login",
 						class: ["small", "green"],
 						id: "login_link",
-						href: "login",
+						href: "/login",
 					},
 					{
 						content: "Sign up",
 						class: ["big", "red"],
 						id: "signup_link",
-						href: "signup",
+						href: "/signup",
 					},
 				]
 			},
@@ -33,19 +35,19 @@ export class NavigationComponent {
 						content: "About",
 						class: ["medium", "sea_blue"],
 						id: "about_link",
-						href: "about",
+						href: "/about",
 					},
 					{
 						content: "Logout",
 						class: ["small", "grey"],
 						id: "logout_link",
-						href: "logout",
+						href: "/logout",
 					},
 					{
 						content: "username", // вместо аватарки
 						class: ["big", "red"],
 						id: "profile_link",
-						href: "profile",
+						href: "/profile",
 					}
 				]
 			},
@@ -56,7 +58,7 @@ export class NavigationComponent {
 						content: "Login",
 						class: ["small", "green", "page"],
 						id: "login_link",
-						href: "login",
+						href: "/login",
 					},
 					{
 						content: "<-",
@@ -73,7 +75,7 @@ export class NavigationComponent {
 						content: "Sign up",
 						class: ["big", "red", "page"],
 						id: "signup_link",
-						href: "signup",
+						href: "/signup",
 					},
 					{
 						content: "<-",
@@ -102,8 +104,8 @@ export class NavigationComponent {
 
 		// important, links don't work without it!
 		this._pageNavigations[name].links.forEach(function (el) {
-			document.getElementById(el.id).dataset.href = el.href;
-
+			let link = document.getElementById(el.id);
+			link.dataset.page = router.getNameByPath(el.href);
 		});
 	}
 }

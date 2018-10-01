@@ -1,5 +1,8 @@
+/** @module modules/ajax */
+
 import {base_path} from "../config.js";
 
+/** AjaxModule is providing http requests to the nackend server */
 export class AjaxModule {
 	static _ajax({method = "GET", path = "/", body}) {
 		path = base_path + path;

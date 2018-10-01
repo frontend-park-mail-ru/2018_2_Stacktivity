@@ -2,8 +2,12 @@ import {HeaderComponent} from "../components/Header/Header.mjs";
 import {NavigationComponent} from "../components/Nav/Nav.mjs";
 import {AjaxModule} from "../modules/ajax.mjs";
 import {UserFormComponent} from "../components/UserForm/UserForm.mjs";
-import {switchPage} from "../modules/router.mjs";
+import {router} from "../modules/router.mjs";
 
+/**
+ * @function createLogin
+ * Draws the login page
+ */
 export function createLogin() {
 	const header = new HeaderComponent({el: root});
 	const navigation = new NavigationComponent({el: root});
@@ -54,16 +58,16 @@ export function createLogin() {
 					loginForm.sendData({path: "/session"})
 						.then((res) => {
 							if (res) {
-								switchPage("menu");
+								router.open("menu");
 							}
 						})
 						.catch((err) => {
-							switchPage("menu");
+							router.open("menu");
 						});
 				}
 			});
 		})
 		.catch(err => {
-			switchPage("menu");
+			router.open("menu");
 		});
 }

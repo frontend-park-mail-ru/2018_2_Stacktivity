@@ -2,8 +2,13 @@ import {HeaderComponent} from "../components/Header/Header.mjs";
 import {NavigationComponent} from "../components/Nav/Nav.mjs";
 import {AjaxModule} from "../modules/ajax.mjs";
 import {LeaderboardComponent} from "../components/Leaderboard/Leaderboard.mjs";
-import {root, switchPage} from "../modules/router.mjs";
+import {root, router} from "../modules/router.mjs";
 
+/**
+ * @function createLeaderboard
+ * Draws the leaders page
+ * @param {number} page - Number of the page to display
+ */
 export function createLeaderboard(page) {
 	let is_page = true;
 
@@ -46,7 +51,7 @@ export function createLeaderboard(page) {
 				event.stopImmediatePropagation();
 				page -= 1;
 
-				switchPage("leaderboard", page);
+				router.open("leaderboard", page);
 
 			});
 
@@ -55,11 +60,11 @@ export function createLeaderboard(page) {
 				event.stopImmediatePropagation();
 				page += 1;
 
-				switchPage("leaderboard", page);
+				router.open("leaderboard", page);
 			});
 
 		})
 		.catch(err => {
-			switchPage("menu");
+			router.open("menu");
 		});
 }

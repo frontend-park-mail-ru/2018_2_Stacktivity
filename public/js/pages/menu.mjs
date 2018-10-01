@@ -4,6 +4,10 @@ import {MenuComponent} from "../components/Menu/Menu.mjs";
 import {AjaxModule} from "../modules/ajax.mjs";
 import {root} from "../modules/router.mjs";
 
+/**
+ * @function createMenu
+ * Draws the leaders page
+ */
 export function createMenu() {
 	const header = new HeaderComponent({el: root});
 	const navigation = new NavigationComponent({el: root});

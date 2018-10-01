@@ -3,6 +3,10 @@ import {NavigationComponent} from "../components/Nav/Nav.mjs";
 import {AboutComponent} from "../components/About/About.mjs";
 import {root} from "../modules/router.mjs";
 
+/**
+ * @function createAbout
+ * Draws the about page
+ */
 export function createAbout() {
 	let is_page = true;
 	const header = new HeaderComponent({el: root});
