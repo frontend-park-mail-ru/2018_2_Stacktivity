@@ -1,73 +1,75 @@
 import {HeaderComponent} from "../components/Header/Header.mjs";
 import {NavigationComponent} from "../components/Nav/Nav.mjs";
-import {AjaxModule} from "../modules/ajax.mjs";
+import {AjaxModule, errorHandler} from "../modules/ajax.mjs";
 import {UserFormComponent} from "../components/UserForm/UserForm.mjs";
-import {router} from "../modules/router.mjs";
+import {root, router} from "../modules/router.mjs";
 
 /**
  * @function createLogin
  * Draws the login page
  */
 export function createLogin() {
-	const header = new HeaderComponent({el: root});
-	const navigation = new NavigationComponent({el: root});
+    const header = new HeaderComponent({el: root});
+    const navigation = new NavigationComponent({el: root});
 
-	let is_page = true;
+    let is_page = true;
 
-	header.data = {is_page, desc: "Login"};
-	header.render();
+    header.data = {is_page, desc: "Login"};
+    header.render();
 
-	AjaxModule.doGet({path: "/session"})
-		.then(resp => {
-			if (resp.status === 200) {
-				return Promise.reject(new Error("You are already logged in!"));
-			}
-			navigation.render("login");
+    AjaxModule.doGet({path: "/session"}).
+        then((resp) => {
+            if (resp.status === 200) {
+                return Promise.reject(new Error("You are already logged in!"));
+            }
+            navigation.render("login");
 
-			let content = document.createElement("main");
-			content.classList.add("page_content");
+            let content = document.createElement("main");
+            content.classList.add("page_content");
 
-			const loginForm = new UserFormComponent({el: content});
-			loginForm.data = {
-				id: "login_form",
-				commonError: "Wrong user or password",
-				submitText: "Login",
-				fields: [
-					{
-						name: "username",
-						validationType: "validate_username",
-						type: "text",
-						placeholder: "Username",
-					},
-					{
-						name: "password",
-						validationType: "validate_password",
-						type: "password",
-						placeholder: "Password",
-					}
-				]
-			};
-			loginForm.render();
+            const loginForm = new UserFormComponent({el: content});
+            loginForm.data = {
+                id: "login_form",
+                commonError: "Wrong user or password",
+                submitText: "Login",
+                fields: [
+                    {
+                        name: "username",
+                        validationType: "validate_username",
+                        type: "text",
+                        placeholder: "Username",
+                    },
+                    {
+                        name: "password",
+                        validationType: "validate_password",
+                        type: "password",
+                        placeholder: "Password",
+                    }
+                ]
+            };
+            loginForm.render();
 
-			root.appendChild(content);
+            root.appendChild(content);
 
-			content.addEventListener("submit", function (event) {
-				event.preventDefault();
+            content.addEventListener("submit", function (event) {
+                event.preventDefault();
 
-				if (loginForm.frontValidate()) {
-					loginForm.sendData({path: "/session"})
-						.then((res) => {
-							if (res) {
-								router.open("menu");
-							}
-						})
-						.catch((err) => {
-							router.open("menu");
-						});
-				}
-			});
-		})
-		.catch(err => {
-			router.open("menu");
-		});
+                if (loginForm.frontValidate()) {
+                    loginForm.sendData({path: "/session"}).
+                        then((res) => {
+                            if (res) {
+                                router.open("menu");
+                            }
+                        }).
+                        catch((err) => {
+                            errorHandler(err);
+                            router.open("menu");
+                        });
+                }
+            });
+        }).
+        catch((err) => {
+            errorHandler(err);
+            router.open("menu");
+        });
 }

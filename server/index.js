@@ -1,5 +1,3 @@
-'use strict';
-
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
@@ -14,5 +12,5 @@ app.use(express.static(root));
 app.use(fallback('index.html', {root}));
 
 app.listen(port, function () {
-	console.log(`Server listening port ${port}`);
+    console.log(`Server listening port ${port}`);
 });
