@@ -25,3 +25,13 @@ npm run hand
 ## Деплой!
 
 Фронтенд на http://212.109.223.57:10002/
+
+## Ментор:
+Попонкин Дима https://github.com/PDmitryA
+
+## Команда:
+Ломачёв Сергей https://github.com/Silvman
+
+Митраков Костя https://github.com/ConstaConst
+
+Соколов Влад https://github.com/Falcon22
