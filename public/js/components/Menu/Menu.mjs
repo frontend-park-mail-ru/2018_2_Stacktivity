@@ -6,15 +6,14 @@ export class MenuComponent {
 
     /** Create the menu component
      *
-     * @param el - root element for the menu
+     * @param root - rootElem element for the menu
      */
-    constructor({el = document.body} = {}) {
-        this._el = el;
+    constructor({root = document.body} = {}) {
+        this._renderRoot = root;
     }
 
 
-    /** Render the template into the end of root element */
+    /** Render the template into the end of rootElem element */
     render() {
-        this._el.innerHTML += Handlebars.templates.Menu();
     }
 }

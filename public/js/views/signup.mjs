@@ -2,15 +2,15 @@ import {HeaderComponent} from "../components/Header/Header.mjs";
 import {NavigationComponent} from "../components/Nav/Nav.mjs";
 import {AjaxModule, errorHandler} from "../modules/ajax.mjs";
 import {UserFormComponent} from "../components/UserForm/UserForm.mjs";
-import {root, router} from "../modules/router.mjs";
+import {rootElem, router} from "../modules/Router.mjs";
 
 /**
  * @function createSignUp
  * Draws the signup page
  */
 export function createSignUp() {
-    const header = new HeaderComponent({el: root});
-    const navigation = new NavigationComponent({el: root});
+    const header = new HeaderComponent({root: rootElem});
+    const navigation = new NavigationComponent({root: rootElem});
 
     let is_page = true;
 
@@ -27,7 +27,7 @@ export function createSignUp() {
         let content = document.createElement("main");
         content.classList.add("page_content");
 
-        const signInForm = new UserFormComponent({el: content});
+        const signInForm = new UserFormComponent({root: content});
         signInForm.data = {
             id: "signup_form",
             commonError: "Several fixes is required",
@@ -49,14 +49,14 @@ export function createSignUp() {
                     error: "This is not an e-mail"
                 },
                 {
-                    name: "password1",
+                    name: "password",
                     validationType: "validate_password",
                     type: "password",
                     placeholder: "Password",
                     error: "Password must be bigger than 6 and less than 36 symbols"
                 },
                 {
-                    name: "password2",
+                    name: "password_repeat",
                     validationType: "validate_password_repeat",
                     type: "password",
                     placeholder: "Confirm password",
@@ -66,7 +66,7 @@ export function createSignUp() {
         };
         signInForm.render();
 
-        root.appendChild(content);
+        rootElem.appendChild(content);
 
         content.addEventListener("submit", function (event) {
             event.preventDefault();

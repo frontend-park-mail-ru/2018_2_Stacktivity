@@ -1,7 +1,6 @@
 /** @module modules/router */
-
-export const root = document.getElementById("root");
-
+import {errorHandler} from "./ajax.mjs";
+import Emitter from "./Emitter.js";
 
 /** Router is providing navigation */
 class Router {
@@ -9,6 +8,8 @@ class Router {
     constructor() {
         this._routes = {};
         this._currentRoute = null;
+
+        Emitter.on("done-user-logout", open("/").bind(this));
     }
 
     /**
@@ -16,31 +17,16 @@ class Router {
      *
      * @param {string} name - Name of action
      * @param {string} path - Path to display in navbar
-     * @param {function} action - Action to invore
+     * @param {function} ControllerClass - Action to invore
      *
      * @return {Router} - Current object instance
      */
-    add(name, path, action) {
-        this._routes[name] = {path, action};
+    add(path, Controller, View) {
+        this._routes[path] = {
+            controller: new Controller(View),
+        };
+
         return this;
-    }
-
-    /**
-     * Returns name of the action with given path
-     *
-     * @param {string} path - path string
-     *
-     * @return {string|null} - Name of the action or null
-     */
-    getNameByPath(path) {
-        for (const name in this._routes) {
-            if (this._routes.hasOwnProperty(name) &&
-                this._routes[name].path === path) {
-                return name;
-            }
-        }
-
-        return null;
     }
 
     /**
@@ -51,19 +37,34 @@ class Router {
      *
      * @return {Router} - Current object instance
      */
-    open(name = "menu", param) {
-        if (this._routes[name]) {
-            root.innerHTML = "";
-            this._currentRoute = name;
-            let path = this._routes[name].path;
-
-            if (param) {
-                path += `\\${param}`;
-            }
-
-            window.history.pushState({lastRoute: this._currentRoute}, "", path);
-            this._routes[name].action(param);
+    open(path = "/") {
+        if (!this._routes[path]) {
+            errorHandler("no such path is registred");
+            return;
         }
+
+        this._routes[path].controller.operate();
+
+        if (controller === null) {
+            controller = new Controller();
+
+            if(controller.)
+            this._renderRoot.appendChild();
+        }
+
+        if (view === null) {
+            view = new Action(viewSection)
+        }
+
+
+        if (param) {
+            path += `\\${param}`;
+        }
+
+
+        this._currentRoute = path;
+        window.history.pushState({lastRoute: this._currentRoute}, "", path);
+        this._routes[name].action(param);
 
         return this;
     }
@@ -89,7 +90,7 @@ function getEventTarget(target) { // для перехода по ссылкам
     return target;
 }
 
-root.addEventListener("click", function (event) {
+rootElem.addEventListener("click", function (event) {
     let link = getEventTarget(event.target);
     if (!link) {
         return;

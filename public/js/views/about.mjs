@@ -1,7 +1,7 @@
 import {HeaderComponent} from "../components/Header/Header.mjs";
 import {NavigationComponent} from "../components/Nav/Nav.mjs";
 import {AboutComponent} from "../components/About/About.mjs";
-import {root} from "../modules/router.mjs";
+import {rootElem} from "../modules/Router.mjs";
 
 /**
  * @function createAbout
@@ -11,9 +11,9 @@ export function createAbout() {
     let is_page = true;
     let content = document.createElement("main");
 
-    const header = new HeaderComponent({el: root});
-    const navigation = new NavigationComponent({el: root});
-    const about = new AboutComponent({el: content});
+    const header = new HeaderComponent({root: rootElem});
+    const navigation = new NavigationComponent({root: rootElem});
+    const about = new AboutComponent({root: content});
 
     header.data = {is_page, desc: "About"};
     header.render();
@@ -24,5 +24,5 @@ export function createAbout() {
 
     about.render();
 
-    root.appendChild(content);
+    rootElem.appendChild(content);
 }

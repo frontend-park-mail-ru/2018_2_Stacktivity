@@ -2,7 +2,7 @@ import {HeaderComponent} from "../components/Header/Header.mjs";
 import {NavigationComponent} from "../components/Nav/Nav.mjs";
 import {AjaxModule, errorHandler} from "../modules/ajax.mjs";
 import {LeaderboardComponent} from "../components/Leaderboard/Leaderboard.mjs";
-import {root, router} from "../modules/router.mjs";
+import {rootElem, router} from "../modules/Router.mjs";
 
 /**
  * @function createLeaderboard
@@ -12,8 +12,8 @@ import {root, router} from "../modules/router.mjs";
 export function createLeaderboard(page) {
     let is_page = true;
 
-    const header = new HeaderComponent({el: root});
-    const navigation = new NavigationComponent({el: root});
+    const header = new HeaderComponent({root: rootElem});
+    const navigation = new NavigationComponent({root: rootElem});
 
     header.data = {is_page, desc: "Leaderboard"};
     header.render();
@@ -36,14 +36,14 @@ export function createLeaderboard(page) {
             let content = document.createElement("main");
             content.classList.add("page_content");
 
-            const leaderboard = new LeaderboardComponent({el: content});
+            const leaderboard = new LeaderboardComponent({root: content});
 
             leaderboard.data = {
                 users: data
             };
             leaderboard.render();
 
-            root.appendChild(content);
+            rootElem.appendChild(content);
 
 
             document.getElementById("prev_page_link").

@@ -2,7 +2,7 @@ import {HeaderComponent} from "../components/Header/Header.mjs";
 import {NavigationComponent} from "../components/Nav/Nav.mjs";
 import {AjaxModule, errorHandler} from "../modules/ajax.mjs";
 import {ProfileComponent} from "../components/Profile/Profile.mjs";
-import {root, router} from "../modules/router.mjs";
+import {rootElem, router} from "../modules/Router.mjs";
 
 /**
  * @function createProfile
@@ -10,11 +10,11 @@ import {root, router} from "../modules/router.mjs";
  */
 export function createProfile() {
     let is_page = true;
-    const header = new HeaderComponent({el: root});
+    const header = new HeaderComponent({root: rootElem});
     header.data = {is_page, desc: "Profile"};
     header.render();
 
-    const navigation = new NavigationComponent({el: root});
+    const navigation = new NavigationComponent({root: rootElem});
     navigation.render("return_link");
 
     AjaxModule.doGet({path: "/session"}).
@@ -29,11 +29,11 @@ export function createProfile() {
             let content = document.createElement("main");
             content.classList.add("page_content");
 
-            const profile = new ProfileComponent({el: content});
+            const profile = new ProfileComponent({root: content});
             profile.data = user;
             profile.render();
 
-            root.appendChild(content);
+            rootElem.appendChild(content);
 
             content.addEventListener("submit", (event) => {
                 event.preventDefault();

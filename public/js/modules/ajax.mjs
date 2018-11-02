@@ -1,6 +1,6 @@
 /** @module modules/ajax */
 
-import {base_path} from "../config.js";
+import {basePath} from "../config.js";
 
 /**
  * dummy!
@@ -15,7 +15,7 @@ function noop() {
  * @return {null}
  */
 export function errorHandler(error) {
-    noop(error);
+    console.log(error);
     return null;
 }
 
@@ -31,7 +31,7 @@ export class AjaxModule {
      * @private
      */
     static _ajax({method = "GET", path = "/", body}) {
-        path = base_path + path;
+        path = basePath + path;
 
         if (method === "GET" || method === "HEAD" || method === "DELETE") {
             return fetch(path, {

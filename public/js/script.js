@@ -1,29 +1,22 @@
-import {AjaxModule} from "./modules/ajax.mjs";
-import {createAbout} from "./pages/about.mjs";
-import {createLeaderboard} from "./pages/leaderboard.mjs";
-import {createLogin} from "./pages/login.mjs";
-import {createMenu} from "./pages/menu.mjs";
-import {createProfile} from "./pages/profile.mjs";
-import {createSignUp} from "./pages/signup.mjs";
-import {router} from "./modules/router.mjs";
+import {AjaxModule, errorHandler} from "./modules/ajax.mjs";
+import {createAbout} from "./views/about.mjs";
+import {createLeaderboard} from "./views/leaderboard.mjs";
+import {createLogin} from "./views/login.mjs";
+import {createMenu} from "./views/menu.mjs";
+import {createProfile} from "./views/profile.mjs";
+import {createSignUp} from "./views/signup.mjs";
+import {router} from "./modules/Router.mjs";
 
+
+import UserModel from "./models/UserModel.js";
+import Emitter from "./modules/Emitter.js";
+
+Emitter.on("get-user", UserModel.Fetch);
+Emitter.on("user-logout", UserModel.Logout);
 
 /**
  * @function logoutUser - Action that clears session-id and logges user out
  */
-function logoutUser() { // TODO to the User module
-    AjaxModule.doDelete({path: "/session"}).
-        then((resp) => {
-            if (resp.status === 200) {
-                router.open("menu");
-            } else {
-                return Promise.reject(new Error(resp.status));
-            }
-        }).
-        catch(() => {
-            router.open("menu");
-        });
-}
 
 /**
  * @function main - Starts the application

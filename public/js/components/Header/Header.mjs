@@ -1,15 +1,15 @@
 /** @module components/Header */
 
 
-/** Renders header in the application pages (logo, descpiption) */
+/** Renders header in the application views (logo, descpiption) */
 export class HeaderComponent {
 
     /** Create the header component
      *
-     * @param el - root element for the header
+     * @param root - rootElem element for the header
      */
-    constructor({el = document.body} = {}) {
-        this._el = el;
+    constructor({root = document.body} = {}) {
+        this._renderRoot = root;
     }
 
 
@@ -31,12 +31,12 @@ export class HeaderComponent {
     }
 
 
-    /** Render the template into the end of root element */
+    /** Render the template into the end of rootElem element */
     render() {
         if (!this._data) {
             return;
         }
 
-        this._el.innerHTML += Handlebars.templates.Header(this._data);
+        this._renderRoot.innerHTML += Handlebars.templates.Header(this._data);
     }
 }

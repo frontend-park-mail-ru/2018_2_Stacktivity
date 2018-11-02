@@ -8,10 +8,10 @@ export class UserFormComponent {
 
     /** Create the header component
      *
-     * @param el - root element for the form
+     * @param root - rootElem element for the form
      */
-    constructor({el = document.body} = {}) {
-        this._el = el;
+    constructor({root = document.body} = {}) {
+        this._renderRoot = root;
     }
 
     /** Get data object which will be used when render
@@ -30,7 +30,7 @@ export class UserFormComponent {
         this._data = data;
     }
 
-    /** Render the template into the end of root element */
+    /** Render the template into the end of rootElem element */
     render() {
         if (!this._data) {
             return;
@@ -60,7 +60,7 @@ export class UserFormComponent {
     getObject() {
         return Array.from(document.getElementById(this._data.id).elements).
             reduce((acc, val) => {
-                if (val.value !== "") {
+                if (val.value !== "" && val.value !== "password_repeat") {
                     acc[val.name] = val.value;
                 }
                 return acc;
@@ -136,32 +136,10 @@ export class UserFormComponent {
             return true;
         }
 
-        if (this._data.id === "login_form") {
-            document.getElementsByClassName("common_error")[0].
-                classList.remove("hidden");
-            return false;
-        }
+        let commonErrorEl = document.getElementsByClassName("common_error")[0];
 
-        if (data.usernameValidate.success) {
-            this._switchShowingError(this.getErrorfield("validate_username"), true);
-        } else {
-            this._switchShowingError(this.getErrorfield("validate_username"), false);
-        }
-        if (data.emailValidate.success) {
-            this._switchShowingError(this.getErrorfield("validate_email"), true);
-        } else {
-            this._switchShowingError(this.getErrorfield("validate_email"), false);
-        }
-        if (data.passwordValidate.success) {
-            this._switchShowingError(this.getErrorfield("validate_password"), true);
-        } else {
-            this._switchShowingError(this.getErrorfield("validate_password"), false);
-        }
-        if (data.passwordRepeatValidate.success) {
-            this._switchShowingError(this.getErrorfield("validate_password_repeat"), true);
-        } else {
-            this._switchShowingError(this.getErrorfield("validate_password_repeat"), false);
-        }
+        commonErrorEl.innerText = data.error.message;
+        commonErrorEl.classList.remove("hidden");
 
         return false;
     }
@@ -190,9 +168,9 @@ export class UserFormComponent {
             });
     }
 
-    /** Render the template into the end of root element */
+    /** Render the template into the end of rootElem element */
     _render() {
-        this._el.innerHTML += Handlebars.templates.UserForm(this._data);
+        this._renderRoot.innerHTML += Handlebars.templates.UserForm(this._data);
     }
 
     /** Validate string on correct symbols

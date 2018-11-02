@@ -2,15 +2,15 @@ import {HeaderComponent} from "../components/Header/Header.mjs";
 import {NavigationComponent} from "../components/Nav/Nav.mjs";
 import {AjaxModule, errorHandler} from "../modules/ajax.mjs";
 import {UserFormComponent} from "../components/UserForm/UserForm.mjs";
-import {root, router} from "../modules/router.mjs";
+import {rootElem, router} from "../modules/Router.mjs";
 
 /**
  * @function createLogin
  * Draws the login page
  */
 export function createLogin() {
-    const header = new HeaderComponent({el: root});
-    const navigation = new NavigationComponent({el: root});
+    const header = new HeaderComponent({root: rootElem});
+    const navigation = new NavigationComponent({root: rootElem});
 
     let is_page = true;
 
@@ -27,7 +27,7 @@ export function createLogin() {
             let content = document.createElement("main");
             content.classList.add("page_content");
 
-            const loginForm = new UserFormComponent({el: content});
+            const loginForm = new UserFormComponent({root: content});
             loginForm.data = {
                 id: "login_form",
                 commonError: "Wrong user or password",
@@ -49,7 +49,7 @@ export function createLogin() {
             };
             loginForm.render();
 
-            root.appendChild(content);
+            rootElem.appendChild(content);
 
             content.addEventListener("submit", function (event) {
                 event.preventDefault();

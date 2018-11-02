@@ -1,17 +1,17 @@
 /** @module components/Nav */
 
-import {router} from "../../modules/router.mjs";
+import {router} from "../../modules/Router.mjs";
 
 
-/** Renders navigation block in the application pages */
+/** Renders navigation block in the application views */
 export class NavigationComponent {
 
     /** Create the navigation component
      *
-     * @param el - root element for the header
+     * @param root - rootElem element for the header
      */
-    constructor({el = document.body} = {}) {
-        this._el = el;
+    constructor({root = document.body} = {}) {
+        this._renderRoot = root;
 
 
         this._pageNavigations = {
@@ -144,12 +144,12 @@ export class NavigationComponent {
     }
 
 
-    /** Render the template to the end of root element and set ups dataset.page of links
+    /** Render the template to the end of rootElem element and set ups dataset.page of links
      *
      * @param {string} navName - name of the set of links which should be wsed
      */
     render(navName) {
-        this._el.innerHTML += Handlebars.templates.Nav(this._pageNavigations[navName]);
+        this._renderRoot.innerHTML += Handlebars.templates.Nav(this._pageNavigations[navName]);
 
         // important, links don't work without it!
         this._pageNavigations[navName].links.forEach(function (el) {
