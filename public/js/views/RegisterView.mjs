@@ -28,14 +28,14 @@ export default class RegisterView extends BaseView {
 
         if (user.is_logged_in) {
             errorHandler("You are already registered and even logged in!");
-            Router.open("/");
+
             return;
         }
 
         this.viewSection.innerHTML += Handlebars.templates.Header({isPage: true, desc: "Sign Up"});
 
         this._navigationController = new NavigationController();
-        this._formController = new FormController("signup");
+        this._formController = new FormController("signup", true);
 
         this.viewSection.innerHTML += Handlebars.templates.Nav({
             links: [
@@ -95,7 +95,7 @@ export default class RegisterView extends BaseView {
 
         this.viewSection.appendChild(content);
 
-        content.addEventListener("submit", this._formController.callbackSubmit);
+        content.addEventListener("submit", this._formController.callbackSubmit.bind(this._formController));
         this.viewSection.addEventListener("click", this._navigationController.keyPressedCallback);
 
         Emitter.off("done-get-user", this.render.bind(this));

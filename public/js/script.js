@@ -14,10 +14,12 @@ UserModel.__data = null;
 Emitter.on("get-user", () => {UserModel.Fetch()}, false);
 Emitter.on("submit-data-login", (data) => {UserModel.Login(data)}, false);
 Emitter.on("submit-data-signup", (data) => {UserModel.Register(data)}, false);
+Emitter.on("submit-data-profile", (data) => {UserModel.Update(data)}, false);
 Emitter.on("user-logout", () => {UserModel.Logout()}, false);
 Emitter.on("wipe-views", () => {
-    document.getElementById("rootElem").innerHTML="";
+    // document.getElementById("rootElem").innerHTML="";
     Router.open("/");
+    Router.rerender();
 }, false);
 
 /**

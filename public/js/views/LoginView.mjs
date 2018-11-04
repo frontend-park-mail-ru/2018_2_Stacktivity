@@ -8,7 +8,7 @@ import FormController from "../controllers/FormController.mjs";
 export default class LoginView extends BaseView {
     constructor() {
         super();
-        Emitter.on("done-get-user", this.render.bind(this));
+        Emitter.on("done-get-user", this.render.bind(this), false);
     }
 
     show() {
@@ -25,7 +25,7 @@ export default class LoginView extends BaseView {
         if (user.is_logged_in) {
             Emitter.off("done-get-user", this.render.bind(this));
             errorHandler("You are already registered and even logged in!");
-            Router.open("/");
+            // Router.open("/");
             return;
         }
 
@@ -83,7 +83,5 @@ export default class LoginView extends BaseView {
 
         this.viewSection.addEventListener("click", this._navigationController.keyPressedCallback);
         content.addEventListener("submit", this._formController.callbackSubmit.bind(this._formController));
-
-        Emitter.off("done-get-user", this.render.bind(this));
     }
 }

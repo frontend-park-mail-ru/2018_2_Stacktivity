@@ -46,7 +46,7 @@ const linksNoLogin = {
 export default class MenuView extends BaseView {
     constructor() {
         super();
-        Emitter.on("done-get-user", this.render.bind(this));
+        Emitter.on("done-get-user", this.render.bind(this), false);
     }
 
     show() {
@@ -81,7 +81,6 @@ export default class MenuView extends BaseView {
             });
 
             // TODO можно вынести в темплейт
-
             // let profile_link = document.getElementById("profile_link"); // аватарка
             // if (user.avatar) {
             //     profile_link.innerHTML = `<span><img src="../${user.avatar}" class="avatar" /></span>`;
@@ -94,7 +93,6 @@ export default class MenuView extends BaseView {
         }
 
         this.viewSection.addEventListener("click", this._navigationController.keyPressedCallback);
-
         this.viewSection.innerHTML += Handlebars.templates.Menu();
 
         Emitter.off("done-get-user", this.render.bind(this));

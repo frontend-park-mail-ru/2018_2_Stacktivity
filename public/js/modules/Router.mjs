@@ -36,6 +36,7 @@ class Router {
      */
     open(path = "/") {
         // TODO исп. деструктуризацию
+        let fullPath = path;
         let aPath = path.split("/");
         path = "/" + aPath[1];
 
@@ -54,11 +55,8 @@ class Router {
             Emitter.emit("leaderboard-set-page", aPath[2]); // TODO check рабоатет ли
         }
 
-        window.history.pushState({lastRoute: this._currentRoute}, "", path);
+        window.history.pushState({lastRoute: this._currentRoute}, "", fullPath);
         this._currentRoute = path;
-
-        console.log(this._routes[path]);
-        console.log(this._routes[path].viewEntity);
 
         if (!this._routes[path].viewEntity.isShown) {
             Object.values(this._routes).forEach(function ({viewEntity}) {
@@ -68,13 +66,18 @@ class Router {
             });
 
             this._routes[path].viewEntity.show();
-        }
-
-        if (!this._routes[path].viewEntity.isShown) {
-            this._routes[path].viewEntity.show();
+        } else {
+            if (path === this._currentRoute) {
+                this.rerender();
+            }
         }
 
         return this;
+    }
+
+
+    rerender() {
+        this._routes[this._currentRoute].viewEntity.show();
     }
 
     getPathTo(View) {

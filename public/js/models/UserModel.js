@@ -5,10 +5,13 @@ import {errorHandler} from "../misc.js";
 export default class UserModel {
 
     static Fetch() {
+
         if (UserModel.__data !== null) {
             Emitter.emit("done-get-user", UserModel.__data);
             return;
         }
+
+        console.log("server fetchiung user", UserModel.__data);
 
         AjaxModule.doGet({path: "/session"}).
             then((resp) => {
@@ -36,36 +39,36 @@ export default class UserModel {
         AjaxModule.doPut({path: `/user/${UserModel.__data.id}`, body: data}).
             then((resp) => {
                 if (resp.status === 200) {
-                    Emitter.emit("update-success", resp);
+                    // Emitter.emit("update-success", resp);
                     Emitter.emit("wipe-views");
-                    UserModel.__data = {is_logged_in: false};
+                    UserModel.__data = null;
                 }
 
-                Emitter.emit("update-error", resp.status);
+                // Emitter.emit("update-error", resp.status);
             });
     }
 
     static Register(data) {
         return AjaxModule.doPost({path: "/user", body: data}).
             then((resp) => {
-                if (resp.status === 201 || resp.status === 400) {
-                    return resp.json();
+                if (resp.status === 400) {
+                    return Promise.reject(resp.json());
+                }
+
+                if (resp.status === 200) {
+                    UserModel.__data = null;
+                    // Emitter.emit("reg-success", data);
+                    Emitter.emit("wipe-views");
                 }
 
                 if (resp.status === 500) {
-                    // Emitter.emit("register-error", resp.status);
+                    // Emitter.emit("reg-error", resp.status);
                 }
             }).
-            then((data) => {
-                if (this.serverValidate(data)) {
-                    // Emitter.emit("register-success", data);
-                    Emitter.emit("wipe-views");
-
-
-                    UserModel.__data = {is_logged_in: false};
-                } else {
-                    // Emitter.emit("register-validation-error", data);
-                }
+            catch((data) => {
+                data.then((body) => {
+                    UserModel.serverValidate(body);
+                })
             });
     }
 
@@ -77,7 +80,7 @@ export default class UserModel {
                 }
 
                 if (resp.status === 200) {
-                    UserModel.__data = {is_logged_in: false};
+                    UserModel.__data = null;
                     // Emitter.emit("login-success", data);
                     Emitter.emit("wipe-views");
                 }
@@ -86,8 +89,10 @@ export default class UserModel {
                     Emitter.emit("login-error", resp.status);
                 }
             }).
-            then((data) => {
-                UserModel.serverValidate(data);
+            catch((data) => {
+                data.then((body) => {
+                    UserModel.serverValidate(body);
+                })
             });
     }
 
@@ -96,7 +101,7 @@ export default class UserModel {
             AjaxModule.doDelete({path: "/session"}).
                 then((resp) => {
                     if (resp.status === 200) {
-                        UserModel.__data = {is_logged_in: false};
+                        UserModel.__data = null;
                         Emitter.emit("wipe-views");
 
                     } else {

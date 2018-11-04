@@ -31,7 +31,7 @@ export default class ProfileView extends BaseView {
         this._navController = new NavigationController();
 
 
-        this.viewSection.innerHTML += Handlebars.templates.Header({is_page: true, desc: "Profile"});
+        this.viewSection.innerHTML += Handlebars.templates.Header({isPage: true, desc: "Profile"});
         this.viewSection.innerHTML += Handlebars.templates.Nav({
             links: [
                 {
@@ -47,7 +47,7 @@ export default class ProfileView extends BaseView {
         content.innerHTML += Handlebars.templates.Profile(user);
         this.viewSection.appendChild(content);
 
-        this.viewSection.addEventListener("click", this._navController.keyPressedCallback);
-        content.addEventListener("submit", this._formController.callbackSubmit);
+        this.viewSection.addEventListener("click", this._navController.keyPressedCallback.bind(this._navController));
+        content.addEventListener("submit", this._formController.callbackSubmit.bind(this._formController));
     }
 }

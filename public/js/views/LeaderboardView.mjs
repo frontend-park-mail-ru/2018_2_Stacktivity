@@ -8,8 +8,9 @@ export default class LeaderboardView extends BaseView {
     constructor() {
         super();
         this._leaderboardModel = new LeaderboardModel();
+        this._leaderboardController = new LeaderboardController();
 
-        Emitter.on("done-leaderboard-load", this.render.bind(this), false);
+        Emitter.on("done-leaderboard-fetch", this.render.bind(this), false);
     }
 
     show() {
@@ -17,12 +18,16 @@ export default class LeaderboardView extends BaseView {
         Emitter.emit("leaderboard-load");
     }
 
+    hide() {
+        Emitter.emit("leaderboard-set-page", 1);
+        super.hide();
+    }
+
     render(users) {
         super.render();
         this.viewSection.innerHTML += Handlebars.templates.Header({isPage: true, desc: "Leaderboard"});
 
         this._navigationController = new NavigationController();
-        this._leaderboardController = new LeaderboardController();
 
         this.viewSection.innerHTML += Handlebars.templates.Nav({
             links: [
