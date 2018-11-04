@@ -8,8 +8,20 @@ import RegisterView from "./views/RegisterView.mjs";
 import LoginView from "./views/LoginView.mjs";
 import AboutView from "./views/AboutView.mjs";
 import LeaderboardView from "./views/LeaderboardView.mjs";
+import GameView from "./views/GameView.js";
+import {errorHandler} from "./misc.js";
 
 UserModel.__data = null;
+
+Emitter.on("error", errorHandler);
+Emitter.on("server-validation-error", function (data) {
+    console.log("oh D:");
+
+    let commonErrorEl = document.getElementsByClassName("common_error")[0];
+
+    commonErrorEl.innerText = data.error.message;
+    commonErrorEl.classList.remove("hidden");
+});
 
 Emitter.on("get-user", () => {UserModel.Fetch()}, false);
 Emitter.on("submit-data-login", (data) => {UserModel.Login(data)}, false);
@@ -28,6 +40,8 @@ Emitter.on("wipe-views", () => {
 function main() {
     Router.
         add("/about", AboutView).
+        add("/single", GameView).
+        add("/mult", GameView).
         add("/", MenuView).
         add("/profile", ProfileView).
         add("/signup", RegisterView).

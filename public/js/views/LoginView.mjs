@@ -4,6 +4,7 @@ import {errorHandler} from "../misc.js";
 import BaseView from "./BaseView.js";
 import Emitter from "../modules/Emitter.js";
 import FormController from "../controllers/FormController.mjs";
+import LoginRegisterValidator from "../components/validators/LoginRegisterValidator.js";
 
 export default class LoginView extends BaseView {
     constructor() {
@@ -32,7 +33,7 @@ export default class LoginView extends BaseView {
         this.viewSection.innerHTML += Handlebars.templates.Header({isPage: true, desc: "Login"});
 
         this._navigationController = new NavigationController();
-        this._formController = new FormController("login", true);
+        this._formController = new FormController("login", LoginRegisterValidator);
 
         this.viewSection.innerHTML += Handlebars.templates.Nav({
             links: [
@@ -74,14 +75,7 @@ export default class LoginView extends BaseView {
 
         this.viewSection.appendChild(content);
 
-        document.addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            console.log("mh?")
-        });
-
-
-        this.viewSection.addEventListener("click", this._navigationController.keyPressedCallback);
         content.addEventListener("submit", this._formController.callbackSubmit.bind(this._formController));
+        this.viewSection.addEventListener("click", this._navigationController.keyPressedCallback);
     }
 }

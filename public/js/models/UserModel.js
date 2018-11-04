@@ -126,10 +126,7 @@ export default class UserModel {
             return true;
         }
 
-        let commonErrorEl = document.getElementsByClassName("common_error")[0];
-
-        commonErrorEl.innerText = data.error.message;
-        commonErrorEl.classList.remove("hidden");
+        Emitter.emit("server-validation-error", data);
 
         return false;
     }

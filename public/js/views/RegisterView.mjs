@@ -4,6 +4,7 @@ import BaseView from "./BaseView.js";
 import Emitter from "../modules/Emitter.js";
 import {errorHandler} from "../misc.js";
 import FormController from "../controllers/FormController.mjs";
+import LoginRegisterValidator from "../components/validators/LoginRegisterValidator.js";
 
 /**
  * @function createSignUp
@@ -17,8 +18,6 @@ export default class RegisterView extends BaseView {
 
     show() {
         Emitter.emit("get-user");
-
-        // место для загрузочной картинки!
 
         super.show();
     }
@@ -35,7 +34,7 @@ export default class RegisterView extends BaseView {
         this.viewSection.innerHTML += Handlebars.templates.Header({isPage: true, desc: "Sign Up"});
 
         this._navigationController = new NavigationController();
-        this._formController = new FormController("signup", true);
+        this._formController = new FormController("signup", LoginRegisterValidator);
 
         this.viewSection.innerHTML += Handlebars.templates.Nav({
             links: [
