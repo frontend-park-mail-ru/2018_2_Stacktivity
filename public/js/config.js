@@ -1,2 +1,3 @@
 export const basePath = "http://localhost:3001";
-export const viewsRootElemId = "";
+
+export const leaderboardLimit = 10;

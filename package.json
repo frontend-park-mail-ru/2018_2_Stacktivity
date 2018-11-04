@@ -7,7 +7,7 @@
     "start": "node server",
     "prestart": "npm run hand",
     "doc": "./node_modules/.bin/jsdoc -c jsdoc_settings.json public/js/*",
-    "hand": "node_modules/.bin/handlebars public/js/components/* -f public/js/handlebars.precompile.js",
+    "hand": "node_modules/.bin/handlebars public/js/views/templates/* -f public/js/handlebars.precompile.js",
     "test": "echo 'under construction\n'"
   },
   "dependencies": {

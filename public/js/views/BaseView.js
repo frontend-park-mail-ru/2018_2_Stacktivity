@@ -2,12 +2,10 @@
  * @class BaseView
  * @module BaseView
  */
-import {errorHandler} from "../modules/ajax.mjs";
-
-export class BaseView {
+export default class BaseView {
     constructor() {
-        this.viewSection = document.createElement('section'); // <section> where the view is rendering to
-        BaseView._renderRoot.appendChild(this.viewSection);
+        this.viewSection = document.createElement('section'); // <section> where the views is rendering to
+        BaseView.renderRoot.appendChild(this.viewSection);
         this.viewSection.hidden = true; // View should not be displayed until all preparations is done (like data fetch)
     }
 
@@ -15,7 +13,7 @@ export class BaseView {
         return this.viewSection.hidden === false;
     }
 
-    static get _renderRoot() {
+    static get renderRoot() {
         return document.getElementById("rootElem");
     }
 
@@ -28,6 +26,7 @@ export class BaseView {
     }
 
     render() {
-        errorHandler(`View ${this.constructor.name} is not implemented`);
+        this.viewSection.innerHTML = "";
+        // errorHandler(`View ${this.constructor.name} is not implemented`);
     }
 }

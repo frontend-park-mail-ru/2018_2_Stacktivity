@@ -1,81 +1,37 @@
-import {AjaxModule} from "../../modules/ajax.mjs";
+import Emitter from "../modules/Emitter.js";
 
-/** @module components/UserForm */
+export default class FormController {
+    constructor(formName, useValidation = false) {
+        this._formName = formName;
+        this._useValidation = useValidation;
 
+        console.log(this)
 
-/** Renders input forms */
-export class UserFormComponent {
-
-    /** Create the header component
-     *
-     * @param root - rootElem element for the form
-     */
-    constructor({root = document.body} = {}) {
-        this._renderRoot = root;
     }
 
-    /** Get data object which will be used when render
-     *
-     * @return {Object}
-     */
-    get data() {
-        return this._data;
-    }
+    callbackSubmit(event) {
+        console.log("asdasd");
 
-    /** Set data object which will be used when render
-     *
-     * @param {Object} data
-     */
-    set data(data) {
-        this._data = data;
-    }
+        event.preventDefault();
+        // event.stopImmediatePropagation(?);
 
-    /** Render the template into the end of rootElem element */
-    render() {
-        if (!this._data) {
-            return;
-        }
-        this._render();
-    }
-
-    /** Get DOM field that contains error message
-     *
-     * @param {string} name of input field is linked with the error
-     *
-     * @return {Object} error field
-     */
-    getErrorfield(name) {
-        for (const elem of document.getElementById(this._data.id).
-            getElementsByClassName("validate")) {
-            if (elem.getElementsByTagName("input")[0].classList.contains(name)) {
-                return elem.getElementsByClassName("error")[0];
-            }
-        }
-    }
-
-    /** Get DOM form field
-     *
-     * @return {Object} form field
-     */
-    getObject() {
-        return Array.from(document.getElementById(this._data.id).elements).
+        if (!this._useValidation || this.frontValidate(event.target)) {
+            let data = Array.from(event.target.elements). // TODO !! будет работать?
             reduce((acc, val) => {
                 if (val.value !== "" && val.value !== "password_repeat") {
                     acc[val.name] = val.value;
                 }
                 return acc;
             }, {}); // harvesting values from form into the object
+
+            Emitter.emit("submit-data-"+this._formName, data);
+        }
     }
 
-    /** Validate form input and activate/deactivate error message
-     *
-     * @return {boolean} is input valid?
-     */
-    frontValidate() {
+    frontValidate(form) {
         let isValid = true;
-        const isLogin = this._data.id === "login_form";
-        const formElem = document.getElementById(this._data.id);
-        for (const elem of formElem.getElementsByClassName("validate")) {
+        const isLogin = this._formName === "login";
+        for (const elem of form.getElementsByClassName("validate")) {
             let input = elem.getElementsByTagName("input")[0];
             let err = elem.getElementsByClassName("error")[0];
             if (input.classList.contains("validate_username")) {
@@ -118,59 +74,11 @@ export class UserFormComponent {
         }
 
         if (isLogin && !isValid) {
-            formElem.getElementsByClassName("common_error")[0].
+            form.getElementsByClassName("common_error")[0].
                 classList.remove("hidden");
         }
 
         return isValid;
-    }
-
-    /** Validate form by server response
-     *
-     * @param {Object} data about validation from server
-     *
-     * @return {boolean} error field
-     */
-    serverValidate(data) {
-        if (data.ValidateSuccess) {
-            return true;
-        }
-
-        let commonErrorEl = document.getElementsByClassName("common_error")[0];
-
-        commonErrorEl.innerText = data.error.message;
-        commonErrorEl.classList.remove("hidden");
-
-        return false;
-    }
-
-    /** HTTP action that sends updated profile data
-     *
-     * @param {Object} params from form
-     *
-     * @return {Promise}
-     */
-    sendData(params = {}) {
-        return AjaxModule.doPost({...params, body: this.getObject()}).
-            then((resp) => {
-                if (resp.status === 201 || resp.status === 400) {
-                    return resp.json();
-                }
-
-                if (resp.status === 500) {
-                    return Promise.reject(new Error(resp.status));
-                }
-            }).
-            then((data) => {
-                if (this.serverValidate(data)) {
-                    return Promise.resolve();
-                }
-            });
-    }
-
-    /** Render the template into the end of rootElem element */
-    _render() {
-        this._renderRoot.innerHTML += Handlebars.templates.UserForm(this._data);
     }
 
     /** Validate string on correct symbols

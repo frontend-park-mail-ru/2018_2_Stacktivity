@@ -2,25 +2,15 @@
 
 import {basePath} from "../config.js";
 
-/**
- * dummy!
- * @return {null}
- */
-function noop() {
-    return null;
-}
-
-/**
- * dummy, latter will be used to handle errors
- * @return {null}
- */
-export function errorHandler(error) {
-    console.log(error);
-    return null;
-}
-
 /** AjaxModule is providing http requests to the nackend server */
-export class AjaxModule {
+export default class AjaxModule {
+    constructor() {
+        if (AjaxModule.__instance) {
+            return AjaxModule.__instance;
+        }
+
+        AjaxModule.__instance = this;
+    }
 
     /** Basic method that provides async HTTP requests
      *

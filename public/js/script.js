@@ -1,44 +1,39 @@
-import {AjaxModule, errorHandler} from "./modules/ajax.mjs";
-import {createAbout} from "./views/about.mjs";
-import {createLeaderboard} from "./views/leaderboard.mjs";
-import {createLogin} from "./views/login.mjs";
-import {createMenu} from "./views/menu.mjs";
-import {createProfile} from "./views/profile.mjs";
-import {createSignUp} from "./views/signup.mjs";
-import {router} from "./modules/Router.mjs";
-
-
+import Router from "./modules/Router.mjs";
 import UserModel from "./models/UserModel.js";
 import Emitter from "./modules/Emitter.js";
 
-Emitter.on("get-user", UserModel.Fetch);
-Emitter.on("user-logout", UserModel.Logout);
+import MenuView from "./views/MenuView.js";
+import ProfileView from "./views/ProfileView.mjs";
+import RegisterView from "./views/RegisterView.mjs";
+import LoginView from "./views/LoginView.mjs";
+import AboutView from "./views/AboutView.mjs";
+import LeaderboardView from "./views/LeaderboardView.mjs";
 
-/**
- * @function logoutUser - Action that clears session-id and logges user out
- */
+UserModel.__data = null;
+
+Emitter.on("get-user", () => {UserModel.Fetch()}, false);
+Emitter.on("submit-data-login", (data) => {UserModel.Login(data)}, false);
+Emitter.on("submit-data-signup", (data) => {UserModel.Register(data)}, false);
+Emitter.on("user-logout", () => {UserModel.Logout()}, false);
+Emitter.on("wipe-views", () => {
+    document.getElementById("rootElem").innerHTML="";
+    Router.open("/");
+}, false);
 
 /**
  * @function main - Starts the application
  */
 function main() {
-    router.
-        add("menu", "/", createMenu).
-        add("signup", "/signup", createSignUp).
-        add("login", "/login", createLogin).
-        add("leaderboard", "/leaderboard", createLeaderboard).
-        add("about", "/about", createAbout).
-        add("profile", "/profile", createProfile).
-        add("logout", "/logout", logoutUser);
+    Router.
+        add("/about", AboutView).
+        add("/", MenuView).
+        add("/profile", ProfileView).
+        add("/signup", RegisterView).
+        add("/login", LoginView).
+        add("/leaderboard", LeaderboardView);
 
-    let path = window.location.pathname,
-        desiredPage = router.getNameByPath(path);
 
-    if (desiredPage === null) {
-        router.open();
-    } else {
-        router.open(desiredPage);
-    }
+    Router.open(window.location.pathname);
 }
 
 main();
