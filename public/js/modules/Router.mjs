@@ -1,4 +1,4 @@
-/** @module modules/router */
+/** @module modules/Router */
 import Emitter from "./Emitter.js";
 
 /**
@@ -14,6 +14,13 @@ class Router {
 
         this._routes = {};
         this._currentPath = null;
+
+        Emitter.on("wipe-views", () => {
+            this.open("/");
+            this._updateRender();
+        }, false);
+
+        window.addEventListener('popstate', this.popstateCallback.bind(Router));
 
         Router.__instance = this;
     }

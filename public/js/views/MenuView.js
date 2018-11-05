@@ -79,7 +79,7 @@ export default class MenuView extends BaseView {
                         href: `/about`,
                     },
                     {
-                        content: "Logout",
+                        content: "logout",
                         class: ["small", "grey", "logout_link"],
                         href: "/logout",
                     },

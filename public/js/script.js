@@ -9,9 +9,10 @@ import LoginView from "./views/LoginView.mjs";
 import AboutView from "./views/AboutView.mjs";
 import LeaderboardView from "./views/LeaderboardView.mjs";
 import GameView from "./views/GameView.js";
+
 import {errorHandler} from "./misc.js";
 
-UserModel.__data = null;
+const user = UserModel;
 
 Emitter.on("error", errorHandler, false);
 Emitter.on("server-validation-error", function (data) {
@@ -21,22 +22,9 @@ Emitter.on("server-validation-error", function (data) {
     commonErrorEl.classList.remove("hidden");
 });
 
-Emitter.on("get-user", () => {UserModel.Fetch()}, false);
-Emitter.on("check-user-login", () => {UserModel.IsLoggedIn()}, false);
-
-Emitter.on("submit-data-login", (data) => {UserModel.Login(data)}, false);
-Emitter.on("submit-data-signup", (data) => {UserModel.Register(data)}, false);
-Emitter.on("submit-data-profile", (data) => {UserModel.Update(data)}, false);
-Emitter.on("user-logout", () => {UserModel.Logout()}, false);
-Emitter.on("wipe-views", () => {
-    Router.open("/");
-    Router._updateRender();
-}, false);
-
-window.addEventListener('popstate', Router.popstateCallback.bind(Router));
-
 /**
- * @function main - Starts the application
+ * Starts the application
+ * @return {undefined}
  */
 function main() {
     Router.

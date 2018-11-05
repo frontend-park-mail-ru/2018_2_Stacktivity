@@ -1,15 +1,28 @@
+/**
+ * @module models/LeaderboardModel
+ */
+
 import Emitter from "../modules/Emitter.js";
 import AjaxModule from "../modules/Ajax.mjs";
-import {errorHandler} from "../misc.js";
 
+/**
+ * Leaderboard model
+ * @class LeaderboardModel
+ */
 export default class LeaderboardModel {
+    /**
+     * Creates the model
+     */
     constructor() {
-        // this._limit = 10;
-        Emitter.on("leaderboard-fetch", this.loadUsers.bind(this), false)
+        Emitter.on("leaderboard-fetch", this.loadUsers.bind(this), false);
     }
 
+    /**
+     * @param {string|number} page Page number
+     * @return {Promise} return
+     */
     loadUsers(page) {
-        AjaxModule.doGet({path: `/user/?page=${page}`}). // TODO fix to offset limit after back update
+        return AjaxModule.doGet({path: `/user/?page=${page}`}). // TODO fix to offset limit after back update
             then((resp) => {
                 if (resp.status === 200) {
                     return resp.json();
@@ -18,7 +31,7 @@ export default class LeaderboardModel {
                 Emitter.emit("error"); // TODO errors
             }).
             then((data) => {
-                Emitter.emit("done-leaderboard-fetch", data)
+                Emitter.emit("done-leaderboard-fetch", data);
             });
     }
 }

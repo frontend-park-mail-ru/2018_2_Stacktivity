@@ -1,17 +1,24 @@
 /** @module components/Nav */
 
 import Router from "../modules/Router.mjs";
-import {getEventTarget} from "../misc.js";
 import Emitter from "../modules/Emitter.js";
 
 /** Renders navigation block in the application views */
 export default class NavigationController {
-    /** Create the navigation component
-     *
-     * @param root - rootElem element for the header
-     */
+    static _getEventTarget(target) { // для перехода по ссылкам без перезагрузки
+        if (!(target instanceof HTMLAnchorElement)) {
+            target = target.closest("a");
+
+            if (!target) {
+                return null;
+            }
+        }
+
+        return target;
+    }
+
     keyPressedCallback(event) {
-        let link = getEventTarget(event.target);
+        let link = NavigationController._getEventTarget(event.target);
         if (!link) {
             return;
         }
@@ -19,7 +26,7 @@ export default class NavigationController {
         event.preventDefault();
 
         if (link.dataset.href === "/logout") {
-            Emitter.emit("user-logout")
+            Emitter.emit("user-logout");
         }
 
         Router.open(link.dataset.href);

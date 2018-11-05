@@ -1,9 +1,10 @@
-/** @module modules/ajax */
+/** @module modules/Ajax */
 
 import {basePath} from "../config.js";
 
 /** AjaxModule is providing http requests to the nackend server */
 export default class AjaxModule {
+    /** Create the module */
     constructor() {
         if (AjaxModule.__instance) {
             return AjaxModule.__instance;
@@ -12,12 +13,12 @@ export default class AjaxModule {
         AjaxModule.__instance = this;
     }
 
-    /** Basic method that provides async HTTP requests
-     *
-     * @param method - GET, POST, PUT etc
-     * @param path - API path
-     * @param body - Request body
+    /**
      * @return {Promise<Response>}
+     * Basic method that provides async HTTP requests
+     * @param {string} method - GET, POST, PUT etc
+     * @param {string} path - API path
+     * @param {JSON} body - Request body
      * @private
      */
     static _ajax({method = "GET", path = "/", body}) {
@@ -51,10 +52,9 @@ export default class AjaxModule {
 
 
     /**
-     * Method that shortcuts GET method
-     *
-     * @param {Object} params - path, body
      * @return {Promise<Response>}
+     * Method that shortcuts GET method
+     * @param {Object} params - path, body
      */
     static doGet(params = {}) {
         return this._ajax({...params, method: "GET"});
@@ -62,10 +62,9 @@ export default class AjaxModule {
 
 
     /**
-     * Method that shortcuts POST method
-     *
-     * @param {Object} params - path, body
      * @return {Promise<Response>}
+     * Method that shortcuts POST method
+     * @param {Object} params - path, body
      */
     static doPost(params = {}) {
         return this._ajax({...params, method: "POST"});
@@ -73,10 +72,9 @@ export default class AjaxModule {
 
 
     /**
-     * Method that shortcuts DELETE method
-     *
-     * @param {Object} params - path, body
      * @return {Promise<Response>}
+     * Method that shortcuts DELETE method
+     * @param {Object} params - path, body
      */
     static doDelete(params = {}) {
         return this._ajax({...params, method: "DELETE"});
@@ -84,10 +82,9 @@ export default class AjaxModule {
 
 
     /**
-     * Method that shortcuts PUT method
-     *
-     * @param {Object} params - path, body
      * @return {Promise<Response>}
+     * Method that shortcuts PUT method
+     * @param {Object} params - path, body
      */
     static doPut(params = {}) {
         return this._ajax({...params, method: "PUT"});
