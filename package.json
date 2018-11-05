@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
+    "local": "MOCKS=1 npm start",
     "prestart": "npm run hand",
     "doc": "./node_modules/.bin/jsdoc -c jsdoc_settings.json public/js/*",
     "hand": "node_modules/.bin/handlebars public/js/views/templates/* -f public/js/handlebars.precompile.js",
@@ -16,6 +17,8 @@
     "debug": "^3.1.0",
     "express": "^4.16.3",
     "express-history-api-fallback": "^2.2.1",
+    "express-http-proxy": "^1.4.0",
+    "express-ws": "^4.0.0",
     "handlebars": "^4.0.12",
     "jsdoc": "^3.5.5",
     "morgan": "^1.9.0",
@@ -27,7 +30,6 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "fest": "^0.12.1"
+    "eslint-plugin-standard": "^4.0.0"
   }
 }

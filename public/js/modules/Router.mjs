@@ -69,7 +69,7 @@ class Router {
     _open(pathname) {
         let {path, page} = this.parsePath(pathname);
         if (!this._routes[path]) {
-            Emitter.emit("error", "no such path is registred");
+            Emitter.emit("warn", "no such path is registred");
             return;
         }
 

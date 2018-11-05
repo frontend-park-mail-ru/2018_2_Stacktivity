@@ -351,3 +351,31 @@ button.submit {
     display: inline;
 }
 
+#infoblock {
+    width: 300px;
+    position: fixed;
+    right:0;
+    top:0;
+    opacity: 0.8;
+    padding-right: 10px;
+}
+
+#infoblock .info {
+    margin-top: 10px;
+    min-height: 50px;
+    border: 2px solid #20a4d6;
+    background: #36ccd4;
+    border-radius: 10px;
+    padding: 8px;
+    color:#000
+}
+
+#infoblock .info.warn {
+    border-color: #f5c411;
+    background: #fff45a;
+}
+
+#infoblock .info.error {
+    border-color: #CA2424;
+    background: red;
+}

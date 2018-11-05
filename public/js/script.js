@@ -10,17 +10,21 @@ import AboutView from "./views/AboutView.mjs";
 import LeaderboardView from "./views/LeaderboardView.mjs";
 import GameView from "./views/GameView.js";
 
-import {errorHandler} from "./misc.js";
+import InfoHandler from "./components/InfoHandler.js";
 
 const user = UserModel;
+const infoHand = InfoHandler;
 
-Emitter.on("error", errorHandler, false);
 Emitter.on("server-validation-error", function (data) {
     let commonErrorEl = document.getElementsByClassName("common_error")[0];
 
     commonErrorEl.innerText = data.error.message;
     commonErrorEl.classList.remove("hidden");
 });
+
+Emitter.on("game-message", function (data) {
+    Emitter.emit("info", data.message);
+}, false);
 
 /**
  * Starts the application

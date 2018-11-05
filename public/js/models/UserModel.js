@@ -55,7 +55,6 @@ class UserModel {
                 Emitter.emit("done-get-user", UserModel.__data);
             }).
             catch((err) => {
-                Emitter.emit("error", err);
                 UserModel.__data = {is_logged_in: false};
 
                 Emitter.emit("done-get-user", UserModel.__data);
@@ -82,7 +81,6 @@ class UserModel {
                     Emitter.emit("done-check-user-login", true);
                 }).
                 catch((err) => {
-                    Emitter.emit("error", err);
                     UserModel.__data = {is_logged_in: false};
 
                     Emitter.emit("done-check-user-login", false);

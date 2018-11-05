@@ -1,16 +1,8 @@
+/* eslint-disable no-unused-vars */
 /**
  * dummy!
- * @return {null}
+ * @return {null} null
  */
 function noop() {
-    return null;
-}
-
-/**
- * dummy, latter will be used to handle errors
- * @return {null}
- */
-export function errorHandler(error) {
-    console.log(error);
     return null;
 }

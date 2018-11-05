@@ -49,7 +49,7 @@ class WebSocks {
         console.log(`Причина: ${event.reason}`);
 
         if (event.code !== 1000) {
-            Emitter.emit("error", event.reason);
+            Emitter.emit("error", `${event.code} ${event.reason}`);
         }
     }
 }
