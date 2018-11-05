@@ -24,16 +24,16 @@ Emitter.on("server-validation-error", function (data) {
 Emitter.on("get-user", () => {UserModel.Fetch()}, false);
 Emitter.on("check-user-login", () => {UserModel.IsLoggedIn()}, false);
 
-
-
 Emitter.on("submit-data-login", (data) => {UserModel.Login(data)}, false);
 Emitter.on("submit-data-signup", (data) => {UserModel.Register(data)}, false);
 Emitter.on("submit-data-profile", (data) => {UserModel.Update(data)}, false);
 Emitter.on("user-logout", () => {UserModel.Logout()}, false);
 Emitter.on("wipe-views", () => {
     Router.open("/");
-    Router.rerender();
+    Router._updateRender();
 }, false);
+
+window.addEventListener('popstate', Router.popstateCallback.bind(Router));
 
 /**
  * @function main - Starts the application
@@ -48,7 +48,6 @@ function main() {
         add("/signup", RegisterView).
         add("/login", LoginView).
         add("/leaderboard", LeaderboardView);
-
 
     Router.open(window.location.pathname);
 }

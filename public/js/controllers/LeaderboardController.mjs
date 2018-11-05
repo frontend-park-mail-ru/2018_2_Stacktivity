@@ -20,14 +20,14 @@ export default class LeaderboardController {
 
     nextPage() {
         this._currentPage++;
-        Router.open("/leaderboard/"+this._currentPage);
+        Router.open(`/leaderboard/${this._currentPage}`);
     }
 
     prevPage() {
         if (this._currentPage > 1) {
             this._currentPage--;
         }
-        Router.open("/leaderboard/"+this._currentPage);
+        Router.open(`/leaderboard/${this._currentPage}`);
     }
 
     setPage(page) {
