@@ -13,10 +13,10 @@ class Emitter {
 
     on(event, callback, once = true) { // подписываемся на событие
         if (!this._listeners[event]) {
-            this._listeners[event] = [ ];
+            this._listeners[event] = [];
         }
 
-        this._listeners[event].push( { once, callback } );
+        this._listeners[event].push({once, callback});
     }
 
     off(event, callback) { // отписываемся от события
@@ -26,7 +26,9 @@ class Emitter {
     }
 
     emit(event, data) { // публикуем (диспатчим, эмитим) событие
-        console.log(this._listeners[event]);
+        if (!this._listeners[event]) {
+            return;
+        }
 
         this._listeners[event].forEach(function (listener) {
             listener.callback(data);
@@ -35,8 +37,6 @@ class Emitter {
         this._listeners[event] = this._listeners[event].filter(function (listener) {
             return !listener.once;
         });
-
-        console.log(this._listeners[event]);
     }
 }
 

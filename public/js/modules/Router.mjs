@@ -45,8 +45,6 @@ class Router {
             return;
         }
 
-        console.log(this._routes[path]);
-
         if (this._routes[path].viewEntity === null) {
             this._routes[path].viewEntity = new this._routes[path].View();
         }

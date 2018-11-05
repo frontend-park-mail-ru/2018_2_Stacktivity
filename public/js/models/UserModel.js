@@ -3,9 +3,7 @@ import Emitter from "../modules/Emitter.js";
 import {errorHandler} from "../misc.js";
 
 export default class UserModel {
-
     static Fetch() {
-
         if (UserModel.__data !== null) {
             Emitter.emit("done-get-user", UserModel.__data);
             return;
@@ -33,6 +31,32 @@ export default class UserModel {
 
                 Emitter.emit("done-get-user", UserModel.__data);
             });
+    }
+
+    static IsLoggedIn() {
+        if (UserModel.__data === null) {
+            AjaxModule.doGet({path: "/session"}).
+                then((resp) => {
+                    if (resp.status === 200) {
+                        return resp.json();
+                    }
+
+                    return Promise.reject(new Error("no login"));
+                }).
+                then((data) => {
+                    UserModel.__data = data;
+                    UserModel.__data.is_logged_in = true;
+                    Emitter.emit("done-check-user-login", true);
+                }).
+                catch((err) => {
+                    errorHandler(err);
+                    UserModel.__data = {is_logged_in: false};
+
+                    Emitter.emit("done-check-user-login", false);
+                });
+        } else {
+            Emitter.emit("done-check-user-login", UserModel.__data.is_logged_in);
+        }
     }
 
     static Update(data) {
@@ -68,7 +92,7 @@ export default class UserModel {
             catch((data) => {
                 data.then((body) => {
                     UserModel.serverValidate(body);
-                })
+                });
             });
     }
 
@@ -92,7 +116,7 @@ export default class UserModel {
             catch((data) => {
                 data.then((body) => {
                     UserModel.serverValidate(body);
-                })
+                });
             });
     }
 

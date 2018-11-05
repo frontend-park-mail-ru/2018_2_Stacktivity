@@ -1,34 +1,61 @@
+/**
+ * @module views/LeaderboardView
+ */
+
 import NavigationController from "../controllers/NavigationController.mjs";
 import LeaderboardController from "../controllers/LeaderboardController.mjs";
 import BaseView from "./BaseView.js";
 import Emitter from "../modules/Emitter.js";
 import LeaderboardModel from "../models/LeaderboardModel.js";
 
+/**
+ * View of the "Leaderboard" page
+ * @class LeaderboardView
+ * @extends BaseView
+ */
 export default class LeaderboardView extends BaseView {
+    /**
+     * Creates view and registres view events
+     */
     constructor() {
         super();
-        this._leaderboardModel = new LeaderboardModel();
+        this._leaderboardModel = new LeaderboardModel(); // handle events
         this._leaderboardController = new LeaderboardController();
+        this._navigationController = new NavigationController();
+        Handlebars.registerPartial('LeaderboardList', Handlebars.templates.LeaderboardList);
 
-        Emitter.on("done-leaderboard-fetch", this.render.bind(this), false);
+        this.render();
+        this.registerEvents();
+
+        Emitter.on("done-leaderboard-fetch", this.renderUsers.bind(this), false);
     }
 
+    /**
+     * Emits load event and shows view
+     * @return {undefined}
+     */
     show() {
         super.show();
         Emitter.emit("leaderboard-load");
     }
 
+    /**
+     * Resets page number to 1
+     * @return {undefined}
+     */
     hide() {
         Emitter.emit("leaderboard-set-page", 1);
         super.hide();
     }
 
-    render(users) {
+    /**
+     * Render this view
+     * @return {undefined}
+     */
+    render() {
         super.render();
+
         this.viewSection.innerHTML += Handlebars.templates.Header({isPage: true, desc: "Leaderboard"});
-
-        this._navigationController = new NavigationController();
-
         this.viewSection.innerHTML += Handlebars.templates.Nav({
             links: [
                 {
@@ -39,12 +66,27 @@ export default class LeaderboardView extends BaseView {
             ]
         });
 
+        this.viewSection.innerHTML += Handlebars.templates.Leaderboard();
 
-        let content = document.createElement("main");
-        content.classList.add("page_content");
-        content.innerHTML += Handlebars.templates.Leaderboard({users});
-        this.viewSection.appendChild(content);
+    }
 
+    /**
+     * Render list of users
+     * @param {Array} users List of users on this page
+     * @return {undefined}
+     */
+    renderUsers(users) {
+        this.viewSection.
+            getElementsByClassName("leaderboard")[0].
+            getElementsByTagName("tbody")[0].
+            innerHTML = Handlebars.templates.LeaderboardList({users});
+    }
+
+    /**
+     * Register events for NavigationController and LeaderboardController to handle
+     * @return {undefined}
+     */
+    registerEvents() {
         document.getElementById("prev_page_link").
             addEventListener("click", this._leaderboardController.paginationPrevCallback.bind(this._leaderboardController));
         document.getElementById("next_page_link").

@@ -1,39 +1,64 @@
+/**
+ * @module views/LoginView
+ */
+
 import NavigationController from "../controllers/NavigationController.mjs";
 import Router from "../modules/Router.mjs";
-import {errorHandler} from "../misc.js";
 import BaseView from "./BaseView.js";
 import Emitter from "../modules/Emitter.js";
 import FormController from "../controllers/FormController.mjs";
 import LoginRegisterValidator from "../components/validators/LoginRegisterValidator.js";
 
+/**
+ * View of the "Login" page
+ * @class LoginView
+ * @extends BaseView
+ */
 export default class LoginView extends BaseView {
+    /**
+     * Creates view and renders it
+     */
     constructor() {
         super();
-        Emitter.on("done-get-user", this.render.bind(this), false);
+        this._navigationController = new NavigationController();
+        this._formController = new FormController("login", LoginRegisterValidator);
+
+        this.render();
+        this.registerEvents();
+
+        Emitter.on("done-check-user-login", this.checkLogin.bind(this));
     }
 
+    /**
+     * Emits check login event and shows view
+     * @return {undefined}
+     */
     show() {
-        Emitter.emit("get-user");
-
-        // место для загрузочной картинки!
+        Emitter.emit("check-user-login");
 
         super.show();
     }
 
-    render(user) {
+    /**
+     * Callback on checking login
+     * @param {boolean} isLogin true is user is logged in
+     * @return {undefined}
+     */
+    checkLogin(isLogin) {
+        if (isLogin) {
+            Emitter.emit("error", "You are already registered and even logged in!");
+            Router.open("/");
+        }
+    }
+
+    /**
+     * Generates html and puts it to this.viewSection
+     * @return {undefined}
+     */
+    render() {
         super.render();
 
-        if (user.is_logged_in) {
-            Emitter.off("done-get-user", this.render.bind(this));
-            errorHandler("You are already registered and even logged in!");
-            // Router.open("/");
-            return;
-        }
-
         this.viewSection.innerHTML += Handlebars.templates.Header({isPage: true, desc: "Login"});
-
-        this._navigationController = new NavigationController();
-        this._formController = new FormController("login", LoginRegisterValidator);
 
         this.viewSection.innerHTML += Handlebars.templates.Nav({
             links: [
@@ -50,10 +75,7 @@ export default class LoginView extends BaseView {
             ]
         });
 
-        let content = document.createElement("main");
-        content.classList.add("page_content");
-
-        content.innerHTML += Handlebars.templates.UserForm({
+        this.viewSection.innerHTML += Handlebars.templates.UserForm({
             id: "login_form",
             commonError: "Wrong user or password",
             submitText: "Login",
@@ -72,10 +94,14 @@ export default class LoginView extends BaseView {
                 }
             ]
         });
+    }
 
-        this.viewSection.appendChild(content);
-
-        content.addEventListener("submit", this._formController.callbackSubmit.bind(this._formController));
+    /**
+     * Register events for NavigationController and FormController to handle
+     * @return {undefined}
+     */
+    registerEvents() {
+        this.viewSection.addEventListener("submit", this._formController.callbackSubmit.bind(this._formController));
         this.viewSection.addEventListener("click", this._navigationController.keyPressedCallback);
     }
 }

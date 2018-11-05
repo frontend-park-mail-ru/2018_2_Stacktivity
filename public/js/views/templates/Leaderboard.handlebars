@@ -1,27 +1,20 @@
-<div class="leaderboard">
-    <table>
-        <thead>
-        <tr>
-            <th class="username">Username</th>
-            <th class="score">Scores</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each users}}
+<main class="page_content">
+    <div class="leaderboard">
+        <table>
+            <thead>
             <tr>
-                <td>
-                    {{username}}
-                </td>
-                <td>
-                    {{score}}
-                </td>
+                <th class="username">Username</th>
+                <th class="score">Scores</th>
             </tr>
-        {{/each}}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {{> LeaderboardList}}
+            </tbody>
+        </table>
 
-	<ul class="pagination">
-		<li><a href="#" id="prev_page_link"><-</a></li>
-        <li><a href="#" id="next_page_link">-></a></li>
-    </ul>
-</div>
+        <ul class="pagination">
+            <li><a href="#" id="prev_page_link"><-</a></li>
+            <li><a href="#" id="next_page_link">-></a></li>
+        </ul>
+    </div>
+</main>

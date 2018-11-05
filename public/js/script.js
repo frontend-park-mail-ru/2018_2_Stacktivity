@@ -13,10 +13,8 @@ import {errorHandler} from "./misc.js";
 
 UserModel.__data = null;
 
-Emitter.on("error", errorHandler);
+Emitter.on("error", errorHandler, false);
 Emitter.on("server-validation-error", function (data) {
-    console.log("oh D:");
-
     let commonErrorEl = document.getElementsByClassName("common_error")[0];
 
     commonErrorEl.innerText = data.error.message;
@@ -24,12 +22,15 @@ Emitter.on("server-validation-error", function (data) {
 });
 
 Emitter.on("get-user", () => {UserModel.Fetch()}, false);
+Emitter.on("check-user-login", () => {UserModel.IsLoggedIn()}, false);
+
+
+
 Emitter.on("submit-data-login", (data) => {UserModel.Login(data)}, false);
 Emitter.on("submit-data-signup", (data) => {UserModel.Register(data)}, false);
 Emitter.on("submit-data-profile", (data) => {UserModel.Update(data)}, false);
 Emitter.on("user-logout", () => {UserModel.Logout()}, false);
 Emitter.on("wipe-views", () => {
-    // document.getElementById("rootElem").innerHTML="";
     Router.open("/");
     Router.rerender();
 }, false);
