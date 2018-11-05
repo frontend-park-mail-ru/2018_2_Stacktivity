@@ -3,7 +3,10 @@
  */
 
 import BaseView from "./BaseView.js";
+import WebSocks from "../modules/WS.js";
 import NavigationController from "../controllers/NavigationController.mjs";
+import FormController from "../controllers/FormController.mjs";
+import Emitter from "../modules/Emitter.js";
 
 /**
  * View of the game page
@@ -17,8 +20,11 @@ export default class GameView extends BaseView {
     constructor() {
         super();
         this._navigationController = new NavigationController();
+        this._formController = new FormController("game");
         this.render();
         this.registerEvents();
+
+        Emitter.on("submit-data-game", WebSocks.send.bind(WebSocks), false);
     }
 
     /**
@@ -37,6 +43,20 @@ export default class GameView extends BaseView {
                 }
             ]
         });
+
+        this.viewSection.innerHTML += Handlebars.templates.UserForm({
+            id: "form_form",
+            submitText: "send",
+            fields: [
+                {
+                    name: "message",
+                    type: "text",
+                    placeholder: "text",
+                }
+            ]
+        });
+
+        this.viewSection.addEventListener("submit", this._formController.callbackSubmit.bind(this._formController));
     }
 
 

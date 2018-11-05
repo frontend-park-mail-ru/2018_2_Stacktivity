@@ -59,7 +59,7 @@ export default class LeaderboardController {
      */
     _setPage(page) {
         if (page > 0) {
-            this._currentPage = page;
+            this._currentPage = Number(page);
         }
     }
 
