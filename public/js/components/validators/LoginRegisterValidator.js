@@ -1,8 +1,19 @@
+/** @module components/validators/LoginRegisterValidator */
+
 import BaseValidator from "./BaseValidator.js";
 
+/**
+ * Validatiors for login and registration
+ * @class LoginRegisterValidator
+ * @extends BaseValidator
+ */
 export default class LoginRegisterValidator extends BaseValidator {
+    /**
+     * Uses validation methods on form
+     * @param {HTMLFormElement} form form is being validated
+     * @return {boolean} is valid?
+     */
     validate(form) {
-
         let isValid = true;
         const isLogin = form.id === "login_form";
         for (const elem of form.getElementsByClassName("validate")) {
@@ -136,7 +147,8 @@ export default class LoginRegisterValidator extends BaseValidator {
 
     /** Validate username
      *
-     * @param {string} password1, password2 for validate
+     * @param {string} password1 for validate
+     * @param {string} password2 repeat
      *
      * @return {boolean} is valid and matched?
      */
@@ -157,9 +169,9 @@ export default class LoginRegisterValidator extends BaseValidator {
     }
 
     /** Validate username
-     *
-     * @param {Object, boolean} err - field in DOM with error message;
-     * isValid - activate/deactivate
+     * @param {Object|boolean} err - field in DOM with error message;
+     * @param {boolean} isValid - activate/deactivate
+     * @return {undefined}
      */
     _switchShowingError(err, isValid) {
         if (isValid) {
