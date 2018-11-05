@@ -12,6 +12,10 @@ import GameView from "./views/GameView.js";
 
 import InfoHandler from "./components/InfoHandler.js";
 
+// webpack imports
+import "./handlebars.precompile.js";
+import "../styles/style.css";
+
 const user = UserModel;
 const infoHand = InfoHandler;
 

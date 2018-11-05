@@ -20,7 +20,9 @@ if (process.env.MOCKS) {
         socket.on('message', (message) => {
             console.log(message);
 
-            socket.send(JSON.stringify({message: "working"}));
+            let text = JSON.parse(message).message;
+
+            socket.send(JSON.stringify({message: `send ${text}`}));
         });
 
         socket.on('close', () => {

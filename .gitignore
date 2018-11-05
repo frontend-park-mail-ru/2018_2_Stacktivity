@@ -1,4 +1,4 @@
 .idea
 node_modules
 out
-public/js/handlebars.precompile.js
+dev/js/handlebars.precompile.js

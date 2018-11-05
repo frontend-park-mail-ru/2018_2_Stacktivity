@@ -1,4 +1,6 @@
 /* ---- style ---- */
+@import "reset.css";
+
 @import "../js/views/templates/css/Nav.css";
 @import "../js/views/templates/css/Leaderboard.css";
 
