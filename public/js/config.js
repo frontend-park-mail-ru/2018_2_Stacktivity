@@ -1,1 +1,3 @@
-export const base_path = "http://localhost:3001";
+export const basePath = "http://localhost:3001";
+
+export const leaderboardLimit = 10;

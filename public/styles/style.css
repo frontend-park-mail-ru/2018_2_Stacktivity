@@ -1,6 +1,6 @@
 /* ---- style ---- */
-@import "../js/components/Nav/Nav.css";
-@import "../js/components/Leaderboard/Leaderboard.css";
+@import "../js/views/templates/css/Nav.css";
+@import "../js/views/templates/css/Leaderboard.css";
 
 body {
     background: #fff;
@@ -139,48 +139,48 @@ body {
 .circle.green    { background: #43AC4C }
 .circle.grey     { background: #aaaaaa }
 
-#about_link {
+#about_link, .about_link {
     top: 280px;
     right: 260px;
 }
 
-#signup_link {
+#signup_link, .signup_link {
     top: 200px;
     left: 320px;
 }
 
-#profile_link {
+#profile_link, .profile_link {
     top: 200px;
     left: 320px;
 }
 
-#profile_link.page {
+#profile_link.page, .profile_link.page {
     top: 170px;
     left: 290px;
 }
 
-#profile_link.profile {
+#profile_link.profile, .profile_link.profile {
     top: 310px;
     left: 0;
     transform: translate(-50%, 0);
 }
 
-#login_link, #logout_link {
+#login_link, #logout_link, .login_link, .logout_link {
     top: 350px;
     left: 230px;
 }
 
-#login_link.page, #logout_link.page {
+#login_link.page, #logout_link.page, .login_link.page, .logout_link.page {
     top: 220px;
     left: 200px;
 }
 
-#return_link {
+#return_link, .return_link {
     top: 170px;
     left: 260px;
 }
 
-#settings_link {
+#settings_link, .settings_link {
     top: 260px;
     right: 130px;
 }

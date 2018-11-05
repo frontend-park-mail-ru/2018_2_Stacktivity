@@ -1,51 +1,43 @@
-import {AjaxModule} from "./modules/ajax.mjs";
-import {createAbout} from "./pages/about.mjs";
-import {createLeaderboard} from "./pages/leaderboard.mjs";
-import {createLogin} from "./pages/login.mjs";
-import {createMenu} from "./pages/menu.mjs";
-import {createProfile} from "./pages/profile.mjs";
-import {createSignUp} from "./pages/signup.mjs";
-import {router} from "./modules/router.mjs";
+import Router from "./modules/Router.mjs";
+import UserModel from "./models/UserModel.js";
+import Emitter from "./modules/Emitter.js";
 
+import MenuView from "./views/MenuView.js";
+import ProfileView from "./views/ProfileView.mjs";
+import RegisterView from "./views/RegisterView.mjs";
+import LoginView from "./views/LoginView.mjs";
+import AboutView from "./views/AboutView.mjs";
+import LeaderboardView from "./views/LeaderboardView.mjs";
+import GameView from "./views/GameView.js";
 
-/**
- * @function logoutUser - Action that clears session-id and logges user out
- */
-function logoutUser() { // TODO to the User module
-    AjaxModule.doDelete({path: "/session"}).
-        then((resp) => {
-            if (resp.status === 200) {
-                router.open("menu");
-            } else {
-                return Promise.reject(new Error(resp.status));
-            }
-        }).
-        catch(() => {
-            router.open("menu");
-        });
-}
+import {errorHandler} from "./misc.js";
+
+const user = UserModel;
+
+Emitter.on("error", errorHandler, false);
+Emitter.on("server-validation-error", function (data) {
+    let commonErrorEl = document.getElementsByClassName("common_error")[0];
+
+    commonErrorEl.innerText = data.error.message;
+    commonErrorEl.classList.remove("hidden");
+});
 
 /**
- * @function main - Starts the application
+ * Starts the application
+ * @return {undefined}
  */
 function main() {
-    router.
-        add("menu", "/", createMenu).
-        add("signup", "/signup", createSignUp).
-        add("login", "/login", createLogin).
-        add("leaderboard", "/leaderboard", createLeaderboard).
-        add("about", "/about", createAbout).
-        add("profile", "/profile", createProfile).
-        add("logout", "/logout", logoutUser);
+    Router.
+        add("/about", AboutView).
+        add("/single", GameView).
+        add("/mult", GameView).
+        add("/", MenuView).
+        add("/profile", ProfileView).
+        add("/signup", RegisterView).
+        add("/login", LoginView).
+        add("/leaderboard", LeaderboardView);
 
-    let path = window.location.pathname,
-        desiredPage = router.getNameByPath(path);
-
-    if (desiredPage === null) {
-        router.open();
-    } else {
-        router.open(desiredPage);
-    }
+    Router.open(window.location.pathname);
 }
 
 main();
