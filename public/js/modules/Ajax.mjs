@@ -2,7 +2,7 @@
 
 import {basePath} from "../config.js";
 
-/** AjaxModule is providing http requests to the nackend server */
+/** AjaxModule is providing http requests to the backend server */
 export default class AjaxModule {
     /** Create the module */
     constructor() {
