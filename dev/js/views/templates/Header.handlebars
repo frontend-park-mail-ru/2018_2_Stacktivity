@@ -1,12 +1,9 @@
-<header class="{{#if isPage}}page_header{{^}}index_header{{/if}}">
-    <div class="logo">
-            <span class="name">
-				Blep
-			</span>
-        {{#if desc}}
-            <span class="desc">
-                {{desc}}
-            </span>
-        {{/if}}
+<header class="header {{#if isPage}}header_page{{/if}}">
+    <div class="header__logo">
     </div>
+    <span class="header__name">Blep
+        {{#if desc}}
+            <span class="header__desc">{{desc}}</span>
+        {{/if}}
+    </span>
 </header>

@@ -71,7 +71,7 @@ export default class MenuView extends BaseView {
      */
     renderNav(user) {
         if (user.is_logged_in) {
-            this.viewSection.getElementsByClassName("navigation")[0].innerHTML = Handlebars.templates.Nav({
+            this.viewSection.getElementsByClassName("navigation")[0].innerHTML = Handlebars.templates.NavList({
                 links: [
                     {
                         content: "About",
@@ -99,7 +99,7 @@ export default class MenuView extends BaseView {
             //     profile_link.innerHTML = `<span>${user.username}</span>`;
             // }
         } else {
-            this.viewSection.getElementsByClassName("navigation")[0].innerHTML += Handlebars.templates.Nav(linksNoLogin);
+            this.viewSection.getElementsByClassName("navigation")[0].innerHTML = Handlebars.templates.NavList(linksNoLogin);
         }
     }
 
