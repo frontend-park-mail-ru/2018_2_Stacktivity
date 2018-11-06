@@ -1,4 +1,5 @@
 import LogicCircle from "./models/Circle/LogicCircle.js";
+import {ADD_CIRCLE} from "./Events.js";
 
 export default class Logic {
     constructor() {
@@ -10,15 +11,13 @@ export default class Logic {
         this._enemy = null;
     }
 
-    instance() {
-        return this;
-    }
-
     init(game, window) {
         this._window = {
             width: window.width,
             height: window.height
         };
+
+        game.on(ADD_CIRCLE, this.addCircle.bind(this), false);
     }
 
     get circles() {

@@ -4,7 +4,7 @@ import {START_GAME} from "./Events.js";
 import Interaction from "./Interaction.js";
 import {ADD_CIRCLE} from "./Events.js";
 
-
+// Не получилось нормально отнаследоваться, временно воткнул
 class Emitter {
     /** Create the emitter */
     constructor() {
