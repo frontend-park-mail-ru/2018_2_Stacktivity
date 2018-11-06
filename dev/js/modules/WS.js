@@ -9,12 +9,8 @@ class WebSocks {
         }
 
         this._connected = false;
-        this._ws = new WebSocket(WSPath);
 
-        this._ws.addEventListener("open", this._onopen.bind(this));
-        this._ws.addEventListener("message", this._onmessage.bind(this));
-        this._ws.addEventListener("error", this._onerror.bind(this));
-        this._ws.addEventListener("close", this._onclose.bind(this));
+        this._ws = null;
 
         Emitter.on("game-send", this.send.bind(this));
 
@@ -28,6 +24,17 @@ class WebSocks {
     send(data) {
         if (this._connected) {
             this._ws.send(JSON.stringify(data));
+        }
+    }
+
+    connect() {
+        if (!this._connected) {
+            this._ws = new WebSocket(WSPath);
+
+            this._ws.addEventListener("open", this._onopen.bind(this));
+            this._ws.addEventListener("message", this._onmessage.bind(this));
+            this._ws.addEventListener("error", this._onerror.bind(this));
+            this._ws.addEventListener("close", this._onclose.bind(this));
         }
     }
 

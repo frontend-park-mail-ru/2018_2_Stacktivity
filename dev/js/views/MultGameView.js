@@ -13,19 +13,24 @@ import Emitter from "../modules/Emitter.js";
  * @class GameView
  * @extends BaseView
  */
-export default class GameView extends BaseView {
+export default class MultGameView extends BaseView {
     /**
      * Creates view and renders it
      */
     constructor() {
         super();
         this._navigationController = new NavigationController();
-        this._formController = new FormController("game");
+        this._formController = new FormController("mult");
         this.render();
         this.registerEvents();
 
         WebSocks.connect();
-        Emitter.on("submit-data-game", WebSocks.send.bind(WebSocks), false);
+
+        Emitter.on("game-message", function (data) {
+            if (data.event === 2) {
+                Emitter.emit("info", "room found!");
+            }
+        }, false);
     }
 
     /**
@@ -41,18 +46,6 @@ export default class GameView extends BaseView {
                     "content": "main",
                     "class": ["grey", "tiny"],
                     "href": "/"
-                }
-            ]
-        });
-
-        this.viewSection.innerHTML += Handlebars.templates.UserForm({
-            id: "form_form",
-            submitText: "send",
-            fields: [
-                {
-                    name: "message",
-                    type: "text",
-                    placeholder: "text",
                 }
             ]
         });

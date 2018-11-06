@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node server",
     "local": "MOCKS=1 npm start",
-    "prestart": "npm run build",
-    "preprestart": "npm run hand",
+    "prestart": "npm run hand && npm run build",
     "hand": "node_modules/.bin/handlebars dev/js/views/templates/* -f dev/js/handlebars.precompile.js",
     "doc": "./node_modules/.bin/jsdoc -c jsdoc_settings.json public/js/*",
     "build": "webpack --mode development",

@@ -54,11 +54,6 @@ table {
 a {
     color: inherit; /* blue colors for links too */
     text-decoration: inherit; /* no underline */
-}.navigation {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
 }.leaderboard {
     border-collapse: initial;
     border-bottom: 5px #355FA2 solid;
@@ -101,72 +96,55 @@ body {
     font-family: 'Quantico', sans-serif;
 }
 
-.index_header {
-    width: 1200px;
-    height: 440px;
+/* ~~~~ Header block ~~~~ */
+.header {
+    width: 40vw;
+    height: 40vh;
     overflow: hidden;
-
-    position: absolute;
-    left: 50%;
-    margin-left: -600px;
+    position: relative;
+    margin: 0 auto;
+    font-size: 25vh;
 }
 
-.index_header .logo {
-    width: 660px;
-    height: 660px;
-    border-radius: 380px;
+.header_page {
+    height: 32vmin;
+    font-size: 22vmin;
+}
+
+.header__logo {
+    width: 40vw;
+    height: 40vw;
+    border-radius: 40vw;
     background: #1a1a1a;
-    position: relative;
-    top: -260px;
+    position: absolute;
+    bottom: 0;
     margin: 0 auto;
 }
 
-.index_header .name {
-    color: #fff;
-    font-size: 144pt;
-    position: absolute;
-    top: 420px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.page_header {
-    width: 1200px;
-    height: 440px;
-    overflow: hidden;
-
+.header__name {
+    color: #ffffff;
     position: absolute;
     left: 50%;
-    margin-left: -600px;
+    transform: translate(-50%, 0);
 }
 
-.page_header .logo {
-    width: 660px;
-    height: 660px;
-    border-radius: 380px;
-    background: #1a1a1a;
-    position: relative;
-    top: -380px;
-    margin: 0 auto;
-}
-
-.page_header .name {
+.header__desc {
     color: #fff;
-    font-size: 144pt;
+    font-size: 5vmin;
+    top: 20vmin;
     position: absolute;
-    top: 480px;
+    left: 3%;
+}
+/* ~~~~ Header end ~~~~ */
+
+
+/* ~~~~ Navigation block ~~~~ */
+.navigation {
+    position: absolute;
+    top: 0;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
 }
-.page_header .desc {
-    color: #fff;
-    font-size: 24pt;
-    position: absolute;
-    top: 550px;
-    left: 140px;
-}
-
-
 
 .circle {
     color: #fff;
@@ -279,18 +257,18 @@ body {
     right: 130px;
 }
 
-.index_content {
+.content {
     position: absolute;
-    top: 480px;
     left: 50%;
     transform: translate(-50%, 0);
 }
 
-.page_content {
-    position: absolute;
+.content_index {
+    top: 480px;
+}
+
+.content_page {
     top: 330px;
-    left: 50%;
-    transform: translate(-50%, 0);
 }
 
 .profile_content {
