@@ -50,10 +50,10 @@ export default class Scene {
         this.clear();
         this.render();
 
-        window.requestAnimationFrame(this.loopCallback);
+        window.requestAnimationFrame(this.loopCallback.bind(this));
     }
 
     start() {
-        window.requestAnimationFrame(this.loopCallback);
+        window.requestAnimationFrame(this.loopCallback.bind(this));
     }
 }
