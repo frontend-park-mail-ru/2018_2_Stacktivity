@@ -19,14 +19,14 @@ class UserModel {
             return UserModel.__instance;
         }
 
-        UserModel.__data = null;
+        UserModel.__data = {};
 
-        Emitter.on("get-user", this.fetch, false);
-        Emitter.on("check-user-login", this.isLoggedIn, false);
-        Emitter.on("submit-data-login", this.login, false);
-        Emitter.on("submit-data-signup", this.register, false);
-        Emitter.on("submit-data-profile", this.update, false);
-        Emitter.on("user-logout", this.logout, false);
+        Emitter.on("get-user", this.fetch.bind(this), false);
+        Emitter.on("check-user-login", this.isLoggedIn.bind(this), false);
+        Emitter.on("submit-data-login", this.login.bind(this), false);
+        Emitter.on("submit-data-signup", this.register.bind(this), false);
+        Emitter.on("submit-data-profile", this.update.bind(this), false);
+        Emitter.on("user-logout", this.logout.bind(this), false);
 
         UserModel.__instance = this;
     }
@@ -36,29 +36,41 @@ class UserModel {
      * Get user data from server or return fetched data
      */
     fetch() {
-        if (UserModel.__data !== null) {
+        if (UserModel.__data.username) {
             Emitter.emit("done-get-user", UserModel.__data);
             return;
         }
 
-        AjaxModule.doGet({path: "/session"}).
-            then((resp) => {
-                if (resp.status === 200) {
-                    return resp.json();
-                }
+        if (UserModel.__data.id === undefined) {
+            console.log(1);
+            Emitter.on("done-check-user-login", this.fetch.bind(this));
+            Emitter.emit("check-user-login");
+            return;
+        }
 
-                return Promise.reject(new Error("no login"));
-            }).
-            then((data) => {
-                UserModel.__data = data;
-                UserModel.__data.is_logged_in = true;
-                Emitter.emit("done-get-user", UserModel.__data);
-            }).
-            catch((err) => {
-                UserModel.__data = {is_logged_in: false};
+        if (!UserModel.__data.is_logged_in) {
+            Emitter.emit("done-get-user", UserModel.__data);
+        } else {
+            AjaxModule.doGet({path: `/user/${UserModel.__data.id}`}).
+                then((resp) => {
+                    if (resp.status === 200) {
+                        return resp.json();
+                    }
 
-                Emitter.emit("done-get-user", UserModel.__data);
-            });
+                    return Promise.reject(new Error(resp.status));
+                }).
+                then((data) => {
+                    let id = UserModel.__data.id;
+                    UserModel.__data = data;
+                    UserModel.__data.is_logged_in = true;
+                    UserModel.__data.id = id;
+
+                    Emitter.emit("done-get-user", UserModel.__data);
+                }).
+                catch((err) => {
+                    Emitter.emit("error", err);
+                });
+        }
     }
 
     /**
@@ -66,7 +78,7 @@ class UserModel {
      * Get user session and check if user logged in or check stored user data
      */
     isLoggedIn() {
-        if (UserModel.__data === null) {
+        if (!UserModel.__data.id) {
             AjaxModule.doGet({path: "/session"}).
                 then((resp) => {
                     if (resp.status === 200) {
@@ -76,15 +88,15 @@ class UserModel {
                     return Promise.reject(new Error("no login"));
                 }).
                 then((data) => {
-                    UserModel.__data = {is_logged_in: true};
+                    UserModel.__data = {id: data.id, is_logged_in: true};
                     Emitter.emit("done-check-user-login", true);
                 }).
                 catch((err) => {
-                    UserModel.__data = {is_logged_in: false};
+                    UserModel.__data = {id: 0, is_logged_in: false};
                     Emitter.emit("done-check-user-login", false);
                 });
         } else {
-            Emitter.emit("done-check-user-login", UserModel.__data.is_logged_in);
+            Emitter.emit("done-check-user-login", UserModel.__data.id !== 0);
         }
     }
 
@@ -99,7 +111,7 @@ class UserModel {
                 if (resp.status === 200) {
                     // Emitter.emit("update-success", resp);
                     Emitter.emit("wipe-views");
-                    UserModel.__data = null;
+                    UserModel.__data = {};
                 }
 
                 // Emitter.emit("update-error", resp.status);
@@ -114,24 +126,22 @@ class UserModel {
     register(data) {
         return AjaxModule.doPost({path: "/user", body: data}).
             then((resp) => {
+                if (resp.status === 409) {
+                    Emitter.emit("server-validation-error", "User already exists");
+                }
                 if (resp.status === 400) {
-                    return Promise.reject(resp.json());
+                    Emitter.emit("server-validation-error", "User already login");
                 }
 
-                if (resp.status === 200) {
-                    UserModel.__data = null;
+                if (resp.status === 201) {
+                    UserModel.__data = {};
                     // Emitter.emit("reg-success", data);
                     Emitter.emit("wipe-views");
                 }
 
                 if (resp.status === 500) {
-                    // Emitter.emit("reg-error", resp.status);
+                    Emitter.emit("server-validation-error", "Server error");
                 }
-            }).
-            catch((jsonPromise) => {
-                jsonPromise.then((body) => {
-                    UserModel.serverValidate(body);
-                });
             });
     }
 
@@ -144,23 +154,17 @@ class UserModel {
         return AjaxModule.doPost({path: "/session", body: data}).
             then((resp) => {
                 if (resp.status === 400) {
-                    return Promise.reject(resp.json());
+                    Emitter.emit("server-validation-error", "No such user");
                 }
 
-                if (resp.status === 200) {
-                    UserModel.__data = null;
-                    // Emitter.emit("login-success", data);
+                if (resp.status === 201) {
+                    UserModel.__data = {};
                     Emitter.emit("wipe-views");
                 }
 
                 if (resp.status === 500) {
-                    Emitter.emit("login-error", resp.status);
+                    Emitter.emit("server-validation-error", "Server error");
                 }
-            }).
-            catch((jsonPromise) => {
-                jsonPromise.then((body) => {
-                    UserModel.serverValidate(body);
-                });
             });
     }
 
@@ -169,13 +173,12 @@ class UserModel {
      * logout user
      */
     logout() {
-        if (UserModel.__data !== null) {
+        if (UserModel.__data.is_logged_in) {
             AjaxModule.doDelete({path: "/session"}).
                 then((resp) => {
                     if (resp.status === 200) {
-                        UserModel.__data = null;
+                        UserModel.__data = {};
                         Emitter.emit("wipe-views");
-
                     } else {
                         return Promise.reject(new Error(resp.status));
                     }

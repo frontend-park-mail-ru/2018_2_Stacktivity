@@ -21,10 +21,10 @@ const user = UserModel;
 const infoHand = InfoHandler;
 
 
-Emitter.on("server-validation-error", function (data) {
+Emitter.on("server-validation-error", function (message) {
     let commonErrorEl = document.getElementsByClassName("common_error")[0];
 
-    commonErrorEl.innerText = data.error.message;
+    commonErrorEl.innerText = message;
     commonErrorEl.classList.remove("hidden");
 });
 
