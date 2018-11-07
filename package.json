@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "prestart": "npm run hand",
+    "local": "MOCKS=1 npm start",
+    "prestart": "npm run hand && npm run build",
+    "hand": "node_modules/.bin/handlebars dev/js/views/templates/* -f dev/js/handlebars.precompile.js",
     "doc": "./node_modules/.bin/jsdoc -c jsdoc_settings.json public/js/*",
-    "hand": "node_modules/.bin/handlebars public/js/views/templates/* -f public/js/handlebars.precompile.js",
-    "test": "echo 'under construction\n'"
+    "build": "webpack --mode development",
+    "watch": "webpack --mode development --watch"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -16,18 +18,27 @@
     "debug": "^3.1.0",
     "express": "^4.16.3",
     "express-history-api-fallback": "^2.2.1",
+    "express-http-proxy": "^1.4.0",
+    "express-ws": "^4.0.0",
     "handlebars": "^4.0.12",
     "jsdoc": "^3.5.5",
     "morgan": "^1.9.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^1.0.1",
     "eslint": "^5.6.1",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "fest": "^0.12.1"
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
   }
 }

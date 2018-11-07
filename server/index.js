@@ -1,15 +1,39 @@
+
+
+const fallback = require('express-history-api-fallback');
 const express = require('express');
 const path = require('path');
-const morgan = require('morgan');
-const fallback = require('express-history-api-fallback');
 const app = express();
+const initMocks = require('./mocks');
+const ws = require('express-ws');
 
-const root = path.resolve(__dirname, '..', 'public');
+const rootDir = path.resolve(__dirname, '..', 'public');
+app.use(express.static(rootDir));
+
+
+if (process.env.MOCKS) {
+    ws(app);
+
+    initMocks(app);
+
+    app.ws('/ws', (socket) => {
+        socket.on('message', (message) => {
+            console.log(message);
+
+            let text = JSON.parse(message).message;
+
+            socket.send(JSON.stringify({message: `send ${text}`}));
+        });
+
+        socket.on('close', () => {
+            console.log('socket is closed');
+        });
+    });
+}
+
+app.use(fallback('index.html', {root: rootDir}));
+
 const port = process.env.PORT || 3000;
-
-app.use(morgan('dev'));
-app.use(express.static(root));
-app.use(fallback('index.html', {root}));
 
 app.listen(port, function () {
     console.log(`Server listening port ${port}`);
