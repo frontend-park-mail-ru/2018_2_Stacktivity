@@ -15,6 +15,7 @@ import InfoHandler from "./components/InfoHandler.js";
 // webpack imports
 import "./handlebars.precompile.js";
 import "../styles/style.css";
+import SingleGameView from "./views/SingleGameView.js";
 import MultGameView from "./views/MultGameView.js";
 
 const user = UserModel;
@@ -38,7 +39,7 @@ Handlebars.registerPartial('NavList', Handlebars.templates.NavList);
 function main() {
     Router.
         add("/about", AboutView).
-        add("/single", GameView).
+        add("/single", SingleGameView).
         add("/mult", MultGameView).
         add("/", MenuView).
         add("/profile", ProfileView).

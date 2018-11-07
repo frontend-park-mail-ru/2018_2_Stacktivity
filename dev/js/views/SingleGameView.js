@@ -14,18 +14,18 @@ import {WSPath} from "../config";
  * @class GameView
  * @extends BaseView
  */
-export default class MultGameView extends BaseView {
+export default class SingleGameView extends BaseView {
     /**
      * Creates view and renders it
      */
     constructor() {
         super();
         this._navigationController = new NavigationController();
-        this._formController = new FormController("mult");
+        this._formController = new FormController("single");
         this.render();
         this.registerEvents();
 
-        WebSocks.connect("ws://localhost:3001/game/multiplayer");
+        WebSocks.connect(WSPath);
 
         Emitter.on("game-message", function (data) {
             if (data.event === 1) {
@@ -44,7 +44,7 @@ export default class MultGameView extends BaseView {
         this.viewSection.innerHTML += Handlebars.templates.Nav({
             links: [
                 {
-                    "content": "mult",
+                    "content": "single",
                     "class": ["grey", "tiny"],
                     "href": "/"
                 }

@@ -36,7 +36,9 @@ class UserModel {
      * Get user data from server or return fetched data
      */
     fetch() {
-        if (UserModel.__data.username) {
+        console.log(UserModel.__data);
+
+        if (UserModel.__data.username !== undefined) {
             Emitter.emit("done-get-user", UserModel.__data);
             return;
         }
@@ -49,8 +51,10 @@ class UserModel {
         }
 
         if (!UserModel.__data.is_logged_in) {
+            console.log(2);
             Emitter.emit("done-get-user", UserModel.__data);
         } else {
+            console.log(3);
             AjaxModule.doGet({path: `/user/${UserModel.__data.id}`}).
                 then((resp) => {
                     if (resp.status === 200) {
@@ -88,7 +92,8 @@ class UserModel {
                     return Promise.reject(new Error("no login"));
                 }).
                 then((data) => {
-                    UserModel.__data = {id: data.id, is_logged_in: true};
+                    // console.log(data)
+                    UserModel.__data = {id: data.ID, is_logged_in: true};
                     Emitter.emit("done-check-user-login", true);
                 }).
                 catch((err) => {
