@@ -1,19 +1,20 @@
-import {ADD_CIRCLE} from "./Events.js";
-import {START_GAME} from "./Events.js";
+import {ADD_CIRCLE, START_GAME, LOAD_LEVEL, LINE_UPDATED, LINE_INPUT} from "./Events.js";
 import SceneCircle from "./models/Circle/SceneCircle.js";
-import {LOAD_LEVEL} from "./Events.js";
+import SceneLine from "./models/Line/SceneLine.js";
+import Point from "./models/Point/Point.js";
 
 
 export default class Scene {
-    constructor(name) {
+    constructor() {
         this._ctx = null;
 
         this._window = null;
 
-        this._name = name;
         this._level = null;
+
         this._circles = [];
         this._line = null;
+
         this._player = null;
         this._enemy = null;
     }
@@ -27,11 +28,16 @@ export default class Scene {
         };
 
         game.on(START_GAME, this.start.bind(this), false);
-        game.on(ADD_CIRCLE, this.addCircle.bind(this), false);
+        // game.on(ADD_CIRCLE, this.addCircle.bind(this), false);
         game.on(LOAD_LEVEL, this.setLevel.bind(this), false);
+        game.on(LINE_INPUT, this.initLine.bind(this), false);
+        game.on(LINE_UPDATED, this.updateLine.bind(this), false);
     }
 
     render() {
+        if (this._line) {
+            this._line.draw(this._ctx);
+        }
         this._circles.forEach((circle) => {
             circle.draw(this._ctx);
         });
@@ -67,5 +73,14 @@ export default class Scene {
         level.circles.forEach((circle) => {
             this.addCircle(circle);
         });
+    }
+
+    updateLine({beginLine, endLine}) {
+        this._line.beginLine = beginLine;
+        this._line.endLine = endLine;
+    }
+
+    initLine() {
+        this._line = new SceneLine(new Point(-10, -10));
     }
 }

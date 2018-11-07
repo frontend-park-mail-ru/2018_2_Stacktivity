@@ -1,10 +1,9 @@
 import Logic from "./Logic.js";
 import Scene from "./Scene.js";
-import {START_GAME} from "./Events.js";
 import Control from "./Control.js";
-import {ADD_CIRCLE} from "./Events.js";
+import {START_GAME, LOAD_LEVEL} from "./Events.js";
 import {defaultLevels} from "./configs/defaultLevels.js";
-import {LOAD_LEVEL} from "./Events.js";
+
 
 // Не получилось нормально отнаследоваться, временно воткнул
 class Emitter {
@@ -79,8 +78,8 @@ export default class Game extends Emitter {
 
         this._mode = mode;
 
-        this._logic = new Logic();
-        this._scene = new Scene("my_scene");
+        this._logic = new Logic(this);
+        this._scene = new Scene();
         this._control = new Control();
     }
 
@@ -107,7 +106,7 @@ export default class Game extends Emitter {
 
         const ctx = canvas.getContext('2d');
 
-        this._logic.init(this, this._window);
+        this._logic.init(this._window);
         this._scene.init(this, this._window, ctx);
         this._control.init(this, canvas);
 

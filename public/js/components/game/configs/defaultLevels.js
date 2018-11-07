@@ -4,25 +4,25 @@ export const defaultLevels = [
         circles: [
             {
                 num: 1,
-                x: 100,
-                y: 100,
+                x: 300,
+                y: 350,
                 r: 50,
                 type: "goal",
                 color: "magenta"
             },
             {
                 num: 2,
-                x: 500,
-                y: 300,
+                x: 1100,
+                y: 350,
                 r: 60,
                 type: "goal",
                 color: "cyan"
             },
             {
                 num: 3,
-                x: 500,
-                y: 400,
-                r: 30,
+                x: 700,
+                y: 350,
+                r: 100,
                 type: "wall",
                 color: "black"
             }

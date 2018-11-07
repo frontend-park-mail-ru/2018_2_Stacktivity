@@ -62,8 +62,8 @@ export default class GameView extends BaseView {
 
         const canvas = document.createElement("canvas");
         canvas.id = "canvas";
-        canvas.width = 900;
-        canvas.height = 600;
+        canvas.width = 1270;
+        canvas.height = 720;
         canvas.style = "border: 1px solid; display: block;";
 
         this.viewSection.appendChild(canvas);
