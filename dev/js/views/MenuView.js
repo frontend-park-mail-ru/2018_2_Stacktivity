@@ -10,17 +10,29 @@ const linksNoLogin = {
     links: [
         {
             content: "About",
-            class: ["medium", "sea_blue", "about_link"],
+            class: [
+                "circle_size_medium",
+                "circle_color_sea-blue",
+                "about_link"
+            ],
             href: "/about",
         },
         {
             content: "Login",
-            class: ["small", "green", "login_link"],
+            class: [
+                "circle_size_small",
+                "circle_color_green",
+                "login_link"
+            ],
             href: "/login",
         },
         {
             content: "Sign up",
-            class: ["big", "red", "signup_link"],
+            class: [
+                "circle_size_big",
+                "circle_color_red",
+                "signup_link"
+            ],
             href: "/signup",
         },
     ]
@@ -75,17 +87,29 @@ export default class MenuView extends BaseView {
                 links: [
                     {
                         content: "About",
-                        class: ["medium", "sea_blue", "about_link"],
+                        class: [
+                            "circle_size_medium",
+                            "circle_color_sea-blue",
+                            "about_link",
+                        ],
                         href: `/about`,
                     },
                     {
                         content: "logout",
-                        class: ["small", "grey", "logout_link"],
+                        class: [
+                            "circle_size_small",
+                            "circle_color_grey",
+                            "logout_link"
+                        ],
                         href: "/logout",
                     },
                     {
                         content: `${user.username}`, // вместо аватарки
-                        class: ["big", "red", "profile_link"],
+                        class: [
+                            "circle_size_big",
+                            "circle_color_red",
+                            "profile_link"
+                        ],
                         href: "/profile",
                     }
                 ]

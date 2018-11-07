@@ -76,13 +76,11 @@ class UserModel {
                     return Promise.reject(new Error("no login"));
                 }).
                 then((data) => {
-                    UserModel.__data = data;
-                    UserModel.__data.is_logged_in = true;
+                    UserModel.__data = {is_logged_in: true};
                     Emitter.emit("done-check-user-login", true);
                 }).
                 catch((err) => {
                     UserModel.__data = {is_logged_in: false};
-
                     Emitter.emit("done-check-user-login", false);
                 });
         } else {

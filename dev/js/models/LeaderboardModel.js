@@ -4,6 +4,7 @@
 
 import Emitter from "../modules/Emitter.js";
 import AjaxModule from "../modules/Ajax.mjs";
+import {leaderboardLimit} from "../config.js";
 
 /**
  * Leaderboard model
@@ -22,7 +23,7 @@ export default class LeaderboardModel {
      * @return {Promise} return
      */
     loadUsers(page) {
-        return AjaxModule.doGet({path: `/user/?page=${page}`}). // TODO fix to offset limit after back update
+        return AjaxModule.doGet({path: `/user?limit=${leaderboardLimit}&offset=${leaderboardLimit * (page - 1)}`}).
             then((resp) => {
                 if (resp.status === 200) {
                     return resp.json();

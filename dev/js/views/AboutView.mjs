@@ -33,7 +33,11 @@ export default class AboutView extends BaseView {
             links: [
                 {
                     content: "<-",
-                    class: ["tiny", "grey", "return_link"],
+                    class: [
+                        "circle_size_tiny",
+                        "circle_color_grey",
+                        "return_link",
+                    ],
                     href: "/",
                 }
             ]

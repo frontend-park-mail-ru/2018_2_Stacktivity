@@ -20,7 +20,7 @@ class Router {
             this._updateRender();
         }, false);
 
-        window.addEventListener('popstate', this.popstateCallback.bind(Router));
+        window.addEventListener('popstate', this.popstateCallback.bind(this));
 
         Router.__instance = this;
     }
