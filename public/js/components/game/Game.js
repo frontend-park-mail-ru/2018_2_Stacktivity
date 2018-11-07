@@ -1,8 +1,10 @@
 import Logic from "./Logic.js";
 import Scene from "./Scene.js";
 import {START_GAME} from "./Events.js";
-import Interaction from "./Interaction.js";
+import Control from "./Control.js";
 import {ADD_CIRCLE} from "./Events.js";
+import {defaultLevels} from "./configs/defaultLevels.js";
+import {LOAD_LEVEL} from "./Events.js";
 
 // Не получилось нормально отнаследоваться, временно воткнул
 class Emitter {
@@ -79,7 +81,7 @@ export default class Game extends Emitter {
 
         this._logic = new Logic();
         this._scene = new Scene("my_scene");
-        this._interaction = new Interaction();
+        this._control = new Control();
     }
 
     init(canvas, {width, height}) {
@@ -107,15 +109,19 @@ export default class Game extends Emitter {
 
         this._logic.init(this, this._window);
         this._scene.init(this, this._window, ctx);
-        this._interaction.init(this, canvas);
+        this._control.init(this, canvas);
 
-        //this.on(START_GAME, this._scene.start.bind(this._scene.instance()), false);
-        //this.on(ADD_CIRCLE, this._scene.addCircle.bind(this._scene.instance()), false);
-        //this.on(ADD_CIRCLE, this._logic.addCircle.bind(this._logic.instance()), false);
+        this.emit(LOAD_LEVEL, Game.loadLevel(1));
     }
 
     start() {
-        //this._scene.start();
         this.emit(START_GAME);
+    }
+
+    static loadLevel(num) {
+        if (num - 1 < 0 || num > defaultLevels.length) {
+            return;
+        }
+        return defaultLevels[num - 1];
     }
 }

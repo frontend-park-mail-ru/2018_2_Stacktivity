@@ -1,8 +1,8 @@
 import Circle from "./Circle.js";
 
 export default class SceneCircle extends Circle {
-    constructor(circle, color) {
-        super(circle.c, circle.r);
+    constructor({num, x, y, r, color}) {
+        super({num, x, y, r});
 
         this._color = color;
     }
@@ -15,8 +15,12 @@ export default class SceneCircle extends Circle {
         this._color = value;
     }
 
+    transformToObject() {
+        return super.transformToObject().color = this._color;
+    }
+
     copy() {
-        return new SceneCircle(super.copy(), this._color);
+        return new SceneCircle(this.transformToObject());
     }
 
     draw(context) {

@@ -1,8 +1,9 @@
 import {ADD_CIRCLE} from "./Events.js";
 import Point from "./models/Point/Point.js";
 import Circle from "./models/Circle/Circle.js";
+import {defaultLevels} from "./configs/defaultLevels.js";
 
-export default class Interaction {
+export default class Control {
     constructor() {
         this._domElem = null;
     }

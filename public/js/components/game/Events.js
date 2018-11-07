@@ -1,7 +1,9 @@
-const START_GAME = 'START_GAME';
-const ADD_CIRCLE = 'ADD_CIRCLE';
+const START_GAME = "START_GAME";
+const ADD_CIRCLE = "ADD_CIRCLE";
+const LOAD_LEVEL = "LOAD_LEVEL";
 
 export {
     START_GAME,
+    LOAD_LEVEL,
     ADD_CIRCLE
 };

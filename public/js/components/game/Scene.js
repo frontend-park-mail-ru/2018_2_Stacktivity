@@ -1,6 +1,8 @@
 import {ADD_CIRCLE} from "./Events.js";
 import {START_GAME} from "./Events.js";
 import SceneCircle from "./models/Circle/SceneCircle.js";
+import {LOAD_LEVEL} from "./Events.js";
+
 
 export default class Scene {
     constructor(name) {
@@ -9,6 +11,7 @@ export default class Scene {
         this._window = null;
 
         this._name = name;
+        this._level = null;
         this._circles = [];
         this._line = null;
         this._player = null;
@@ -25,13 +28,7 @@ export default class Scene {
 
         game.on(START_GAME, this.start.bind(this), false);
         game.on(ADD_CIRCLE, this.addCircle.bind(this), false);
-    }
-
-    addCircle(params) {
-        if (params.color && params.circle) {
-            this._circles.push(new SceneCircle(params.circle, params.color));
-        }
-        console.log(this._name, ": ", this._circles);
+        game.on(LOAD_LEVEL, this.setLevel.bind(this), false);
     }
 
     render() {
@@ -55,5 +52,20 @@ export default class Scene {
 
     start() {
         window.requestAnimationFrame(this.loopCallback.bind(this));
+    }
+
+
+    addCircle(circle) {
+        if (circle.num && circle.x && circle.y && circle.r && circle.color) {
+            this._circles[circle.num] = new SceneCircle(circle);
+        }
+    }
+
+    setLevel(level) {
+        this._level = level.levelNumber;
+
+        level.circles.forEach((circle) => {
+            this.addCircle(circle);
+        });
     }
 }

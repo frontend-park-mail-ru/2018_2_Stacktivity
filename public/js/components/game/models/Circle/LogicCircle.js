@@ -1,8 +1,8 @@
 import Circle from "./Circle.js";
 
 export default class LogicCircle extends Circle {
-    constructor(circle, type) {
-        super(circle.c, circle.r);
+    constructor({num, x, y, r, type}) {
+        super({num, x, y, r});
 
         this._type = type;
     }
@@ -15,7 +15,11 @@ export default class LogicCircle extends Circle {
         this._type = value;
     }
 
+    transformToObject() {
+        return super.transformToObject().type = this._type;
+    }
+
     copy() {
-        return new LogicCircle(super.copy(), this._type);
+        return new LogicCircle(this.transformToObject());
     }
 }
