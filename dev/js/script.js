@@ -8,7 +8,6 @@ import RegisterView from "./views/RegisterView.mjs";
 import LoginView from "./views/LoginView.mjs";
 import AboutView from "./views/AboutView.mjs";
 import LeaderboardView from "./views/LeaderboardView.mjs";
-import GameView from "./views/GameView.js";
 
 import InfoHandler from "./components/InfoHandler.js";
 
@@ -17,6 +16,7 @@ import "./handlebars.precompile.js";
 import "../styles/style.css";
 import SingleGameView from "./views/SingleGameView.js";
 import MultGameView from "./views/MultGameView.js";
+import GameView from "./views/GameView";
 
 const user = UserModel;
 const infoHand = InfoHandler;
@@ -39,7 +39,7 @@ Handlebars.registerPartial('NavList', Handlebars.templates.NavList);
 function main() {
     Router.
         add("/about", AboutView).
-        add("/single", SingleGameView).
+        add("/single", GameView).
         add("/mult", MultGameView).
         add("/", MenuView).
         add("/profile", ProfileView).
