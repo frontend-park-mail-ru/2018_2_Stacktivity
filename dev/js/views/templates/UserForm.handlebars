@@ -1,0 +1,16 @@
+<main class="content content_with-borders">
+    <form class="user_form" id="{{id}}" method="post">
+        <div class="user-form__error user-form__error_main hidden js-common_error">{{commonError}}</div>
+
+        {{#fields}}
+            <div class="user-form__field {{#if validationType}}js-validate{{/if}}">
+                <input class="user-form__input-block {{validationType}}" name="{{name}}" type="{{type}}"
+                       placeholder="{{placeholder}}"/>
+                <span class="user-form__error js-error hidden">{{error}}</span>
+            </div>
+        {{/fields}}
+
+        <button class="user-form__button">{{submitText}}</button>
+    </form>
+
+</main>
