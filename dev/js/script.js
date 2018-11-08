@@ -15,16 +15,17 @@ import InfoHandler from "./components/InfoHandler.js";
 // webpack imports
 import "./handlebars.precompile.js";
 import "../styles/style.css";
+import SingleGameView from "./views/SingleGameView.js";
 import MultGameView from "./views/MultGameView.js";
 
 const user = UserModel;
 const infoHand = InfoHandler;
 
 
-Emitter.on("server-validation-error", function (data) {
-    let commonErrorEl = document.getElementsByClassName("common_error")[0];
+Emitter.on("server-validation-error", function (message) {
+    let commonErrorEl = document.getElementsByClassName("js-common_error")[0];
 
-    commonErrorEl.innerText = data.error.message;
+    commonErrorEl.innerText = message;
     commonErrorEl.classList.remove("hidden");
 });
 
@@ -38,7 +39,7 @@ Handlebars.registerPartial('NavList', Handlebars.templates.NavList);
 function main() {
     Router.
         add("/about", AboutView).
-        add("/single", GameView).
+        add("/single", SingleGameView).
         add("/mult", MultGameView).
         add("/", MenuView).
         add("/profile", ProfileView).

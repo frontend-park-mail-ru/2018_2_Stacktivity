@@ -36,7 +36,7 @@ export default class AboutView extends BaseView {
                     class: [
                         "circle_size_tiny",
                         "circle_color_grey",
-                        "return_link",
+                        "navigation__circle_position_about",
                     ],
                     href: "/",
                 }

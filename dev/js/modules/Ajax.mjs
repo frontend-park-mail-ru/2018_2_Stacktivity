@@ -1,6 +1,7 @@
 /** @module modules/Ajax */
 
 import {basePath} from "../config.js";
+import Emitter from "./Emitter.js";
 
 /** AjaxModule is providing http requests to the nackend server */
 export default class AjaxModule {
@@ -29,6 +30,8 @@ export default class AjaxModule {
                 method: method,
                 mode: "cors",
                 credentials: "include",
+            }).catch((err) => {
+                Emitter.emit("error", err);
             });
         } else {
             let headers = {}, sendBody = "";
@@ -46,6 +49,8 @@ export default class AjaxModule {
                 body: sendBody,
                 mode: "cors",
                 credentials: "include",
+            }).catch((err) => {
+                Emitter.emit("error", err);
             });
         }
     }

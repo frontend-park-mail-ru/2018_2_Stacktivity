@@ -16,10 +16,10 @@ export default class LoginRegisterValidator extends BaseValidator {
     validate(form) {
         let isValid = true;
         const isLogin = form.id === "login_form";
-        for (const elem of form.getElementsByClassName("validate")) {
+        for (const elem of form.getElementsByClassName("js-validate")) {
             let input = elem.getElementsByTagName("input")[0];
-            let err = elem.getElementsByClassName("error")[0];
-            if (input.classList.contains("validate_username")) {
+            let err = elem.getElementsByClassName("js-error")[0];
+            if (input.classList.contains("js-validate_username")) {
                 const isValidField = this._usernameValidate(input.value);
 
                 if (!isLogin) {
@@ -28,7 +28,7 @@ export default class LoginRegisterValidator extends BaseValidator {
 
                 isValid = isValidField ? isValid : false;
             }
-            if (input.classList.contains("validate_email")) {
+            if (input.classList.contains("js-validate_email")) {
                 const isValidField = this._emailValidate(input.value);
 
                 if (!isLogin) {
@@ -37,7 +37,7 @@ export default class LoginRegisterValidator extends BaseValidator {
 
                 isValid = isValidField ? isValid : false;
             }
-            if (input.classList.contains("validate_password")) {
+            if (input.classList.contains("js-validate_password")) {
                 const isValidField = this._passwordValidate(input.value);
 
                 if (!isLogin) {
@@ -46,7 +46,7 @@ export default class LoginRegisterValidator extends BaseValidator {
 
                 isValid = isValidField ? isValid : false;
             }
-            if (input.classList.contains("validate_password_repeat")) {
+            if (input.classList.contains("js-validate_password_repeat")) {
                 const password1 = document.getElementsByClassName("validate_password");
                 const isValidField = this._doublePasswordValidate(password1[0].value, input.value);
 
@@ -59,7 +59,7 @@ export default class LoginRegisterValidator extends BaseValidator {
         }
 
         if (isLogin && !isValid) {
-            form.getElementsByClassName("common_error")[0].
+            form.getElementsByClassName("js-common_error")[0].
                 classList.remove("hidden");
         }
 

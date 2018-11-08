@@ -27,9 +27,9 @@ class WebSocks {
         }
     }
 
-    connect() {
+    connect(path) {
         if (!this._connected) {
-            this._ws = new WebSocket(WSPath);
+            this._ws = new WebSocket(path);
 
             this._ws.addEventListener("open", this._onopen.bind(this));
             this._ws.addEventListener("message", this._onmessage.bind(this));
