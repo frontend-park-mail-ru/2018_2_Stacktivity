@@ -67,8 +67,7 @@ export default class LoginView extends BaseView {
                     class: [
                         "circle_size_big",
                         "circle_color_red",
-                        "page",
-                        "signup_link",
+                        "navigation__circle_position_right-top",
                     ],
                     href: "/signup",
                 },
@@ -77,7 +76,7 @@ export default class LoginView extends BaseView {
                     class: [
                         "circle_size_tiny",
                         "circle_color_grey",
-                        "return_link"
+                        "navigation__circle_position_return"
                     ],
                     href: "/",
                 }

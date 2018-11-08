@@ -63,7 +63,7 @@ export default class LeaderboardView extends BaseView {
                     class: [
                         "circle_size_tiny",
                         "circle_color_grey",
-                        "return_link",
+                        "navigation__circle_position_return",
                     ],
                     href: "/",
                 }
@@ -81,8 +81,7 @@ export default class LeaderboardView extends BaseView {
      */
     renderUsers(users) {
         this.viewSection.
-            getElementsByClassName("leaderboard")[0].
-            getElementsByTagName("tbody")[0].
+            getElementsByClassName("leaderboard__body")[0].
             innerHTML = Handlebars.templates.LeaderboardList({users});
     }
 

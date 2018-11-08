@@ -66,8 +66,7 @@ export default class RegisterView extends BaseView {
                     class: [
                         "circle_size_small",
                         "circle_color_green",
-                        "page",
-                        "login_link",
+                        "navigation__circle_position_right-page",
                     ],
                     href: "/login",
                 },
@@ -76,7 +75,7 @@ export default class RegisterView extends BaseView {
                     class: [
                         "circle_size_tiny",
                         "circle_color_grey",
-                        "return_link",
+                        "navigation__circle_position_return",
                     ],
                     href: "/",
                 }

@@ -1,20 +1,14 @@
-<main class="content">
+<main class="content content_with-borders">
     <div class="leaderboard">
-        <table>
-            <thead>
-            <tr>
-                <th class="username">Username</th>
-                <th class="score">Scores</th>
-            </tr>
-            </thead>
-            <tbody>
-                {{> LeaderboardList}}
-            </tbody>
-        </table>
-
-        <ul class="pagination">
-            <li><a href="#" id="prev_page_link"><-</a></li>
-            <li><a href="#" id="next_page_link">-></a></li>
-        </ul>
+        <div class="leaderboard__header">Username</div>
+        <div class="leaderboard__header">Scores</div>
+        <div class="leaderboard__body">
+            {{> LeaderboardList}}
+        </div>
     </div>
+
+    <ul class="leaderboard__pagination">
+        <li class="leaderboard__pagination__button"><a href="#" id="prev_page_link"><-</a></li>
+        <li class="leaderboard__pagination__button"><a href="#" id="next_page_link">-></a></li>
+    </ul>
 </main>

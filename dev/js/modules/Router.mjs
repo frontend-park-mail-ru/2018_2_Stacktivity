@@ -70,6 +70,7 @@ class Router {
         let {path, page} = this.parsePath(pathname);
         if (!this._routes[path]) {
             Emitter.emit("warn", "no such path is registred");
+            this.open("/");
             return;
         }
 

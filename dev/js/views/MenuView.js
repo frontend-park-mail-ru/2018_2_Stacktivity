@@ -13,7 +13,7 @@ const linksNoLogin = {
             class: [
                 "circle_size_medium",
                 "circle_color_sea-blue",
-                "about_link"
+                "navigation__circle_position_about"
             ],
             href: "/about",
         },
@@ -22,7 +22,7 @@ const linksNoLogin = {
             class: [
                 "circle_size_small",
                 "circle_color_green",
-                "login_link"
+                "navigation__circle_position_right"
             ],
             href: "/login",
         },
@@ -31,7 +31,7 @@ const linksNoLogin = {
             class: [
                 "circle_size_big",
                 "circle_color_red",
-                "signup_link"
+                "navigation__circle_position_right-top"
             ],
             href: "/signup",
         },
@@ -90,7 +90,7 @@ export default class MenuView extends BaseView {
                         class: [
                             "circle_size_medium",
                             "circle_color_sea-blue",
-                            "about_link",
+                            "navigation__circle_position_about",
                         ],
                         href: `/about`,
                     },
@@ -99,16 +99,16 @@ export default class MenuView extends BaseView {
                         class: [
                             "circle_size_small",
                             "circle_color_grey",
-                            "logout_link"
+                            "navigation__circle_position_right"
                         ],
                         href: "/logout",
                     },
                     {
-                        content: `${user.username}`, // вместо аватарки
+                        content: `${user.username}`,
                         class: [
                             "circle_size_big",
                             "circle_color_red",
-                            "profile_link"
+                            "navigation__circle_position_right-top"
                         ],
                         href: "/profile",
                     }

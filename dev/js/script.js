@@ -23,7 +23,7 @@ const infoHand = InfoHandler;
 
 
 Emitter.on("server-validation-error", function (message) {
-    let commonErrorEl = document.getElementsByClassName("common_error")[0];
+    let commonErrorEl = document.getElementsByClassName("js-common_error")[0];
 
     commonErrorEl.innerText = message;
     commonErrorEl.classList.remove("hidden");

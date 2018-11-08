@@ -58,7 +58,7 @@ class InfoHandler {
      */
     _handleError(msg) {
         let message = document.createElement("div");
-        message.classList.add("info", "error");
+        message.classList.add("infoblock__info", "infoblock__info_error");
         message.innerText = msg;
         this._infoblock.prepend(message);
         this.__fadeaway(message);
@@ -72,7 +72,7 @@ class InfoHandler {
      */
     _handleInfo(msg) {
         let message = document.createElement("div");
-        message.classList.add("info");
+        message.classList.add("infoblock__info");
         message.innerText = msg;
         this._infoblock.prepend(message);
         this.__fadeaway(message);
@@ -86,7 +86,7 @@ class InfoHandler {
      */
     _handleWarn(msg) {
         let message = document.createElement("div");
-        message.classList.add("info", "warn");
+        message.classList.add("infoblock__info", "infoblock__info_warn");
         message.innerText = msg;
         this._infoblock.prepend(message);
         this.__fadeaway(message);

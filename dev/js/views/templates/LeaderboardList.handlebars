@@ -1,10 +1,9 @@
 {{#each users}}
-    <tr>
-        <td>
-            {{username}}
-        </td>
-        <td>
-            {{score}}
-        </td>
-    </tr>
+    <div class="leaderboard__username">
+        {{username}}
+    </div>
+
+    <div class="leaderboard__score">
+        {{score}}
+    </div>
 {{/each}}
