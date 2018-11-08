@@ -1,7 +1,7 @@
 import Logic from "./Logic.js";
 import Scene from "./Scene.js";
 import Control from "./Control.js";
-import {START_GAME, LOAD_LEVEL} from "./Events.js";
+import {START_GAME, LOAD_LEVEL, LEVEL_RESTART} from "./Events.js";
 import {defaultLevels} from "./configs/defaultLevels.js";
 
 
@@ -52,7 +52,7 @@ class Emitter {
      * @return {Emitter}
      * Subscribing on event
      * @param {string} event name of event
-     * @param {any} data data
+     * @param {{level: null}} data data
      * */
     emit(event, data) { // публикуем (диспатчим, эмитим) событие
         if (this._listeners[event]) {
@@ -78,12 +78,17 @@ export default class Game extends Emitter {
 
         this._mode = mode;
 
+        this._level = null;
+
         this._logic = new Logic(this);
         this._scene = new Scene();
         this._control = new Control();
     }
 
     init(canvas, {width, height}) {
+        this.on(LOAD_LEVEL, this.setLevel.bind(this), false);
+        this.on(LEVEL_RESTART, this.restartLevel.bind(this), false);
+
         if (!canvas) {
             canvas = document.createElement('canvas');
             canvas.id = 'canvas';
@@ -122,5 +127,13 @@ export default class Game extends Emitter {
             return;
         }
         return defaultLevels[num - 1];
+    }
+
+    setLevel(level) {
+        this._level = level;
+    }
+
+    restartLevel() {
+        this.emit(LOAD_LEVEL, this._level);
     }
 }

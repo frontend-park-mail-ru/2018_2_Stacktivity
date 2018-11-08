@@ -1,6 +1,5 @@
 import Point from "./models/Point/Point.js";
-import Circle from "./models/Circle/Circle.js";
-import {ADD_CIRCLE, LINE_ADD_POINT, LINE_GO, LINE_INPUT} from "./Events.js";
+import {LINE_ADD_POINT, LINE_GO, LINE_INPUT} from "./Events.js";
 
 
 export default class Control {
@@ -19,7 +18,7 @@ export default class Control {
             game.emit(LINE_ADD_POINT, this.mousePoint(e));
         });
 
-        this._domElem.addEventListener("mouseleave", (e) => {
+        this._domElem.addEventListener("mouseleave", () => {
             game.emit(LINE_GO);
         });
 

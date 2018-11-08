@@ -27,7 +27,7 @@ export default class SceneCircle extends Circle {
         context.save();
 
         context.beginPath();
-        context.arc(this._c.x, this._c.y, this._r, 0, Math.PI * 2, true);
+        context.arc(this._c.x, this._c.y, this._r + 10, 0, Math.PI * 2, true);
         context.closePath();
 
         context.fillStyle = this._color;

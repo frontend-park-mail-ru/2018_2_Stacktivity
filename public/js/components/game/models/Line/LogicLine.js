@@ -1,6 +1,6 @@
-import Line from "./Line.js";
+import Line, {BaseLine} from "./Line.js";
 import Point from "../Point/Point.js";
-import {BaseLine} from "./Line.js";
+
 
 export default class LogicLine extends Line {
     constructor(basePoint, window) {
@@ -26,14 +26,24 @@ export default class LogicLine extends Line {
     }
 
     addPoint(point) {
-        if (!this._inputting || Point.equal(point, this.lastPoint())) {
+        if (!this._inputting || Point.equal(point, this.getLastPoint())) {
             return;
         }
         this._beginLine.addPoint(point);
     }
 
-    lastPoint() {
+    getLastPoint() {
         return this._beginLine.lastPoint();
+    }
+
+    getLastLine() {
+        if (this._inputting) {
+            return;
+        }
+        const p1 = this._endLine.getRealPoint(this._endLine.currentPosition - 1) ||
+            this._beginLine.getRealPoint(this._beginLine.size() - 1);
+        const p2 = this._endLine.getRealPoint(this._endLine.currentPosition);
+        return {p1, p2};
     }
 
     step() {
@@ -47,6 +57,8 @@ export default class LogicLine extends Line {
             this._beginLine = this._endLine.copy();
             this.constructEndLine();
         }
+
+        return !this.isLineOutOfWindow();
     }
 
     constructEndLine() {
@@ -69,13 +81,24 @@ export default class LogicLine extends Line {
         }
     }
 
-    getLastLine() {
-        if (this._inputting) {
-            return;
+    isLineOutOfWindow() {
+        let isOut = true;
+
+        for (let i = this._beginLine.currentPosition; i < this._beginLine.size(); i++) {
+            const point = this._beginLine.getRealPoint(i);
+            isOut = point.y < 0 || point.y > this._window.height;
+            if (!isOut) {
+                return isOut;
+            }
         }
-        const p1 = this._endLine.getRealPoint(this._endLine.currentPosition - 1) ||
-            this._beginLine.getRealPoint(this._beginLine.size() - 1);
-        const p2 = this._endLine.getRealPoint(this._endLine.currentPosition);
-        return [p1, p2];
+        for (let i = 0; i < this._endLine.currentPosition; i++) {
+            const point = this._endLine.getRealPoint(i);
+            isOut = point.y < 0 || point.y > this._window.height;
+            if (!isOut) {
+                return isOut;
+            }
+        }
+
+        return isOut;
     }
 }

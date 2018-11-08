@@ -1,4 +1,4 @@
-import {ADD_CIRCLE, START_GAME, LOAD_LEVEL, LINE_UPDATED, LINE_INPUT} from "./Events.js";
+import {START_GAME, LOAD_LEVEL, LINE_UPDATED, LINE_INPUT, LINE_DROP, CIRCLE_DROP} from "./Events.js";
 import SceneCircle from "./models/Circle/SceneCircle.js";
 import SceneLine from "./models/Line/SceneLine.js";
 import Point from "./models/Point/Point.js";
@@ -28,10 +28,13 @@ export default class Scene {
         };
 
         game.on(START_GAME, this.start.bind(this), false);
-        // game.on(ADD_CIRCLE, this.addCircle.bind(this), false);
         game.on(LOAD_LEVEL, this.setLevel.bind(this), false);
+
         game.on(LINE_INPUT, this.initLine.bind(this), false);
         game.on(LINE_UPDATED, this.updateLine.bind(this), false);
+        game.on(LINE_DROP, this.dropLine.bind(this), false);
+
+        game.on(CIRCLE_DROP, this.dropCircle.bind(this), false);
     }
 
     render() {
@@ -45,7 +48,6 @@ export default class Scene {
 
     clear() {
         const ctx = this._ctx;
-        ctx.resetTransform();
         ctx.clearRect(0, 0, this._window.width, this._window.height);
     }
 
@@ -67,6 +69,10 @@ export default class Scene {
         }
     }
 
+    dropCircle({num}) {
+        delete this._circles[num];
+    }
+
     setLevel(level) {
         this._level = level.levelNumber;
 
@@ -82,5 +88,9 @@ export default class Scene {
 
     initLine() {
         this._line = new SceneLine(new Point(-10, -10));
+    }
+
+    dropLine() {
+        this._line = null;
     }
 }

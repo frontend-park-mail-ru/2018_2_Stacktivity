@@ -4,7 +4,7 @@
  * Event messaging service
  * @class Router
  */
-class Emitter {
+export class Emitter {
     /** Create the emitter */
     constructor() {
         if (Emitter.__instance) {

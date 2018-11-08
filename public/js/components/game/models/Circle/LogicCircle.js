@@ -28,7 +28,7 @@ export default class LogicCircle extends Circle {
                (point.y - this.c.y) * (point.y - this.c.y) <= this.r * this.r;
     }
 
-    isIntersectedWithЫegment(p1, p2) {
+    isIntersectedWithSegment({p1, p2}) {
         if (Math.min(p1.x, p2.x, this.c.x + this.r) === this.c.x + this.r ||
             Math.max(p1.x, p2.x, this.c.x - this.r) === this.c.x - this.r ||
             Math.min(p1.y, p2.y, this.c.y + this.r) === this.c.y + this.r ||
@@ -45,7 +45,7 @@ export default class LogicCircle extends Circle {
             p1 = tmp;
         }
 
-        //ax + by + c = 0 line from 2 points
+        // ax + by + c = 0 line from 2 points
         const b = -1;
         const a = (p2.y - p1.y) / (p2.x - p1.x);
         const c = p1.y - a * p1.x;
@@ -53,6 +53,6 @@ export default class LogicCircle extends Circle {
         // dist = |a*x0 + b*y0 + c| / sqrt(a^2 + b^2) between line and this center
         const dist = Math.abs(a * this.c.x + b * this.c.y + c) / Math.sqrt(a * a + b * b);
 
-        return dist <= this.r;
+        return dist < this.r;
     }
 }
