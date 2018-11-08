@@ -1,5 +1,5 @@
 import Point from "./models/Point/Point.js";
-import {LINE_ADD_POINT, LINE_GO, LINE_INPUT} from "./Events.js";
+import {LINE_ADD_POINT, LINE_GO, LINE_INPUT, WAY_HIDE, WAY_SHOW, LEVEL_NEXT} from "./Events.js";
 
 
 export default class Control {
@@ -24,6 +24,23 @@ export default class Control {
 
         this._domElem.addEventListener("mouseup", () => {
            game.emit(LINE_GO);
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "w") {
+                game.emit(WAY_SHOW);
+            }
+        });
+
+        document.addEventListener("keyup", (e) => {
+            if (e.key === "w") {
+                game.emit(WAY_HIDE);
+            }
+        });
+        document.addEventListener("keypress", (e) => {
+            if (e.key === "n") {
+                game.emit(LEVEL_NEXT);
+            }
         });
      }
 

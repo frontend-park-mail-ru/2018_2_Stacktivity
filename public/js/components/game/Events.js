@@ -1,6 +1,8 @@
 const START_GAME = "START_GAME";
 const LOAD_LEVEL = "LOAD_LEVEL";
 const LEVEL_RESTART = "LEVEL_RESTART";
+const LEVEL_COMPLETE = "LEVEL_COMPLETE";
+const LEVEL_NEXT = "LEVEL_NEXT";
 
 const CIRCLE_ADD = "CIRCLE_ADD";
 const CIRCLE_DROP = "CIRCLE_DROP";
@@ -11,10 +13,16 @@ const LINE_UPDATED = "LINE_UPDATED";
 const LINE_DROP = "LINE_DROP";
 const LINE_GO = "LINE_GO";
 
+const WAY_SHOW = "WAY_SHOW";
+const WAY_HIDE = "WAY_HIDE";
+
+
 export {
     START_GAME,
     LOAD_LEVEL,
     LEVEL_RESTART,
+    LEVEL_COMPLETE,
+    LEVEL_NEXT,
 
     CIRCLE_ADD,
     CIRCLE_DROP,
@@ -24,4 +32,7 @@ export {
     LINE_UPDATED,
     LINE_DROP,
     LINE_GO,
+
+    WAY_SHOW,
+    WAY_HIDE
 };

@@ -1,6 +1,6 @@
 import LogicCircle from "./models/Circle/LogicCircle.js";
 import {START_GAME, LOAD_LEVEL, LINE_DROP, LINE_UPDATED,
-    LINE_ADD_POINT, LINE_GO, LINE_INPUT, CIRCLE_DROP, LEVEL_RESTART} from "./Events.js";
+    LINE_ADD_POINT, LINE_GO, LINE_INPUT, CIRCLE_DROP, LEVEL_RESTART, LEVEL_COMPLETE} from "./Events.js";
 import {RPS} from "./configs/config.js";
 import LogicLine from "./models/Line/LogicLine.js";
 
@@ -13,11 +13,12 @@ export default class Logic {
         this._reconDelay = 1000 / RPS;
 
         this._circles = [];
+        this._goalsCircleCounter = 0;
+
         this._line = null;
         this._inputting = false;
 
         this._player = null;
-        this._enemy = null;
     }
 
     init(window) {
@@ -35,6 +36,16 @@ export default class Logic {
         this._game.on(LINE_DROP, this.dropLine.bind(this), false);
 
         this._game.on(CIRCLE_DROP, this.dropCircle.bind(this), false);
+    }
+
+    setLevel(level) {
+        this._game.emit(LINE_DROP);
+        this._circles = [];
+        this._goalsCircleCounter = 0;
+
+        level.circles.forEach((circle) => {
+            this.addCircle(circle);
+        });
     }
 
     reckon() {
@@ -59,6 +70,26 @@ export default class Logic {
         window.setTimeout(this.loopCallback.bind(this), this._reconDelay);
     }
 
+    validatePoint(point) {
+        return !this._circles.some((circle) => circle.isIntersectedWithPoint(point));
+    }
+
+    checkCollision() {
+        this._circles.forEach((circle) => {
+            if (this._line && circle.isIntersectedWithSegment(this._line.getLastLine())) {
+                switch (circle.type) {
+                    case "wall":
+                        this._game.emit(LEVEL_RESTART);
+                        break;
+                    case "goal":
+                        this._game.emit(CIRCLE_DROP, {num: circle.num});
+                        break;
+                    default:
+                }
+            }
+        });
+    }
+
     get circles() {
         return this._circles;
     }
@@ -68,21 +99,20 @@ export default class Logic {
     }
 
     addCircle(circle) {
-        if (circle.num && circle.x && circle.y && circle.r && circle.type) {
+        if (circle !== undefined) {
             this._circles[circle.num] = new LogicCircle(circle);
+            if (circle.type === "goal") {
+                this._goalsCircleCounter++;
+            }
         }
     }
 
     dropCircle({num}) {
         delete this._circles[num];
-    }
-
-    setLevel(level) {
-        this._game.emit(LINE_DROP);
-
-        level.circles.forEach((circle) => {
-            this.addCircle(circle);
-        });
+        this._goalsCircleCounter--;
+        if (this._goalsCircleCounter === 0) {
+            this._game.emit(LEVEL_COMPLETE);
+        }
     }
 
     startLineInput(point) {
@@ -90,6 +120,13 @@ export default class Logic {
 
         this._line = new LogicLine(point, this._window);
         this._inputting = true;
+    }
+
+    finishLineInput() {
+        if (this._inputting) {
+            this._inputting = false;
+            this._line.inputting = false;
+        }
     }
 
     addPointInLine(point) {
@@ -103,35 +140,8 @@ export default class Logic {
         }
     }
 
-    finishLineInput() {
-        if (this._inputting) {
-            this._inputting = false;
-            this._line.inputting = false;
-        }
-    }
-
     dropLine() {
         this._line = null;
         this._inputting = false;
-    }
-
-    validatePoint(point) {
-        return !this._circles.some((circle) => circle.isIntersectedWithPoint(point));
-    }
-
-    checkCollision() {
-        this._circles.forEach((circle) => {
-            if (circle.isIntersectedWithSegment(this._line.getLastLine())) {
-                switch (circle.type) {
-                    case "wall":
-                        this._game.emit(LEVEL_RESTART);
-                        break;
-                    case "goal":
-                        this._game.emit(CIRCLE_DROP, {num: circle.num});
-                        break;
-                    default:
-                }
-            }
-        });
     }
 }

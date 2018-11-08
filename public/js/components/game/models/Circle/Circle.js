@@ -5,7 +5,6 @@ export default class Circle {
         this._c = new Point(x, y);
         this._r = r;
         this._num = num || 0;
-        this._num = num;
     }
 
 

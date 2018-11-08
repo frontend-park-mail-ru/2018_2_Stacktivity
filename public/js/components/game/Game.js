@@ -1,7 +1,7 @@
 import Logic from "./Logic.js";
 import Scene from "./Scene.js";
 import Control from "./Control.js";
-import {START_GAME, LOAD_LEVEL, LEVEL_RESTART} from "./Events.js";
+import {START_GAME, LOAD_LEVEL, LEVEL_RESTART, LEVEL_COMPLETE, LEVEL_NEXT} from "./Events.js";
 import {defaultLevels} from "./configs/defaultLevels.js";
 
 
@@ -88,6 +88,8 @@ export default class Game extends Emitter {
     init(canvas, {width, height}) {
         this.on(LOAD_LEVEL, this.setLevel.bind(this), false);
         this.on(LEVEL_RESTART, this.restartLevel.bind(this), false);
+        this.on(LEVEL_COMPLETE, this.completeLevel.bind(this), false);
+        this.on(LEVEL_NEXT, this.nextLevel.bind(this), false);
 
         if (!canvas) {
             canvas = document.createElement('canvas');
@@ -115,7 +117,7 @@ export default class Game extends Emitter {
         this._scene.init(this, this._window, ctx);
         this._control.init(this, canvas);
 
-        this.emit(LOAD_LEVEL, Game.loadLevel(1));
+        this.emit(LOAD_LEVEL, Game.loadLevel(0n));
     }
 
     start() {
@@ -123,17 +125,28 @@ export default class Game extends Emitter {
     }
 
     static loadLevel(num) {
-        if (num - 1 < 0 || num > defaultLevels.length) {
+        if (num < 0 || num > defaultLevels.length) {
             return;
         }
-        return defaultLevels[num - 1];
+        return defaultLevels[num];
     }
 
     setLevel(level) {
         this._level = level;
+        console.log("level: ", this._level.levelNumber);
     }
 
     restartLevel() {
         this.emit(LOAD_LEVEL, this._level);
+    }
+
+    completeLevel() {
+        // Write points ...
+        this.emit(LEVEL_NEXT);
+    }
+
+    nextLevel() {
+        const next = (this._level.levelNumber + 1) % defaultLevels.length;
+        this.emit(LOAD_LEVEL, Game.loadLevel(next));
     }
 }
