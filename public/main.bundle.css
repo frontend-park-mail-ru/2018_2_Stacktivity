@@ -54,42 +54,11 @@ table {
 a {
     color: inherit; /* blue colors for links too */
     text-decoration: inherit; /* no underline */
-}.leaderboard {
-    border-collapse: initial;
-    border-bottom: 5px #355FA2 solid;
-    border-top: 5px #355FA2 solid;
-    border-radius: 40px;
-    background: transparent;
-    width: 800px;
-    padding: 20px;
-    font-size: 26px;
-}
+}/* ---- style ---- */
 
-.leaderboard table {
-    width: 100%;
+:root {
+    --main-width-content: 70vmin;
 }
-
-.leaderboard th {
-    font-weight: bold;
-    text-align: left;
-    background: #ddd;
-    padding: 10px;
-}
-
-.leaderboard th.username {
-    width: 30%;
-}
-
-.leaderboard th.score {
-    width: 70%;
-
-}
-
-.leaderboard td {
-    background: #eee;
-    padding: 8px;
-}
-/* ---- style ---- */
 
 body {
     background: #fff;
@@ -98,7 +67,7 @@ body {
 
 /* ~~~~ Header block ~~~~ */
 .header {
-    width: 70vmin;
+    width: var(--main-width-content);
     height: 40vmin;
     overflow: hidden;
     position: relative;
@@ -112,8 +81,8 @@ body {
 }
 
 .header__logo {
-    width: 70vmin;
-    height: 70vmin;
+    width: var(--main-width-content);
+    height: var(--main-width-content);
     border-radius: 35vmin;
     background: #1a1a1a;
     position: absolute;
@@ -243,8 +212,8 @@ body {
 }
 
 .login_link.page, .logout_link.page {
-    top: -3vw;
-    left: 16vw;
+    top: -6vmin;
+    left: 32vmin;
 }
 
 .return_link {
@@ -313,22 +282,31 @@ body {
     margin-top: 72px;
 }
 
-.user_form {
-    border-bottom: 5px #355FA2 solid;
-    border-top: 5px #355FA2 solid;
-    border-radius: 40px;
-    background: transparent;
-    width: 600px;
-    padding: 20px;
+.user_form label {
+    font-size: 3vmin;
+    text-align: center;
 }
 
-.user_form fieldset {
-    position: relative;
+.user_form {
+    border: 0.9vmin #355FA2 solid;
+    border-left: 0.3vmin #fff solid;
+    border-right: 0.3vmin #fff solid;
+    border-radius: 8vmin;
+    background: transparent;
+    width: var(--main-width-content);
+    max-height: 50vh;
+    padding: 2vmin;
+    padding-left: 4vmin;
+    padding-right: 4vmin;
+}
 
-    margin-bottom: 20px;
-    width: 500px;
-    left: 50%;
-    transform: translate(-50%, 0);
+#profile_form .field {
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+}
+
+.field {
+    margin-bottom: 2vmin;
 }
 
 .user_form .error {
@@ -336,33 +314,29 @@ body {
     color: #f00;
 }
 
-.user_form fieldset .error {
-    font-size: 16px;
+.user_form .field .error {
+    font-size: 1.8vmin;
 }
 
 .input_block {
-    width: 100%;
-
-    border-radius: 5px;
+    border-radius: 1vmin;
     background: #fff;
     border: none;
     box-shadow: 0 0 5px rgba(30, 30, 30, 0.5) inset;
-    padding: 12px;
-    font-size: 22px;
-    margin-bottom: 10px;
+    padding: 1.3vmin;
+    font-size: 2vmin;
     font-family: 'Quantico', sans-serif;
+    width: 100%;
 }
 
 .profile_input {
-    width: initial;
-
-    border-radius: 5px;
+    border-radius: 1vmin;
     background: #fff;
     border: none;
     box-shadow: 0 0 5px rgba(30, 30, 30, 0.5) inset;
-    padding: 12px;
-    font-size: 22px;
-    margin-bottom: 10px;
+    padding: 1.3vmin;
+    font-size: 2vmin;
+    margin-bottom: 3vmin;
     font-family: 'Quantico', sans-serif;
 }
 
@@ -382,13 +356,13 @@ button.submit {
     background: #305A9D;
     border-bottom: none;
     border-top: none;
-    border-left: #293955 solid 6px;
-    border-right: #293955 solid 6px;
-    border-radius: 30px;
-    height: 60px;
-    width: 150px;
+    border-left: #293955 solid 1vmin;
+    border-right: #293955 solid 1vmin;
+    border-radius: 3vmin;
+    height: 6vmin;
+    width: 16vmin;
     font-family: 'Quantico', sans-serif;
-    font-size: 22px;
+    font-size: 3vmin;
     color: #fff;
     position: relative;
 
@@ -411,8 +385,9 @@ button.submit {
 }
 
 .score {
-    font-size: 32px;
+    font-size: 4vmin;
     text-align: center;
+    padding: 2vmin;
 }
 
 .profile_avatar {
@@ -460,3 +435,43 @@ button.submit {
     border-color: #CA2424;
     background: red;
 }
+
+
+
+
+.leaderboard {
+    border: 0.9vmin #355FA2 solid;
+    border-left: 0.3vmin #fff solid;
+    border-right: 0.3vmin #fff solid;
+    border-radius: 8vmin;
+    background: transparent;
+    width: var(--main-width-content);
+    max-height: 50vh;
+    padding: 2vmin;
+}
+
+.leaderboard table {
+    width: 100%;
+}
+
+.leaderboard th {
+    font-weight: bold;
+    text-align: left;
+    background: #ddd;
+    padding: 10px;
+}
+
+.leaderboard th.username {
+    width: 30%;
+}
+
+.leaderboard th.score {
+    width: 70%;
+
+}
+
+.leaderboard td {
+    background: #eee;
+    padding: 8px;
+}
+

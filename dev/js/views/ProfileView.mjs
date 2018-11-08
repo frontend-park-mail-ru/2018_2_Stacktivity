@@ -46,7 +46,7 @@ export default class ProfileView extends BaseView {
         if (isLogin) {
             Emitter.emit("get-user");
         } else {
-            Emitter.emit("error", "You are already registered and even logged in!");
+            Emitter.emit("warn", "You must login to preform such action.");
             Router.open("/");
         }
     }
@@ -73,7 +73,7 @@ export default class ProfileView extends BaseView {
         });
 
         this._content = document.createElement("main");
-        this._content.classList.add("page_content");
+        this._content.classList.add("content");
         this.viewSection.appendChild(this._content);
     }
 
