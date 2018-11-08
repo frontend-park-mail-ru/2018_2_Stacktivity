@@ -58,6 +58,9 @@ export default class Logic {
                 this._game.emit(LEVEL_RESTART);
             }
         }
+        if (this._goalsCircleCounter === 0) {
+            this._game.emit(LEVEL_COMPLETE);
+        }
     }
 
     loopCallback() {
@@ -110,9 +113,6 @@ export default class Logic {
     dropCircle({num}) {
         delete this._circles[num];
         this._goalsCircleCounter--;
-        if (this._goalsCircleCounter === 0) {
-            this._game.emit(LEVEL_COMPLETE);
-        }
     }
 
     startLineInput(point) {
