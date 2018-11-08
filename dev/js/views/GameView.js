@@ -26,7 +26,7 @@ export default class GameView extends BaseView {
         this.render();
         //this.registerEvents();
 
-        Emitter.on("submit-data-game", WebSocks.send.bind(WebSocks), false);
+        // Emitter.on("submit-data-game", WebSocks.send.bind(WebSocks), false);
     }
 
     /**
@@ -42,18 +42,6 @@ export default class GameView extends BaseView {
         //             "content": "main",
         //             "class": ["grey", "tiny"],
         //             "href": "/"
-        //         }
-        //     ]
-        // });
-        //
-        // this.viewSection.innerHTML += Handlebars.templates.UserForm({
-        //     id: "form_form",
-        //     submitText: "send",
-        //     fields: [
-        //         {
-        //             name: "message",
-        //             type: "text",
-        //             placeholder: "text",
         //         }
         //     ]
         // });

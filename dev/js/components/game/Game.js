@@ -117,7 +117,7 @@ export default class Game extends Emitter {
         this._scene.init(this, this._window, ctx);
         this._control.init(this, canvas);
 
-        this.emit(LOAD_LEVEL, Game.loadLevel(0n));
+        this.emit(LOAD_LEVEL, Game.loadLevel(0));
     }
 
     start() {
