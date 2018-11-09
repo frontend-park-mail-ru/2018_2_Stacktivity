@@ -42,7 +42,31 @@ export default class Control {
                 game.emit(LEVEL_NEXT);
             }
         });
-     }
+
+        this._domElem.addEventListener("touchstart", (e) => {
+            e.preventDefault();
+
+            const touches = e.changedTouches;
+            if (touches && touches.length > 0) {
+                game.emit(LINE_INPUT, this.mousePoint(touches[0]));
+            }
+        });
+
+        this._domElem.addEventListener("touchmove", (e) => {
+            e.preventDefault();
+
+            const touches = e.changedTouches;
+            if (touches && touches.length > 0) {
+                game.emit(LINE_ADD_POINT, this.mousePoint(touches[0]));
+            }
+        });
+
+        this._domElem.addEventListener("touchend", (e) => {
+            e.preventDefault();
+
+            game.emit(LINE_GO);
+        });
+    }
 
     mousePoint(event) {
         return new Point(
