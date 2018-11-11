@@ -2342,6 +2342,704 @@ export const defaultLevels = [
                 r: 35,
                 type: "goal",
                 color: "blue"
+            },
+            {
+                num: 68,
+                x: 637,
+                y: 360,
+                r: 35,
+                type: "wall",
+                color: "black"
+            }
+        ]
+    },
+    {
+        levelNumber: 10,
+        circles: [
+            {
+                num: 0,
+                x: 25,
+                y: 25,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 1,
+                x: 25,
+                y: 159,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 2,
+                x: 25,
+                y: 293,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 3,
+                x: 25,
+                y: 427,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 4,
+                x: 25,
+                y: 561,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 5,
+                x: 25,
+                y: 695,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 6,
+                x: 1245,
+                y: 25,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 7,
+                x: 1245,
+                y: 159,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 8,
+                x: 1245,
+                y: 293,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 9,
+                x: 1245,
+                y: 427,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 10,
+                x: 1245,
+                y: 561,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 11,
+                x: 1245,
+                y: 695,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 12,
+                x: 160.5,
+                y: 25,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 13,
+                x: 160.5,
+                y: 159,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 14,
+                x: 160.5,
+                y: 293,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 15,
+                x: 160.5,
+                y: 427,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 16,
+                x: 160.5,
+                y: 561,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 17,
+                x: 160.5,
+                y: 695,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 18,
+                x: 1109.5,
+                y: 25,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 19,
+                x: 1109.5,
+                y: 159,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 20,
+                x: 1109.5,
+                y: 293,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 21,
+                x: 1109.5,
+                y: 427,
+                r: 80,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 22,
+                x: 1109.5,
+                y: 561,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 23,
+                x: 1109.5,
+                y: 695,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 24,
+                x: 296,
+                y: 25,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 25,
+                x: 296,
+                y: 159,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 26,
+                x: 296,
+                y: 293,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 27,
+                x: 296,
+                y: 427,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 28,
+                x: 296,
+                y: 561,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 29,
+                x: 296,
+                y: 695,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 30,
+                x: 974,
+                y: 25,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 31,
+                x: 974,
+                y: 159,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 32,
+                x: 974,
+                y: 293,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 33,
+                x: 974,
+                y: 427,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 34,
+                x: 974,
+                y: 561,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 35,
+                x: 974,
+                y: 695,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 36,
+                x: 431.5,
+                y: 25,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 37,
+                x: 431.5,
+                y: 159,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 38,
+                x: 431.5,
+                y: 293,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 39,
+                x: 431.5,
+                y: 427,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 40,
+                x: 431.5,
+                y: 561,
+                r: 80,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 41,
+                x: 431.5,
+                y: 695,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 42,
+                x: 838.5,
+                y: 25,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 43,
+                x: 838.5,
+                y: 159,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 44,
+                x: 838.5,
+                y: 293,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 45,
+                x: 838.5,
+                y: 427,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 46,
+                x: 838.5,
+                y: 561,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 47,
+                x: 838.5,
+                y: 695,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 48,
+                x: 567,
+                y: 25,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 49,
+                x: 567,
+                y: 159,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 50,
+                x: 567,
+                y: 293,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 51,
+                x: 567,
+                y: 427,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 52,
+                x: 567,
+                y: 561,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 53,
+                x: 567,
+                y: 695,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 54,
+                x: 703,
+                y: 25,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 55,
+                x: 703,
+                y: 159,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 56,
+                x: 703,
+                y: 293,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 57,
+                x: 703,
+                y: 427,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 58,
+                x: 703,
+                y: 561,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 59,
+                x: 703,
+                y: 695,
+                r: 10,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 60,
+                x: 772.5,
+                y: 494,
+                r: 35,
+                type: "goal",
+                color: "blue"
+            },
+            {
+                num: 61,
+                x: 772.5,
+                y: 360,
+                r: 35,
+                type: "goal",
+                color: "blue"
+            },
+            {
+                num: 62,
+                x: 1043.5,
+                y: 628,
+                r: 35,
+                type: "goal",
+                color: "blue"
+            },
+            {
+                num: 63,
+                x: 908,
+                y: 628,
+                r: 35,
+                type: "goal",
+                color: "blue"
+            },
+            {
+                num: 64,
+                x: 501.5,
+                y: 360,
+                r: 35,
+                type: "goal",
+                color: "blue"
+            },
+            {
+                num: 65,
+                x: 772.5,
+                y: 628,
+                r: 35,
+                type: "goal",
+                color: "blue"
+            },
+            {
+                num: 66,
+                x: 637,
+                y: 360,
+                r: 35,
+                type: "goal",
+                color: "blue"
+            }
+        ]
+    },
+    {
+        levelNumber: 11,
+        circles: [
+            {
+                num: 0,
+                x: 70,
+                y: 350,
+                r: 8,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 1,
+                x: 130,
+                y: 350,
+                r: 8,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 2,
+                x: 310,
+                y: 350,
+                r: 8,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 3,
+                x: 470,
+                y: 350,
+                r: 8,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 4,
+                x: 600,
+                y: 350,
+                r: 40,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 5,
+                x: 730,
+                y: 350,
+                r: 8,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 6,
+                x: 890,
+                y: 350,
+                r: 8,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 7,
+                x: 1070,
+                y: 350,
+                r: 8,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 8,
+                x: 1160,
+                y: 350,
+                r: 40,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 9,
+                x: 1240,
+                y: 350,
+                r: 8,
+                type: "wall",
+                color: "black"
+            },
+            {
+                num: 10,
+                x: 810,
+                y: 350,
+                r: 40,
+                type: "goal",
+                color: "orange"
+            },
+            {
+                num: 11,
+                x: 980,
+                y: 350,
+                r: 40,
+                type: "goal",
+                color: "orange"
+            },
+            {
+                num: 12,
+                x: 980,
+                y: 480,
+                r: 40,
+                type: "goal",
+                color: "orange"
+            },
+            {
+                num: 13,
+                x: 980,
+                y: 480,
+                r: 40,
+                type: "goal",
+                color: "mediumorchid"
+            },
+            {
+                num: 14,
+                x: 980,
+                y: 600,
+                r: 40,
+                type: "goal",
+                color: "mediumorchid"
+            },
+            {
+                num: 15,
+                x: 980,
+                y: 140,
+                r: 60,
+                type: "goal",
+                color: "mediumorchid"
+            },
+            {
+                num: 16,
+                x: 1160,
+                y: 220,
+                r: 40,
+                type: "goal",
+                color: "orange"
+            },
+            {
+                num: 17,
+                x: 600,
+                y: 560,
+                r: 60,
+                type: "goal",
+                color: "mediumorchid"
             }
         ]
     }
