@@ -38,7 +38,10 @@ export default class LogicLine extends Line {
 
     getLastLine() {
         if (this._inputting) {
-            return;
+            const p1 = this._beginLine.getRealPoint(this._beginLine.size() - 1);
+            const p2 = this._beginLine.getRealPoint(this._beginLine.size() - 2);
+
+            return {p1, p2};
         }
         const p1 = this._endLine.getRealPoint(this._endLine.currentPosition - 1) ||
             this._beginLine.getRealPoint(this._beginLine.size() - 1);

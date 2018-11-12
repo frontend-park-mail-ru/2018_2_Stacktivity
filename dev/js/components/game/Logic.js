@@ -73,13 +73,10 @@ export default class Logic {
         window.setTimeout(this.loopCallback.bind(this), this._reconDelay);
     }
 
-    validatePoint(point) {
-        return !this._circles.some((circle) => circle.isIntersectedWithPoint(point));
-    }
-
     checkCollision() {
         this._circles.forEach((circle) => {
-            if (this._line && circle.isIntersectedWithSegment(this._line.getLastLine())) {
+            if (this._line && circle.
+                isIntersectedWithSegment(this._line.getLastLine())) {
                 switch (circle.type) {
                     case "wall":
                         this._game.emit(LEVEL_RESTART);
@@ -88,6 +85,9 @@ export default class Logic {
                         this._game.emit(CIRCLE_DROP, {num: circle.num});
                         break;
                     default:
+                }
+                if (this._inputting) {
+                    this._game.emit(LINE_GO);
                 }
             }
         });
@@ -134,9 +134,7 @@ export default class Logic {
             this._line.addPoint(point.copy());
             this._game.emit(LINE_UPDATED, this._line.copyLine());
 
-            if (!this.validatePoint(point)) {
-                this._game.emit(LINE_GO);
-            }
+            this.checkCollision();
         }
     }
 
