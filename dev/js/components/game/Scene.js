@@ -41,6 +41,7 @@ export default class Scene {
     }
 
     setLevel(level) {
+        this.render();
         this._level = level.levelNumber;
         this._circles = [];
 

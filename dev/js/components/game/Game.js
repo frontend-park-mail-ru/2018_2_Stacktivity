@@ -133,7 +133,6 @@ export default class Game extends Emitter {
 
     setLevel(level) {
         this._level = level;
-        console.log("level: ", this._level.levelNumber);
     }
 
     restartLevel() {
