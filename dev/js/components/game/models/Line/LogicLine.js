@@ -73,10 +73,35 @@ export default class LogicLine extends Line {
         }
         this._endLine = new BaseLine(this._beginLine.getRealPoint(this._beginLine.size() - 1), points);
 
-        for (let i = 0; i < this._endLine.size(); i++) {
-            if (this._endLine.getRealPoint(i).x <= 0 ||
-                this._endLine.getRealPoint(i).x >= this._window.width) {
+        const firstIsReversed = this._isReversed;
+
+        for (let i = 1; i < this._endLine.size(); i++) {
+            const point = this._endLine.getRealPoint(i);
+            if (point.x < 0 || point.x > this._window.width) {
                 this._isReversed = !this._isReversed;
+
+                const prePoint = this._endLine.getRealPoint(i - 1);
+
+                const k = (point.y - prePoint.y) / (point.x - prePoint.x);
+                const b = point.y - k * point.x;
+
+                const newPoint = new Point();
+                if (point.x < 0) {
+                    newPoint.x = 0;
+                } else {
+                    newPoint.x = this._window.width;
+                }
+                newPoint.y = k * newPoint.x + b;
+
+                this._endLine.addPointByInd(newPoint.copy(), i);
+                this._endLine.currentPosition++;
+
+                const newAddedPoint = this._endLine.getOriginPoint(i);
+                if (firstIsReversed) {
+                    newAddedPoint.x = -newAddedPoint.x;
+                }
+                this._originLine.points.splice(i, 0, newAddedPoint);
+
                 for (let j = i + 1; j < this._endLine.size(); j++) {
                     this._endLine.points[j].x = 2 * this._endLine.points[i].x - this._endLine.points[j].x;
                 }
