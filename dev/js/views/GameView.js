@@ -7,7 +7,7 @@ import WebSocks from "../modules/WS.js";
 import NavigationController from "../controllers/NavigationController.mjs";
 import FormController from "../controllers/FormController.mjs";
 import Emitter from "../modules/Emitter.js";
-import Game from "../components/game/Game.js";
+import Single from "../components/game/GameModes/Single.js";
 
 /**
  * View of the game page
@@ -22,7 +22,7 @@ export default class GameView extends BaseView {
         super();
         //this._navigationController = new NavigationController();
         this._formController = new FormController("game");
-        this._game = new Game("single");
+        this._game = new Single();
         this.render();
         //this.registerEvents();
 
@@ -50,9 +50,9 @@ export default class GameView extends BaseView {
 
         const canvas = document.createElement("canvas");
         canvas.id = "canvas";
-        canvas.width = 1270;
+        canvas.width = 1280;
         canvas.height = 720;
-        canvas.style = "border: 1px solid; display: block;";
+        canvas.style = "border-left: 5px solid blue; border-right: 5px solid blue; display: block;";
 
         this.viewSection.appendChild(canvas);
 

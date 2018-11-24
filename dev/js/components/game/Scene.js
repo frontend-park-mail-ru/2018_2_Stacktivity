@@ -1,25 +1,30 @@
-import {START_GAME, LOAD_LEVEL, LINE_UPDATED, LINE_INPUT, LINE_DROP, CIRCLE_DROP, WAY_HIDE, WAY_SHOW} from "./Events.js";
+import {LEVEL_START, LEVEL_LOAD, LINE_UPDATED, LINE_INPUT, LINE_DROP, CIRCLE_DROP, WAY_HIDE, WAY_SHOW} from "./Events.js";
 import SceneCircle from "./models/Circle/SceneCircle.js";
 import SceneLine from "./models/Line/SceneLine.js";
 import Point from "./models/Point/Point.js";
+import {LEVEL_EVENT, LEVEL_RELOAD, LEVEL_SHOW_LINE_FAILED, LEVEL_SHOW_PREVIEW, LEVEL_STOP} from "./Events";
 
 
 export default class Scene {
-    constructor() {
+    constructor(game) {
+        this._game = game;
+
         this._ctx = null;
 
         this._window = null;
 
-        this._level = null;
+        this._levelNumber = null;
 
         this._circles = [];
         this._line = null;
 
         this._player = null;
         this._enemy = null;
+
+        this._stop = true;
     }
 
-    init(game, window, ctx) {
+    init(window, ctx) {
         this._ctx = ctx;
 
         this._window = {
@@ -27,22 +32,25 @@ export default class Scene {
             height: window.height
         };
 
-        game.on(START_GAME, this.start.bind(this), false);
-        game.on(LOAD_LEVEL, this.setLevel.bind(this), false);
+        this._game.on(LEVEL_START, this.start.bind(this), false);
+        this._game.on(LEVEL_STOP, this.stop.bind(this), false);
+        this._game.on(LEVEL_LOAD, this.loadLevel.bind(this), false);
 
-        game.on(LINE_INPUT, this.initLine.bind(this), false);
-        game.on(LINE_UPDATED, this.updateLine.bind(this), false);
-        game.on(LINE_DROP, this.dropLine.bind(this), false);
+        this._game.on(LEVEL_SHOW_PREVIEW, this.showLevelPreview.bind(this), false);
+        this._game.on(LEVEL_SHOW_LINE_FAILED, this.showLineFailed.bind(this), false);
 
-        game.on(CIRCLE_DROP, this.dropCircle.bind(this), false);
+        this._game.on(LINE_INPUT, this.initLine.bind(this), false);
+        this._game.on(LINE_UPDATED, this.updateLine.bind(this), false);
+        this._game.on(LINE_DROP, this.dropLine.bind(this), false);
 
-        game.on(WAY_SHOW, this.showWay.bind(this), false);
-        game.on(WAY_HIDE, this.hideWay.bind(this), false);
+        this._game.on(CIRCLE_DROP, this.dropCircle.bind(this), false);
+
+        this._game.on(WAY_SHOW, this.showWay.bind(this), false);
+        this._game.on(WAY_HIDE, this.hideWay.bind(this), false);
     }
 
-    setLevel(level) {
-        this.render();
-        this._level = level.levelNumber;
+    loadLevel(level) {
+        this._levelNumber = level.levelNumber;
         this._circles = [];
 
         level.circles.forEach((circle) => {
@@ -65,16 +73,42 @@ export default class Scene {
     }
 
     loopCallback() {
-        this.clear();
-        this.render();
 
-        window.requestAnimationFrame(this.loopCallback.bind(this));
+        if (!this._stop) {
+            this.clear();
+            this.render();
+            window.requestAnimationFrame(this.loopCallback.bind(this));
+        }
     }
 
     start() {
-        window.requestAnimationFrame(this.loopCallback.bind(this));
+        if (this._stop) {
+            this._stop = false;
+
+            this.loopCallback();
+        }
     }
 
+    stop() {
+        this._stop = true;
+    }
+
+    showLevelPreview() {
+        this.clear();
+
+        this._ctx.save();
+
+        this._ctx.font = "100px serif";
+        this._ctx.fillText(this._levelNumber, this._window.width / 2,
+             this._window.height / 2);
+
+        this._ctx.restore();
+    }
+
+    showLineFailed() {
+        this.clear();
+        this.render();
+    }
 
     addCircle(circle) {
         if (circle.x && circle.y && circle.r && circle.color) {

@@ -1,14 +1,16 @@
 import LogicCircle from "./models/Circle/LogicCircle.js";
-import {START_GAME, LOAD_LEVEL, LINE_DROP, LINE_UPDATED,
-    LINE_ADD_POINT, LINE_GO, LINE_INPUT, CIRCLE_DROP, LEVEL_RESTART, LEVEL_COMPLETE} from "./Events.js";
+import {LEVEL_START, LEVEL_LOAD, LINE_DROP, LINE_UPDATED,
+    LINE_ADD_POINT, LINE_GO, LINE_INPUT, CIRCLE_DROP, LEVEL_RELOAD, LEVEL_COMPLETE} from "./Events.js";
 import {RPS} from "./configs/config.js";
 import LogicLine from "./models/Line/LogicLine.js";
+import {DEFAULT_WINDOW} from "./configs/config";
+import {LEVEL_EVENT, LEVEL_FAILED, LEVEL_STOP} from "./Events";
 
 
 export default class Logic {
     constructor(game) {
         this._game = game;
-        this._window = null;
+        this._window = DEFAULT_WINDOW;
 
         this._reconDelay = 1000 / RPS;
 
@@ -17,18 +19,15 @@ export default class Logic {
 
         this._line = null;
         this._inputting = false;
+        this._stop = true;
 
         this._player = null;
     }
 
-    init(window) {
-        this._window = {
-            width: window.width,
-            height: window.height
-        };
-
-        this._game.on(START_GAME, this.start.bind(this), false);
-        this._game.on(LOAD_LEVEL, this.setLevel.bind(this), false);
+    init() {
+        this._game.on(LEVEL_START, this.start.bind(this), false);
+        this._game.on(LEVEL_LOAD, this.loadLevel.bind(this), false);
+        this._game.on(LEVEL_STOP, this.stop.bind(this), false);
 
         this._game.on(LINE_INPUT, this.startLineInput.bind(this), false);
         this._game.on(LINE_ADD_POINT, this.addPointInLine.bind(this), false);
@@ -38,10 +37,10 @@ export default class Logic {
         this._game.on(CIRCLE_DROP, this.dropCircle.bind(this), false);
     }
 
-    setLevel(level) {
-        this._game.emit(LINE_DROP);
+    loadLevel(level) {
         this._circles = [];
         this._goalsCircleCounter = 0;
+        this._game.emit(LINE_DROP);
 
         level.circles.forEach((circle) => {
             this.addCircle(circle);
@@ -55,22 +54,30 @@ export default class Logic {
 
                 this.checkCollision();
             } else {
-                this._game.emit(LEVEL_RESTART);
+                this._game.emit(LEVEL_EVENT, LEVEL_RELOAD);
             }
         }
         if (this._goalsCircleCounter === 0) {
-            this._game.emit(LEVEL_COMPLETE);
+            this._game.emit(LEVEL_EVENT, LEVEL_COMPLETE);
         }
     }
 
     loopCallback() {
-        this.reckon();
-
-        window.setTimeout(this.loopCallback.bind(this), this._reconDelay);
+        if (!this._stop) {
+            this.reckon();
+            window.setTimeout(this.loopCallback.bind(this), this._reconDelay);
+        }
     }
 
     start() {
-        window.setTimeout(this.loopCallback.bind(this), this._reconDelay);
+        if (this._stop) {
+            this._stop = false;
+            this.loopCallback();
+        }
+    }
+
+    stop() {
+        this._stop = true;
     }
 
     checkCollision() {
@@ -79,12 +86,13 @@ export default class Logic {
                 isIntersectedWithSegment(this._line.getLastLine())) {
                 switch (circle.type) {
                     case "wall":
-                        this._game.emit(LEVEL_RESTART);
+                        this._game.emit(LEVEL_EVENT, LEVEL_FAILED);
                         break;
                     case "goal":
                         this._game.emit(CIRCLE_DROP, {num: circle.num});
                         break;
                     default:
+                        break;
                 }
                 if (this._inputting) {
                     this._game.emit(LINE_GO);
@@ -116,7 +124,10 @@ export default class Logic {
     }
 
     startLineInput(point) {
-        this._game.emit(LEVEL_RESTART);
+        if (this._stop) {
+            return;
+        }
+        this._game.emit(LEVEL_EVENT, LEVEL_RELOAD);
 
         this._line = new LogicLine(point, this._window);
         this._inputting = true;
