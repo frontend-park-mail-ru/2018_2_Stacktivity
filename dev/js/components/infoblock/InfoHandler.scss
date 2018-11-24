@@ -1,31 +1,32 @@
-
 /* ~~~~ Infoblock ~~~~ */
 
 .infoblock {
   width: 300px;
   position: fixed;
-  right:0;
-  top:0;
+  right: 0;
+  top: 0;
   opacity: 0.8;
   padding-right: 10px;
-}
 
-.infoblock__info {
-  margin-top: 10px;
-  min-height: 50px;
-  border: 2px solid #20a4d6;
-  background: #36ccd4;
-  border-radius: 10px;
-  padding: 8px;
-  color:#000
-}
+  &__info {
+    margin-top: 10px;
+    min-height: 50px;
+    border: 2px solid #20a4d6;
+    background: #36ccd4;
+    border-radius: 10px;
+    padding: 8px;
+    color: #000;
 
-.infoblock__info_warn {
-  border-color: #f5c411;
-  background: #fff45a;
-}
+    &_warn {
+      border-color: #f5c411;
+      background: #fff45a;
 
-.infoblock__info_error {
-  border-color: #CA2424;
-  background: red;
+    }
+
+    &_error {
+      border-color: #CA2424;
+      background: red;
+
+    }
+  }
 }

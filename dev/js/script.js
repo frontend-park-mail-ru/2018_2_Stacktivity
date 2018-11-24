@@ -28,6 +28,24 @@ Emitter.on("server-validation-error", function (message) {
 });
 
 
+/*
+// todo update navigations link's angle
+function updateAngleNavigation(ratio) {
+
+}
+
+window.addEventListener("resize", (event) => {
+    let ratio = event.view.innerHeight / event.view.innerWidth;
+
+    if (ratio < 3 / 4) {
+
+    } else if (ratio < 16 / 9) {
+
+    } else {
+
+    }
+});*/
+
 Handlebars.registerPartial('NavList', Handlebars.templates.NavList);
 
 /**
