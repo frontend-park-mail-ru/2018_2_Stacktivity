@@ -11,7 +11,7 @@ $space: 2vmin; // зазор между блоком заголовка и кн�
   transform: translate(-50%, -50%) rotate($angle);
 }
 
-@mixin circle-constructor($name, $d, $color, $angle) {
+@mixin circle-constructor($name, $d, $color, $angle, $hover-color: $color) {
   &__link {
     &_#{$name} {
       @include position-rotation($d, $angle);
@@ -22,8 +22,21 @@ $space: 2vmin; // зазор между блоком заголовка и кн�
     &_#{$name} {
       @include circle-geometry($d);
       @include circle-derotate(-$angle);
+      border-radius: $d * 1.1;
       background: $color;
+      transition: background-color 1s, width 1s, height 1s;
+      transition-timing-function: ease;
+      bottom: -($d / 2);
     }
+
+    &_#{$name}:hover {
+      width: $d * 1.1;
+      height: $d * 1.1;
+
+      background-color: saturate($color, 50%);
+    }
+
+
   }
 }
 
@@ -46,7 +59,6 @@ $circle-medium-width-size-big: 20vmin;
   
   &__circle {
     position: absolute; // positioning from the bottom of wrapping div
-    bottom: 0;
   }
 
   @include circle-constructor("about",    $circle-small-width-size-big,    $circle-color-sea-blue,  30deg);
@@ -74,7 +86,7 @@ $circle-medium-width-size-big: 20vmin;
     top: 0;
     @include circle-constructor("about",    $circle-size-medium,  $circle-color-sea-blue,  65deg);
     @include circle-constructor("profile",  $circle-size-big,     $circle-color-red,      -65deg);
-    @include circle-constructor("signup",   $circle-size-big,     $circle-color-red,      -65deg);
+    @include circle-constructor("signup",   $circle-size-big,     $circle-color-red,      -65deg, #999);
     @include circle-constructor("signup-page",   $circle-size-big,     $circle-color-red,      65deg);
     @include circle-constructor("login",    $circle-size-small,   $circle-color-green,    -40deg);
     @include circle-constructor("login-page",    $circle-size-big,   $circle-color-green,    65deg);
