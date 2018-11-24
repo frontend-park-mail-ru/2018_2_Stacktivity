@@ -1,0 +1,72 @@
+/* ~~~~ User form ~~~~ */
+.user-form {
+  max-height: 50vh;
+  padding: 2vmin;
+  padding-left: 4vmin;
+  padding-right: 4vmin;
+}
+
+.user-form label {
+  font-size: 3vmin;
+  text-align: center;
+}
+
+.user-form__field_with-label {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+}
+
+.user-form__field {
+  position: relative;
+  margin-bottom: 2vmin;
+}
+
+.user-form__error {
+  font-size: 22px;
+  color: #f00;
+}
+
+.user-form__error_main {
+  text-align: center;
+  margin-bottom: 1vmin;
+}
+
+.user-form__field .error {
+  font-size: 1.8vmin;
+}
+
+.user-form__input-block {
+  border-radius: 1vmin;
+  background: #fff;
+  border: none;
+  box-shadow: 0 0 5px rgba(30, 30, 30, 0.5) inset;
+  padding: 1.3vmin;
+  font-size: 2vmin;
+  font-family: 'Quantico', sans-serif;
+  width: 100%;
+}
+
+.user-form__input-block[readonly] {
+  background: transparent;
+  box-shadow: none;
+  color: #1a1a1a;
+}
+
+.user-form__button {
+  background: #305A9D;
+  border-bottom: none;
+  border-top: none;
+  border-left: #293955 solid 1vmin;
+  border-right: #293955 solid 1vmin;
+  border-radius: 3vmin;
+  height: 6vmin;
+  width: 16vmin;
+  font-family: 'Quantico', sans-serif;
+  font-size: 3vmin;
+  color: #fff;
+  position: relative;
+
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+/* ~~~~ End User form ~~~~ */

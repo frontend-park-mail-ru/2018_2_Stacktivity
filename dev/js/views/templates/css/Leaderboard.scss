@@ -1,0 +1,44 @@
+/* ~~~~ Leaderboard start ~~~~ */
+.leaderboard {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  max-height: 50vh;
+  padding: 3vmin;
+  font-size: 2vmin;
+  
+  &__header {
+    font-weight: bold;
+    text-align: left;
+    background: #ddd;
+    padding: 10px;
+  }
+  
+  &__username {
+    padding: 8px;
+    background: #ddd;
+  }
+
+  &__body {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+  }
+
+  &__score {
+    background: #eee;
+    padding: 8px;
+  }
+
+  &__pagination {
+    text-align: center;
+    padding-bottom: 3vmin;
+    font-size: 3vmin;
+  }
+}
+
+.pagination {
+  &__button {
+    display: inline;
+  }
+}

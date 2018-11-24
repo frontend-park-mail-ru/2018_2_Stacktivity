@@ -1,7 +1,7 @@
 /** @module components/InfoHandler */
 
-import Emitter from "../modules/Emitter.js";
-import {infoLevel} from "../config.js";
+import Emitter from "../../modules/Emitter.js";
+import {infoLevel} from "../../config.js";
 
 /**
  * @class InfoHandler

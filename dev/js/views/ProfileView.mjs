@@ -63,9 +63,7 @@ export default class ProfileView extends BaseView {
                 {
                     content: "<-",
                     class: [
-                        "circle_size_tiny",
-                        "circle_color_grey",
-                        "navigation__circle_position_return",
+                        "navigation__circle_return",
                     ],
                     href: "/",
                 }

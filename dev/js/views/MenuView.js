@@ -10,29 +10,17 @@ const linksNoLogin = {
     links: [
         {
             content: "About",
-            class: [
-                "circle_size_medium",
-                "circle_color_sea-blue",
-                "navigation__circle_position_about"
-            ],
+            class: ["about"],
             href: "/about",
         },
         {
             content: "Login",
-            class: [
-                "circle_size_small",
-                "circle_color_green",
-                "navigation__circle_position_right"
-            ],
+            class: ["login"],
             href: "/login",
         },
         {
             content: "Sign up",
-            class: [
-                "circle_size_big",
-                "circle_color_red",
-                "navigation__circle_position_right-top"
-            ],
+            class: ["signup"],
             href: "/signup",
         },
     ]
@@ -87,29 +75,17 @@ export default class MenuView extends BaseView {
                 links: [
                     {
                         content: "About",
-                        class: [
-                            "circle_size_medium",
-                            "circle_color_sea-blue",
-                            "navigation__circle_position_about",
-                        ],
+                        class: ["about"],
                         href: `/about`,
                     },
                     {
                         content: "logout",
-                        class: [
-                            "circle_size_small",
-                            "circle_color_grey",
-                            "navigation__circle_position_right"
-                        ],
+                        class: ["logout"],
                         href: "/logout",
                     },
                     {
                         content: `${user.username}`,
-                        class: [
-                            "circle_size_big",
-                            "circle_color_red",
-                            "navigation__circle_position_right-top"
-                        ],
+                        class: ["profile"],
                         href: "/profile",
                     }
                 ]

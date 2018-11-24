@@ -4,13 +4,15 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     entry: {
         main: [
-            './dev/js/script.js',
+            './dev/index.js',
         ],
     },
+
     output: {
         path: path.resolve(__dirname, 'public'),
         filename: '[name].bundle.js'
     },
+
     module: {
         rules: [
             {
@@ -25,13 +27,23 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: ['css-loader']
-                    })
+                use: [
+                    'style-loader',
+                    { loader: 'css-loader', options: { importLoaders: 1 } },
+                    // 'postcss-loader'
+                ],
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    // 'postcss-loader',
+                    'sass-loader'
+                ],
             }
         ]
     },
-    plugins: [new ExtractTextPlugin("[name].bundle.css")]
 
+    plugins: [new ExtractTextPlugin("[name].bundle.css")]
 };

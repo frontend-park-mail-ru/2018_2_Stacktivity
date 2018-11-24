@@ -1,0 +1,148 @@
+/* ~~~~ reset styles import ~~~~~ */
+@import "reset.css";
+
+
+/* ~~~~~~ global variables ~~~~~~ */
+:root {
+  // todo colors? user appearance settings?
+  --base-degree: 60deg;
+}
+
+$main-width-content: 70vmin;
+
+
+/* ~~~~~~~ global mixins ~~~~~~~~ */
+@mixin circle-geometry($d) {
+  border-radius: $d / 2;
+  width: $d;
+  height: $d;
+  font-size: ($d - (0.5vmin/$d) * 1vmin) / 4; // todo подобрать функцию
+}
+
+/* ~~~~~~~ global styles ~~~~~~~~ */
+body {
+  background: #fff;
+  font-family: 'Quantico', sans-serif;
+}
+
+
+/* ~~~~~~~~~~~ Circle ~~~~~~~~~~~ */
+
+$circle-size-tiny: 6vmin;
+$circle-size-small: 10vmin;
+$circle-size-medium-small: 14vmin;
+$circle-size-medium: 16vmin;
+$circle-size-big: 20vmin;
+
+$circle-color-red: #CA2424;
+$circle-color-blue: #275CD9;
+$circle-color-orange: #FF8408;
+$circle-color-sea-blue: #169DA4;
+$circle-color-green: #43AC4C;
+$circle-color-grey: #aaaaaa;
+
+.circle {
+  color: #fff;
+  font-size: 4.5vmin;
+  text-align: center;
+  position: absolute;
+
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &_size {
+    &_small {
+      @include circle-geometry($circle-size-small);
+    }
+
+    &_tiny {
+      @include circle-geometry($circle-size-tiny);
+    }
+
+    &_medium {
+      @include circle-geometry($circle-size-medium);
+    }
+
+    &_medium-small {
+      @include circle-geometry($circle-size-medium-small);
+    }
+
+    &_big {
+      @include circle-geometry($circle-size-big);
+    }
+  }
+
+  &_color {
+    &_red {
+      background: $circle-color-red
+    }
+
+    &_blue {
+      background: $circle-color-blue
+    }
+
+    &_orange {
+      background: $circle-color-orange
+    }
+
+    &_sea-blue {
+      background: $circle-color-sea-blue
+    }
+
+    &_green {
+      background: $circle-color-green
+    }
+
+    &_grey {
+      background: $circle-color-grey
+    }
+  }
+}
+
+/* ~~~~~~~~~~ Content ~~~~~~~~~~~ */
+.content {
+  display: inline-block;
+  left: 50%;
+  position: relative;
+  transform: translate(-50%, 0);
+  top: 10vmin;
+
+  &_with-borders {
+    border: 0.9vmin #355FA2 solid;
+    border-left: 0.3vmin #fff solid;
+    border-right: 0.3vmin #fff solid;
+    border-radius: 8vmin;
+    width: $main-width-content;
+  }
+}
+
+/* ~~~~~~~~~~~~ Misc ~~~~~~~~~~~~ */
+.clear {
+  clear: both;
+}
+
+.hidden {
+  display: none;
+}
+
+.score {
+  font-size: 4vmin;
+  text-align: center;
+  padding: 2vmin;
+}
+
+
+/* ~~~~ views styles import ~~~~~ */
+@import "../js/views/templates/css/Header.scss";
+@import "../js/views/templates/css/Leaderboard.scss";
+@import "../js/views/templates/css/Menu.scss";
+@import "../js/views/templates/css/Nav.scss";
+@import "../js/views/templates/css/UserForm.scss";
+
+
+/* ~~ components styles import ~~ */
+@import "../js/components/infoblock/InfoHandler.scss";

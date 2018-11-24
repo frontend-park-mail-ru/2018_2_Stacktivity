@@ -1,0 +1,111 @@
+/* ~~~~ Navigation block ~~~~ */
+$space: 2vmin; // зазор между блоком заголовка и кнопкой
+
+@mixin position-rotation($d, $angle) {
+  height: ($main-width-content / 2 + $space + $d * 3 / 2);
+  transform: rotate($angle);
+  transform-origin: top;
+}
+
+.navigation {
+  position: absolute; // from the top of the document
+  top: 5vmin;
+  
+  &__link {
+    position: absolute; // one origin for all links
+    
+    &_about {
+      @include position-rotation($circle-size-medium, 30deg);
+    }
+    
+    &_profile, &_signup {
+      @include position-rotation($circle-size-big, -30deg);
+    }
+    
+    &_login, &_logout {
+      @include position-rotation($circle-size-small, 0deg);
+    }
+    
+    &_return {
+      @include position-rotation($circle-size-medium, -20deg);
+    }
+  }
+  
+  &__circle {
+    position: absolute; // positioning from the bottom of wrapping div
+    bottom: 0;
+    
+    @mixin circle_derotate($angle) {
+      transform: translate(-50%, -50%) rotate($angle);
+    }
+    
+    &_about {
+      @include circle-geometry($circle-size-medium);
+      @include circle_derotate(-45deg);
+      background: $circle-color-sea-blue;
+    }
+    
+    &_profile, &_signup {
+      @include circle-geometry($circle-size-big);
+      @include circle_derotate(45deg);
+      background: $circle-color-red;
+    }
+    
+    &_login, &_logout {
+      @include circle-geometry($circle-size-small);
+      @include circle_derotate(25deg);
+      background: $circle-color-green;
+    }
+    
+    &_return {
+      @include circle-geometry($circle-size-tiny);
+      @include circle_derotate(20deg);
+      background: $circle-color-grey;
+    }
+  }
+}
+
+@media (min-width: 400px) {
+  .navigation {
+    &__link {
+      &_about {
+        @include position-rotation($circle-size-medium, 35deg);
+      }
+      
+      &_profile, &_signup {
+        @include position-rotation($circle-size-big, -35deg);
+      }
+      
+      &_login, &_logout {
+        @include position-rotation($circle-size-small, -22deg);
+      }
+      
+      &_return {
+        @include position-rotation($circle-size-medium, -15deg);
+      }
+    }
+  }
+}
+
+@media (min-width: 820px) {
+  .navigation {
+    &__link {
+      &_about {
+        @include position-rotation($circle-size-medium, 45deg);
+      }
+      
+      &_profile, &_signup {
+        @include position-rotation($circle-size-big, -45deg);
+      }
+      
+      &_login, &_logout {
+        @include position-rotation($circle-size-small, -25deg);
+      }
+      
+      &_return {
+        @include position-rotation($circle-size-medium, -10deg);
+      }
+    }
+  }
+}
+

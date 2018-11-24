@@ -9,18 +9,16 @@ import LoginView from "./views/LoginView.mjs";
 import AboutView from "./views/AboutView.mjs";
 import LeaderboardView from "./views/LeaderboardView.mjs";
 
-import InfoHandler from "./components/InfoHandler.js";
+import InfoHandler from "./components/infoblock/InfoHandler.js";
 
 // webpack imports
 import "./handlebars.precompile.js";
-import "../styles/style.css";
 import SingleGameView from "./views/SingleGameView.js";
 import MultGameView from "./views/MultGameView.js";
 import GameView from "./views/GameView";
 
 const user = UserModel;
 const infoHand = InfoHandler;
-
 
 Emitter.on("server-validation-error", function (message) {
     let commonErrorEl = document.getElementsByClassName("js-common_error")[0];
