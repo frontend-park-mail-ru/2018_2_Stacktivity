@@ -5,3 +5,5 @@ export const MAX_LINE_POINTS_LENGTH = 300;
 export const RUNNING_TIMEOUT = 60; // sec
 export const INPUT_TIMEOUT = 10; // sec
 export const DEFAULT_WINDOW = {width: 1280, height: 720};
+export const LINE_WIDTH = 16;
+export const LEVEL_NUBER_FONT_SIZE = 150;

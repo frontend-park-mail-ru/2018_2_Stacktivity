@@ -8,10 +8,10 @@ export default class SceneLine extends Line {
     }
 
 
-    draw(context) {
+    draw(context, scale) {
         context.save();
 
-        context.lineWidth = 16;
+        context.lineWidth = 16 * scale;
         context.lineCap = 'round';
         context.lineJoin = 'round';
 

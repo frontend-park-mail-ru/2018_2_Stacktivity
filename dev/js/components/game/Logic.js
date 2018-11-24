@@ -10,7 +10,7 @@ import {LEVEL_EVENT, LEVEL_FAILED, LEVEL_STOP} from "./Events";
 export default class Logic {
     constructor(game) {
         this._game = game;
-        this._window = DEFAULT_WINDOW;
+        this._window = null;
 
         this._reconDelay = 1000 / RPS;
 
@@ -24,7 +24,7 @@ export default class Logic {
         this._player = null;
     }
 
-    init() {
+    init(window) {
         this._game.on(LEVEL_START, this.start.bind(this), false);
         this._game.on(LEVEL_LOAD, this.loadLevel.bind(this), false);
         this._game.on(LEVEL_STOP, this.stop.bind(this), false);
@@ -35,6 +35,11 @@ export default class Logic {
         this._game.on(LINE_DROP, this.dropLine.bind(this), false);
 
         this._game.on(CIRCLE_DROP, this.dropCircle.bind(this), false);
+
+        this._window = {
+            width: window.width,
+            height: window.height
+        };
     }
 
     loadLevel(level) {

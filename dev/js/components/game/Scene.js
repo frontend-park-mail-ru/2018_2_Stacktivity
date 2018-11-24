@@ -3,6 +3,7 @@ import SceneCircle from "./models/Circle/SceneCircle.js";
 import SceneLine from "./models/Line/SceneLine.js";
 import Point from "./models/Point/Point.js";
 import {LEVEL_SHOW_LINE_FAILED, LEVEL_SHOW_PREVIEW, LEVEL_STOP} from "./Events";
+import {LEVEL_NUBER_FONT_SIZE} from "./configs/config";
 
 
 export default class Scene {
@@ -12,6 +13,7 @@ export default class Scene {
         this._ctx = null;
 
         this._window = null;
+        this._scale = 1;
 
         this._levelNumber = null;
 
@@ -24,13 +26,15 @@ export default class Scene {
         this._stop = true;
     }
 
-    init(window, ctx) {
+    init(window, scale, ctx) {
         this._ctx = ctx;
 
         this._window = {
             width: window.width,
             height: window.height
         };
+
+        this._scale = scale;
 
         this._game.on(LEVEL_START, this.start.bind(this), false);
         this._game.on(LEVEL_STOP, this.stop.bind(this), false);
@@ -60,7 +64,7 @@ export default class Scene {
 
     render() {
         if (this._line) {
-            this._line.draw(this._ctx);
+            this._line.draw(this._ctx, this._scale);
         }
         this._circles.forEach((circle) => {
             circle.draw(this._ctx);
@@ -98,7 +102,7 @@ export default class Scene {
 
         this._ctx.save();
 
-        this._ctx.font = "150px Quantico";
+        this._ctx.font = `${String(LEVEL_NUBER_FONT_SIZE * this._scale)}px Quantico`;
         this._ctx.fillText(this._levelNumber, this._window.width / 2,
              this._window.height / 2);
 

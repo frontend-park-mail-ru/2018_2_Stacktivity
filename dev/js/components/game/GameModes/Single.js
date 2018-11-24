@@ -15,6 +15,7 @@ import {
 } from "../Events";
 import {defaultLevels} from "../configs/defaultLevels";
 import {
+    DEFAULT_WINDOW,
     LEVEL_SHOW_LINE_FAILED_TIME,
     LEVEL_SHOW_TIME
 } from "../configs/config";
@@ -22,6 +23,8 @@ import {
 export default class Single extends Game {
     constructor() {
         super("single");
+
+        this._scale = 1;
 
         this._user = null;
     }
@@ -34,17 +37,19 @@ export default class Single extends Game {
             height: height
         };
 
+        this._scale = height / DEFAULT_WINDOW.height;
+
         this._user = Single.loadUser();
 
         const ctx = canvas.getContext('2d');
 
-        this._logic.init();
-        this._scene.init(this._window, ctx);
+        this._logic.init(this._window);
+        this._scene.init(this._window, this._scale, ctx);
         this._control.init(this, canvas);
     }
 
     start() {
-        this._level = Single.loadLevel(this._user.currentLevel);
+        this.setLevel(Single.loadLevel(this._user.currentLevel));
         this.emit(LEVEL_LOAD, this._level);
 
         this.emit(LEVEL_SHOW_PREVIEW);
@@ -98,7 +103,20 @@ export default class Single extends Game {
     }
 
     setLevel(level) {
-        this._level = level;
+        this._level = {};
+        this._level.levelNumber = level.levelNumber;
+        this._level.circles = [];
+
+        level.circles.forEach((circle) => {
+            this._level.circles.push({
+                num: circle.num,
+                x: circle.x * this._scale,
+                y: circle.y * this._scale,
+                r: circle.r * this._scale,
+                type: circle.type,
+                color: circle.color
+            });
+        });
     }
 
     nextLevel() {
