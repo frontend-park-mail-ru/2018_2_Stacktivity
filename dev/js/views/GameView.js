@@ -43,7 +43,6 @@ export default class GameView extends BaseView {
                     "class": [
                         "circle_size_tiny",
                         "circle_color_grey",
-                        "navigation__circle_position_return",
                     ],
                     "href": "/"
                 }
