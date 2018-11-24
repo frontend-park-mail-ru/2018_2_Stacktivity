@@ -2,7 +2,7 @@ import {LEVEL_START, LEVEL_LOAD, LINE_UPDATED, LINE_INPUT, LINE_DROP, CIRCLE_DRO
 import SceneCircle from "./models/Circle/SceneCircle.js";
 import SceneLine from "./models/Line/SceneLine.js";
 import Point from "./models/Point/Point.js";
-import {LEVEL_EVENT, LEVEL_RELOAD, LEVEL_SHOW_LINE_FAILED, LEVEL_SHOW_PREVIEW, LEVEL_STOP} from "./Events";
+import {LEVEL_SHOW_LINE_FAILED, LEVEL_SHOW_PREVIEW, LEVEL_STOP} from "./Events";
 
 
 export default class Scene {

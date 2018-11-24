@@ -1,7 +1,6 @@
 import Logic from "../Logic.js";
 import Scene from "../Scene.js";
 import Control from "../Control.js";
-import {LEVEL_START, LEVEL_LOAD, LEVEL_RELOAD, LEVEL_COMPLETE, LEVEL_NEXT} from "../Events.js";
 import {defaultLevels} from "../configs/defaultLevels.js";
 
 
@@ -93,23 +92,5 @@ export default class Game extends Emitter {
             return;
         }
         return defaultLevels[num];
-    }
-
-    setLevel(level) {
-        this._level = level;
-    }
-
-    restartLevel() {
-        this.emit(LEVEL_LOAD, this._level);
-    }
-
-    completeLevel() {
-        // Write points ...
-        // this.emit(LEVEL_NEXT);
-    }
-
-    nextLevel() {
-        const next = (this._level.levelNumber + 1) % defaultLevels.length;
-        this.emit(LEVEL_LOAD, Game.loadLevel(next));
     }
 }
