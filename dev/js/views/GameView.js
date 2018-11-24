@@ -52,7 +52,7 @@ export default class GameView extends BaseView {
         canvas.id = "canvas";
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        canvas.style = "border: 5px solid black; display: block;";
+        canvas.style = "display: block;";
 
         document.body.style.overflow = "hidden";
 
