@@ -98,7 +98,7 @@ export default class Scene {
 
         this._ctx.save();
 
-        this._ctx.font = "100px serif";
+        this._ctx.font = "150px Quantico";
         this._ctx.fillText(this._levelNumber, this._window.width / 2,
              this._window.height / 2);
 
