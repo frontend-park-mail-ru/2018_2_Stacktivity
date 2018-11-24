@@ -20,11 +20,11 @@ export default class GameView extends BaseView {
      */
     constructor() {
         super();
-        //this._navigationController = new NavigationController();
+        // this._navigationController = new NavigationController();
         this._formController = new FormController("game");
         this._game = new Single();
         this.render();
-        //this.registerEvents();
+        // this.registerEvents();
 
         // Emitter.on("submit-data-game", WebSocks.send.bind(WebSocks), false);
     }
@@ -52,7 +52,9 @@ export default class GameView extends BaseView {
         canvas.id = "canvas";
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        canvas.style = "border: 5px solid black; display: block; overflow:hidden;";
+        canvas.style = "border: 5px solid black; display: block;";
+
+        document.body.style.overflow = "hidden";
 
         this.viewSection.appendChild(canvas);
 
