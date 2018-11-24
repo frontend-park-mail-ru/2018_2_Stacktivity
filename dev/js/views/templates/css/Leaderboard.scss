@@ -4,7 +4,14 @@
   grid-template-columns: 3fr 7fr;
   max-height: 50vh;
   padding: 3vmin;
-  font-size: 2vmin;
+  font-size: 4vmin;
+
+  @media (min-aspect-ratio: 2/3) {
+    font-size: 2vmin;
+  }
+
+  @media (min-aspect-ratio: 16/9), (orientation: landscape) {
+  }
   
   &__header {
     font-weight: bold;
@@ -33,7 +40,14 @@
   &__pagination {
     text-align: center;
     padding-bottom: 3vmin;
-    font-size: 3vmin;
+    font-size: 6vmin;
+
+    @media (min-aspect-ratio: 2/3) {
+      font-size: 3vmin;
+    }
+
+    @media (min-aspect-ratio: 16/9), (orientation: landscape) {
+    }
   }
 }
 

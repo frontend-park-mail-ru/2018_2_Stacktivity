@@ -1,7 +1,6 @@
 /* ~~~~ reset styles import ~~~~~ */
 @import "reset.css";
 
-
 /* ~~~~~~ global variables ~~~~~~ */
 :root {
   // todo colors? user appearance settings?
@@ -9,7 +8,6 @@
 }
 
 $main-width-content: 70vmin;
-
 
 /* ~~~~~~~ global mixins ~~~~~~~~ */
 @mixin circle-geometry($d) {
@@ -23,8 +21,8 @@ $main-width-content: 70vmin;
 body {
   background: #fff;
   font-family: 'Quantico', sans-serif;
+  overflow: hidden;
 }
-
 
 /* ~~~~~~~~~~~ Circle ~~~~~~~~~~~ */
 
@@ -109,14 +107,29 @@ $circle-color-grey: #aaaaaa;
   left: 50%;
   position: relative;
   transform: translate(-50%, 0);
-  top: 10vmin;
+  top: 30vmin;
 
   &_with-borders {
     border: 0.9vmin #355FA2 solid;
     border-left: 0.3vmin #fff solid;
     border-right: 0.3vmin #fff solid;
     border-radius: 8vmin;
-    width: $main-width-content;
+    width: 90vmin;
+
+    @media (min-aspect-ratio: 2/3) {
+      width: $main-width-content;
+    }
+
+    @media (min-aspect-ratio: 16/9), (orientation: landscape) {
+    }
+  }
+
+  @media (min-aspect-ratio: 2/3) {
+    top: 10vmin;
+  }
+
+  @media (min-aspect-ratio: 16/9), (orientation: landscape) {
+    top: 5vmin;
   }
 }
 
@@ -135,14 +148,12 @@ $circle-color-grey: #aaaaaa;
   padding: 2vmin;
 }
 
-
 /* ~~~~ views styles import ~~~~~ */
 @import "../js/views/templates/css/Header.scss";
 @import "../js/views/templates/css/Leaderboard.scss";
 @import "../js/views/templates/css/Menu.scss";
 @import "../js/views/templates/css/Nav.scss";
 @import "../js/views/templates/css/UserForm.scss";
-
 
 /* ~~ components styles import ~~ */
 @import "../js/components/infoblock/InfoHandler.scss";

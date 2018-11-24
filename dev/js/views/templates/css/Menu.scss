@@ -1,6 +1,6 @@
 /* ~~~~~ Main menu ~~~~~~ */
 .main-menu {
-  font-size: 8vmin;
+  font-size: 10vmin;
   text-align: left;
   position: relative;
   
@@ -18,10 +18,14 @@
   }
 
   &__element {
-    margin: 20px 0;
+    margin: 6vmin 0;
 
     &_with-padding {
-      margin-top: 72px;
+      margin-top: 10vmin;
     }
+  }
+
+  @media (min-aspect-ratio: 2/3) {
+    font-size: 8vmin;
   }
 }

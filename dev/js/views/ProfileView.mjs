@@ -62,9 +62,7 @@ export default class ProfileView extends BaseView {
             links: [
                 {
                     content: "<-",
-                    class: [
-                        "navigation__circle_return",
-                    ],
+                    class: ["return"],
                     href: "/",
                 }
             ]

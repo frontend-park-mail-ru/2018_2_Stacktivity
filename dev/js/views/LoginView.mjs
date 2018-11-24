@@ -64,16 +64,12 @@ export default class LoginView extends BaseView {
             links: [
                 {
                     content: "Sign up",
-                    class: [
-                        "navigation__circle_signup",
-                    ],
+                    class: ["signup-page"],
                     href: "/signup",
                 },
                 {
                     content: "<-",
-                    class: [
-                        "navigation__circle_return"
-                    ],
+                    class: ["return"],
                     href: "/",
                 }
             ]
