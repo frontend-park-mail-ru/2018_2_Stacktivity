@@ -20,11 +20,11 @@ export default class GameView extends BaseView {
      */
     constructor() {
         super();
-        // this._navigationController = new NavigationController();
+        this._navigationController = new NavigationController();
         this._formController = new FormController("game");
         this._game = new Single();
         this.render();
-        // this.registerEvents();
+        this.registerEvents();
 
         // Emitter.on("submit-data-game", WebSocks.send.bind(WebSocks), false);
     }
@@ -36,15 +36,15 @@ export default class GameView extends BaseView {
     render() {
         super.render();
 
-        // this.viewSection.innerHTML += Handlebars.templates.Nav({
-        //     links: [
-        //         {
-        //             "content": "main",
-        //             "class": ["grey", "tiny"],
-        //             "href": "/"
-        //         }
-        //     ]
-        // });
+        this.viewSection.innerHTML += Handlebars.templates.Nav({
+            links: [
+                {
+                    "content": "main",
+                    "class": ["grey", "tiny"],
+                    "href": "/"
+                }
+            ]
+        });
 
         this.viewSection.addEventListener("submit", this._formController.callbackSubmit.bind(this._formController));
 
@@ -67,8 +67,8 @@ export default class GameView extends BaseView {
      * Register events for NavigationController to handle
      * @return {undefined}
      */
-    // registerEvents() {
-    //     this.viewSection.getElementsByClassName("navigation")[0].
-    //         addEventListener("click", this._navigationController.keyPressedCallback);
-    // }
+    registerEvents() {
+        this.viewSection.getElementsByClassName("navigation")[0].
+            addEventListener("click", this._navigationController.keyPressedCallback);
+    }
 }
