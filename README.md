@@ -32,6 +32,6 @@ npm run hand
 ## Команда:
 Ломачёв Сергей https://github.com/Silvman
 
-Митраков Костя https://github.com/ConstaConst
+Митраков Костя https://github.com/mitrkos
 
 Соколов Влад https://github.com/Falcon22
