@@ -198,7 +198,7 @@ $chat-room-public: #900;
   
   
   &__conversation {
-    background: #999999;
+    //background: #999999;
     
     display: grid;
     grid-template-rows: 3fr 1fr;
@@ -319,9 +319,9 @@ $chat-room-public: #900;
 }
 
 .messagesunion {
-  position: absolute;
+  //position: absolute;
   
-  bottom: 0; left: 0;
+  //bottom: 0; left: 0;
   
   max-height: 100%;
   width: 100%;
@@ -345,7 +345,7 @@ $chat-room-public: #900;
   &__nickname {
     text-align: center;
     font-size: 2.3vmin;
-    color: #1d5019;
+    color: #000;
   }
   
   &__circle {
