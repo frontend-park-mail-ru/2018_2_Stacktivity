@@ -62,18 +62,22 @@ export default class ChatView extends BaseView {
                             is_private: false,
                             name: chat.name,
                             cid: chat.id,
-                        })
+                        });
 
-                        // todo members
-
+                        chat.members.forEach((mem) => {
+                            this._userboardDOM.innerHTML += Handlebars.templates.UserboardEntry({
+                                username: mem
+                            })
+                        });
                     }
 
-                    // TODO стиллизация сообещний
                     chat.history.forEach((post) => {
                         // прикрепляем новый пост
-                        let new_post = document.createElement("div");
-                        new_post.innerText = `${post.id} : ${post.username} : ${post.message}`;
-                        this._rooms[chat.id].appendChild(new_post)
+                        this._rooms[chat.id].innerHTML += Handlebars.templates.ChatMessage({
+                            username: post.username,
+                            message: post.message,
+                            date: post.date
+                        })
 
                         // todo инкремент счетчика
                     });
@@ -81,16 +85,21 @@ export default class ChatView extends BaseView {
             } else if (resp.event === 5) {
                 Emitter.emit("info", "new message!");
 
-                let message = resp.data;
+                let post = resp.data;
                 // new_post.inner`${message.id} : ${message.username} : ${message.message}`;
-                this._rooms[message.cid].innerHTML += Handlebars.templates.ChatMessage({
-                    username: message.username,
-                    message: message.message,
-                    date: message.date
-                })
+                this._rooms[post.cid].innerHTML += Handlebars.templates.ChatMessage({
+                    username: post.username,
+                    message: post.message,
+                    date: post.date
+                });
 
+                let counter = document.getElementsByClassName("js-cid-"+post.cid)[0].getElementsByClassName("room__message-counter");
 
-                // todo инкремент счетчика
+                if (!counter.innerText) {
+                    counter.innerText = 1;
+                } else {
+                    counter.innerText = +(counter.innerText) + 1;
+                }
             }
         });
 
@@ -287,7 +296,7 @@ export default class ChatView extends BaseView {
                <button type="submit">add</button>
             </form>
             
-            <a class="userboard__user">
+            <a class="userboard__user" data-username="Silvman">
                 <div class="user__status user__status_online"></div>
                 @Silvman
             </a>

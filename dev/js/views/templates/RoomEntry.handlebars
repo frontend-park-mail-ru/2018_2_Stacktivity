@@ -1,4 +1,4 @@
-<a class="talkboard__room room {{#if is_private}}room_private{{else}}room_public{{/if}}" data-cid="{{cid}}">
+<a class="talkboard__room room {{#if is_private}}room_private{{else}}room_public{{/if}} js-cid-{{cid}}" data-cid="{{cid}}">
     <div class="room__icon">
         {{#if is_private}}&{{else}}#{{/if}}
     </div>
@@ -7,7 +7,7 @@
         {{name}}
     </div>
 
-    <div class="room__message-counter hidden">
+    <div class="room__message-counter">
 
     </div>
 </a>
