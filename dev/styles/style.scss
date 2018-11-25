@@ -157,3 +157,27 @@ $circle-color-grey: #aaaaaa;
 
 /* ~~ components styles import ~~ */
 @import "../js/components/infoblock/InfoHandler.scss";
+
+
+/* ~~~~ Chat ~~~~ */
+.chat {
+  width: 800px;
+  height:400px;
+  background: #ddd;
+  
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: 1.3fr 3fr 0.7fr;
+
+  &__talkboard {
+    background: #eee;
+  }
+  
+  &__userboard {
+    background: #ccc;
+  }
+  
+  &__content {
+    // todo
+  }
+}

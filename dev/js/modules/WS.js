@@ -13,6 +13,7 @@ class WebSocks {
         this._ws = null;
 
         Emitter.on("game-send", this.send.bind(this));
+        Emitter.on("chat-send", this.send.bind(this));
 
         WebSocks.__instance = this;
     }

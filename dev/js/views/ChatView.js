@@ -60,18 +60,6 @@ export default class ChatView extends BaseView {
         });
 
         this.viewSection.innerHTML += `
-         
-    <style>
-       .chat {
-        width: 800px;
-           height:400px;
-           background: #ddd;
-           
-        	display: grid;
-           
-        }
-    </style>
-    
     <div class="chat">
     	<div class="chat__talkboard">
         
