@@ -7,7 +7,7 @@ import WebSocks from "../modules/WS.js";
 import NavigationController from "../controllers/NavigationController.mjs";
 import FormController from "../controllers/FormController.mjs";
 import Emitter from "../modules/Emitter.js";
-import {WSPath} from "../config";
+import {WSPathMultiplayer, WSPathSingleplayer} from "../config";
 
 /**
  * View of the game page
@@ -25,7 +25,10 @@ export default class MultGameView extends BaseView {
         this.render();
         this.registerEvents();
 
-        WebSocks.connect("ws://localhost:3001/game/multiplayer");
+        // WebSocks.connect("ws://localhost:3001/game/multiplayer");
+
+        this._ws = new WebSocks("game");
+        this._ws.connect(WSPathMultiplayer);
 
         Emitter.on("game-message", function (data) {
             if (data.event === 1) {

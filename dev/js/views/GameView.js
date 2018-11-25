@@ -8,6 +8,7 @@ import NavigationController from "../controllers/NavigationController.mjs";
 import FormController from "../controllers/FormController.mjs";
 import Emitter from "../modules/Emitter.js";
 import Single from "../components/game/GameModes/Single.js";
+import {WSPathSingleplayer} from "../config";
 
 /**
  * View of the game page
@@ -26,6 +27,15 @@ export default class GameView extends BaseView {
         this.render();
         this.registerEvents();
 
+        this._ws = new WebSocks("game");
+        this._ws.connect(WSPathSingleplayer);
+
+        Emitter.on("game-message", function (data) {
+            if (data.event === 1) {
+                Emitter.emit("info", "room found!");
+            }
+        }, false);
+
         // Emitter.on("submit-data-game", WebSocks.send.bind(WebSocks), false);
     }
 
@@ -41,8 +51,7 @@ export default class GameView extends BaseView {
                 {
                     "content": "main",
                     "class": [
-                        "circle_size_tiny",
-                        "circle_color_grey",
+                        "return",
                     ],
                     "href": "/"
                 }

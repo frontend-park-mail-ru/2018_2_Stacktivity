@@ -1,4 +1,4 @@
-import {WSPath} from "../config.js";
+import {WSPathSingleplayer} from "../config.js";
 import Emitter from "./Emitter.js";
 
 export default class WebSocks {
