@@ -164,7 +164,7 @@ $circle-color-grey: #aaaaaa;
   width: 800px;
   height:400px;
   background: #ddd;
-  
+
   display: grid;
   margin: 0 auto;
   grid-template-columns: 1.3fr 3fr 0.7fr;
@@ -177,7 +177,84 @@ $circle-color-grey: #aaaaaa;
     background: #ccc;
   }
   
-  &__content {
-    // todo
+  &__conversation {
+    background: #999999;
+
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+  }
+}
+
+.messageinput {
+  background: red;
+}
+
+.messages {
+  position: relative;
+}
+
+.messagesunion {
+  position: absolute;
+
+  bottom: 0; left: 0;
+
+  max-height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.messageblock {
+
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+
+  margin: 10px;
+}
+
+.author {
+  position: relative;
+}
+
+.unionauthordata {
+
+  &__nickname {
+    text-align: center;
+    font-size: 2.3vmin;
+    color: #1d5019;
+  }
+
+  &__circle {
+    @include circle-geometry(7vmin);
+
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin: 10px auto;
+
+    background: #43AC4C;
+  }
+}
+
+.messagedata {
+  position: relative;
+
+  background: white;
+
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+  padding: 20px;
+}
+
+.dataunion {
+  bottom: 0;
+
+  word-break: break-all;
+
+  &__messagetext {
+  }
+
+  &__messagedate {
+    text-align: right;
+     margin-top: 10px;
+    color: #999999;
   }
 }
