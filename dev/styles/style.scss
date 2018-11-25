@@ -14,7 +14,7 @@ $main-width-content: 70vmin;
   border-radius: $d / 2;
   width: $d;
   height: $d;
-  font-size: ($d - (0.5vmin/$d) * 1vmin) / 4; // todo подобрать функцию
+  //font-size: ($d - (0.5vmin/$d) * 1vmin) / 4; // todo подобрать функцию
 }
 
 /* ~~~~~~~ global styles ~~~~~~~~ */
@@ -160,24 +160,144 @@ $circle-color-grey: #aaaaaa;
 
 
 /* ~~~~ Chat ~~~~ */
+$chat-main-color: #ddd;
+$chat-secondary-color: #eee;
+$chat-3-color: #ccc;
+
+$chat-room-active: #fff343;
+$chat-room-public: #900;
+
 .chat {
-  width: 800px;
-  height:400px;
-  background: #ddd;
+  height:100vh;
+  background: $chat-main-color;
+  overflow: hidden;
   
   display: grid;
   margin: 0 auto;
   grid-template-columns: 1.3fr 3fr 0.7fr;
 
   &__talkboard {
-    background: #eee;
+    background: $chat-secondary-color;
+    padding: 1vmin;
+    box-shadow: -1px 0 10px #1a1a1a;
+  
+    @media (max-width: 400px) {
+      max-height: 10vh;
+    }
   }
   
   &__userboard {
-    background: #ccc;
+    background: $chat-3-color;
+    padding: 1vmin;
+    box-shadow: 1px 0 10px #1a1a1a;
+  
+    @media (max-width: 400px) {
+      display: none;
+    }
   }
   
-  &__content {
-    // todo
+  &__chatcontent {
+    display: grid;
+    grid-template-rows: 1fr 80px;
+  }
+
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+  }
+  
+  &__form {
+    padding: 1vmin;
+    background: #9a9a9a;
+  }
+}
+
+.talkboard {
+  &__rooms {
+    @media (max-width: 400px) {
+      display: none;
+    }
+  }
+  
+  &__toggle {
+    display: none;
+  
+    @media (max-width: 400px) {
+      display: block;
+    }
+  }
+}
+
+.userboard {
+  &__user {
+    margin: 0.3vmin;
+    padding-left: 10px  ;
+    position: relative;
+    top: 20px;
+  }
+}
+
+.user {
+  &__status {
+    position: absolute;
+    top:0;
+    left: 0;
+    background: #333;
+    border: #1a1a1a;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    
+    &_online {
+      background-color: #43AC4C;
+    }
+    
+    &_offline {
+      background-color: #990000;
+    }
+  }
+}
+
+.room {
+  display: grid;
+  grid-template-columns: 1fr 10fr 1fr;
+  padding: 0.5vmin;
+  transition: background-color 0.5s;
+  transition-timing-function: ease;
+  margin: 0.1vmin;
+  border-radius: 3vmin;
+  position: relative;
+  height: 5vh;
+  
+  &_active {
+    background-color: $chat-room-active;
+  }
+  
+  &:hover {
+    background-color: desaturate($chat-room-active, 30%);
+  }
+  
+  &__name {
+  
+  }
+  
+  &__message-counter {
+    @include circle-geometry(4vh);
+    font-size: 2vh;
+    padding-top: 1vmin;
+    text-align: center;
+    background: #ff0000;
+    color: #fff;
+    font-weight: 800;
+  }
+}
+
+.chatblock {
+  position: fixed;
+  bottom: 2vmin;
+  right: 2vmin;
+  box-shadow: 0 0 4px #1a1a1a;
+  
+  &__if {
+    display: none;
   }
 }
