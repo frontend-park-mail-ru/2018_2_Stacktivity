@@ -184,9 +184,89 @@ export default class ChatView extends BaseView {
            
         </div>
        
-        <div class="chat__chatcontent chatcontent">
+        <div class="chat__chatcontent chatcontent chat__conversation conversation">
             <div class="chatcontent__messages">
+            <div class="conversation__messages messages">
             
+                <div class="messages__messagesunion messagesunion">
+                    
+                    <div class="messagesunion__messageblock messageblock">
+                        
+                        <div class="messageblock__author author">
+                            <div class="autor__unionauthordata unionauthordata">
+                                <div class="unionauthordata__nickname">
+                                        nickname
+                                </div>        
+                                <div class="unionauthordata__circle">
+                                </div>
+                            </div>
+                        </div>  
+                            
+                        <div class="messageblock__messagedata messagedata">
+                            <div class="messagedata__dataunion dataunion">
+                                <div class="dataunion__messagetext">
+Указывает, что элемент абсолютно позиционирован, при этом другие элементы отображаются на веб-странице словно абсолютно позиционированного элемента и нет. Положение элемента задается свойствами left, top, right и bottom, также на положение влияет значение свойства position родительского элемента. Так, если у родителя значение position установлено как static или родителя нет, то отсчет координат ведется от края окна браузера. Если у родителя значение position задано как fixed, relative или absolute, то отсчет координат ведется от края родительского элемента.
+                                </div>
+                                <hr>
+                                <div class="dataunion__messagedate">
+                                    21.21.2112 12:12
+                                </div>
+                            </div>    
+                        </div>  
+                    </div>
+                    
+                    <div class="messagesunion__messageblock messageblock">
+                        
+                        <div class="messageblock__author author">
+                            <div class="autor__unionauthordata unionauthordata">
+                                <div class="unionauthordata__nickname">
+                                        nickname
+                                </div>        
+                                <div class="unionauthordata__circle">
+                                </div>
+                            </div>
+                        </div>  
+                            
+                        <div class="messageblock__messagedata messagedata">
+                            <div class="messagedata__dataunion dataunion">
+                                <div class="dataunion__messagetext">
+Указывает, что элемент абсолютно позиционирован, при этом другие элементы отображаются на веб-странице словно абсолютно позиционированного элемента и нет. Положение элемента задается свойствами left, top, right и bottom, также на положение влияет значение свойства position родительского элемента. Так, если у родителя значение position установлено как static или родителя нет, то отсчет координат ведется от края окна браузера. Если у родителя значение position задано как fixed, relative или absolute, то отсчет координат ведется от края родительского элемента.
+                                </div>
+                                <hr>
+                                <div class="dataunion__messagedate">
+                                    21.21.2112 12:12
+                                </div>
+                            </div>    
+                        </div>  
+                    </div>
+                    
+                    <div class="messagesunion__messageblock messageblock">
+                        
+                        <div class="messageblock__author author">
+                            <div class="autor__unionauthordata unionauthordata">
+                                <div class="unionauthordata__nickname">
+                                        nickname
+                                </div>        
+                                <div class="unionauthordata__circle">
+                                </div>
+                            </div>
+                        </div>
+                            
+                        <div class="messageblock__messagedata messagedata">
+                            <div class="messagedata__dataunion dataunion">
+                                <div class="dataunion__messagetext">
+Указывает,
+                                </div>
+                                <hr>
+                                <div class="dataunion__messagedate">
+                                    21.21.2112 12:12
+                                </div>
+                            </div>    
+                        </div>  
+                    </div>
+                    
+                </div>
+            </div>
             </div>
         
             <form class="chat__form">
