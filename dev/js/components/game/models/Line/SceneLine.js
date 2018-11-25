@@ -8,10 +8,10 @@ export default class SceneLine extends Line {
     }
 
 
-    draw(context) {
+    draw(context, scale) {
         context.save();
 
-        context.lineWidth = 16;
+        context.lineWidth = 16 * scale;
         context.lineCap = 'round';
         context.lineJoin = 'round';
 
@@ -29,7 +29,7 @@ export default class SceneLine extends Line {
 
             context.beginPath();
             if (this._endLine) {
-                for (let i = 0; i < this._endLine.size(); i++) {
+                for (let i = 0; i <= this._endLine.size(); i++) {
                     let point = this._endLine.getRealPoint(i);
                     if (point) {
                         context.lineTo(point.x, point.y);
@@ -49,7 +49,7 @@ export default class SceneLine extends Line {
             }
         }
         if (this._endLine) {
-            for (let i = 0; i < this._endLine.currentPosition; i++) {
+            for (let i = 0; i <= this._endLine.currentPosition; i++) {
                 let point = this._endLine.getRealPoint(i);
                 if (point) {
                     context.lineTo(point.x, point.y);
