@@ -1,20 +1,12 @@
 import {WSPath} from "../config.js";
 import Emitter from "./Emitter.js";
 
-class WebSocks {
+export default class WebSocks {
     /** Create the websockets module */
-    constructor() {
-        if (WebSocks.__instance) {
-            return WebSocks.__instance;
-        }
-
+    constructor(name) {
+        this._name = name;
         this._connected = false;
-
-        this._ws = null;
-
-        Emitter.on("game-send", this.send.bind(this));
-
-        WebSocks.__instance = this;
+        Emitter.on(name + "-send", this.send.bind(this), false);
     }
 
     get isConnected() {
@@ -40,7 +32,7 @@ class WebSocks {
 
     _onmessage(event) {
         const message = JSON.parse(event.data);
-        Emitter.emit("game-message", message);
+        Emitter.emit(this._name + "-message", message);
     }
 
     _onerror(error) {
@@ -60,5 +52,3 @@ class WebSocks {
         }
     }
 }
-
-export default new WebSocks();

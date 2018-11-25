@@ -1,0 +1,385 @@
+/* ~~~~ reset styles import ~~~~~ */
+@import "reset.css";
+
+/* ~~~~~~ global variables ~~~~~~ */
+:root {
+  // todo colors? user appearance settings?
+  --base-degree: 60deg;
+}
+
+$main-width-content: 70vmin;
+
+/* ~~~~~~~ global mixins ~~~~~~~~ */
+@mixin circle-geometry($d) {
+  border-radius: $d / 2;
+  width: $d;
+  height: $d;
+  //font-size: ($d - (0.5vmin/$d) * 1vmin) / 4; // todo подобрать функцию
+}
+
+/* ~~~~~~~ global styles ~~~~~~~~ */
+body {
+  background: #fff;
+  font-family: 'Quantico', sans-serif;
+  overflow: hidden;
+}
+
+/* ~~~~~~~~~~~ Circle ~~~~~~~~~~~ */
+
+$circle-size-tiny: 6vmin;
+$circle-size-small: 10vmin;
+$circle-size-medium-small: 14vmin;
+$circle-size-medium: 16vmin;
+$circle-size-big: 20vmin;
+
+$circle-color-red: #CA2424;
+$circle-color-blue: #275CD9;
+$circle-color-orange: #FF8408;
+$circle-color-sea-blue: #169DA4;
+$circle-color-green: #43AC4C;
+$circle-color-grey: #aaaaaa;
+
+.circle {
+  color: #fff;
+  font-size: 4.5vmin;
+  text-align: center;
+  position: absolute;
+
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &_size {
+    &_small {
+      @include circle-geometry($circle-size-small);
+    }
+
+    &_tiny {
+      @include circle-geometry($circle-size-tiny);
+    }
+
+    &_medium {
+      @include circle-geometry($circle-size-medium);
+    }
+
+    &_medium-small {
+      @include circle-geometry($circle-size-medium-small);
+    }
+
+    &_big {
+      @include circle-geometry($circle-size-big);
+    }
+  }
+
+  &_color {
+    &_red {
+      background: $circle-color-red
+    }
+
+    &_blue {
+      background: $circle-color-blue
+    }
+
+    &_orange {
+      background: $circle-color-orange
+    }
+
+    &_sea-blue {
+      background: $circle-color-sea-blue
+    }
+
+    &_green {
+      background: $circle-color-green
+    }
+
+    &_grey {
+      background: $circle-color-grey
+    }
+  }
+}
+
+/* ~~~~~~~~~~ Content ~~~~~~~~~~~ */
+.content {
+  display: inline-block;
+  left: 50%;
+  position: relative;
+  transform: translate(-50%, 0);
+  top: 30vmin;
+
+  &_with-borders {
+    border: 0.9vmin #355FA2 solid;
+    border-left: 0.3vmin #fff solid;
+    border-right: 0.3vmin #fff solid;
+    border-radius: 8vmin;
+    width: 90vmin;
+
+    @media (min-aspect-ratio: 2/3) {
+      width: $main-width-content;
+    }
+
+    @media (min-aspect-ratio: 16/9), (orientation: landscape) {
+    }
+  }
+
+  @media (min-aspect-ratio: 2/3) {
+    top: 10vmin;
+  }
+
+  @media (min-aspect-ratio: 16/9), (orientation: landscape) {
+    top: 5vmin;
+  }
+}
+
+/* ~~~~~~~~~~~~ Misc ~~~~~~~~~~~~ */
+.clear {
+  clear: both;
+}
+
+.hidden {
+  display: none;
+}
+
+.score {
+  font-size: 4vmin;
+  text-align: center;
+  padding: 2vmin;
+}
+
+/* ~~~~ views styles import ~~~~~ */
+@import "../js/views/templates/css/Header.scss";
+@import "../js/views/templates/css/Leaderboard.scss";
+@import "../js/views/templates/css/Menu.scss";
+@import "../js/views/templates/css/Nav.scss";
+@import "../js/views/templates/css/UserForm.scss";
+
+/* ~~ components styles import ~~ */
+@import "../js/components/infoblock/InfoHandler.scss";
+
+
+/* ~~~~ Chat ~~~~ */
+$chat-main-color: #ddd;
+$chat-secondary-color: #eee;
+$chat-3-color: #ccc;
+
+$chat-room-active: #fff343;
+$chat-room-public: #900;
+
+.chat {
+  height:100vh;
+  background: $chat-main-color;
+  overflow: hidden;
+  
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: 1.3fr 3fr 0.7fr;
+
+  &__talkboard {
+    background: $chat-secondary-color;
+    padding: 1vmin;
+    box-shadow: -1px 0 10px #1a1a1a;
+  
+    @media (max-width: 400px) {
+      //max-height: 10vh;
+    }
+  }
+  
+  &__userboard {
+    background: $chat-3-color;
+    padding: 1vmin;
+    box-shadow: 1px 0 10px #1a1a1a;
+  
+    @media (max-width: 400px) {
+      display: none;
+    }
+  }
+  
+  
+  &__conversation {
+    //background: #999999;
+    
+    display: grid;
+    grid-template-rows: 1fr 80px;
+  }
+  
+  &__chatcontent {
+    //display: grid;
+  }
+
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 10fr;
+  }
+  
+  &__form {
+    padding: 1vmin;
+    background: #9a9a9a;
+  }
+}
+
+.talkboard {
+  &__rooms {
+    @media (max-width: 400px) {
+      display: none;
+    }
+  }
+  
+  &__toggle {
+    display: none;
+  
+    @media (max-width: 400px) {
+      display: block;
+    }
+  }
+}
+
+.userboard {
+  &__user {
+    margin: 0.3vmin;
+    padding-left: 10px  ;
+    position: relative;
+    top: 20px;
+  }
+}
+
+.user {
+  &__status {
+    position: absolute;
+    top:0;
+    left: 0;
+    background: #333;
+    border: #1a1a1a;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    
+    &_online {
+      background-color: #43AC4C;
+    }
+    
+    &_offline {
+      background-color: #990000;
+    }
+  }
+}
+
+.room {
+  display: grid;
+  grid-template-columns: 1fr 10fr 1fr;
+  padding: 0.5vmin;
+  transition: background-color 0.5s;
+  transition-timing-function: ease;
+  margin: 0.1vmin;
+  border-radius: 3vmin;
+  position: relative;
+  height: 5vh;
+  
+  &_active {
+    background-color: $chat-room-active;
+  }
+  
+  &:hover {
+    background-color: desaturate($chat-room-active, 30%);
+  }
+  
+  &__name {
+  
+  }
+  
+  &__message-counter {
+    @include circle-geometry(4vh);
+    font-size: 2vh;
+    padding-top: 1vmin;
+    text-align: center;
+    background: #ff0000;
+    color: #fff;
+    font-weight: 800;
+  }
+}
+
+.chatblock {
+  position: fixed;
+  bottom: 2vmin;
+  right: 2vmin;
+  box-shadow: 0 0 4px #1a1a1a;
+  
+  &__if {
+    display: none;
+  }
+}
+
+.messageinput {
+  background: red;
+}
+
+.messages {
+  position: relative;
+}
+
+.messagesunion {
+  position: absolute;
+  
+  bottom: 0; left: 0;
+  
+  max-height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.messageblock {
+  
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  
+  margin: 10px;
+}
+
+.author {
+  position: relative;
+}
+
+.unionauthordata {
+  
+  &__nickname {
+    text-align: center;
+    font-size: 2.3vmin;
+    color: #000;
+  }
+  
+  &__circle {
+    @include circle-geometry(7vmin);
+    
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin: 10px auto;
+    
+    background: #43AC4C;
+  }
+}
+
+.messagedata {
+  position: relative;
+  
+  background: white;
+  
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  
+  padding: 20px;
+}
+
+.dataunion {
+  bottom: 0;
+  
+  word-break: break-all;
+  
+  &__messagetext {
+  }
+  
+  &__messagedate {
+    text-align: right;
+    margin-top: 10px;
+    color: #999999;
+  }
+}
