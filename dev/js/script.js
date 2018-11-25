@@ -16,6 +16,7 @@ import "./handlebars.precompile.js";
 import SingleGameView from "./views/SingleGameView.js";
 import MultGameView from "./views/MultGameView.js";
 import GameView from "./views/GameView";
+import ChatView from "./views/ChatView";
 
 const user = UserModel;
 const infoHand = InfoHandler;
@@ -61,6 +62,7 @@ function main() {
         add("/profile", ProfileView).
         add("/signup", RegisterView).
         add("/login", LoginView).
+        add("/chat", ChatView).
         add("/leaderboard", LeaderboardView);
 
     Router.open(window.location.pathname);
