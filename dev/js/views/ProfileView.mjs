@@ -71,6 +71,14 @@ export default class ProfileView extends BaseView {
         this._content = document.createElement("main");
         this._content.classList.add("content", "content_with-borders");
         this.viewSection.appendChild(this._content);
+
+        this.viewSection.innerHTML += `
+<div id="chatblock" class="chatblock">
+    <a data-href="/chat">Open chat</a><br />
+    
+    <a data-href="chat">Show chat</a>
+    <iframe class="chatblock__if" src="/chat" width="300px" height="500px"></iframe>
+</div>`
     }
 
     /**

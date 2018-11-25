@@ -79,11 +79,16 @@ export default class ChatView extends BaseView {
                     });
                 })
             } else if (resp.event === 5) {
-                let message = resp.data;
+                Emitter.emit("info", "new message!");
 
-                let new_post = document.createElement("div");
-                new_post.innerText = `${message.id} : ${message.username} : ${message.message}`;
-                this._rooms[message.cid].appendChild(new_post)
+                let message = resp.data;
+                // new_post.inner`${message.id} : ${message.username} : ${message.message}`;
+                this._rooms[message.cid].innerHTML += Handlebars.templates.ChatMessage({
+                    username: message.username,
+                    message: message.message,
+                    date: message.date
+                })
+
 
                 // todo инкремент счетчика
             }
@@ -185,7 +190,7 @@ export default class ChatView extends BaseView {
         </div>
        
         <div class="chat__chatcontent chatcontent chat__conversation conversation">
-            <div class="chatcontent__messages">
+           
             <div class="conversation__messages messages">
             
                 <div class="messages__messagesunion messagesunion">
@@ -265,8 +270,9 @@ export default class ChatView extends BaseView {
                         </div>  
                     </div>
                     
-                </div>
             </div>
+               
+        
             </div>
         
             <form class="chat__form">
@@ -319,13 +325,13 @@ export default class ChatView extends BaseView {
                 this._talksDOM.style.display = 'grid';
                 link.dataset.toggle = "hide";
 
-                document.getElementsByClassName("chat__talkboard")[0].style.maxHeight = "30vh";
+                // document.getElementsByClassName("chat__talkboard")[0].style.maxHeight = "30vh";
 
             } else if (link.dataset.toggle === "hide") {
                 link.innerText = "Show rooms";
                 this._talksDOM.style.display = 'none';
                 link.dataset.toggle = "show";
-                document.getElementsByClassName("chat__talkboard")[0].style.maxHeight = "10vh";
+                // document.getElementsByClassName("chat__talkboard")[0].style.maxHeight = "10vh";
             }
 
         });

@@ -68,6 +68,13 @@ export default class LeaderboardView extends BaseView {
 
         this.viewSection.innerHTML += Handlebars.templates.Leaderboard();
 
+        this.viewSection.innerHTML += `
+<div id="chatblock" class="chatblock">
+    <a data-href="/chat">Open chat</a><br />
+    
+    <a data-href="chat">Show chat</a>
+    <iframe class="chatblock__if" src="/chat" width="300px" height="500px"></iframe>
+</div>`
     }
 
     /**

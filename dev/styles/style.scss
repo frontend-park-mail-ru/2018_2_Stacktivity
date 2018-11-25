@@ -182,7 +182,7 @@ $chat-room-public: #900;
     box-shadow: -1px 0 10px #1a1a1a;
   
     @media (max-width: 400px) {
-      max-height: 10vh;
+      //max-height: 10vh;
     }
   }
   
@@ -201,16 +201,16 @@ $chat-room-public: #900;
     //background: #999999;
     
     display: grid;
-    grid-template-rows: 3fr 1fr;
+    grid-template-rows: 1fr 80px;
   }
   
   &__chatcontent {
-    display: grid;
-    grid-template-rows: 1fr 80px;
+    //display: grid;
   }
 
   @media (max-width: 400px) {
     grid-template-columns: 1fr;
+    grid-template-rows: 1fr 10fr;
   }
   
   &__form {
@@ -319,9 +319,9 @@ $chat-room-public: #900;
 }
 
 .messagesunion {
-  //position: absolute;
+  position: absolute;
   
-  //bottom: 0; left: 0;
+  bottom: 0; left: 0;
   
   max-height: 100%;
   width: 100%;
