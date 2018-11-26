@@ -24,7 +24,7 @@ npm run hand
 
 ## Деплой!
 
-Фронтенд на http://212.109.223.57:10002/
+Фронтенд на http://blep.me/
 
 ## Ментор:
 Попонкин Дима https://github.com/PDmitryA

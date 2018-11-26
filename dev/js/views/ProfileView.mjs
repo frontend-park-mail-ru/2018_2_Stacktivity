@@ -78,7 +78,7 @@ export default class ProfileView extends BaseView {
     
     <a data-href="chat">Show chat</a>
     <iframe class="chatblock__if" src="/chat" width="300px" height="500px"></iframe>
-</div>`
+</div>`;
     }
 
     /**
