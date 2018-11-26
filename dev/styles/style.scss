@@ -289,7 +289,7 @@ $chat-room-public: #900;
   }
   
   &__message-counter {
-    @include circle-geometry(4vh);
+    //@include circle-geometry(4vh);
     font-size: 2vh;
     padding-top: 1vmin;
     text-align: center;
@@ -349,7 +349,7 @@ $chat-room-public: #900;
   }
   
   &__circle {
-    @include circle-geometry(7vmin);
+    //@include circle-geometry(7vmin);
     
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     margin: 10px auto;
