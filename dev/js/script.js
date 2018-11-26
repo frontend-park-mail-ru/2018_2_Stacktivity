@@ -9,18 +9,17 @@ import LoginView from "./views/LoginView.mjs";
 import AboutView from "./views/AboutView.mjs";
 import LeaderboardView from "./views/LeaderboardView.mjs";
 
-import InfoHandler from "./components/InfoHandler.js";
+import InfoHandler from "./components/infoblock/InfoHandler.js";
 
 // webpack imports
 import "./handlebars.precompile.js";
-import "../styles/style.css";
 import SingleGameView from "./views/SingleGameView.js";
 import MultGameView from "./views/MultGameView.js";
 import GameView from "./views/GameView";
+import ChatView from "./views/ChatView";
 
 const user = UserModel;
 const infoHand = InfoHandler;
-
 
 Emitter.on("server-validation-error", function (message) {
     let commonErrorEl = document.getElementsByClassName("js-common_error")[0];
@@ -29,6 +28,24 @@ Emitter.on("server-validation-error", function (message) {
     commonErrorEl.classList.remove("hidden");
 });
 
+
+/*
+// todo update navigations link's angle
+function updateAngleNavigation(ratio) {
+
+}
+
+window.addEventListener("resize", (event) => {
+    let ratio = event.view.innerHeight / event.view.innerWidth;
+
+    if (ratio < 3 / 4) {
+
+    } else if (ratio < 16 / 9) {
+
+    } else {
+
+    }
+});*/
 
 Handlebars.registerPartial('NavList', Handlebars.templates.NavList);
 
@@ -45,6 +62,7 @@ function main() {
         add("/profile", ProfileView).
         add("/signup", RegisterView).
         add("/login", LoginView).
+        add("/chat", ChatView).
         add("/leaderboard", LeaderboardView);
 
     Router.open(window.location.pathname);

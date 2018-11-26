@@ -1,0 +1,31 @@
+/* ~~~~~ Main menu ~~~~~~ */
+.main-menu {
+  font-size: 10vmin;
+  text-align: left;
+  position: relative;
+  
+  &__circle {
+    left: -8vmin;
+    transform: translate(0, 15%);
+
+    &_second {
+      left: -15vmin;
+    }
+  }
+  
+  &__link {
+    position: relative;
+  }
+
+  &__element {
+    margin: 6vmin 0;
+
+    &_with-padding {
+      margin-top: 10vmin;
+    }
+  }
+
+  @media (min-aspect-ratio: 2/3) {
+    font-size: 8vmin;
+  }
+}

@@ -1,8 +1,7 @@
-import Logic from "./Logic.js";
-import Scene from "./Scene.js";
-import Control from "./Control.js";
-import {START_GAME, LOAD_LEVEL, LEVEL_RESTART, LEVEL_COMPLETE, LEVEL_NEXT} from "./Events.js";
-import {defaultLevels} from "./configs/defaultLevels.js";
+import Logic from "../Logic.js";
+import Scene from "../Scene.js";
+import Control from "../Control.js";
+import {defaultLevels} from "../configs/defaultLevels.js";
 
 
 // Не получилось нормально отнаследоваться, временно воткнул
@@ -81,47 +80,11 @@ export default class Game extends Emitter {
         this._level = null;
 
         this._logic = new Logic(this);
-        this._scene = new Scene();
+        this._scene = new Scene(this);
         this._control = new Control();
     }
 
-    init(canvas, {width, height}) {
-        this.on(LOAD_LEVEL, this.setLevel.bind(this), false);
-        this.on(LEVEL_RESTART, this.restartLevel.bind(this), false);
-        this.on(LEVEL_COMPLETE, this.completeLevel.bind(this), false);
-        this.on(LEVEL_NEXT, this.nextLevel.bind(this), false);
-
-        if (!canvas) {
-            canvas = document.createElement('canvas');
-            canvas.id = 'canvas';
-
-            document.body.appendChild(canvas);
-
-            canvas.width = width;
-            canvas.height = height;
-
-            this._window = {
-                width: width,
-                height: height
-            };
-        } else {
-            this._window = {
-                width: canvas.width,
-                height: canvas.height
-            };
-        }
-
-        const ctx = canvas.getContext('2d');
-
-        this._logic.init(this._window);
-        this._scene.init(this, this._window, ctx);
-        this._control.init(this, canvas);
-
-        this.emit(LOAD_LEVEL, Game.loadLevel(0));
-    }
-
-    start() {
-        this.emit(START_GAME);
+    init() {
     }
 
     static loadLevel(num) {
@@ -129,24 +92,5 @@ export default class Game extends Emitter {
             return;
         }
         return defaultLevels[num];
-    }
-
-    setLevel(level) {
-        this._level = level;
-        console.log("level: ", this._level.levelNumber);
-    }
-
-    restartLevel() {
-        this.emit(LOAD_LEVEL, this._level);
-    }
-
-    completeLevel() {
-        // Write points ...
-        this.emit(LEVEL_NEXT);
-    }
-
-    nextLevel() {
-        const next = (this._level.levelNumber + 1) % defaultLevels.length;
-        this.emit(LOAD_LEVEL, Game.loadLevel(next));
     }
 }

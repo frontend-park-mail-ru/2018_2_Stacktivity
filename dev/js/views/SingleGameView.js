@@ -7,7 +7,7 @@ import WebSocks from "../modules/WS.js";
 import NavigationController from "../controllers/NavigationController.mjs";
 import FormController from "../controllers/FormController.mjs";
 import Emitter from "../modules/Emitter.js";
-import {WSPath} from "../config";
+import {WSPathSingleplayer} from "../config";
 
 /**
  * View of the game page
@@ -25,7 +25,9 @@ export default class SingleGameView extends BaseView {
         this.render();
         this.registerEvents();
 
-        WebSocks.connect(WSPath);
+
+        this._ws = new WebSocks("game");
+        this._ws.connect(WSPathSingleplayer);
 
         Emitter.on("game-message", function (data) {
             if (data.event === 1) {

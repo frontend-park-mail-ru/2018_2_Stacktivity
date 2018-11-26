@@ -1,0 +1,74 @@
+/* ~~~~ Header block ~~~~ */
+.header {
+  overflow: hidden;
+  position: relative;
+
+  left: 50%;
+  transform: translate(-50%,0);
+
+  width: 110vmin;
+  height: 60vmin;
+  font-size: 35vmin;
+  
+  &_page { // modification
+    height: 32vmin;
+    font-size: 22vmin;
+  }
+  
+  &__logo {
+    @include circle-geometry(110vmin);
+    background: #1a1a1a;
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+
+    @media (min-aspect-ratio: 2/3) {
+      @include circle-geometry($main-width-content);
+    }
+  }
+  
+  &__name {
+    color: #ffffff;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 3vmin;
+
+    @media (min-aspect-ratio: 2/3) {
+      top: 0;
+    }
+
+    @media (min-aspect-ratio: 16/9), (orientation: landscape) {
+      top: 1vmin;
+    }
+  }
+
+  &__desc {
+    color: #fff;
+    font-size: 9vmin;
+    top: 30vmin;
+    position: absolute;
+    left: 3%;
+
+    @media (min-aspect-ratio: 2/3) {
+      font-size: 5vmin;
+      top: 22vmin;
+    }
+
+    @media (min-aspect-ratio: 16/9), (orientation: landscape) {
+      top: 19vmin;
+    }
+  }
+
+  @media (min-aspect-ratio: 2/3) {
+    width: $main-width-content;
+    height: 40vmin;
+    font-size: 25vmin;
+  }
+
+  @media (min-aspect-ratio: 16/9), (orientation: landscape) {
+    width: $main-width-content;
+    height: 35vmin;
+    font-size: 20vmin;
+  }
+}

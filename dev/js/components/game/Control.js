@@ -1,5 +1,6 @@
 import Point from "./models/Point/Point.js";
 import {LINE_ADD_POINT, LINE_GO, LINE_INPUT, WAY_HIDE, WAY_SHOW, LEVEL_NEXT} from "./Events.js";
+import {LEVEL_EVENT, LEVEL_PREV} from "./Events";
 
 
 export default class Control {
@@ -39,10 +40,40 @@ export default class Control {
         });
         document.addEventListener("keypress", (e) => {
             if (e.key === "n") {
-                game.emit(LEVEL_NEXT);
+                game.emit(LEVEL_EVENT, LEVEL_NEXT);
             }
         });
-     }
+        document.addEventListener("keypress", (e) => {
+            if (e.key === "b") {
+                game.emit(LEVEL_EVENT, LEVEL_PREV);
+            }
+        });
+
+
+        this._domElem.addEventListener("touchstart", (e) => {
+            e.preventDefault();
+
+            const touches = e.changedTouches;
+            if (touches && touches.length > 0) {
+                game.emit(LINE_INPUT, this.mousePoint(touches[0]));
+            }
+        });
+
+        this._domElem.addEventListener("touchmove", (e) => {
+            e.preventDefault();
+
+            const touches = e.changedTouches;
+            if (touches && touches.length > 0) {
+                game.emit(LINE_ADD_POINT, this.mousePoint(touches[0]));
+            }
+        });
+
+        this._domElem.addEventListener("touchend", (e) => {
+            e.preventDefault();
+
+            game.emit(LINE_GO);
+        });
+    }
 
     mousePoint(event) {
         return new Point(

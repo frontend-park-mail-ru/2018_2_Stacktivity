@@ -7,7 +7,7 @@ import WebSocks from "../modules/WS.js";
 import NavigationController from "../controllers/NavigationController.mjs";
 import FormController from "../controllers/FormController.mjs";
 import Emitter from "../modules/Emitter.js";
-import {WSPath} from "../config";
+import {WSPathMultiplayer, WSPathSingleplayer} from "../config";
 
 /**
  * View of the game page
@@ -25,13 +25,17 @@ export default class MultGameView extends BaseView {
         this.render();
         this.registerEvents();
 
-        WebSocks.connect("ws://localhost:3001/game/multiplayer");
+        // WebSocks.connect("ws://localhost:3001/game/multiplayer");
 
-        Emitter.on("game-message", function (data) {
+        this._ws = new WebSocks("mult");
+        this._ws.connect(WSPathMultiplayer);
+
+        Emitter.on("mult-message", function (data) {
             if (data.event === 1) {
                 Emitter.emit("info", "room found!");
             }
         }, false);
+
     }
 
     /**
@@ -50,6 +54,15 @@ export default class MultGameView extends BaseView {
                 }
             ]
         });
+
+
+        this.viewSection.innerHTML += `
+<div id="chatblock" class="chatblock">
+    <a data-href="/chat">Open chat</a><br />
+    
+    <a data-href="chat">Show chat</a>
+    <iframe class="chatblock__if" src="/chat" width="300px" height="500px"></iframe>
+</div>`
 
         this.viewSection.addEventListener("submit", this._formController.callbackSubmit.bind(this._formController));
     }

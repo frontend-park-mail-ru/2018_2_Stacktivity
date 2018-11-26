@@ -28,16 +28,12 @@ export default class AboutView extends BaseView {
     render() {
         super.render();
 
-        this.viewSection.innerHTML += Handlebars.templates.Header({isPage: true, desc: "About"});
+        this.viewSection.innerHTML += Handlebars.templates.Header({isPage: true, desc: "Rules"});
         this.viewSection.innerHTML += Handlebars.templates.Nav({
             links: [
                 {
                     content: "<-",
-                    class: [
-                        "circle_size_tiny",
-                        "circle_color_grey",
-                        "navigation__circle_position_about",
-                    ],
+                    class: ["return"],
                     href: "/",
                 }
             ]

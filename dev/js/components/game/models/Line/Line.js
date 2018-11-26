@@ -79,11 +79,29 @@ export class BaseLine {
         this._points.push(point);
     }
 
+    addPointByInd(point, ind) {
+        if (ind < 0 || ind > this._points.length) {
+            return;
+        }
+
+        point.x -= this._basePoint.x;
+        point.y -= this._basePoint.y;
+
+        this._points.splice(ind, 0, point);
+    }
+
     getRealPoint(index) {
         if (index < 0 || index >= this.size()) {
             return null;
         }
         return Point.sum(this._points[index], this._basePoint);
+    }
+
+    getOriginPoint(index) {
+        if (index < 0 || index >= this.size()) {
+            return null;
+        }
+        return this._points[index].copy();
     }
 
     copyWithPosition() {

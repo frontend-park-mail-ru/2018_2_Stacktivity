@@ -43,6 +43,18 @@ export default class NavigationController {
             Emitter.emit("user-logout");
         }
 
+        if (link.dataset.href === "chat") {
+            let cb = document.getElementsByClassName("chatblock__if")[0];
+
+            if (cb.style.display === "none") {
+                cb.style.display = "block";
+            } else {
+                cb.style.display = "none";
+            }
+
+            return;
+        }
+
         Router.open(link.dataset.href);
     }
 }
