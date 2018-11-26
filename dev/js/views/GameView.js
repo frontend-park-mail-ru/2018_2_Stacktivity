@@ -51,7 +51,7 @@ export default class GameView extends BaseView {
                 {
                     "content": "main",
                     "class": [
-                        "return",
+                        "back",
                     ],
                     "href": "/"
                 }

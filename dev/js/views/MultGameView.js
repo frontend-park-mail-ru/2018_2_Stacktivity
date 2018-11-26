@@ -27,14 +27,15 @@ export default class MultGameView extends BaseView {
 
         // WebSocks.connect("ws://localhost:3001/game/multiplayer");
 
-        this._ws = new WebSocks("game");
+        this._ws = new WebSocks("mult");
         this._ws.connect(WSPathMultiplayer);
 
-        Emitter.on("game-message", function (data) {
+        Emitter.on("mult-message", function (data) {
             if (data.event === 1) {
                 Emitter.emit("info", "room found!");
             }
         }, false);
+
     }
 
     /**
