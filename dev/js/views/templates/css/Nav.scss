@@ -59,6 +59,7 @@ $circle-medium-width-size-big: 20vmin;
   
   &__circle {
     position: absolute; // positioning from the bottom of wrapping div
+    cursor: pointer;
   }
 
   @include circle-constructor("about",    $circle-small-width-size-big,    $circle-color-sea-blue,  30deg);

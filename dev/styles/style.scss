@@ -305,6 +305,10 @@ $chat-room-public: #900;
   right: 2vmin;
   box-shadow: 0 0 4px #1a1a1a;
   
+  a {
+    cursor: pointer;
+  }
+  
   &__if {
     display: none;
   }
