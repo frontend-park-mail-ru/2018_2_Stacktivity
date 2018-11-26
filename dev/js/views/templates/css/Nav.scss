@@ -69,6 +69,7 @@ $circle-medium-width-size-big: 20vmin;
   @include circle-constructor("login-page",    $circle-small-width-size-medium, $circle-color-green, 30deg);
   @include circle-constructor("logout",   $circle-small-width-size-medium, $circle-color-grey,      -30deg);
   @include circle-constructor("return",   $circle-small-width-size-medium, $circle-color-grey,      -30deg);
+  @include circle-constructor("back",   $circle-small-width-size-medium, $circle-color-grey,      -85deg);
 
   @media (min-aspect-ratio: 2/3) {
     top: 5vmin;
@@ -80,6 +81,7 @@ $circle-medium-width-size-big: 20vmin;
     @include circle-constructor("login-page",    $circle-size-big, $circle-color-green,  45deg);
     @include circle-constructor("logout",   $circle-size-small,   $circle-color-grey,     -25deg);
     @include circle-constructor("return",   $circle-size-small,   $circle-color-grey,     -45deg);
+    @include circle-constructor("back",   $circle-size-small,   $circle-color-grey,     -85deg);
   }
 
   @media (min-aspect-ratio: 16/9), (orientation: landscape) {
@@ -92,5 +94,6 @@ $circle-medium-width-size-big: 20vmin;
     @include circle-constructor("login-page",    $circle-size-big,   $circle-color-green,    65deg);
     @include circle-constructor("logout",   $circle-size-small,   $circle-color-grey,     -40deg);
     @include circle-constructor("return",   $circle-size-small,   $circle-color-grey,     -65deg);
+    @include circle-constructor("back",   $circle-size-small,   $circle-color-grey,     -85deg);
   }
 }
