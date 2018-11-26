@@ -14,7 +14,7 @@ $main-width-content: 70vmin;
   border-radius: $d / 2;
   width: $d;
   height: $d;
-  //font-size: ($d - (0.5vmin/$d) * 1vmin) / 4; // todo подобрать функцию
+  font-size: ($d - (0.5vmin/$d) * 1vmin) / 4; // todo подобрать функцию
 }
 
 /* ~~~~~~~ global styles ~~~~~~~~ */
