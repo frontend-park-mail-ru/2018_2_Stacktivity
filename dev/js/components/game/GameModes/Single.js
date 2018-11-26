@@ -37,7 +37,7 @@ export default class Single extends Game {
             height: height
         };
 
-        this._scale = height / DEFAULT_WINDOW.height;
+        this._scale = width / DEFAULT_WINDOW.width;
 
         this._user = Single.loadUser();
 
