@@ -2,19 +2,13 @@
 @import "reset.css";
 
 /* ~~~~~~ global variables ~~~~~~ */
-:root {
-  // todo colors? user appearance settings?
-  --base-degree: 60deg;
-}
-
 $main-width-content: 70vmin;
 
 /* ~~~~~~~ global mixins ~~~~~~~~ */
 @mixin circle-geometry($d) {
-  border-radius: $d / 2;
+  border-radius: 50%;
   width: $d;
   height: $d;
-  font-size: ($d - (0.5vmin/$d) * 1vmin) / 4; // todo подобрать функцию
 }
 
 /* ~~~~~~~ global styles ~~~~~~~~ */
@@ -41,16 +35,13 @@ $circle-color-grey: #aaaaaa;
 
 .circle {
   color: #fff;
-  font-size: 4.5vmin;
+  font-size: 4vmin;
   text-align: center;
   position: absolute;
 
-  span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &_size {
     &_small {
@@ -103,10 +94,7 @@ $circle-color-grey: #aaaaaa;
 
 /* ~~~~~~~~~~ Content ~~~~~~~~~~~ */
 .content {
-  display: inline-block;
-  left: 50%;
   position: relative;
-  transform: translate(-50%, 0);
   top: 30vmin;
 
   &_with-borders {
@@ -386,4 +374,12 @@ $chat-room-public: #900;
     margin-top: 10px;
     color: #999999;
   }
+}
+
+// todo redo
+
+#rootElem section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
