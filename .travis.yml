@@ -12,4 +12,4 @@ branches:
   - master
 before_install:
 - openssl aes-256-cbc -K $encrypted_05cd555bf90b_key -iv $encrypted_05cd555bf90b_iv
-  -in tp_blep.enc -out ~\/tp_blep -d
+  -in tp_blep.enc -out ./tp_blep -d
