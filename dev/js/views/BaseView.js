@@ -13,7 +13,7 @@ export default class BaseView {
     constructor() {
         this.viewSection = document.createElement('section'); // <section> where the views is rendering to
         BaseView.renderRoot.appendChild(this.viewSection);
-        this.viewSection.hidden = true; // View should not be displayed until all preparations is done (like data fetch)
+        this.viewSection.style.display = 'none'; // View should not be displayed until all preparations is done (like data fetch)
     }
 
     /**

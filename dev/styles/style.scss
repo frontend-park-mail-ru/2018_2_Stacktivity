@@ -44,7 +44,7 @@ $circle-color-grey: #aaaaaa;
   justify-content: center;
 
   &_size {
-    &_small {
+    &_small { 
       @include circle-geometry($circle-size-small);
     }
 
@@ -377,6 +377,10 @@ $chat-room-public: #900;
 }
 
 // todo redo
+
+#rootElem {
+  //position: absolute;
+}
 
 #rootElem section {
   display: flex;
