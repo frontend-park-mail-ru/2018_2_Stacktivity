@@ -9,7 +9,7 @@
     "prestart": "npm run hand && npm run build",
     "hand": "node_modules/.bin/handlebars dev/js/views/templates/* -f dev/js/handlebars.precompile.js",
     "doc": "./node_modules/.bin/jsdoc -c jsdoc_settings.json public/js/*",
-    "build": "webpack --mode development",
+    "build": "npm run hand && webpack --mode development",
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
