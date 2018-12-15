@@ -5,9 +5,10 @@ script:
 - npm run build
 - chmod 600 ./tp_blep
 - ssh-keyscan -H $blep_ip >> ~/.ssh/known_hosts
-- scp -i ./tp_blep -r public $blep_user_ip:/home/ubuntu/blep/front
-- scp -i ./tp_blep ./nginx.conf $blep_user_ip:/etc/nginx/conf.d/frontend.conf
-- ssh -i ./tp_blep $blep_user_ip sudo nginx -s reload
+- scp -i ./tp_blep -r public $blep_user@$blep_ip:/home/$blep_user/blep/front
+- scp -i ./tp_blep ./nginx.conf $blep_user@$blep_ip:/home/$blep_user/frontend.conf
+- ssh -i ./tp_blep $blep_user@$blep_ip sudo mv /home/$blep_user/frontend.conf /etc/nginx/conf.d/frontend.conf
+- ssh -i ./tp_blep $blep_user@$blep_ip sudo nginx -s reload
 branches:
   only:
   - master
