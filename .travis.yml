@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- 10
+script:
+- npm run hand
+- npm run build
+- chmod 600 ./tp_blep
+- ssh-keyscan -H 95.163.212.75 >> ~/.ssh/known_hosts
+- scp -i ./tp_blep -r public ubuntu@95.163.212.75:/home/ubuntu/blep/front
+branches:
+  only:
+  - master
+before_install:
+- openssl aes-256-cbc -K $encrypted_05cd555bf90b_key -iv $encrypted_05cd555bf90b_iv
+  -in tp_blep.enc -out ~\/tp_blep -d
