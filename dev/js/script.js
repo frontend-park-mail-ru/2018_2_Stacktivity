@@ -11,12 +11,12 @@ import LeaderboardView from "./views/LeaderboardView.mjs";
 
 import InfoHandler from "./components/infoblock/InfoHandler.js";
 
-// webpack imports
-import "./handlebars.precompile.js";
-import SingleGameView from "./views/SingleGameView.js";
 import MultGameView from "./views/MultGameView.js";
 import GameView from "./views/GameView";
 import ChatView from "./views/ChatView";
+
+// webpack import
+import "./handlebars.precompile.js";
 
 const user = UserModel;
 const infoHand = InfoHandler;
@@ -27,25 +27,6 @@ Emitter.on("server-validation-error", function (message) {
     commonErrorEl.innerText = message;
     commonErrorEl.classList.remove("hidden");
 });
-
-
-/*
-// todo update navigations link's angle
-function updateAngleNavigation(ratio) {
-
-}
-
-window.addEventListener("resize", (event) => {
-    let ratio = event.view.innerHeight / event.view.innerWidth;
-
-    if (ratio < 3 / 4) {
-
-    } else if (ratio < 16 / 9) {
-
-    } else {
-
-    }
-});*/
 
 Handlebars.registerPartial('NavList', Handlebars.templates.NavList);
 
