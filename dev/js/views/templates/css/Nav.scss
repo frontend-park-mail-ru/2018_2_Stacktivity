@@ -2,13 +2,13 @@
 $space: 3vmin; // зазор между блоком заголовка и кнопкой
 
 @mixin position-rotation($d, $angle) {
-  height: ($main-width-content / 2 + $space + $d * 3 / 2);
+  height: ($main-width-content / 2 + $space + $d);
   transform: rotate($angle);
   transform-origin: top;
 }
 
 @mixin circle-derotate($angle) {
-  transform: translate(-50%, -50%) rotate($angle);
+  transform: rotate($angle);
 }
 
 @mixin circle-constructor($name, $d, $color, $angle, $hover-color: $color) {
@@ -22,21 +22,17 @@ $space: 3vmin; // зазор между блоком заголовка и кн�
     &_#{$name} {
       @include circle-geometry($d);
       @include circle-derotate(-$angle);
-      border-radius: $d * 1.1;
       background: $color;
-      transition: background-color 1s, width 1s, height 1s;
-      transition-timing-function: ease;
+      transition: background-color 500ms, transform 500ms;
+      transition-timing-function: cubic-bezier(0.79,-2.32, 0.25, 3.18);
       bottom: 0;
     }
 
     &_#{$name}:hover {
-      width: $d * 1.1;
-      height: $d * 1.1;
+      transform: rotate(-$angle) scale(1.1);
 
       background-color: saturate($color, 50%);
     }
-
-
   }
 }
 
@@ -50,15 +46,14 @@ $circle-medium-width-size-big: 20vmin;
 .navigation {
   position: absolute; // from the top of the document
   top: 30vmin;
-  left: 50%;
-  transform: translate(-50%, 0);
   
   &__link {
     position: absolute; // one origin for all links
+    display: flex;
+    justify-content: center;
   }
   
   &__circle {
-    position: absolute; // positioning from the bottom of wrapping div
     cursor: pointer;
   }
 
