@@ -87,17 +87,18 @@ export default class MultGameView extends BaseView {
         this._ws.connect(WSPathMultiplayer);
         this._game = new Multiplayer();
 
-        this.viewSection.innerHTML = `
-            <div class="game-loading">
-                <img src="https://i.redd.it/u0tcjayept5z.gif" />
-            </div>
-        `;
+        // this.viewSection.innerHTML = `
+        //     <div class="game-loading">
+        //         <img src="https://i.redd.it/u0tcjayept5z.gif" />
+        //     </div>
+        // `;
 
-        setTimeout(() => {
-            console.log("enemy-commected emit");
-            Emitter.emit("info", "Other player has connected");
+        // setTimeout(() => {
+        //     console.log("enemy-commected emit");
+        //     Emitter.emit("info", "Other player has connected");
+        //     Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
+        // }, 10000);
             Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
-        }, 10000);
 
         super.show();
     }

@@ -12,7 +12,7 @@ import {
     PLAYER_FAILURE,
     PLAYER_SUCCESS,
     SERVER_CONNECTED,
-    SERVER_DATA_LOADED,
+    SERVER_DATA_LOADED, SERVER_ENEMY_LEFT,
     SERVER_FINISH_GAME,
     SERVER_FINISH_INPUT,
     SERVER_INPUTTED_LINE,
@@ -115,6 +115,7 @@ export default class Multiplayer extends Game {
                 this.emit(LINE_ENEMY_CREATE, data.line);
                 this.changeState(Multiplayer.STATES.GAME_PROCESSING);
                 break;
+            case SERVER_ENEMY_LEFT:
             case SERVER_FINISH_GAME:
                 if (data.status === SERVER_STATUS_SUCCESS) {
                     this.changeState(Multiplayer.STATES.END_SUCCESS);
