@@ -1,7 +1,7 @@
 export default class Point {
     constructor(x, y) {
-        this._x = x || 0.0;
-        this._y = y || 0.0;
+        this._x = Math.round(x) || 0;
+        this._y = Math.round(y) || 0;
     }
 
     get x() {
@@ -9,7 +9,7 @@ export default class Point {
     }
 
     set x(value) {
-        this._x = value;
+        this._x = Math.round(value);
     }
 
     get y() {
@@ -17,7 +17,7 @@ export default class Point {
     }
 
     set y(value) {
-        this._y = value;
+        this._y = Math.round(value);
     }
 
     static sum(a, b) {

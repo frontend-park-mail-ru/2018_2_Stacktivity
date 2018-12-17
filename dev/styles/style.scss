@@ -95,7 +95,6 @@ $circle-color-grey: #aaaaaa;
 /* ~~~~~~~~~~ Content ~~~~~~~~~~~ */
 .content {
   position: relative;
-  top: 30vmin;
 
   &_with-borders {
     border: 0.9vmin #355FA2 solid;
@@ -111,13 +110,17 @@ $circle-color-grey: #aaaaaa;
     @media (min-aspect-ratio: 16/9), (orientation: landscape) {
     }
   }
+}
 
-  @media (min-aspect-ratio: 2/3) {
-    top: 10vmin;
-  }
+.content-wrapper {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  height: 60vh;
 
   @media (min-aspect-ratio: 16/9), (orientation: landscape) {
-    top: 5vmin;
+    height: 65vmin;
+
   }
 }
 
@@ -142,6 +145,7 @@ $circle-color-grey: #aaaaaa;
 @import "../js/views/templates/css/Menu.scss";
 @import "../js/views/templates/css/Nav.scss";
 @import "../js/views/templates/css/UserForm.scss";
+@import "../js/views/templates/css/Game.scss";
 
 /* ~~ components styles import ~~ */
 @import "../js/components/infoblock/InfoHandler.scss";
@@ -379,11 +383,12 @@ $chat-room-public: #900;
 // todo redo
 
 #rootElem {
-  //position: absolute;
+  height: 100%;
 }
 
 #rootElem section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
 }

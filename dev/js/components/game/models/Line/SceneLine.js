@@ -1,4 +1,5 @@
 import Line from "./Line.js";
+import {LINE_WIDTH} from "../../configs/config";
 
 export default class SceneLine extends Line {
     constructor(point) {
@@ -8,12 +9,16 @@ export default class SceneLine extends Line {
     }
 
 
-    draw(context, scale) {
+    draw(context, scale, color) {
+        color = color || "black";
+
         context.save();
 
-        context.lineWidth = 16 * scale;
-        context.lineCap = 'round';
-        context.lineJoin = 'round';
+        context.lineWidth = LINE_WIDTH * scale;
+        context.lineCap = "round";
+        context.lineJoin = "round";
+
+        context.globalCompositeOperation = "lighter";
 
         if (this._showWay) {
             context.strokeStyle = "red";
@@ -39,7 +44,7 @@ export default class SceneLine extends Line {
             context.stroke();
         }
 
-        context.strokeStyle = "black";
+        context.strokeStyle = color;
         context.beginPath();
 
         for (let i = this._beginLine.currentPosition; i < this._beginLine.size(); i++) {

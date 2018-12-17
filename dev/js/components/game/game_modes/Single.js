@@ -12,32 +12,32 @@ import {
     LEVEL_FAILED,
     LEVEL_SHOW_LINE_FAILED,
     LEVEL_STOP
-} from "../Events";
+} from "./single_components/Events";
 import {defaultLevels} from "../configs/defaultLevels";
 import {
-    DEFAULT_WINDOW,
     LEVEL_SHOW_LINE_FAILED_TIME,
     LEVEL_SHOW_TIME
 } from "../configs/config";
+import Logic from "./single_components/Logic";
+import Scene from "./single_components/Scene";
+import Control from "./single_components/Control";
+
 
 export default class Single extends Game {
     constructor() {
         super("single");
 
-        this._scale = 1;
-
         this._user = null;
+
+        this._logic = new Logic(this);
+        this._scene = new Scene(this);
+        this._control = new Control();
     }
 
     init(canvas, {width, height}) {
+        super.init({width, height});
+
         this.on(LEVEL_EVENT, this.manageLevels.bind(this), false);
-
-        this._window = {
-            width: width,
-            height: height
-        };
-
-        this._scale = width / DEFAULT_WINDOW.width;
 
         this._user = Single.loadUser();
 
@@ -100,23 +100,6 @@ export default class Single extends Game {
             return;
         }
         return defaultLevels[num];
-    }
-
-    setLevel(level) {
-        this._level = {};
-        this._level.levelNumber = level.levelNumber;
-        this._level.circles = [];
-
-        level.circles.forEach((circle) => {
-            this._level.circles.push({
-                num: circle.num,
-                x: circle.x * this._scale,
-                y: circle.y * this._scale,
-                r: circle.r * this._scale,
-                type: circle.type,
-                color: circle.color
-            });
-        });
     }
 
     nextLevel() {

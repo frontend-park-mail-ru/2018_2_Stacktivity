@@ -1,9 +1,8 @@
-import LogicCircle from "./models/Circle/LogicCircle.js";
+import LogicCircle from "../../models/Circle/LogicCircle.js";
 import {LEVEL_START, LEVEL_LOAD, LINE_DROP, LINE_UPDATED,
     LINE_ADD_POINT, LINE_GO, LINE_INPUT, CIRCLE_DROP, LEVEL_RELOAD, LEVEL_COMPLETE} from "./Events.js";
-import {RPS} from "./configs/config.js";
-import LogicLine from "./models/Line/LogicLine.js";
-import {DEFAULT_WINDOW} from "./configs/config";
+import {RPS} from "../../configs/config.js";
+import LogicLine from "../../models/Line/LogicLine.js";
 import {LEVEL_EVENT, LEVEL_FAILED, LEVEL_STOP} from "./Events";
 
 

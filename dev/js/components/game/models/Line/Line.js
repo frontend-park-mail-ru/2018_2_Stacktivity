@@ -73,9 +73,15 @@ export class BaseLine {
         return this.getRealPoint(this.size() - 1);
     }
 
-    addPoint(point) {
-        point.x -= this._basePoint.x;
-        point.y -= this._basePoint.y;
+    addPoint(point, relative) {
+        if (!relative) {
+            point.x -= this._basePoint.x;
+            point.y -= this._basePoint.y;
+        }
+
+        point.x = Math.round(point.x);
+        point.y = Math.round(point.y);
+
         this._points.push(point);
     }
 
@@ -129,5 +135,16 @@ export class BaseLine {
 
     copyBasePoint() {
         return this._basePoint.copy();
+    }
+
+    makeJsonObj() {
+        const obj = {};
+        obj.base_point = {x: this._basePoint.x, y: this._basePoint.y};
+        obj.points = [];
+        this._points.forEach((point) => {
+            obj.points.push({x: point.x, y: point.y});
+        });
+
+        return obj;
     }
 }
