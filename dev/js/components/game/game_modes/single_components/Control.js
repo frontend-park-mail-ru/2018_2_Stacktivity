@@ -1,4 +1,4 @@
-import Point from "./models/Point/Point.js";
+import Point from "../../models/Point/Point.js";
 import {LINE_ADD_POINT, LINE_GO, LINE_INPUT, WAY_HIDE, WAY_SHOW, LEVEL_NEXT} from "./Events.js";
 import {LEVEL_EVENT, LEVEL_PREV} from "./Events";
 

@@ -1,5 +1,6 @@
 import Line, {BaseLine} from "./Line.js";
 import Point from "../Point/Point.js";
+import {MAX_LINE_POINTS_LENGTH} from "../../configs/config";
 
 
 export default class LogicLine extends Line {
@@ -25,11 +26,11 @@ export default class LogicLine extends Line {
         }
     }
 
-    addPoint(point) {
+    addPoint(point, relative) {
         if (!this._inputting || Point.equal(point, this.getLastPoint())) {
             return;
         }
-        this._beginLine.addPoint(point);
+        this._beginLine.addPoint(point, relative);
     }
 
     getLastPoint() {
@@ -91,7 +92,7 @@ export default class LogicLine extends Line {
                 } else {
                     newPoint.x = this._window.width;
                 }
-                newPoint.y = k * newPoint.x + b;
+                newPoint.y = Math.round(k * newPoint.x + b);
 
                 this._endLine.addPointByInd(newPoint.copy(), i);
                 this._endLine.currentPosition++;

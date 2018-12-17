@@ -36,25 +36,20 @@ class UserModel {
      * Get user data from server or return fetched data
      */
     fetch() {
-        console.log(UserModel.__data);
-
         if (UserModel.__data.username !== undefined) {
             Emitter.emit("done-get-user", UserModel.__data);
             return;
         }
 
         if (UserModel.__data.id === undefined) {
-            console.log(1);
             Emitter.on("done-check-user-login", this.fetch.bind(this));
             Emitter.emit("check-user-login");
             return;
         }
 
         if (!UserModel.__data.is_logged_in) {
-            console.log(2);
             Emitter.emit("done-get-user", UserModel.__data);
         } else {
-            console.log(3);
             AjaxModule.doGet({path: `/user/${UserModel.__data.id}`}).
                 then((resp) => {
                     if (resp.status === 200) {

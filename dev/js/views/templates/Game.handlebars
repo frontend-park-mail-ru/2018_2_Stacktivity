@@ -1,0 +1,26 @@
+<style>
+    body {
+        background: #fff;
+    }
+</style>
+
+<div class="game-wrapper">
+    <div class="game-header">
+        {{> GameHeader}}
+    </div>
+
+    <div class="center-wrapper">
+        <div class="js-canvas-wrapper"></div>
+    </div>
+
+    {{#if mult}}
+        <div class="game-footer">
+            {{> GameFooter}}
+        </div>
+    {{/if}}
+</div>
+
+<div class="game-warning">
+    <p>Please flip your device horizontally <br />to continue</p>
+    <img src="https://cdn1.iconfinder.com/data/icons/smartphone-application-2/64/Smartphone-flip-512.png" />
+</div>

@@ -21,6 +21,7 @@ export default class WebSocks {
 
     connect(path) {
         if (!this._connected) {
+            console.log("conntect");
             this._ws = new WebSocket(path);
 
             this._ws.addEventListener("open", this._onopen.bind(this));
@@ -28,6 +29,12 @@ export default class WebSocks {
             this._ws.addEventListener("error", this._onerror.bind(this));
             this._ws.addEventListener("close", this._onclose.bind(this));
         }
+    }
+
+    close() {
+        console.log("close");
+        this._ws.close();
+        this._connected = false;
     }
 
     _onmessage(event) {
@@ -46,6 +53,12 @@ export default class WebSocks {
     _onclose(event) {
         console.log(`Код: ${event.code}`);
         console.log(`Причина: ${event.reason}`);
+        this._connected = false;
+
+        if (event.code === 1006) {
+            Emitter.emit("info", "now is the winter of out disconnect");
+            return;
+        }
 
         if (event.code !== 1000) {
             Emitter.emit("error", `${event.code} ${event.reason}`);
