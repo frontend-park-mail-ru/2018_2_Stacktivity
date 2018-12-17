@@ -110,7 +110,7 @@
   align-items: center;
 }
 
-.description__player {
+.description__status {
   flex-direction: column;
   text-align: center;
   display: inline-flex;
@@ -122,12 +122,12 @@
   font-size: 130%;
 }
 
-.player {
-  &__name {
+.status {
+  &__header {
 
   }
 
-  &__score {
+  &__desc {
     font-size: 70%;
   }
 }

@@ -2,9 +2,9 @@
     <div class="game-footer__decsription">
         <!--horisontal flexbox-->
 
-        <div class="description__player js-player-first">
-            <div class="player__name">{{first.username}}</div>
-            <div class="player__score">{{first.score}}</div>
+        <div class="description__status js-player-first">
+            <div class="status__header">{{players.first.username}}</div>
+            <div class="status__desc">{{players.first.score}}</div>
             <!--vertical inline flexbox-->
         </div>
 
@@ -12,9 +12,9 @@
             vs.
         </div>
 
-        <div class="description__player js-player-second">
-            <div class="player__name">{{second.username}}</div>
-            <div class="player__score">{{second.score}}</div>
+        <div class="description__status js-player-second">
+            <div class="status__header">{{players.second.username}}</div>
+            <div class="status__desc">{{players.second.score}}</div>
             <!--vertical inline flexbox-->
         </div>
     </div>

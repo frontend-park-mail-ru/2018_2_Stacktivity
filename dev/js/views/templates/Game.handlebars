@@ -13,9 +13,11 @@
         <div class="js-canvas-wrapper"></div>
     </div>
 
-    <div class="game-footer">
-        {{> GameFooter}}
-    </div>
+    {{#if mult}}
+        <div class="game-footer">
+            {{> GameFooter}}
+        </div>
+    {{/if}}
 </div>
 
 <div class="game-warning">

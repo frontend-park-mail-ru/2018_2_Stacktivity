@@ -4,9 +4,14 @@
     </a>
 
     <div class="game-header__decsription">
-        <div class="description__player js-game-status">
-            <div class="player__name">{{first.username}}</div>
-            <div class="player__score">you draw</div>
+        <div class="description__status js-game-status">
+            {{#if mult}}
+                <div class="status__header">Draw!</div>
+                <div class="status__desc">there should be timer</div>
+            {{else}}
+                <div class="status__header">{{player.username}}</div>
+                <div class="status__desc">{{player.score}}</div>
+            {{/if}}
         </div>
     </div>
 </div>

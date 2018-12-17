@@ -52,5 +52,6 @@ function main() {
 
 }
 
+document.emitter = Emitter;
 
 main();

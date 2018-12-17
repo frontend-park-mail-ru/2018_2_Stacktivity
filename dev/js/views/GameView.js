@@ -24,56 +24,63 @@ export default class GameView extends BaseView {
         this._navigationController = new NavigationController();
         this._formController = new FormController("game");
         this._game = new Single();
-        this.render();
         this.registerEvents();
 
         this._ws = new WebSocks("game");
         this._ws.connect(WSPathSingleplayer);
 
-        Emitter.on("game-message", function (data) {
-            if (data.event === 1) {
-                Emitter.emit("info", "room found!");
+        Emitter.on("player-got-scores", (user) => {
+            if (this._players.first.username === user.username) {
+                this.viewSection.getElementsByClassName("js-player-first")[0].innerHTML = Handlebars.templates.GameHeaderStatus({user});
+            } else {
+                this.viewSection.getElementsByClassName("js-player-second")[0].innerHTML = Handlebars.templates.GameHeaderStatus({user});
             }
         }, false);
 
-        this._players = {};
+        Emitter.on("game-change-state", (message) => {
+            message = {header: "lol", desc: "kek"};
+            this.viewSection.getElementsByClassName("js-game-status")[0].innerHTML = Handlebars.templates.GameHeaderStatus({message: message});
+        }, false);
 
-        Emitter.on("player_got_scores", (user) => {
-            if (this._players.first.username === user.username) {
-                this.viewSection.getElementsByClassName("js-user-first")[0].innerHTML = Handlebars.templates.GameHeaderStatus({user});
-            } else {
-                this.viewSection.getElementsByClassName("js-user-second")[0].innerHTML = Handlebars.templates.GameHeaderStatus({user});
-            }
-        });
+        Emitter.on("player-left-game", (user) => {
+            this.viewSection.getElementsByClassName("js-game-status")[0].innerHTML = Handlebars.templates.GameHeaderStatus({header: `${user.username} left game...`, desc: "You win!"});
+        }, false);
 
-        Emitter.on("player_draw_line", () => {
-            this.viewSection.getElementsByClassName("js-game-status")[0].innerHTML = Handlebars.templates.GameHeaderStatus({message: "Send line..."});
-        });
-
-        Emitter.on("player_turn", () => {
-            // todo who draws
-        });
-
-        Emitter.on("player_left_game", () => {
-            // todo other win
-        });
-
-        Emitter.on("level_passed", () => {
+        Emitter.on("level-passed", () => {
             //todo congrats
-        });
+        }, false);
 
-        Emitter.on("level_passed_mult", () => {
-            //todo congrats
-        });
-
-
+        Emitter.on("done-get-user", (user) => {
+            this.setFirstPlayer(user);
+        }, false);
     }
 
-    renderGame(players) {
-        this.viewSection.innerHTML = "";
+    setFirstPlayer(user) {
+        this._player = {
+            username: user.username,
+            score: user.score
+        };
 
-        this.viewSection.addEventListener("submit", this._formController.callbackSubmit.bind(this._formController));
-        this.viewSection.innerHTML += Handlebars.templates.Game(players);
+        this.render();
+    }
+
+    /**
+     * Emits load event and shows view
+     * @return {undefined}
+     */
+    show() {
+        Emitter.emit("get-user");
+        super.show();
+    }
+
+    renderGame() {
+        const state = {
+            mult: false,
+            player: this._player,
+        };
+
+        this.viewSection.innerHTML = "";
+        this.viewSection.innerHTML += Handlebars.templates.Game(state);
 
         const height = window.innerHeight;
         const width = window.innerWidth;
@@ -89,7 +96,7 @@ export default class GameView extends BaseView {
         }
 
         canvas.id = "canvas-single";
-        canvas.style = "border-left: 4px solid #00000082;border-right: 3px solid #00000082;display: block;box-shadow: 0 0 20px #00000085;position: relative;background: #fff;";
+        canvas.style = "border-left: 4px solid #00000082;border-right: 3px solid #00000082;display: block;box-shadow: inset 0 0 20px #00000085;position: relative;background: #fff;";
 
         this.viewSection.getElementsByClassName("js-canvas-wrapper")[0].appendChild(canvas);
 
@@ -104,8 +111,7 @@ export default class GameView extends BaseView {
      */
     render() {
         super.render();
-
-        this.renderGame({first: {username: "sis", score: 303}, second: {username: "ere", score: 12}});
+        this.renderGame();
     }
 
 
