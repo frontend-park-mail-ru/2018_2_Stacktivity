@@ -1,3 +1,10 @@
+.game-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .game-wrapper {
   display: none;
   flex-direction: column;

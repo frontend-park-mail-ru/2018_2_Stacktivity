@@ -22,37 +22,37 @@ export default class GameView extends BaseView {
     constructor() {
         super();
         this._navigationController = new NavigationController();
-        this._formController = new FormController("game");
-        this._game = new Single();
         this.registerEvents();
 
         this._ws = new WebSocks("game");
-        this._ws.connect(WSPathSingleplayer);
 
-        Emitter.on("player-got-scores", (user) => {
-            if (this._players.first.username === user.username) {
-                this.viewSection.getElementsByClassName("js-player-first")[0].innerHTML = Handlebars.templates.GameHeaderStatus({user});
-            } else {
-                this.viewSection.getElementsByClassName("js-player-second")[0].innerHTML = Handlebars.templates.GameHeaderStatus({user});
-            }
+        this._player = null;
+
+        Emitter.on("game-message", (data) => {
+           Emitter.emit("info", data);
         }, false);
 
-        Emitter.on("game-change-state", (message) => {
+        Emitter.on("single-player-got-scores", (user) => {
+            this.viewSection.getElementsByClassName("js-game-status")[0].innerHTML = Handlebars.templates.GameHeaderStatus({user});
+
+        }, false);
+
+        Emitter.on("single-game-change-state", (message) => {
             message = {header: "lol", desc: "kek"};
             this.viewSection.getElementsByClassName("js-game-status")[0].innerHTML = Handlebars.templates.GameHeaderStatus({message: message});
         }, false);
 
-        Emitter.on("player-left-game", (user) => {
+        Emitter.on("single-player-left-game", (user) => {
             this.viewSection.getElementsByClassName("js-game-status")[0].innerHTML = Handlebars.templates.GameHeaderStatus({header: `${user.username} left game...`, desc: "You win!"});
-        }, false);
-
-        Emitter.on("level-passed", () => {
-            //todo congrats
         }, false);
 
         Emitter.on("done-get-user", (user) => {
             this.setFirstPlayer(user);
-        }, false);
+        });
+
+        Emitter.on("single-render-game", () => {
+            this.renderGame()
+        }, false)
     }
 
     setFirstPlayer(user) {
@@ -60,8 +60,6 @@ export default class GameView extends BaseView {
             username: user.username,
             score: user.score
         };
-
-        this.render();
     }
 
     /**
@@ -69,8 +67,20 @@ export default class GameView extends BaseView {
      * @return {undefined}
      */
     show() {
-        Emitter.emit("get-user");
+        if (!this._player) {
+            Emitter.emit("get-user");
+        }
+
+        this._ws.connect(WSPathSingleplayer);
+        this._game = new Single();
+
+        Emitter.emit("single-render-game");
         super.show();
+    }
+
+    hide() {
+        this._ws.close();
+        super.hide();
     }
 
     renderGame() {
@@ -79,8 +89,7 @@ export default class GameView extends BaseView {
             player: this._player,
         };
 
-        this.viewSection.innerHTML = "";
-        this.viewSection.innerHTML += Handlebars.templates.Game(state);
+        this.viewSection.innerHTML = Handlebars.templates.Game(state);
 
         const height = window.innerHeight;
         const width = window.innerWidth;
@@ -100,6 +109,7 @@ export default class GameView extends BaseView {
 
         this.viewSection.getElementsByClassName("js-canvas-wrapper")[0].appendChild(canvas);
 
+        console.log("preinit");
         this._game.init(canvas, {width: canvas.width, height: canvas.height});
         this._game.start();
     }
@@ -113,7 +123,6 @@ export default class GameView extends BaseView {
         super.render();
         this.renderGame();
     }
-
 
     /**
      * Register events for NavigationController to handle

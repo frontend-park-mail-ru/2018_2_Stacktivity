@@ -8,12 +8,7 @@ import {defaultLevels} from "../configs/defaultLevels.js";
 class Emitter {
     /** Create the emitter */
     constructor() {
-        if (Emitter.__instance) {
-            return Emitter.__instance;
-        }
-
         this._listeners = {};
-        Emitter.__instance = this;
     }
 
     /**
