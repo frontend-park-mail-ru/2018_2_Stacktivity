@@ -36,18 +36,44 @@ export default class GameView extends BaseView {
             }
         }, false);
 
-        // Emitter.on("submit-data-game", WebSocks.send.bind(WebSocks), false);
+        this._players = {};
+
+        Emitter.on("player_got_scores", (user) => {
+            if (this._players.first.username === user.username) {
+                this.viewSection.getElementsByClassName("js-user-first")[0].innerHTML = Handlebars.templates.GameHeaderStatus({user});
+            } else {
+                this.viewSection.getElementsByClassName("js-user-second")[0].innerHTML = Handlebars.templates.GameHeaderStatus({user});
+            }
+        });
+
+        Emitter.on("player_draw_line", () => {
+            this.viewSection.getElementsByClassName("js-game-status")[0].innerHTML = Handlebars.templates.GameHeaderStatus({message: "Send line..."});
+        });
+
+        Emitter.on("player_turn", () => {
+            // todo who draws
+        });
+
+        Emitter.on("player_left_game", () => {
+            // todo other win
+        });
+
+        Emitter.on("level_passed", () => {
+            //todo congrats
+        });
+
+        Emitter.on("level_passed_mult", () => {
+            //todo congrats
+        });
+
+
     }
 
-    /**
-     * Generates html and puts it to this.viewSection
-     * @return {undefined}
-     */
-    render() {
-        super.render();
+    renderGame(players) {
+        this.viewSection.innerHTML = "";
 
         this.viewSection.addEventListener("submit", this._formController.callbackSubmit.bind(this._formController));
-        this.viewSection.innerHTML += Handlebars.templates.Game();
+        this.viewSection.innerHTML += Handlebars.templates.Game(players);
 
         const height = window.innerHeight;
         const width = window.innerWidth;
@@ -57,7 +83,6 @@ export default class GameView extends BaseView {
         if (width / height > 16 / 9) {
             canvas.width = height * 16 / 9;
             canvas.height = height;
-
         } else {
             canvas.height = width * 9 / 16;
             canvas.width = width;
@@ -68,9 +93,19 @@ export default class GameView extends BaseView {
 
         this.viewSection.getElementsByClassName("js-canvas-wrapper")[0].appendChild(canvas);
 
-
         this._game.init(canvas, {width: canvas.width, height: canvas.height});
         this._game.start();
+    }
+
+
+    /**
+     * Generates html and puts it to this.viewSection
+     * @return {undefined}
+     */
+    render() {
+        super.render();
+
+        this.renderGame({first: {username: "sis", score: 303}, second: {username: "ere", score: 12}});
     }
 
 

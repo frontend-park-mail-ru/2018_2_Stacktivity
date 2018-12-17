@@ -29,6 +29,8 @@ Emitter.on("server-validation-error", function (message) {
 });
 
 Handlebars.registerPartial('NavList', Handlebars.templates.NavList);
+Handlebars.registerPartial('GameFooter', Handlebars.templates.GameFooter);
+Handlebars.registerPartial('GameHeader', Handlebars.templates.GameHeader);
 
 /**
  * Starts the application

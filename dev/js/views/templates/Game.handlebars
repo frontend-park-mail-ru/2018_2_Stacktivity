@@ -5,19 +5,8 @@
 </style>
 
 <div class="game-wrapper">
-    <div class="game-header" style="z-index: 1">
-        <div class="game-header__circle">
-            <a class="game-header__link" href="/" data-href="/">
-                Left game
-            </a>
-
-            <div class="game-header__decsription">
-                <div class="description__player">
-                    <div class="player__name">Silvman</div>
-                    <div class="player__score">you draw</div>
-                </div>
-            </div>
-        </div>
+    <div class="game-header">
+        {{> GameHeader}}
     </div>
 
     <div class="center-wrapper">
@@ -25,27 +14,7 @@
     </div>
 
     <div class="game-footer">
-        <div class="game-footer__circle">
-            <div class="game-footer__decsription">
-                <!--horisontal flexbox-->
-
-                <div class="description__player">
-                    <div class="player__name">Silvman</div>
-                    <div class="player__score">1000500</div>
-                    <!--vertical inline flexbox-->
-                </div>
-
-                <div class="description__vs">
-                    vs.
-                </div>
-
-                <div class="description__player">
-                    <div class="player__name">ASD</div>
-                    <div class="player__score">-1</div>
-                    <!--vertical inline flexbox-->
-                </div>
-            </div>
-        </div>
+        {{> GameFooter}}
     </div>
 </div>
 
