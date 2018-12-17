@@ -1,5 +1,5 @@
-export const basePath = "http://localhost:3001";
-export const backWSPath = "ws://localhost:3001";
+export const basePath = "http://localhost:8082";
+export const backWSPath = "ws://localhost:8082";
 
 export const WSPathSingleplayer = "ws://localhost:8083/game/singleplayer";
 export const WSPathMultiplayer = "ws://localhost:8083/game/multiplayer";

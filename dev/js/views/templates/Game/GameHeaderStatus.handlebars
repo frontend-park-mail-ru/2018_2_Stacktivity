@@ -1,0 +1,8 @@
+{{#if user}}
+    <div class="status__header">{{user.username}}</div>
+    <div class="status__desc">{{user.score}}</div>
+{{/if}}
+{{#if message}}
+    <div class="status__header">{{message.header}}</div>
+    <div class="status__desc">{{message.desc}}</div>
+{{/if}}

@@ -1,0 +1,147 @@
+.game-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.game-wrapper {
+  display: none;
+  flex-direction: column;
+
+  align-items: center;
+
+  height: 100%;
+
+  @media (orientation: landscape), (min-width: 500px) {
+    display: flex;
+  }
+}
+
+.game-warning {
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  text-align: center;
+  font-size: 5vmin;
+  height: 100%;
+
+  @media (orientation: portrait) and (max-width: 500px) {
+    display: flex;
+  }
+
+  p {
+    padding-bottom: 10vmin;
+  }
+
+  img {
+    width: 80%;
+  }
+}
+
+.navigation_game {
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.game-header {
+  position: absolute;
+  height: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1
+}
+
+.game-header__circle {
+  background: #000;
+  opacity: 0.5;
+  @include circle-geometry(150vmin);
+  top: -140vmin;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  transition: top 1s;
+  transition-timing-function: ease;
+  &:hover {
+    top: -135vmin;
+  }
+}
+
+.game-header__link {
+  color: #fff;
+  position: absolute;
+  bottom: 11vmin;
+  font-size: 4vmin;
+  display: flex;
+  align-items: center;
+}
+
+.game-header__decsription {
+  color: #fff;
+  position: absolute;
+  bottom: 2vmin;
+  font-size: 4vmin;
+  display: flex;
+  align-items: center;
+}
+
+.game-footer {
+  position: absolute;
+  height: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+}
+
+.game-footer__circle {
+  background: #000;
+  opacity: 0.5;
+  @include circle-geometry(150vmin);
+  bottom: 10vmin;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.game-footer__decsription {
+  color: #fff;
+  position: absolute;
+  top: 2vmin;
+  font-size: 4vmin;
+  display: flex;
+  align-items: center;
+}
+
+.description__status {
+  flex-direction: column;
+  text-align: center;
+  display: inline-flex;
+}
+
+.description__vs {
+  padding-left: 2vmin;
+  padding-right: 2vmin;
+  font-size: 130%;
+}
+
+.status {
+  &__header {
+
+  }
+
+  &__desc {
+    font-size: 70%;
+  }
+}
+
+.center-wrapper {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  flex-direction: column;
+}
