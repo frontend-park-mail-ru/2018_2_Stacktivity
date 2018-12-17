@@ -7,7 +7,8 @@ import WebSocks from "../modules/WS.js";
 import NavigationController from "../controllers/NavigationController.mjs";
 import FormController from "../controllers/FormController.mjs";
 import Emitter from "../modules/Emitter.js";
-import {WSPathMultiplayer, WSPathSingleplayer} from "../config";
+import {WSPathMultiplayer} from "../config";
+import Multiplayer from "../components/game/game_modes/Multiplayer";
 
 /**
  * View of the game page
@@ -22,10 +23,11 @@ export default class MultGameView extends BaseView {
         super();
         this._navigationController = new NavigationController();
         this._formController = new FormController("mult");
+
+        this._game = new Multiplayer();
+
         this.render();
         this.registerEvents();
-
-        // WebSocks.connect("ws://localhost:3001/game/multiplayer");
 
         this._ws = new WebSocks("mult");
         this._ws.connect(WSPathMultiplayer);
@@ -35,7 +37,6 @@ export default class MultGameView extends BaseView {
                 Emitter.emit("info", "room found!");
             }
         }, false);
-
     }
 
     /**
@@ -55,16 +56,28 @@ export default class MultGameView extends BaseView {
             ]
         });
 
+        const canvas = document.createElement("canvas");
+        canvas.id = "canvas-mult";
+        canvas.width = window.innerWidth - 10;
+        canvas.height = canvas.width * 9 / 16;
+        canvas.style = "border-left: 5px solid black; border-right: 5px solid black; display: block;";
 
-        this.viewSection.innerHTML += `
-<div id="chatblock" class="chatblock">
-    <a data-href="/chat">Open chat</a><br />
-    
-    <a data-href="chat">Show chat</a>
-    <iframe class="chatblock__if" src="/chat" width="300px" height="500px"></iframe>
-</div>`
+        document.body.style.overflow = "hidden";
 
-        this.viewSection.addEventListener("submit", this._formController.callbackSubmit.bind(this._formController));
+        this.viewSection.appendChild(canvas);
+        this._game.init(this._ws, canvas, {width: canvas.width, height: canvas.height});
+        this._game.start();
+
+
+//         this.viewSection.innerHTML += `
+// <div id="chatblock" class="chatblock">
+//     <a data-href="/chat">Open chat</a><br />
+//
+//     <a data-href="chat">Show chat</a>
+//     <iframe class="chatblock__if" src="/chat" width="300px" height="500px"></iframe>
+// </div>`;
+//
+//         this.viewSection.addEventListener("submit", this._formController.callbackSubmit.bind(this._formController));
     }
 
 

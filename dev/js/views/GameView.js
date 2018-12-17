@@ -7,7 +7,7 @@ import WebSocks from "../modules/WS.js";
 import NavigationController from "../controllers/NavigationController.mjs";
 import FormController from "../controllers/FormController.mjs";
 import Emitter from "../modules/Emitter.js";
-import Single from "../components/game/GameModes/Single.js";
+import Single from "../components/game/game_modes/Single.js";
 import {WSPathSingleplayer} from "../config";
 
 /**

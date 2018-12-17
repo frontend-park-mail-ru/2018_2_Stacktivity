@@ -1,9 +1,9 @@
 import {LEVEL_START, LEVEL_LOAD, LINE_UPDATED, LINE_INPUT, LINE_DROP, CIRCLE_DROP, WAY_HIDE, WAY_SHOW} from "./Events.js";
-import SceneCircle from "./models/Circle/SceneCircle.js";
-import SceneLine from "./models/Line/SceneLine.js";
-import Point from "./models/Point/Point.js";
+import SceneCircle from "../../models/Circle/SceneCircle.js";
+import SceneLine from "../../models/Line/SceneLine.js";
+import Point from "../../models/Point/Point.js";
 import {LEVEL_SHOW_LINE_FAILED, LEVEL_SHOW_PREVIEW, LEVEL_STOP} from "./Events";
-import {LEVEL_NUBER_FONT_SIZE} from "./configs/config";
+import {LEVEL_NUMBER_FONT_SIZE} from "../../configs/config";
 
 
 export default class Scene {
@@ -102,7 +102,7 @@ export default class Scene {
 
         this._ctx.save();
 
-        this._ctx.font = `${String(LEVEL_NUBER_FONT_SIZE * this._scale)}px Quantico`;
+        this._ctx.font = `${String(LEVEL_NUMBER_FONT_SIZE * this._scale)}px Quantico`;
         this._ctx.fillText(this._levelNumber, this._window.width / 2,
              this._window.height / 2);
 
