@@ -46,29 +46,28 @@ export default class GameView extends BaseView {
     render() {
         super.render();
 
-        this.viewSection.innerHTML += Handlebars.templates.Nav({
-            links: [
-                {
-                    "content": "main",
-                    "class": [
-                        "back",
-                    ],
-                    "href": "/"
-                }
-            ]
-        });
-
         this.viewSection.addEventListener("submit", this._formController.callbackSubmit.bind(this._formController));
+        this.viewSection.innerHTML += Handlebars.templates.Game();
+
+        const height = window.innerHeight;
+        const width = window.innerWidth;
 
         const canvas = document.createElement("canvas");
-        canvas.id = "canvas";
-        canvas.width = window.innerWidth - 10;
-        canvas.height = canvas.width * 9 / 16;
-        canvas.style = "border-left: 5px solid black; border-right: 5px solid black; display: block;";
 
-        document.body.style.overflow = "hidden";
+        if (width / height > 16 / 9) {
+            canvas.width = height * 16 / 9;
+            canvas.height = height;
 
-        this.viewSection.appendChild(canvas);
+        } else {
+            canvas.height = width * 9 / 16;
+            canvas.width = width;
+        }
+
+        canvas.id = "canvas-single";
+        canvas.style = "border-left: 4px solid #00000082;border-right: 3px solid #00000082;display: block;box-shadow: 0 0 20px #00000085;position: relative;background: #fff;";
+
+        this.viewSection.getElementsByClassName("js-canvas-wrapper")[0].appendChild(canvas);
+
 
         this._game.init(canvas, {width: canvas.width, height: canvas.height});
         this._game.start();
@@ -80,7 +79,21 @@ export default class GameView extends BaseView {
      * @return {undefined}
      */
     registerEvents() {
-        this.viewSection.getElementsByClassName("navigation")[0].
-            addEventListener("click", this._navigationController.keyPressedCallback);
+        this.viewSection.addEventListener("click", this._navigationController.keyPressedCallback);
+
+        window.addEventListener("resize", () => {
+            const height = window.innerHeight;
+            const width = window.innerWidth;
+            const canvas = document.getElementById("canvas-single");
+
+            if (width / height > 16 / 9) {
+                canvas.width = height * 16 / 9;
+                canvas.height = height;
+
+            } else {
+                canvas.height = width * 9 / 16;
+                canvas.width = width;
+            }
+        });
     }
 }

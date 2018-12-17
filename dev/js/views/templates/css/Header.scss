@@ -4,9 +4,12 @@
   position: relative;
   
   height: 60vmin;
-  width: 110vmin;
+  width: 100%;
   font-size: 35vmin;
-  
+
+  display: flex;
+  justify-content: center;
+
   &_page { // modification
     height: 32vmin;
     font-size: 22vmin;
@@ -17,7 +20,6 @@
     background: #1a1a1a;
     position: absolute;
     bottom: 0;
-    margin: 0 auto;
 
     @media (min-aspect-ratio: 2/3) {
       @include circle-geometry($main-width-content);
