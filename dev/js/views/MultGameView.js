@@ -71,7 +71,6 @@ export default class MultGameView extends BaseView {
         this._players.first = {
             username: user.username,
             score: user.score,
-            is_logged_in: user.is_logged_in,
         };
     }
 
@@ -82,6 +81,25 @@ export default class MultGameView extends BaseView {
     show() {
         Emitter.emit("check-user-login");
         super.show();
+
+        if (this._players.first) {
+            this._ws.connect(WSPathMultiplayer);
+            this._game = new Multiplayer();
+
+            this.viewSection.innerHTML = `
+            <div class="game-loading">
+                <img src="https://i.redd.it/u0tcjayept5z.gif" />
+            </div>
+        `;
+
+            // setTimeout(() => {
+            //     console.log("enemy-commected emit");
+            //     Emitter.emit("info", "Other player has connected");
+            //     Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
+            // }, 10000);
+
+            Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
+        }
     }
 
     /**
@@ -101,25 +119,7 @@ export default class MultGameView extends BaseView {
                 });
 
                 Emitter.emit("get-user");
-                return;
             }
-
-            this._ws.connect(WSPathMultiplayer);
-            this._game = new Multiplayer();
-
-            this.viewSection.innerHTML = `
-            <div class="game-loading">
-                <img src="https://i.redd.it/u0tcjayept5z.gif" />
-            </div>
-        `;
-
-            // setTimeout(() => {
-            //     console.log("enemy-commected emit");
-            //     Emitter.emit("info", "Other player has connected");
-            //     Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
-            // }, 10000);
-
-            Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
         }
     }
 
