@@ -33,9 +33,11 @@ export default class WebSocks {
 
     close() {
         console.log("close");
-        this._ws.close();
-        this._connected = false;
-    }
+        if (this._connected) {
+            this._ws.close();
+            this._connected = false;
+
+        }}
 
     _onmessage(event) {
         const message = JSON.parse(event.data);

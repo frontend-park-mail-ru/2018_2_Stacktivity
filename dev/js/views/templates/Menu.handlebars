@@ -1,18 +1,24 @@
 <div class="content-wrapper">
 <main class="content">
-    <ul class="main-menu">
-        <li class="main-menu__element"><a href="/single" data-href="/single">
-            <div class="circle circle_size_tiny main-menu__circle circle_color_blue inline"></div>
-            Single</a>
+    <div class="main-menu">
+        <a href="/single" data-href="/single" class="main-menu__menu-link">
+            <div class="menu-link__pic">
+                <div class="circle circle_size_tiny main-menu__circle circle_color_blue inline"></div>
+            </div>
+            <div class="menu-link__desc">Single</div>
+        </a>
 
-        </li>
-        <li class="main-menu__element"><a href="/mult" data-href="/mult" class="main_menu__link">
-            <div class="circle circle_size_tiny main-menu__circle circle_color_red main-menu__circle_second"></div>
-            <div class="circle circle_size_tiny main-menu__circle circle_color_orange"></div>
-            Multiplayer</a>
+        <a href="/mult" data-href="/mult" class="main-menu__menu-link js-multiplayer-link">
+            <div class="menu-link__pic">
+                <div class="circle circle_size_tiny main-menu__circle circle_color_red"></div>
+                <div class="circle circle_size_tiny main-menu__circle circle_color_orange"></div>
+            </div>
+            <div class="menu-link__desc">Multiplayer</div>
+        </a>
 
-        </li>
-        <li class="main-menu__element_with-padding"><a href="#" data-href="/leaderboard">Leaderboard</a></li>
-    </ul>
+        <a href="/leaderboard" data-href="/leaderboard" class="main-menu__menu-link">
+            <div class="menu-link__desc menu-link__desc_leaderboard">Leaderboard</div>
+        </a>
+    </div>
 </main>
 </div>

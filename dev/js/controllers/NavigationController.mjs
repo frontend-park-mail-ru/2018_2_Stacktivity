@@ -39,6 +39,12 @@ export default class NavigationController {
 
         event.preventDefault();
 
+        if (link.classList.contains("js-disabled-multiplayer")) {
+            Emitter.emit("warn", "You must login to play multiplayer");
+            return;
+        }
+
+
         if (link.dataset.href === "/logout") {
             Emitter.emit("user-logout");
         }
