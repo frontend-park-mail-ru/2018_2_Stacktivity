@@ -105,7 +105,11 @@ export default class Multiplayer extends Game {
                 // eslint-disable-next-line no-case-declarations
                 let line_obj = null;
                 if (this._logic._player.line) {
-                    console.log(this._logic._player.line);
+                    if (this._logic._player.line._inputting) {
+                        console.log("Finish line ");
+                        this._logic._player.line.finishLine();
+                        console.log("Finish line 2");
+                    }
                     line_obj = this._logic._player.line._originLine.makeJsonObj();
                 }
 

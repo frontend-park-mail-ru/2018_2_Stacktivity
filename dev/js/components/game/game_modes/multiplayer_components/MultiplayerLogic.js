@@ -175,7 +175,7 @@ export default class MultiplayerLogic {
             return;
         }
         this._inputting = false;
-        this._player.line.inputting = false;
+        this._player.line.finishLine();
     }
 
     addPointInLine(point) {
@@ -256,7 +256,7 @@ export default class MultiplayerLogic {
             this._enemy.line.addPoint(new Point(point.x, point.y), true);
         });
 
-        this._enemy.line.inputting = false;
+        this._enemy.line.finishLine();
 
         this._game.emit(LINE_UPDATED, {enemyLine: this._enemy.line.copyLine()});
     }
