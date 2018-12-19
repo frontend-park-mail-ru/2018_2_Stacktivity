@@ -96,6 +96,7 @@ export default class Multiplayer extends Game {
             case SERVER_START_INPUT:
                 this.emit(LEVEL_LOAD, this._level);
                 this.emit(LINE_REFRESH);
+                Emitter.emit("start-timer", 10000);
 
                 this.changeState(Multiplayer.STATES.INPUTTING_LINE);
                 break;

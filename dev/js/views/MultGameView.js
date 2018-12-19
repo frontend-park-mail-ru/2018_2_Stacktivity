@@ -64,6 +64,18 @@ export default class MultGameView extends BaseView {
             }, false
         );
 
+        Emitter.on("start-timer", (time) => {
+            const timer = this.viewSection.getElementsByClassName("js-game-timer")[0];
+            let iId = setInterval(function () {
+                time -= 1000;
+                if (time < 0) {
+                    clearInterval(iId);
+                } else {
+                    timer.innerHTML = `${time / 1000}`;
+                }
+            }, 1000);
+        }, false);
+
         Emitter.on("done-check-user-login", this.checkLogin.bind(this));
     }
 
@@ -83,6 +95,7 @@ export default class MultGameView extends BaseView {
         super.show();
 
         if (this._players.first) {
+            console.log("SHOWMUSTGOON");
             this._ws.connect(WSPathMultiplayer);
             this._game = new Multiplayer();
 
@@ -115,7 +128,7 @@ export default class MultGameView extends BaseView {
             if (!this._players.first) {
                 Emitter.on("done-get-user", (user) => {
                     this.setFirstPlayer(user);
-                    this.show();
+                    //this.show();
                 });
 
                 Emitter.emit("get-user");
