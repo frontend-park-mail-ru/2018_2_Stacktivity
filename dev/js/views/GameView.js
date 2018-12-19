@@ -80,6 +80,7 @@ export default class GameView extends BaseView {
 
     hide() {
         this._ws.close();
+        Emitter.wipe("game-message");
         super.hide();
     }
 

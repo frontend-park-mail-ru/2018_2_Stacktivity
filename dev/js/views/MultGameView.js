@@ -50,7 +50,7 @@ export default class MultGameView extends BaseView {
         }, false);
 
         Emitter.on("mult-render-game", () => {
-            this.renderGame()
+            this.renderGame();
         }, false);
 
         Emitter.on("mult-enemy-connected", (enemy) => {
@@ -105,7 +105,10 @@ export default class MultGameView extends BaseView {
 
     hide() {
         super.hide();
+
         this._ws.close();
+        Emitter.wipe("mult-message");
+
         this.viewSection.innerHTML = "";
     }
 
@@ -130,7 +133,7 @@ export default class MultGameView extends BaseView {
             canvas.width = width;
         }
 
-        canvas.id = "canvas-single";
+        canvas.id = "canvas-mult";
         canvas.style = "border-left: 4px solid #00000082;border-right: 3px solid #00000082;display: block;box-shadow: inset 0 0 20px #00000085;position: relative;background: #fff;";
 
         this.viewSection.getElementsByClassName("js-canvas-wrapper")[0].appendChild(canvas);
@@ -158,7 +161,7 @@ export default class MultGameView extends BaseView {
         window.addEventListener("resize", () => {
             const height = window.innerHeight;
             const width = window.innerWidth;
-            const canvas = document.getElementById("canvas-single");
+            const canvas = document.getElementById("canvas-mult");
 
             if (width / height > 16 / 9) {
                 canvas.width = height * 16 / 9;
