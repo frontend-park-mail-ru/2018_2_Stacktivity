@@ -28,19 +28,18 @@ export default class MultiplayerLogic {
         this._reconDelay = 1000 / RPS;
 
         this._stop = true;
+        this._stepsToDeath = MAX_LINE_POINTS_LENGTH;
 
         this._walls = [];
         this._player = {
             circles: [],
             circlesNum: 0,
-            line: null,
-            stepsToDeath: MAX_LINE_POINTS_LENGTH
+            line: null
         };
         this._enemy = {
             circles: [],
             circlesNum: 0,
-            line: null,
-            stepsToDeath: MAX_LINE_POINTS_LENGTH
+            line: null
         };
     }
 
@@ -60,10 +59,8 @@ export default class MultiplayerLogic {
 
     doGameProcessing() {
         if (this._player.line) {
-            this._player.stepsToDeath--;
-            if (!this._player.line.step() || this._player.stepsToDeath === 0) {
-                console.log("LINE_DROP player");
-                console.log("STD:", this._player.stepsToDeath);
+            if (!this._player.line.step()) {
+                console.log("LINE_DROP player out");
                 this._game.emit(LINE_DROP, "player");
                 this._game.emit(PLAYER_FAILURE);
             } else {
@@ -72,13 +69,26 @@ export default class MultiplayerLogic {
         }
 
         if (this._enemy.line) {
-            this._enemy.stepsToDeath--;
-            if (!this._enemy.line.step() || this._enemy.stepsToDeath === 0) {
-                console.log("LINE_DROP enemy");
-                console.log("STD:", this._enemy.stepsToDeath);
+            if (!this._enemy.line.step()) {
+                console.log("LINE_DROP enemy out");
                 this._game.emit(LINE_DROP, "enemy");
             } else {
                 this._game.emit(LINE_UPDATED, {enemyLine: this._enemy.line.copyLine()});
+            }
+        }
+
+        this._stepsToDeath--;
+        console.log("STD: ", this._stepsToDeath);
+        if (this._stepsToDeath === 0) {
+            this._stepsToDeath = MAX_LINE_POINTS_LENGTH;
+
+            const failure = this._player.line;
+
+            this._game.emit(LINE_DROP, "player");
+            this._game.emit(LINE_DROP, "enemy");
+
+            if (failure) {
+                this._game.emit(PLAYER_FAILURE);
             }
         }
 
@@ -175,7 +185,9 @@ export default class MultiplayerLogic {
             return;
         }
         this._inputting = false;
-        this._player.line.finishLine();
+        if (this._player.line) {
+            this._player.line.finishLine();
+        }
     }
 
     addPointInLine(point) {
@@ -192,10 +204,8 @@ export default class MultiplayerLogic {
     dropLine(player) {
         if (player === "player") {
             this._player.line = null;
-            this._player.stepsToDeath = MAX_LINE_POINTS_LENGTH;
         } else {
             this._enemy.line = null;
-            this._player.stepsToDeath = MAX_LINE_POINTS_LENGTH;
         }
     }
 
@@ -228,12 +238,14 @@ export default class MultiplayerLogic {
                     this._game.emit(LINE_DROP, player);
                     console.log("LINE_DROP", player, "wall");
                     if (player === "player") {
-                        this._game.emit(PLAYER_FAILURE);
+                        if (this._game._state === Multiplayer.STATES.GAME_PROCESSING) {
+                            this._game.emit(PLAYER_FAILURE);
+                        }
                     }
                     break;
                 case "goal":
                     console.log("CIRCLE_DROP", player, circle.num);
-                    if (this._game._state !== Multiplayer.STATES.INPUTTING_LINE) {
+                    if (this._game._state === Multiplayer.STATES.GAME_PROCESSING) {
                         this._game.emit(CIRCLE_DROP, {player: player, num: circle.num});
                     }
                     break;

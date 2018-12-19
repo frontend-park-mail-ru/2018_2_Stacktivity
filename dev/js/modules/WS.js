@@ -7,6 +7,7 @@ export default class WebSocks {
         this._name = name;
         this._connected = false;
         Emitter.on(name + "-send", this.send.bind(this), false);
+        Emitter.on(name + "-close", this.close.bind(this), false);
     }
 
     get isConnected() {

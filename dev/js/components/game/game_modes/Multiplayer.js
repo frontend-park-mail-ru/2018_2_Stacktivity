@@ -2,8 +2,8 @@ import Game from "./Game";
 
 import MultiplayerLogic from "./multiplayer_components/MultiplayerLogic";
 import MultiplayerScene from "./multiplayer_components/MultiplayerScene";
-import {LEVEL_COMPLETE, LEVEL_FAILED, LEVEL_LOAD, LEVEL_SHOW_PREVIEW, LEVEL_START} from "./single_components/Events";
-import {LEVEL_NUMBER_FONT_SIZE, LEVEL_SHOW_LINE_FAILED_TIME, LEVEL_SHOW_TIME} from "../configs/config";
+import {LEVEL_LOAD} from "./single_components/Events";
+import {LEVEL_SHOW_TIME} from "../configs/config";
 import {defaultLevels} from "../configs/defaultLevels";
 import MultiplayerControl from "./multiplayer_components/MultiplayerControl";
 import {
@@ -56,10 +56,8 @@ export default class Multiplayer extends Game {
         };
     }
 
-    init(ws, canvas, {width, height}) {
+    init(canvas, {width, height}) {
         super.init({width, height});
-
-        this._ws = ws;
 
         this.on(STATE_CHANGE, this.changeState.bind(this), false);
         this.on(PLAYER_SUCCESS, Multiplayer.sendPlayerSuccess.bind(this));
@@ -126,6 +124,7 @@ export default class Multiplayer extends Game {
                 } else {
                     this.changeState(Multiplayer.STATES.END_FAILURE);
                 }
+                Emitter.emit("mult-close");
         }
     }
 

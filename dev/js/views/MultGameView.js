@@ -135,7 +135,7 @@ export default class MultGameView extends BaseView {
 
         this.viewSection.getElementsByClassName("js-canvas-wrapper")[0].appendChild(canvas);
 
-        this._game.init(this._ws, canvas, {width: canvas.width, height: canvas.height});
+        this._game.init(canvas, {width: canvas.width, height: canvas.height});
         this._game.start();
     }
 
