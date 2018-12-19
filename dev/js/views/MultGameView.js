@@ -91,7 +91,6 @@ export default class MultGameView extends BaseView {
      * @return {undefined}
      */
     show() {
-        Emitter.emit("check-user-login");
         super.show();
 
         if (this._players.first) {
@@ -112,6 +111,8 @@ export default class MultGameView extends BaseView {
             // }, 10000);
 
             Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
+        } else {
+            Emitter.emit("check-user-login");
         }
     }
 
@@ -128,7 +129,7 @@ export default class MultGameView extends BaseView {
             if (!this._players.first) {
                 Emitter.on("done-get-user", (user) => {
                     this.setFirstPlayer(user);
-                    //this.show();
+                    this.show();
                 });
 
                 Emitter.emit("get-user");
@@ -196,13 +197,15 @@ export default class MultGameView extends BaseView {
             const width = window.innerWidth;
             const canvas = document.getElementById("canvas-mult");
 
-            if (width / height > 16 / 9) {
-                canvas.width = height * 16 / 9;
-                canvas.height = height;
+            if (canvas) {
+                if (width / height > 16 / 9) {
+                    canvas.width = height * 16 / 9;
+                    canvas.height = height;
 
-            } else {
-                canvas.height = width * 9 / 16;
-                canvas.width = width;
+                } else {
+                    canvas.height = width * 9 / 16;
+                    canvas.width = width;
+                }
             }
         });
     }
