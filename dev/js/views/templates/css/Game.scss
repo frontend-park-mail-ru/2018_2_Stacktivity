@@ -64,10 +64,10 @@
   position: relative;
   display: flex;
   justify-content: center;
-  transition: top 1s;
+  transition: transform 1s;
   transition-timing-function: ease;
   &:hover {
-    top: -135vmin;
+    transform: translateY(5vmin);
   }
 }
 
@@ -75,7 +75,7 @@
   color: #fff;
   position: absolute;
   bottom: 11vmin;
-  font-size: 4vmin;
+  font-size: 3.5vmin;
   display: flex;
   align-items: center;
 }
@@ -83,8 +83,8 @@
 .game-header__decsription {
   color: #fff;
   position: absolute;
-  bottom: 2vmin;
-  font-size: 4vmin;
+  bottom: 3vmin;
+  font-size: 5vmin;
   display: flex;
   align-items: center;
 }
@@ -96,6 +96,15 @@
   display: flex;
   justify-content: center;
   bottom: 0;
+
+  &__scores {
+    color: #fff;
+    position: absolute;
+    top: 10vmin;
+    font-size: 3vmin;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .game-footer__circle {
@@ -106,6 +115,11 @@
   position: relative;
   display: flex;
   justify-content: center;
+  transition: transform 1s;
+  transition-timing-function: ease;
+  &:hover {
+    transform: translateY(-5vmin);
+  }
 }
 
 .game-footer__decsription {
@@ -121,6 +135,14 @@
   flex-direction: column;
   text-align: center;
   display: inline-flex;
+}
+
+.description__status_player {
+  color: #ff0000;
+}
+
+.description__status_enemy {
+  color: #20a4d6;
 }
 
 .description__vs {

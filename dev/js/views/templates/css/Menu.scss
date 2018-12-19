@@ -3,29 +3,37 @@
   font-size: 10vmin;
   text-align: left;
   position: relative;
-  
+
   &__circle {
-    left: -8vmin;
-    transform: translate(0, 15%);
-
-    &_second {
-      left: -15vmin;
-    }
-  }
-  
-  &__link {
     position: relative;
+    margin-right: 1vmin;
   }
 
-  &__element {
-    margin: 6vmin 0;
+  &__menu-link {
+    position: relative;
+    margin-bottom: 2vmin;
+    display: grid;
+    grid-template-columns: 16vmin 1fr;
 
-    &_with-padding {
-      margin-top: 10vmin;
+    &_not-login {
+      filter: grayscale(100%);
+      opacity: 0.5;
     }
   }
 
   @media (min-aspect-ratio: 2/3) {
     font-size: 8vmin;
+  }
+}
+
+.menu-link__pic {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.menu-link__desc {
+  &_leaderboard {
+    grid-column-start: 2;
   }
 }

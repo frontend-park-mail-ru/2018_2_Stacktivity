@@ -9,6 +9,7 @@ import FormController from "../controllers/FormController.mjs";
 import Emitter from "../modules/Emitter.js";
 import {WSPathMultiplayer} from "../config";
 import Multiplayer from "../components/game/game_modes/Multiplayer";
+import Router from "../modules/Router.mjs";
 
 /**
  * View of the game page
@@ -62,12 +63,14 @@ export default class MultGameView extends BaseView {
                 Emitter.emit("mult-render-game");
             }, false
         );
+
+        Emitter.on("done-check-user-login", this.checkLogin.bind(this));
     }
 
     setFirstPlayer(user) {
         this._players.first = {
             username: user.username,
-            score: user.score
+            score: user.score,
         };
     }
 
@@ -76,31 +79,48 @@ export default class MultGameView extends BaseView {
      * @return {undefined}
      */
     show() {
-        if (!this._players.first) {
-            Emitter.on("done-get-user", (user) => {
-                this.setFirstPlayer(user);
-            });
-
-            Emitter.emit("get-user");
-        }
-
-        this._ws.connect(WSPathMultiplayer);
-        this._game = new Multiplayer();
-
-        // this.viewSection.innerHTML = `
-        //     <div class="game-loading">
-        //         <img src="https://i.redd.it/u0tcjayept5z.gif" />
-        //     </div>
-        // `;
-
-        // setTimeout(() => {
-        //     console.log("enemy-commected emit");
-        //     Emitter.emit("info", "Other player has connected");
-        //     Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
-        // }, 10000);
-            Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
-
+        Emitter.emit("check-user-login");
         super.show();
+
+        if (this._players.first) {
+            this._ws.connect(WSPathMultiplayer);
+            this._game = new Multiplayer();
+
+            this.viewSection.innerHTML = `
+            <div class="game-loading">
+                <img src="https://i.redd.it/u0tcjayept5z.gif" />
+            </div>
+        `;
+
+            // setTimeout(() => {
+            //     console.log("enemy-commected emit");
+            //     Emitter.emit("info", "Other player has connected");
+            //     Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
+            // }, 10000);
+
+            Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
+        }
+    }
+
+    /**
+     * Callback on checking login
+     * @param {boolean} isLogin true is user is logged in
+     * @return {undefined}
+     */
+    checkLogin(isLogin) {
+        if (!isLogin) {
+            Emitter.emit("warn", "You must login to preform this action");
+            Router.open("/");
+        } else {
+            if (!this._players.first) {
+                Emitter.on("done-get-user", (user) => {
+                    this.setFirstPlayer(user);
+                    this.show();
+                });
+
+                Emitter.emit("get-user");
+            }
+        }
     }
 
     hide() {
