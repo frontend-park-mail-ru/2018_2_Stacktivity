@@ -102,6 +102,7 @@ $circle-color-grey: #aaaaaa;
     border-right: 0.3vmin #fff solid;
     border-radius: 8vmin;
     width: 90vmin;
+    background: url("/opacity.png");
 
     @media (min-aspect-ratio: 2/3) {
       width: $main-width-content;
@@ -391,4 +392,18 @@ $chat-room-public: #900;
   flex-direction: column;
   align-items: center;
   height: 100%;
+  opacity: 0;
+  transition: opacity 0.2s;
+  transition-timing-function: ease;
+}
+
+#rootElem section.js-show {
+  opacity: 1;
+}
+
+
+.js-circle-animation {
+  top: 0;
+  left: 0;
+  z-index: -1;
 }

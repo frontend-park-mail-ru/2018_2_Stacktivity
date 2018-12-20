@@ -64,10 +64,11 @@
   position: relative;
   display: flex;
   justify-content: center;
-  transition: transform 1s;
+  transition: transform 1s, opacity 1s;
   transition-timing-function: ease;
   &:hover {
     transform: translateY(5vmin);
+    opacity: 1;
   }
 }
 
@@ -115,10 +116,12 @@
   position: relative;
   display: flex;
   justify-content: center;
-  transition: transform 1s;
+
+  transition: transform 1s, opacity 1s;
   transition-timing-function: ease;
   &:hover {
     transform: translateY(-5vmin);
+    opacity: 1;
   }
 }
 

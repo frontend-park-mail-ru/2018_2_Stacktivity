@@ -30,7 +30,7 @@
   }
 
   &__error {
-    font-size: 22px;
+    font-size: 1.4vmin;
     color: #f00;
 
     &_main {
@@ -48,6 +48,7 @@
     font-size: 4vmin;
     font-family: 'Quantico', sans-serif;
     width: 100%;
+    margin-bottom: 0.5vmin;
 
     [readonly] {
       background: transparent;

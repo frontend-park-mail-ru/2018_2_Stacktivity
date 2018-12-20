@@ -17,6 +17,7 @@ export default class LoginRegisterValidator extends BaseValidator {
         let isValid = true;
         const isLogin = form.id === "login_form";
         for (const elem of form.getElementsByClassName("js-validate")) {
+            console.log(elem)
             let input = elem.getElementsByTagName("input")[0];
             let err = elem.getElementsByClassName("js-error")[0];
             if (input.classList.contains("js-validate_username")) {
@@ -32,6 +33,7 @@ export default class LoginRegisterValidator extends BaseValidator {
                 const isValidField = this._emailValidate(input.value);
 
                 if (!isLogin) {
+                    console.log("switch")
                     this._switchShowingError(err, isValidField);
                 }
 
@@ -47,7 +49,7 @@ export default class LoginRegisterValidator extends BaseValidator {
                 isValid = isValidField ? isValid : false;
             }
             if (input.classList.contains("js-validate_password_repeat")) {
-                const password1 = document.getElementsByClassName("validate_password");
+                const password1 = document.getElementsByClassName("js-validate_password");
                 const isValidField = this._doublePasswordValidate(password1[0].value, input.value);
 
                 if (!isLogin) {
@@ -58,7 +60,10 @@ export default class LoginRegisterValidator extends BaseValidator {
             }
         }
 
+        console.log(isLogin)
+
         if (isLogin && !isValid) {
+            console.log(isLogin)
             form.getElementsByClassName("js-common_error")[0].
                 classList.remove("hidden");
         }

@@ -59,17 +59,10 @@ export default class MenuView extends BaseView {
      */
     render() {
         super.render();
+
         this.viewSection.innerHTML += Handlebars.templates.Header();
         this.viewSection.innerHTML += Handlebars.templates.Nav();
         this.viewSection.innerHTML += Handlebars.templates.Menu();
-
-        this.viewSection.innerHTML += `
-<div id="chatblock" class="chatblock">
-    <a data-href="/chat">Open chat</a><br />
-    <a data-href="chat">Show chat</a>
-    <iframe class="chatblock__if" src="/chat" width="300px" height="500px"></iframe>
-</div>
-`
     }
 
     /**

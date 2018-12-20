@@ -5,7 +5,7 @@
 
         {{#fields}}
             <div class="user-form__field {{#if validationType}}js-validate{{/if}}">
-                <input class="user-form__input-block {{validationType}}" name="{{name}}" type="{{type}}"
+                <input class="user-form__input-block js-{{validationType}}" name="{{name}}" type="{{type}}"
                        placeholder="{{placeholder}}"/>
                 <span class="user-form__error js-error hidden">{{error}}</span>
             </div>
