@@ -92,6 +92,7 @@ export default class MenuView extends BaseView {
                 ]
             });
 
+            this.viewSection.getElementsByClassName("js-multiplayer-link")[0].classList.remove("main-menu__menu-link_not-login", "js-disabled-multiplayer");
             // TODO вынести в темплейт
             // let profile_link = document.getElementById("profile_link"); // аватарка
             // if (user.avatar) {
