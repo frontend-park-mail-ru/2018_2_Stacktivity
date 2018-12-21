@@ -61,7 +61,7 @@ export default class ProfileView extends BaseView {
         this.viewSection.innerHTML += Handlebars.templates.Nav({
             links: [
                 {
-                    content: "<-",
+                    content: "",
                     class: ["return"],
                     href: "/",
                 }
@@ -70,7 +70,12 @@ export default class ProfileView extends BaseView {
 
         this._content = document.createElement("main");
         this._content.classList.add("content", "content_with-borders");
-        this.viewSection.appendChild(this._content);
+
+        this._contentWrap = document.createElement("div");
+        this._contentWrap.classList.add("content-wrapper");
+        this._contentWrap.appendChild(this._content);
+
+        this.viewSection.appendChild(this._contentWrap);
     }
 
     /**

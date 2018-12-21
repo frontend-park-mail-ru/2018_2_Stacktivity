@@ -1,13 +1,13 @@
 /* ~~~~ Leaderboard start ~~~~ */
 .leaderboard {
   display: grid;
-  grid-template-columns: 3fr 7fr;
+  grid-template-columns: 2vmin 1fr 1fr;
   max-height: 50vh;
   padding: 3vmin;
   font-size: 4vmin;
 
   @media (min-aspect-ratio: 2/3) {
-    font-size: 2vmin;
+    font-size: 3vmin;
   }
 
   @media (min-aspect-ratio: 16/9), (orientation: landscape) {
@@ -15,26 +15,30 @@
   
   &__header {
     font-weight: bold;
-    text-align: left;
-    background: #ddd;
-    padding: 10px;
+    text-align: center;
+    padding: 1.2vmin;
   }
   
   &__username {
-    padding: 8px;
-    background: #ddd;
+    padding: 1vmin;
+    text-align: center;
   }
 
   &__body {
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 4;
     display: grid;
-    grid-template-columns: 3fr 7fr;
+    grid-template-columns: 2vmin 1fr 1fr;
   }
 
   &__score {
-    background: #eee;
-    padding: 8px;
+    padding: 1vmin;
+    text-align: center;
+  }
+
+  &__place {
+    padding: 1vmin;
+    text-align: center;
   }
 
   &__pagination {

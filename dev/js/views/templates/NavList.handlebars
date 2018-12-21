@@ -1,7 +1,11 @@
 {{#links}}
     <div class="navigation__link {{#each class}}navigation__link_{{this}}{{/each}}">
         <a href="{{href}}" data-href="{{href}}" class="circle navigation__circle {{#each class}}navigation__circle_{{this}}{{/each}}">
-            {{content}}
+            {{#if content}}
+                {{content}}
+            {{else}}
+                <i class="fa fa-undo" style="font-size: 4vmin"></i>
+            {{/if}}
         </a>
     </div>
 {{/links}}

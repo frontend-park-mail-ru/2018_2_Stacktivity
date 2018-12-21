@@ -67,7 +67,7 @@ export default class RegisterView extends BaseView {
                     href: "/login",
                 },
                 {
-                    content: "<-",
+                    content: "",
                     class: ["return"],
                     href: "/",
                 }

@@ -59,7 +59,7 @@ export default class LeaderboardView extends BaseView {
         this.viewSection.innerHTML += Handlebars.templates.Nav({
             links: [
                 {
-                    content: "<-",
+                    content: "",
                     class: ["return"],
                     href: "/",
                 }

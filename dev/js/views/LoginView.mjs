@@ -68,7 +68,7 @@ export default class LoginView extends BaseView {
                     href: "/signup",
                 },
                 {
-                    content: "<-",
+                    content: "",
                     class: ["return"],
                     href: "/",
                 }

@@ -1,6 +1,22 @@
 {{#each users}}
+    <div class="leaderboard__place">
+        {{place}}
+    </div>
+
     <div class="leaderboard__username">
+
         {{username}}
+        {{#if first}}
+            <i class="fa fa-trophy" style="color: #f5bc16"></i>
+
+        {{/if}}
+        {{#if second}}
+            <i class="fa fa-trophy" style="color: #cccccc"></i>
+
+        {{/if}}
+        {{#if third}}
+            <i class="fa fa-trophy" style="color: #ec6d2e"></i>
+        {{/if}}
     </div>
 
     <div class="leaderboard__score">

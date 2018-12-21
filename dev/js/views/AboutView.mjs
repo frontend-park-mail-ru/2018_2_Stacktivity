@@ -32,7 +32,7 @@ export default class AboutView extends BaseView {
         this.viewSection.innerHTML += Handlebars.templates.Nav({
             links: [
                 {
-                    content: "<-",
+                    content: "",
                     class: ["return"],
                     href: "/",
                 }
