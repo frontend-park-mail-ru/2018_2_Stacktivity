@@ -60,26 +60,32 @@ sw_init();
 
 const rList = [];
 
-for (let i = 0; i < 10; i++) {
-    let rounds = document.createElement("div");
-    rounds.classList.add("js-circle-animation", "circle", "circle_size_small");
-    const rl = Math.random();
-    rounds.style.top = `${Math.random() * 100}vh`;
+const wh = window.innerWidth / window.innerHeight;
 
-    if (rl < 0.5) {
-        rounds.style.left = `${rl * 2 * 20}vw`;
-    } else {
-        rounds.style.left = `${60 + rl * 30}vw`;
+if (wh > 2 / 3) {
+    for (let i = 0; i < 10; i++) {
+        let rounds = document.createElement("div");
+        rounds.classList.add("js-circle-animation", "circle", "circle_size_small");
+        const rl = Math.random();
+        rounds.style.top = `${Math.random() * 100}vh`;
+
+        if (rl < 0.5) {
+            rounds.style.left = `${rl * 2 * 20}vw`;
+        } else {
+            rounds.style.left = `${60 + rl * 30}vw`;
+        }
+
+        const rd = 0.4 + Math.random() * 0.6;
+        rounds.style.width = `${rd * 30}vmin`;
+        rounds.style.height = `${rd * 30}vmin`;
+        rounds.style.backgroundColor = `rgba(${230 + Math.random() * 25}, ${230 + Math.random() * 25}, ${230 + Math.random() * 25}, 0.8)`;
+
+        document.getElementById("rootElem").
+            appendChild(rounds);
+        rList.push(rounds);
     }
 
-    const rd = 0.4 + Math.random() * 0.6;
-    rounds.style.width = `${rd * 30}vmin`;
-    rounds.style.height = `${rd * 30}vmin`;
-    rounds.style.backgroundColor = `rgba(${230 + Math.random() * 25}, ${230 + Math.random() * 25}, ${230 + Math.random() * 25}, 0.8)`;
-
-    document.getElementById("rootElem").
-        appendChild(rounds);
-    rList.push(rounds);
+    run();
 }
 
 let mouse_x = 0;
@@ -177,5 +183,3 @@ function run() {
     }
     window.requestAnimationFrame(run);
 }
-
-run();
