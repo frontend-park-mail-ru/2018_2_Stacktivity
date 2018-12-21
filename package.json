@@ -9,7 +9,7 @@
     "prestart": "npm run hand && npm run build",
     "hand": "node_modules/.bin/handlebars dev/js/views/templates/* -f dev/js/handlebars.precompile.js",
     "doc": "./node_modules/.bin/jsdoc -c jsdoc_settings.json public/js/*",
-    "build": "npm run hand && webpack --mode development",
+    "build": "npm run hand && webpack --mode development && node gen_list_static.js",
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
@@ -23,7 +23,8 @@
     "handlebars": "^4.0.12",
     "jsdoc": "^3.5.5",
     "morgan": "^1.9.0",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "walk": "^2.3.14"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
