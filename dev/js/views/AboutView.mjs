@@ -28,7 +28,7 @@ export default class AboutView extends BaseView {
     render() {
         super.render();
 
-        this.viewSection.innerHTML += Handlebars.templates.Header({isPage: true, desc: "Rules"});
+        this.viewSection.innerHTML += Handlebars.templates.Header({isPage: true, desc: "Our team"});
         this.viewSection.innerHTML += Handlebars.templates.Nav({
             links: [
                 {
