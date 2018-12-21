@@ -102,7 +102,7 @@ export default class Scene {
 
         this._ctx.save();
 
-        this._ctx.font = `${String(LEVEL_NUMBER_FONT_SIZE * this._scale)}px Quantico`;
+        this._ctx.font = `${String(LEVEL_NUMBER_FONT_SIZE * this._game.scale)}vw Quantico`;
         this._ctx.fillText(this._levelNumber, this._window.width / 2,
              this._window.height / 2);
 

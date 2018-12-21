@@ -12,7 +12,7 @@ import {
 } from "../single_components/Events";
 import SceneLine from "../../models/Line/SceneLine";
 import Point from "../../models/Point/Point";
-import {LINE_REFRESH, MULT_COMP_START} from "./MultiplayerEvents";
+import {CANVAS_RESIZE, LINE_REFRESH, MULT_COMP_START} from "./MultiplayerEvents";
 
 
 export default class MultiplayerScene {
@@ -49,6 +49,8 @@ export default class MultiplayerScene {
         this._game.on(LINE_REFRESH, this.initLine.bind(this), false);
 
         this._game.on(CIRCLE_DROP, this.dropCircle.bind(this), false);
+
+        this._game.on(CANVAS_RESIZE, this.resizeLevel.bind(this), false);
     }
 
     loadLevel(level) {
@@ -59,6 +61,26 @@ export default class MultiplayerScene {
 
         level.circles.forEach((circle) => {
             this.addCircle(circle);
+        });
+    }
+
+    resizeLevel({newLevel}) {
+        newLevel.circles.forEach((circle) => {
+            if (this._player.circles[circle.num]) {
+                this._player.circles[circle.num].x = newLevel.circles[circle.num].x;
+                this._player.circles[circle.num].y = newLevel.circles[circle.num].y;
+                this._player.circles[circle.num].r = newLevel.circles[circle.num].r;
+            }
+            if (this._enemy.circles[circle.num]) {
+                this._enemy.circles[circle.num].x = newLevel.circles[circle.num].x;
+                this._enemy.circles[circle.num].y = newLevel.circles[circle.num].y;
+                this._enemy.circles[circle.num].r = newLevel.circles[circle.num].r;
+            }
+            if (this._walls[circle.num]) {
+                this._walls[circle.num].x = newLevel.circles[circle.num].x;
+                this._walls[circle.num].y = newLevel.circles[circle.num].y;
+                this._walls[circle.num].r = newLevel.circles[circle.num].r;
+            }
         });
     }
 

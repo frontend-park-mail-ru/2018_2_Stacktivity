@@ -79,8 +79,9 @@ export default class Game extends Emitter {
             width: width,
             height: height
         };
-
+        console.log("cur window: ", width, height);
         this._scale = width / DEFAULT_WINDOW.width;
+        console.log("cur scale: ", this._scale);
     }
 
     static loadLevel(num) {
@@ -104,6 +105,20 @@ export default class Game extends Emitter {
                 type: circle.type,
                 color: circle.color
             });
+        });
+    }
+
+    resize(newScale) {
+        if (!this._level) {
+            return;
+        }
+
+        const resizeScale = newScale / this._scale;
+
+        this._level.circles.forEach((circle) => {
+            circle.x = Math.round(circle.x * resizeScale);
+            circle.y = Math.round(circle.y * resizeScale);
+            circle.r = Math.round(circle.r * resizeScale);
         });
     }
 

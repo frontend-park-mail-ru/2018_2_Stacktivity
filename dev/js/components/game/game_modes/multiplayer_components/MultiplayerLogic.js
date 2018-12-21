@@ -12,6 +12,7 @@ import {
 import LogicLine from "../../models/Line/LogicLine";
 import Multiplayer from "../Multiplayer";
 import {
+    CANVAS_RESIZE,
     LINE_ENEMY_CREATE,
     LINE_FINISH_INPUT,
     MULT_COMP_START,
@@ -52,9 +53,12 @@ export default class MultiplayerLogic {
         this._game.on(LINE_ADD_POINT, this.addPointInLine.bind(this), false);
         this._game.on(LINE_FINISH_INPUT, this.finishLineInput.bind(this), false);
         this._game.on(LINE_ENEMY_CREATE, this.createEnemyLine.bind(this), false);
+        this._game.on(LINE_ENEMY_CREATE, this.refreshSTD.bind(this), false);
         this._game.on(LINE_DROP, this.dropLine.bind(this), false);
 
         this._game.on(CIRCLE_DROP, this.dropCircle.bind(this), false);
+
+        this._game.on(CANVAS_RESIZE, this.resize.bind(this), false);
     }
 
     doGameProcessing() {
@@ -271,5 +275,86 @@ export default class MultiplayerLogic {
         this._enemy.line.finishLine();
 
         this._game.emit(LINE_UPDATED, {enemyLine: this._enemy.line.copyLine()});
+    }
+
+    refreshSTD() {
+        this._stepsToDeath = MAX_LINE_POINTS_LENGTH;
+    }
+
+    resizeLevel(newLevel) {
+        newLevel.circles.forEach((circle) => {
+            if (this._player.circles[circle.num]) {
+                this._player.circles[circle.num].x = newLevel.circles[circle.num].x;
+                this._player.circles[circle.num].y = newLevel.circles[circle.num].y;
+                this._player.circles[circle.num].r = newLevel.circles[circle.num].r;
+            }
+            if (this._enemy.circles[circle.num]) {
+                this._enemy.circles[circle.num].x = newLevel.circles[circle.num].x;
+                this._enemy.circles[circle.num].y = newLevel.circles[circle.num].y;
+                this._enemy.circles[circle.num].r = newLevel.circles[circle.num].r;
+            }
+            if (this._walls[circle.num]) {
+                this._walls[circle.num].x = newLevel.circles[circle.num].x;
+                this._walls[circle.num].y = newLevel.circles[circle.num].y;
+                this._walls[circle.num].r = newLevel.circles[circle.num].r;
+            }
+        });
+    }
+
+    resizeLines(newScale) {
+        const resizeScale = newScale / this._game._scale;
+
+        if (this._player.line) {
+            this._player.line._window = this._game._window;
+            if (this._player.line._beginLine) {
+                this._player.line._beginLine._basePoint._x = Math.round(
+                    this._player.line._beginLine._basePoint._x * resizeScale);
+                this._player.line._beginLine._basePoint._y = Math.round(
+                    this._player.line._beginLine._basePoint._y * resizeScale);
+                this._player.line._beginLine._points.forEach((point) => {
+                    point.x = Math.round(point.x * resizeScale);
+                    point.y = Math.round(point.y * resizeScale);
+                });
+            }
+            if (this._player.line._endLine) {
+                this._player.line._endLine._basePoint._x = Math.round(
+                    this._player.line._endLine._basePoint._x * resizeScale);
+                this._player.line._endLine._basePoint._y = Math.round(
+                    this._player.line._endLine._basePoint._y * resizeScale);
+                this._player.line._endLine._points.forEach((point) => {
+                    point.x = Math.round(point.x * resizeScale);
+                    point.y = Math.round(point.y * resizeScale);
+                });
+            }
+        }
+
+        if (this._enemy.line) {
+            this._enemy.line._window = this._game._window;
+            if (this._enemy.line._beginLine) {
+                this._enemy.line._beginLine._basePoint._x = Math.round(
+                    this._enemy.line._beginLine._basePoint._x * resizeScale);
+                this._enemy.line._beginLine._basePoint._y = Math.round(
+                    this._enemy.line._beginLine._basePoint._y * resizeScale);
+                this._enemy.line._beginLine._points.forEach((point) => {
+                    point.x = Math.round(point.x * resizeScale);
+                    point.y = Math.round(point.y * resizeScale);
+                });
+            }
+            if (this._enemy.line._endLine) {
+                this._enemy.line._endLine._basePoint._x = Math.round(
+                    this._enemy.line._endLine._basePoint._x * resizeScale);
+                this._enemy.line._endLine._basePoint._y = Math.round(
+                    this._enemy.line._endLine._basePoint._y * resizeScale);
+                this._enemy.line._endLine._points.forEach((point) => {
+                    point.x = Math.round(point.x * resizeScale);
+                    point.y = Math.round(point.y * resizeScale);
+                });
+            }
+        }
+    }
+
+    resize({newLevel, newScale}) {
+        this.resizeLevel(newLevel);
+        this.resizeLines(newScale);
     }
 }

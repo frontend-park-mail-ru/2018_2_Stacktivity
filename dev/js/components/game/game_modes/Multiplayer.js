@@ -3,10 +3,11 @@ import Game from "./Game";
 import MultiplayerLogic from "./multiplayer_components/MultiplayerLogic";
 import MultiplayerScene from "./multiplayer_components/MultiplayerScene";
 import {LEVEL_LOAD} from "./single_components/Events";
-import {LEVEL_SHOW_TIME} from "../configs/config";
+import {DEFAULT_WINDOW, LEVEL_SHOW_TIME} from "../configs/config";
 import {defaultLevels} from "../configs/defaultLevels";
 import MultiplayerControl from "./multiplayer_components/MultiplayerControl";
 import {
+    CANVAS_RESIZE,
     LINE_ENEMY_CREATE, LINE_REFRESH,
     MULT_COMP_START,
     PLAYER_FAILURE,
@@ -59,6 +60,38 @@ export default class Multiplayer extends Game {
     init(canvas, {width, height}) {
         super.init({width, height});
 
+        window.addEventListener("resize", () => {
+            const height_ = window.innerHeight;
+            const width_ = window.innerWidth;
+            const canvas_ = document.getElementById("canvas-mult");
+
+            let newH = height_;
+            let newW = width_;
+
+            if (canvas_) {
+                if (width_ / height_ > 16 / 9) {
+                    newW = height_ * 16 / 9;
+                    newH = height_;
+
+                    canvas.width = newW;
+                    canvas.height = newH;
+                } else {
+                    newW = width_;
+                    newH = width_ * 9 / 16;
+
+                    canvas.width = newW;
+                    canvas.height = newH;
+                }
+            }
+
+            const newScale = width_ / DEFAULT_WINDOW.width;
+            console.log("new scale: ", newScale);
+            console.log("resize scale: ", newScale / this._scale);
+            super.resize(newScale);
+            this.emit(CANVAS_RESIZE, {newLevel: this._level, newScale: newScale});
+            super.init({width: newW, height: newH});
+        });
+
         this.on(STATE_CHANGE, this.changeState.bind(this), false);
         this.on(PLAYER_SUCCESS, Multiplayer.sendPlayerSuccess.bind(this));
         this.on(PLAYER_FAILURE, Multiplayer.sendPlayerFailure.bind(this), false);
@@ -102,19 +135,21 @@ export default class Multiplayer extends Game {
                 break;
             case SERVER_FINISH_INPUT:
                 // eslint-disable-next-line no-case-declarations
-                let line_obj = null;
+                let lineObj = null;
                 if (this._logic._player.line) {
                     if (this._logic._player.line._inputting) {
                         console.log("Finish line ");
                         this._logic._player.line.finishLine();
                         console.log("Finish line 2");
                     }
-                    line_obj = this._logic._player.line._originLine.makeJsonObj();
+                    lineObj = this._logic._player.line._originLine.makeJsonObj();
+                    this.scaleLineToDefault(lineObj);
                 }
 
-                Emitter.emit("mult-send", {event: SERVER_INPUTTED_LINE, line: line_obj});
+                Emitter.emit("mult-send", {event: SERVER_INPUTTED_LINE, line: lineObj});
                 break;
             case SERVER_START_GAME:
+                this.scaleLineToCurrent(data.line);
                 this.emit(LINE_ENEMY_CREATE, data.line);
                 this.changeState(Multiplayer.STATES.GAME_PROCESSING);
                 break;
@@ -154,5 +189,33 @@ export default class Multiplayer extends Game {
     static sendPlayerFailure() {
         console.log("PLAYER_FAILURE");
         Emitter.emit("mult-send", {event: SERVER_PLAYER_FAILURE});
+    }
+
+    scaleLineToDefault(jsonLine) {
+        if (!jsonLine) {
+            return;
+        }
+
+        jsonLine.base_point.x = Math.round(jsonLine.base_point.x / this._scale);
+        jsonLine.base_point.y = Math.round(jsonLine.base_point.y / this._scale);
+
+        jsonLine.points.forEach((point) => {
+            point.x = Math.round(point.x / this._scale);
+            point.y = Math.round(point.y / this._scale);
+        });
+    }
+
+    scaleLineToCurrent(jsonLine) {
+        if (!jsonLine) {
+            return;
+        }
+
+        jsonLine.base_point.x = Math.round(jsonLine.base_point.x * this._scale);
+        jsonLine.base_point.y = Math.round(jsonLine.base_point.y * this._scale);
+
+        jsonLine.points.forEach((point) => {
+            point.x = Math.round(point.x * this._scale);
+            point.y = Math.round(point.y * this._scale);
+        });
     }
 }
