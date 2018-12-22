@@ -23,7 +23,7 @@ import {
     SERVER_START_GAME,
     SERVER_START_INPUT,
     SERVER_STATUS_SUCCESS,
-    STATE_CHANGE
+    STATE_CHANGE, TUTOR_NOT_SHOW, TUTOR_SHOW
 } from "./multiplayer_components/MultiplayerEvents";
 import Emitter from "../../../modules/Emitter";
 import User from "../models/User/User";
@@ -133,6 +133,7 @@ export default class Multiplayer extends Game {
                 this.emit(LINE_REFRESH);
                 Emitter.emit("start-timer", 10000);
 
+                this.emit(TUTOR_SHOW);
                 this.changeState(Multiplayer.STATES.INPUTTING_LINE);
                 break;
             case SERVER_FINISH_INPUT:
