@@ -145,6 +145,8 @@ export default class Scene {
 
         this._ctx.save();
 
+        this._ctx.textAlign = "center";
+
         this._ctx.font = `${String((LEVEL_NUMBER_FONT_SIZE + 5) * this._game.scale)}vw Quantico`;
         this._ctx.fillText(this._levelNumber, this._window.width / 2,
              this._window.height / 2);
