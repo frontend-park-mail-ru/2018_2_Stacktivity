@@ -41,6 +41,8 @@ export default class Multiplayer extends Game {
         this._logic = new MultiplayerLogic(this);
         this._scene = new MultiplayerScene(this);
         this._control = new MultiplayerControl();
+
+        Emitter.on("mult-message", this.manageServer.bind(this), false);
     }
 
     static get STATES() {
@@ -94,7 +96,6 @@ export default class Multiplayer extends Game {
         this.on(STATE_CHANGE, this.changeState.bind(this), false);
         this.on(PLAYER_SUCCESS, Multiplayer.sendPlayerSuccess.bind(this));
         this.on(PLAYER_FAILURE, Multiplayer.sendPlayerFailure.bind(this), false);
-        Emitter.on("mult-message", this.manageServer.bind(this), false);
 
         const ctx = canvas.getContext('2d');
 
@@ -116,9 +117,12 @@ export default class Multiplayer extends Game {
                 this.changeState(Multiplayer.STATES.WAITING_PLAYERS);
                 break;
             case SERVER_LOADING:
-                this.setLevel(data.level);
                 this._player = new User({nickname: data.players[0]});
                 this._enemy = new User({nickname: data.players[1]});
+
+                Emitter.emit("mult-enemy-connected", {username: data.players[1]});
+
+                this.setLevel(data.level);
 
                 this.changeState(Multiplayer.STATES.PRESENTATION_PLAYERS);
 
