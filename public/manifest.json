@@ -1,0 +1,14 @@
+{
+  "name": "Blep",
+  "short_name": "Blep",
+  "icons": [{
+    "src": "resources/favicon.png",
+    "sizes": "269x269",
+    "type": "image/png"
+  }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF"
+}
