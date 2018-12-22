@@ -28,10 +28,6 @@ export default class GameView extends BaseView {
 
         this._player = null;
 
-        Emitter.on("game-message", (data) => {
-           Emitter.emit("info", data);
-        }, false);
-
         Emitter.on("single-player-got-scores", (user) => {
             this.viewSection.getElementsByClassName("js-game-status")[0].innerHTML = Handlebars.templates.GameHeaderStatus({user});
 
