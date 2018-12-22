@@ -14,10 +14,10 @@ import Multiplayer from "../Multiplayer";
 import {
     CANVAS_RESIZE,
     LINE_ENEMY_CREATE,
-    LINE_FINISH_INPUT,
+    LINE_FINISH_INPUT, LINE_REFRESH,
     MULT_COMP_START,
     PLAYER_FAILURE,
-    PLAYER_SUCCESS
+    PLAYER_SUCCESS, TUTOR_NOT_SHOW
 } from "./MultiplayerEvents";
 import Point from "../../models/Point/Point";
 
@@ -55,6 +55,7 @@ export default class MultiplayerLogic {
         this._game.on(LINE_ENEMY_CREATE, this.createEnemyLine.bind(this), false);
         this._game.on(LINE_ENEMY_CREATE, this.refreshSTD.bind(this), false);
         this._game.on(LINE_DROP, this.dropLine.bind(this), false);
+        this._game.on(LINE_REFRESH, this.dropAllLines.bind(this), false);
 
         this._game.on(CIRCLE_DROP, this.dropCircle.bind(this), false);
 
@@ -185,6 +186,8 @@ export default class MultiplayerLogic {
         if (!this._inputting) {
             return;
         }
+        this._game.emit(TUTOR_NOT_SHOW);
+
         this._inputting = false;
         if (this._player.line) {
             this._player.line.finishLine();
@@ -208,6 +211,11 @@ export default class MultiplayerLogic {
         } else {
             this._enemy.line = null;
         }
+    }
+
+    dropAllLines() {
+        this._player.line = null;
+        this._enemy.line = null;
     }
 
     checkCollision() {

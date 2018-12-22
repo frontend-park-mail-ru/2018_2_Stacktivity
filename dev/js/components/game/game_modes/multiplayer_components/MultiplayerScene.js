@@ -1,4 +1,4 @@
-import {LEVEL_NUMBER_FONT_SIZE} from "../../configs/config";
+import {LEVEL_NUMBER_FONT_SIZE, LINE_WIDTH, tutorialLine} from "../../configs/config";
 import SceneCircle from "../../models/Circle/SceneCircle";
 import Multiplayer from "../Multiplayer";
 import {
@@ -12,7 +12,7 @@ import {
 } from "../single_components/Events";
 import SceneLine from "../../models/Line/SceneLine";
 import Point from "../../models/Point/Point";
-import {CANVAS_RESIZE, LINE_REFRESH, MULT_COMP_START} from "./MultiplayerEvents";
+import {CANVAS_RESIZE, LINE_REFRESH, MULT_COMP_START, TUTOR_NOT_SHOW, TUTOR_SHOW} from "./MultiplayerEvents";
 
 
 export default class MultiplayerScene {
@@ -34,6 +34,9 @@ export default class MultiplayerScene {
             color: "blue",
             line: null
         };
+
+        this._tutorI = 0;
+        this._showTutor = false;
     }
 
     init(ctx) {
@@ -51,6 +54,9 @@ export default class MultiplayerScene {
         this._game.on(CIRCLE_DROP, this.dropCircle.bind(this), false);
 
         this._game.on(CANVAS_RESIZE, this.resizeLevel.bind(this), false);
+
+        this._game.on(TUTOR_SHOW, this.setShowTutor.bind(this));
+        this._game.on(TUTOR_NOT_SHOW, this.unsetShowTutor.bind(this));
     }
 
     loadLevel(level) {
@@ -147,7 +153,8 @@ export default class MultiplayerScene {
         this._ctx.save();
 
         this._ctx.font = `${String(LEVEL_NUMBER_FONT_SIZE * this._game.scale)}vw Quantico`;
-        this._ctx.fillText("Waiting server", 0,
+        this._ctx.textAlign = "center";
+        this._ctx.fillText("Waiting server", this._game.window.width / 2,
             this._game.window.height / 2);
 
         this._ctx.restore();
@@ -159,7 +166,8 @@ export default class MultiplayerScene {
         this._ctx.save();
 
         this._ctx.font = `${String(LEVEL_NUMBER_FONT_SIZE * this._game.scale)}vw Quantico`;
-        this._ctx.fillText("Waiting another player", 0,
+        this._ctx.textAlign = "center";
+        this._ctx.fillText("Waiting another player", this._game.window.width / 2,
             this._game.window.height / 2);
 
         this._ctx.restore();
@@ -174,7 +182,7 @@ export default class MultiplayerScene {
 
         this._ctx.fillStyle = "red";
         this._ctx.textAlign = "right";
-        this._ctx.fillText(this._game._player.nickname, this._game.window.width / 2, this._game.window.height / 2);
+        this._ctx.fillText(this._game._player.nickname, this._game.window.width / 2, this._game.window.height / 2 - this._game.window.height * 0.2);
 
         this._ctx.fillStyle = "black";
         this._ctx.textAlign = "center";
@@ -182,7 +190,7 @@ export default class MultiplayerScene {
 
         this._ctx.fillStyle = "blue";
         this._ctx.textAlign = "left";
-        this._ctx.fillText(this._game._enemy.nickname, this._game.window.width / 2, this._game.window.height / 2);
+        this._ctx.fillText(this._game._enemy.nickname, this._game.window.width / 2, this._game.window.height / 2 + this._game.window.height * 0.2);
 
         this._ctx.restore();
     }
@@ -259,16 +267,50 @@ export default class MultiplayerScene {
 
         this._ctx.save();
 
+        let text = "";
         if (status === "SUCCESS") {
             this._ctx.fillStyle = "red";
+            text = "You win";
         } else {
             this._ctx.fillStyle = "blue";
+            text = "You lose";
         }
         this._ctx.textAlign = "center";
 
-        this._ctx.font = `${String(LEVEL_NUMBER_FONT_SIZE * this._game.scale)}vw Quantico`;
-        this._ctx.fillText(status, this._game.window.width / 2,
+        this._ctx.font = `${String((LEVEL_NUMBER_FONT_SIZE + 5) * this._game.scale)}vw Quantico`;
+        this._ctx.fillText(text, this._game.window.width / 2,
             this._game.window.height / 2);
+
+        this._ctx.restore();
+    }
+
+    showTutor() {
+        if (this._tutorI >= tutorialLine.points.length) {
+            this._tutorI = 0;
+        }
+
+        this._ctx.save();
+
+        this._ctx.font = `${String(5 * this._game.scale)}vw Quantico`;
+
+        this._ctx.fillStyle = "rgb(0, 0, 0, 0.5)";
+        this._ctx.fillText("draw a line", Math.round(tutorialLine.base_point.x * this._game.scale), Math.round((tutorialLine.base_point.y + 40) * this._game.scale));
+
+        this._ctx.lineWidth = LINE_WIDTH * this._game.scale;
+        this._ctx.lineCap = "round";
+        this._ctx.lineJoin = "round";
+
+        this._ctx.strokeStyle = "rgb(146, 153, 163, 0.5)";
+
+        this._ctx.beginPath();
+        this._ctx.moveTo(Math.round(tutorialLine.base_point.x * this._game.scale), Math.round(tutorialLine.base_point.y * this._game.scale));
+
+        for (let i = 0; i <= this._tutorI; i++) {
+            this._ctx.lineTo(Math.round((tutorialLine.base_point.x + tutorialLine.points[i].x) * this._game.scale),
+                Math.round((tutorialLine.base_point.y + tutorialLine.points[i].y) * this._game.scale));
+        }
+
+        this._ctx.stroke();
 
         this._ctx.restore();
     }
@@ -312,6 +354,11 @@ export default class MultiplayerScene {
                 this.showEnd("FAILURE");
                 break;
         }
+        if (this._showTutor) {
+            this.showTutor();
+            this._tutorI++;
+        }
+
     }
 
     clear() {
@@ -326,5 +373,14 @@ export default class MultiplayerScene {
             this.render();
             window.requestAnimationFrame(this.loopCallback.bind(this));
         }
+    }
+
+    setShowTutor() {
+        this._showTutor = true;
+        this._tutorI = 0;
+    }
+
+    unsetShowTutor() {
+        this._showTutor = false;
     }
 }

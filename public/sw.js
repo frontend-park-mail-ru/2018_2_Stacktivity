@@ -12,7 +12,6 @@ this.addEventListener("install", function (event) {
                 ]);
             }).
             catch((err) => {
-                console.log(err.stack || err);
             })
     );
 });
@@ -32,7 +31,6 @@ this.addEventListener('fetch', function (event) {
                 return fetch(event.request);
             }).
             catch((err) => {
-                console.log(err.stack || err);
             })
     );
 });

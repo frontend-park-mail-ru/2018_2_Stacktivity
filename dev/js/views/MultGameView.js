@@ -81,8 +81,7 @@ export default class MultGameView extends BaseView {
 
     setFirstPlayer(user) {
         this._players.first = {
-            username: user.username,
-            score: user.score,
+            username: user.username
         };
     }
 
@@ -97,11 +96,7 @@ export default class MultGameView extends BaseView {
             this._ws.connect(WSPathMultiplayer);
             this._game = new Multiplayer();
 
-            this.viewSection.innerHTML = `
-            <div class="game-loading">
-                <img src="/resources/loading.gif" />
-            </div>
-        `;
+            this.viewSection.innerHTML = Handlebars.templates.GameLoading();
 
             // setTimeout(() => {
             //     console.log("enemy-commected emit");
@@ -109,7 +104,7 @@ export default class MultGameView extends BaseView {
             //     Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
             // }, 10000);
 
-            Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
+            //Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
         } else {
             Emitter.emit("check-user-login");
         }
