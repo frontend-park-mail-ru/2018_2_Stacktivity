@@ -4,6 +4,7 @@ import {LEVEL_START, LEVEL_LOAD, LINE_DROP, LINE_UPDATED,
 import {RPS} from "../../configs/config.js";
 import LogicLine from "../../models/Line/LogicLine.js";
 import {LEVEL_EVENT, LEVEL_FAILED, LEVEL_STOP} from "./Events";
+import {TUTOR_NOT_SHOW} from "../multiplayer_components/MultiplayerEvents";
 
 
 export default class Logic {
@@ -139,6 +140,8 @@ export default class Logic {
 
     finishLineInput() {
         if (this._inputting) {
+            this._game.emit(TUTOR_NOT_SHOW);
+
             this._inputting = false;
             this._line.inputting = false;
         }
