@@ -65,8 +65,6 @@ export default class MultiplayerScene {
     }
 
     resizeLevel({newLevel}) {
-        console.log("RESIZE SCENE");
-
         newLevel.circles.forEach((circle) => {
             if (this._player.circles[circle.num]) {
                 this._player.circles[circle.num]._c._x = newLevel.circles[circle.num].x;
@@ -288,7 +286,6 @@ export default class MultiplayerScene {
     }
 
     render() {
-        console.log("RENDER");
         switch (this._game.state) {
             case Multiplayer.STATES.PRESENTATION_PLAYERS:
                 this.showPresentationPlayers();

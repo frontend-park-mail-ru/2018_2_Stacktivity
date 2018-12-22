@@ -64,7 +64,6 @@ export default class MultiplayerLogic {
     doGameProcessing() {
         if (this._player.line) {
             if (!this._player.line.step()) {
-                console.log("LINE_DROP player out");
                 this._game.emit(LINE_DROP, "player");
                 this._game.emit(PLAYER_FAILURE);
             } else {
@@ -74,7 +73,6 @@ export default class MultiplayerLogic {
 
         if (this._enemy.line) {
             if (!this._enemy.line.step()) {
-                console.log("LINE_DROP enemy out");
                 this._game.emit(LINE_DROP, "enemy");
             } else {
                 this._game.emit(LINE_UPDATED, {enemyLine: this._enemy.line.copyLine()});
@@ -239,7 +237,6 @@ export default class MultiplayerLogic {
             switch (circle.type) {
                 case "wall":
                     this._game.emit(LINE_DROP, player);
-                    console.log("LINE_DROP", player, "wall");
                     if (player === "player") {
                         if (this._game._state === Multiplayer.STATES.GAME_PROCESSING) {
                             this._game.emit(PLAYER_FAILURE);
@@ -247,7 +244,6 @@ export default class MultiplayerLogic {
                     }
                     break;
                 case "goal":
-                    console.log("CIRCLE_DROP", player, circle.num);
                     if (this._game._state === Multiplayer.STATES.GAME_PROCESSING) {
                         this._game.emit(CIRCLE_DROP, {player: player, num: circle.num});
                     }
@@ -281,7 +277,6 @@ export default class MultiplayerLogic {
     }
 
     resizeLevel(newLevel) {
-        console.log("RESIZE LEVEL LOGIC: ", newLevel);
         newLevel.circles.forEach((circle) => {
             if (this._player.circles[circle.num]) {
                 this._player.circles[circle.num]._c._x = newLevel.circles[circle.num].x;
@@ -302,7 +297,6 @@ export default class MultiplayerLogic {
     }
 
     resizeLines(resizeScale) {
-        console.log("RESIZE_LINE: ", resizeScale);
         if (this._player.line) {
             this._player.line._window = this._game._window;
             if (this._player.line._beginLine) {
@@ -355,8 +349,6 @@ export default class MultiplayerLogic {
     }
 
     resize({newLevel, resizeScale}) {
-        console.log("RESIZE LOGIC:", resizeScale);
-
         this.resizeLevel(newLevel);
         this.resizeLines(resizeScale);
     }

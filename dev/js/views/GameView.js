@@ -110,7 +110,6 @@ export default class GameView extends BaseView {
 
         this.viewSection.getElementsByClassName("js-canvas-wrapper")[0].appendChild(canvas);
 
-        console.log("preinit");
         this._game.init(canvas, {width: canvas.width, height: canvas.height});
         this._game.start();
     }

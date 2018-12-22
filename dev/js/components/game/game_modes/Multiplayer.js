@@ -86,9 +86,6 @@ export default class Multiplayer extends Game {
 
             const newScale = width_ / DEFAULT_WINDOW.width;
             const resizeScale = newScale / this._scale;
-            console.log("RESIZE");
-            console.log("new scale: ", newScale);
-            console.log("resize scale: ", resizeScale);
             super.resize(resizeScale);
             super.init({width: newW, height: newH});
             this.emit(CANVAS_RESIZE, {newLevel: this._level, resizeScale: resizeScale});
@@ -110,7 +107,6 @@ export default class Multiplayer extends Game {
         // this.setLevel(Multiplayer.loadLevel(3));
         // this.emit(LEVEL_LOAD, this._level);
 
-        console.log("MULT_START");
         this.emit(MULT_COMP_START);
     }
 
@@ -140,9 +136,7 @@ export default class Multiplayer extends Game {
                 let lineObj = null;
                 if (this._logic._player.line) {
                     if (this._logic._player.line._inputting) {
-                        console.log("Finish line ");
                         this._logic._player.line.finishLine();
-                        console.log("Finish line 2");
                     }
                     lineObj = this._logic._player.line._originLine.makeJsonObj();
                     this.scaleLineToDefault(lineObj);
@@ -184,12 +178,10 @@ export default class Multiplayer extends Game {
     }
 
     static sendPlayerSuccess() {
-        console.log("PLAYER_SUCCESS");
         Emitter.emit("mult-send", {event: SERVER_PLAYER_SUCCESS});
     }
 
     static sendPlayerFailure() {
-        console.log("PLAYER_FAILURE");
         Emitter.emit("mult-send", {event: SERVER_PLAYER_FAILURE});
     }
 

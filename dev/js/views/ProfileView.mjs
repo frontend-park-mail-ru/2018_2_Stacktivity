@@ -84,7 +84,6 @@ export default class ProfileView extends BaseView {
      * @return {undefined}
      */
     renderProfile(user) {
-        console.log("rerender");
         this._content.innerHTML = Handlebars.templates.Profile(user);
     }
 

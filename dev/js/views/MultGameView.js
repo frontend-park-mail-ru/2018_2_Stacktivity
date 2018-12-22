@@ -94,7 +94,6 @@ export default class MultGameView extends BaseView {
         super.show();
 
         if (this._players.first) {
-            console.log("SHOWMUSTGOON");
             this._ws.connect(WSPathMultiplayer);
             this._game = new Multiplayer();
 

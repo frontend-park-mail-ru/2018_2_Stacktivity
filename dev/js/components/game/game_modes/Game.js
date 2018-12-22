@@ -79,9 +79,7 @@ export default class Game extends Emitter {
             width: width,
             height: height
         };
-        console.log("cur window: ", width, height);
         this._scale = width / DEFAULT_WINDOW.width;
-        console.log("cur scale: ", this._scale);
     }
 
     static loadLevel(num) {
@@ -109,8 +107,6 @@ export default class Game extends Emitter {
     }
 
     resize(resizeScale) {
-        console.log("RESIZE GAME");
-
         if (!this._level) {
             return;
         }
