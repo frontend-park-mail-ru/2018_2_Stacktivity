@@ -81,8 +81,7 @@ export default class MultGameView extends BaseView {
 
     setFirstPlayer(user) {
         this._players.first = {
-            username: user.username,
-            score: user.score,
+            username: user.username
         };
     }
 
@@ -109,7 +108,7 @@ export default class MultGameView extends BaseView {
             //     Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
             // }, 10000);
 
-            Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
+            //Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
         } else {
             Emitter.emit("check-user-login");
         }
