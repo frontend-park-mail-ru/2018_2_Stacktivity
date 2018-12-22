@@ -96,11 +96,7 @@ export default class MultGameView extends BaseView {
             this._ws.connect(WSPathMultiplayer);
             this._game = new Multiplayer();
 
-            this.viewSection.innerHTML = `
-            <div class="game-loading">
-                <img src="/resources/loading.gif" />
-            </div>
-        `;
+            this.viewSection.innerHTML = Handlebars.templates.GameLoading();
 
             // setTimeout(() => {
             //     console.log("enemy-commected emit");
