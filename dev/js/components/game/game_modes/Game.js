@@ -108,12 +108,12 @@ export default class Game extends Emitter {
         });
     }
 
-    resize(newScale) {
+    resize(resizeScale) {
+        console.log("RESIZE GAME");
+
         if (!this._level) {
             return;
         }
-
-        const resizeScale = newScale / this._scale;
 
         this._level.circles.forEach((circle) => {
             circle.x = Math.round(circle.x * resizeScale);

@@ -65,21 +65,23 @@ export default class MultiplayerScene {
     }
 
     resizeLevel({newLevel}) {
+        console.log("RESIZE SCENE");
+
         newLevel.circles.forEach((circle) => {
             if (this._player.circles[circle.num]) {
-                this._player.circles[circle.num].x = newLevel.circles[circle.num].x;
-                this._player.circles[circle.num].y = newLevel.circles[circle.num].y;
-                this._player.circles[circle.num].r = newLevel.circles[circle.num].r;
+                this._player.circles[circle.num]._c._x = newLevel.circles[circle.num].x;
+                this._player.circles[circle.num]._c._y = newLevel.circles[circle.num].y;
+                this._player.circles[circle.num]._r = newLevel.circles[circle.num].r;
             }
             if (this._enemy.circles[circle.num]) {
-                this._enemy.circles[circle.num].x = newLevel.circles[circle.num].x;
-                this._enemy.circles[circle.num].y = newLevel.circles[circle.num].y;
-                this._enemy.circles[circle.num].r = newLevel.circles[circle.num].r;
+                this._enemy.circles[circle.num]._c._x = newLevel.circles[circle.num].x;
+                this._enemy.circles[circle.num]._c._y = newLevel.circles[circle.num].y;
+                this._enemy.circles[circle.num]._r = newLevel.circles[circle.num].r;
             }
             if (this._walls[circle.num]) {
-                this._walls[circle.num].x = newLevel.circles[circle.num].x;
-                this._walls[circle.num].y = newLevel.circles[circle.num].y;
-                this._walls[circle.num].r = newLevel.circles[circle.num].r;
+                this._walls[circle.num]._c._x = newLevel.circles[circle.num].x;
+                this._walls[circle.num]._c._y = newLevel.circles[circle.num].y;
+                this._walls[circle.num]._r = newLevel.circles[circle.num].r;
             }
         });
     }
@@ -286,6 +288,7 @@ export default class MultiplayerScene {
     }
 
     render() {
+        console.log("RENDER");
         switch (this._game.state) {
             case Multiplayer.STATES.PRESENTATION_PLAYERS:
                 this.showPresentationPlayers();

@@ -70,14 +70,14 @@ export default class Multiplayer extends Game {
 
             if (canvas_) {
                 if (width_ / height_ > 16 / 9) {
-                    newW = height_ * 16 / 9;
+                    newW = Math.round(height_ * 16 / 9);
                     newH = height_;
 
                     canvas.width = newW;
                     canvas.height = newH;
                 } else {
                     newW = width_;
-                    newH = width_ * 9 / 16;
+                    newH = Math.round(width_ * 9 / 16);
 
                     canvas.width = newW;
                     canvas.height = newH;
@@ -85,11 +85,13 @@ export default class Multiplayer extends Game {
             }
 
             const newScale = width_ / DEFAULT_WINDOW.width;
+            const resizeScale = newScale / this._scale;
+            console.log("RESIZE");
             console.log("new scale: ", newScale);
-            console.log("resize scale: ", newScale / this._scale);
-            super.resize(newScale);
-            this.emit(CANVAS_RESIZE, {newLevel: this._level, newScale: newScale});
+            console.log("resize scale: ", resizeScale);
+            super.resize(resizeScale);
             super.init({width: newW, height: newH});
+            this.emit(CANVAS_RESIZE, {newLevel: this._level, resizeScale: resizeScale});
         });
 
         this.on(STATE_CHANGE, this.changeState.bind(this), false);
