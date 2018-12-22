@@ -147,7 +147,8 @@ export default class MultiplayerScene {
         this._ctx.save();
 
         this._ctx.font = `${String(LEVEL_NUMBER_FONT_SIZE * this._game.scale)}vw Quantico`;
-        this._ctx.fillText("Waiting server", 0,
+        this._ctx.textAlign = "center";
+        this._ctx.fillText("Waiting server", this._game.window.width / 2,
             this._game.window.height / 2);
 
         this._ctx.restore();
@@ -159,7 +160,8 @@ export default class MultiplayerScene {
         this._ctx.save();
 
         this._ctx.font = `${String(LEVEL_NUMBER_FONT_SIZE * this._game.scale)}vw Quantico`;
-        this._ctx.fillText("Waiting another player", 0,
+        this._ctx.textAlign = "center";
+        this._ctx.fillText("Waiting another player", this._game.window.width / 2,
             this._game.window.height / 2);
 
         this._ctx.restore();
@@ -174,7 +176,7 @@ export default class MultiplayerScene {
 
         this._ctx.fillStyle = "red";
         this._ctx.textAlign = "right";
-        this._ctx.fillText(this._game._player.nickname, this._game.window.width / 2, this._game.window.height / 2);
+        this._ctx.fillText(this._game._player.nickname, this._game.window.width / 2, this._game.window.height / 2 - this._game.window.height * 0.2);
 
         this._ctx.fillStyle = "black";
         this._ctx.textAlign = "center";
@@ -182,7 +184,7 @@ export default class MultiplayerScene {
 
         this._ctx.fillStyle = "blue";
         this._ctx.textAlign = "left";
-        this._ctx.fillText(this._game._enemy.nickname, this._game.window.width / 2, this._game.window.height / 2);
+        this._ctx.fillText(this._game._enemy.nickname, this._game.window.width / 2, this._game.window.height / 2 + this._game.window.height * 0.2);
 
         this._ctx.restore();
     }
@@ -259,15 +261,18 @@ export default class MultiplayerScene {
 
         this._ctx.save();
 
+        let text = "";
         if (status === "SUCCESS") {
             this._ctx.fillStyle = "red";
+            text = "You win";
         } else {
             this._ctx.fillStyle = "blue";
+            text = "You lose";
         }
         this._ctx.textAlign = "center";
 
-        this._ctx.font = `${String(LEVEL_NUMBER_FONT_SIZE * this._game.scale)}vw Quantico`;
-        this._ctx.fillText(status, this._game.window.width / 2,
+        this._ctx.font = `${String((LEVEL_NUMBER_FONT_SIZE + 5) * this._game.scale)}vw Quantico`;
+        this._ctx.fillText(text, this._game.window.width / 2,
             this._game.window.height / 2);
 
         this._ctx.restore();
