@@ -98,7 +98,7 @@ export default class MultGameView extends BaseView {
 
             this.viewSection.innerHTML = `
             <div class="game-loading">
-                <img src="https://i.redd.it/u0tcjayept5z.gif" />
+                <img src="/resources/loading.gif" />
             </div>
         `;
 
