@@ -3,7 +3,8 @@ import SceneCircle from "../../models/Circle/SceneCircle.js";
 import SceneLine from "../../models/Line/SceneLine.js";
 import Point from "../../models/Point/Point.js";
 import {LEVEL_SHOW_LINE_FAILED, LEVEL_SHOW_PREVIEW, LEVEL_STOP} from "./Events";
-import {LEVEL_NUMBER_FONT_SIZE} from "../../configs/config";
+import {LEVEL_NUMBER_FONT_SIZE, LINE_WIDTH, tutorialLine} from "../../configs/config";
+import {TUTOR_NOT_SHOW, TUTOR_SHOW} from "../multiplayer_components/MultiplayerEvents";
 
 
 export default class Scene {
@@ -24,6 +25,9 @@ export default class Scene {
         this._enemy = null;
 
         this._stop = true;
+
+        this._tutorI = 0;
+        this._showTutor = false;
     }
 
     init(window, scale, ctx) {
@@ -51,6 +55,9 @@ export default class Scene {
 
         this._game.on(WAY_SHOW, this.showWay.bind(this), false);
         this._game.on(WAY_HIDE, this.hideWay.bind(this), false);
+
+        this._game.on(LEVEL_START, this.setShowTutor.bind(this));
+        this._game.on(TUTOR_NOT_SHOW, this.unsetShowTutor.bind(this));
     }
 
     loadLevel(level) {
@@ -62,6 +69,37 @@ export default class Scene {
         });
     }
 
+    showTutor() {
+        if (this._tutorI >= tutorialLine.points.length) {
+            this._tutorI = 0;
+        }
+
+        this._ctx.save();
+
+        this._ctx.font = `${String(5 * this._game.scale)}vw Quantico`;
+
+        this._ctx.fillStyle = "rgb(0, 0, 0, 0.5)";
+        this._ctx.fillText("draw a line", Math.round(tutorialLine.base_point.x * this._game.scale), Math.round((tutorialLine.base_point.y + 40) * this._game.scale));
+
+        this._ctx.lineWidth = LINE_WIDTH * this._game.scale;
+        this._ctx.lineCap = "round";
+        this._ctx.lineJoin = "round";
+
+        this._ctx.strokeStyle = "rgb(146, 153, 163, 0.5)";
+
+        this._ctx.beginPath();
+        this._ctx.moveTo(Math.round(tutorialLine.base_point.x * this._game.scale), Math.round(tutorialLine.base_point.y * this._game.scale));
+
+        for (let i = 0; i <= this._tutorI; i++) {
+            this._ctx.lineTo(Math.round((tutorialLine.base_point.x + tutorialLine.points[i].x) * this._game.scale),
+                Math.round((tutorialLine.base_point.y + tutorialLine.points[i].y) * this._game.scale));
+        }
+
+        this._ctx.stroke();
+
+        this._ctx.restore();
+    }
+
     render() {
         if (this._line) {
             this._line.draw(this._ctx, this._scale);
@@ -69,6 +107,11 @@ export default class Scene {
         this._circles.forEach((circle) => {
             circle.draw(this._ctx);
         });
+
+        if (this._showTutor) {
+            this.showTutor();
+            this._tutorI++;
+        }
     }
 
     clear() {
@@ -147,5 +190,14 @@ export default class Scene {
         if (this._line) {
             this._line.showWay = false;
         }
+    }
+
+    setShowTutor() {
+        this._showTutor = true;
+        this._tutorI = 0;
+    }
+
+    unsetShowTutor() {
+        this._showTutor = false;
     }
 }
