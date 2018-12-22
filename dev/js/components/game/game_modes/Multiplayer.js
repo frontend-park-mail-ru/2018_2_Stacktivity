@@ -156,7 +156,7 @@ export default class Multiplayer extends Game {
                 break;
             case SERVER_ENEMY_LEFT:
             case SERVER_FINISH_GAME:
-                this._game.emit(TUTOR_NOT_SHOW);
+                this.emit(TUTOR_NOT_SHOW);
 
                 if (data.status === SERVER_STATUS_SUCCESS) {
                     this.changeState(Multiplayer.STATES.END_SUCCESS);
