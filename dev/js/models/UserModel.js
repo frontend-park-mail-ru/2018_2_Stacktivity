@@ -37,7 +37,6 @@ class UserModel {
      */
     fetch() {
         if (UserModel.__data.username !== undefined) {
-            console.log("user exists");
             Emitter.emit("done-get-user", UserModel.__data);
             return;
         }
@@ -49,7 +48,6 @@ class UserModel {
         }
 
         if (!UserModel.__data.is_logged_in) {
-            console.log("user not login");
             Emitter.emit("done-get-user", UserModel.__data);
         } else {
             AjaxModule.doGet({path: `/user/${UserModel.__data.id}`}).
@@ -65,7 +63,6 @@ class UserModel {
                     UserModel.__data = data;
                     UserModel.__data.is_logged_in = true;
                     UserModel.__data.id = id;
-                    console.log("done fetching data", UserModel.__data);
 
                     Emitter.emit("done-get-user", UserModel.__data);
                 }).

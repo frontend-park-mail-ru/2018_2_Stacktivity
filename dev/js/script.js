@@ -113,41 +113,41 @@ function run() {
             rList[i].ax = (xc - mouse_x) * (r + 50) / (d * 30);
             rList[i].ay = (yc - mouse_y) * (r + 50) / (d * 30);
         }
-            if (rList[i].ax > 0) {
-                rList[i].ax -= 0.05;
-                rList[i].style.left = `${rList[i].offsetLeft + rList[i].ax}px`;
-
-                if (rList[i].ax < 0) {
-                    rList[i].ax = 0;
-                }
-            }
+        if (rList[i].ax > 0) {
+            rList[i].ax -= 0.05;
+            rList[i].style.left = `${rList[i].offsetLeft + rList[i].ax}px`;
 
             if (rList[i].ax < 0) {
-                rList[i].ax += 0.05;
-                rList[i].style.left = `${rList[i].offsetLeft + rList[i].ax}px`;
-
-                if (rList[i].ax > 0) {
-                    rList[i].ax = 0;
-                }
+                rList[i].ax = 0;
             }
+        }
 
-            if (rList[i].ay > 0) {
-                rList[i].ay -= 0.05;
-                rList[i].style.top = `${rList[i].offsetTop + rList[i].ay}px`;
+        if (rList[i].ax < 0) {
+            rList[i].ax += 0.05;
+            rList[i].style.left = `${rList[i].offsetLeft + rList[i].ax}px`;
 
-                if (rList[i].ay < 0) {
-                    rList[i].ay = 0;
-                }
+            if (rList[i].ax > 0) {
+                rList[i].ax = 0;
             }
+        }
+
+        if (rList[i].ay > 0) {
+            rList[i].ay -= 0.05;
+            rList[i].style.top = `${rList[i].offsetTop + rList[i].ay}px`;
 
             if (rList[i].ay < 0) {
-                rList[i].ay += 0.05;
-                rList[i].style.top = `${rList[i].offsetTop + rList[i].ay}px`;
-
-                if (rList[i].ay > 0) {
-                    rList[i].ay = 0;
-                }
+                rList[i].ay = 0;
             }
+        }
+
+        if (rList[i].ay < 0) {
+            rList[i].ay += 0.05;
+            rList[i].style.top = `${rList[i].offsetTop + rList[i].ay}px`;
+
+            if (rList[i].ay > 0) {
+                rList[i].ay = 0;
+            }
+        }
 
 
         for (let j = i + 1; j < rList.length; j++) {
