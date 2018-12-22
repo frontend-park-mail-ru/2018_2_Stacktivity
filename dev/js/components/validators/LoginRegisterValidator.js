@@ -47,7 +47,7 @@ export default class LoginRegisterValidator extends BaseValidator {
                 isValid = isValidField ? isValid : false;
             }
             if (input.classList.contains("js-validate_password_repeat")) {
-                const password1 = document.getElementsByClassName("validate_password");
+                const password1 = document.getElementsByClassName("js-validate_password");
                 const isValidField = this._doublePasswordValidate(password1[0].value, input.value);
 
                 if (!isLogin) {

@@ -2,20 +2,30 @@
     <div class="game-footer__decsription">
         <!--horisontal flexbox-->
 
-        <div class="description__status js-player-first">
+        <div class="description__status">
+            {{#if mult}}
+                <div class="status__header">Draw!</div>
+                <div class="status__desc js-game-timer">there should be timer</div>
+            {{else}}
+                <div class="status__header">{{player.username}}</div>
+                <div class="status__desc">{{player.score}}</div>
+            {{/if}}
+        </div>
+    </div>
+
+    <div class="game-footer__scores">
+        <div class="description__status js-player-first description__status_player">
             <div class="status__header">{{players.first.username}}</div>
             <div class="status__desc">{{players.first.score}}</div>
-            <!--vertical inline flexbox-->
         </div>
 
         <div class="description__vs">
             vs.
         </div>
 
-        <div class="description__status js-player-second">
+        <div class="description__status js-player-second description__status_enemy">
             <div class="status__header">{{players.second.username}}</div>
             <div class="status__desc">{{players.second.score}}</div>
-            <!--vertical inline flexbox-->
         </div>
     </div>
 </div>

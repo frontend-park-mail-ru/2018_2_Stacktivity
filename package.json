@@ -6,10 +6,10 @@
   "scripts": {
     "start": "node server",
     "local": "MOCKS=1 npm start",
-    "prestart": "npm run hand && npm run build",
+    "prestart": "npm run build",
     "hand": "node_modules/.bin/handlebars dev/js/views/templates/* -f dev/js/handlebars.precompile.js",
     "doc": "./node_modules/.bin/jsdoc -c jsdoc_settings.json public/js/*",
-    "build": "npm run hand && webpack --mode development",
+    "build": "npm run hand && webpack --mode development && node gen_list_static.js",
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
@@ -20,10 +20,12 @@
     "express-history-api-fallback": "^2.2.1",
     "express-http-proxy": "^1.4.0",
     "express-ws": "^4.0.0",
+    "font-awesome": "^4.7.0",
     "handlebars": "^4.0.12",
     "jsdoc": "^3.5.5",
     "morgan": "^1.9.0",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "walk": "^2.3.14"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -37,6 +39,8 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^3.0.1",
+    "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.10.0",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.4.0",

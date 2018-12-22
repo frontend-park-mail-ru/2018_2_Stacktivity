@@ -24,8 +24,9 @@ $space: 3vmin; // зазор между блоком заголовка и кн�
       @include circle-derotate(-$angle);
       background: $color;
       transition: background-color 500ms, transform 500ms;
-      transition-timing-function: cubic-bezier(0.79,-2.32, 0.25, 3.18);
+      transition-timing-function: cubic-bezier(0.86, -1.21, 0.13, 2.05);
       bottom: 0;
+      font-size: $d / 5;
     }
 
     &_#{$name}:hover {

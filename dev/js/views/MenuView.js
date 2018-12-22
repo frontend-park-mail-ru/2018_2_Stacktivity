@@ -59,17 +59,10 @@ export default class MenuView extends BaseView {
      */
     render() {
         super.render();
+
         this.viewSection.innerHTML += Handlebars.templates.Header();
         this.viewSection.innerHTML += Handlebars.templates.Nav();
         this.viewSection.innerHTML += Handlebars.templates.Menu();
-
-        this.viewSection.innerHTML += `
-<div id="chatblock" class="chatblock">
-    <a data-href="/chat">Open chat</a><br />
-    <a data-href="chat">Show chat</a>
-    <iframe class="chatblock__if" src="/chat" width="300px" height="500px"></iframe>
-</div>
-`
     }
 
     /**
@@ -99,6 +92,7 @@ export default class MenuView extends BaseView {
                 ]
             });
 
+            this.viewSection.getElementsByClassName("js-multiplayer-link")[0].classList.remove("main-menu__menu-link_not-login", "js-disabled-multiplayer");
             // TODO вынести в темплейт
             // let profile_link = document.getElementById("profile_link"); // аватарка
             // if (user.avatar) {
@@ -107,6 +101,7 @@ export default class MenuView extends BaseView {
             //     profile_link.innerHTML = `<span>${user.username}</span>`;
             // }
         } else {
+            this.viewSection.getElementsByClassName("js-multiplayer-link")[0].classList.add("main-menu__menu-link_not-login", "js-disabled-multiplayer");
             this.viewSection.getElementsByClassName("navigation")[0].innerHTML = Handlebars.templates.NavList(linksNoLogin);
         }
     }

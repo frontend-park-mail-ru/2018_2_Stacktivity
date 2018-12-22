@@ -6,7 +6,7 @@ export const defaultLevels = [
                 num: 0,
                 x: 636.5,
                 y: 360,
-                r: 80,
+                r: 160,
                 type: "goal",
                 color: "blue"
             }
@@ -252,7 +252,7 @@ export const defaultLevels = [
                 num: 0,
                 x: 25,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -260,7 +260,7 @@ export const defaultLevels = [
                 num: 1,
                 x: 25,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -268,7 +268,7 @@ export const defaultLevels = [
                 num: 2,
                 x: 25,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -276,7 +276,7 @@ export const defaultLevels = [
                 num: 3,
                 x: 25,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -284,7 +284,7 @@ export const defaultLevels = [
                 num: 4,
                 x: 25,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -292,7 +292,7 @@ export const defaultLevels = [
                 num: 5,
                 x: 25,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -300,7 +300,7 @@ export const defaultLevels = [
                 num: 6,
                 x: 1245,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -308,7 +308,7 @@ export const defaultLevels = [
                 num: 7,
                 x: 1245,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -316,7 +316,7 @@ export const defaultLevels = [
                 num: 8,
                 x: 1245,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -324,7 +324,7 @@ export const defaultLevels = [
                 num: 9,
                 x: 1245,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -332,7 +332,7 @@ export const defaultLevels = [
                 num: 10,
                 x: 1245,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -340,7 +340,7 @@ export const defaultLevels = [
                 num: 11,
                 x: 1245,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -348,7 +348,7 @@ export const defaultLevels = [
                 num: 12,
                 x: 160.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -356,7 +356,7 @@ export const defaultLevels = [
                 num: 13,
                 x: 160.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -364,7 +364,7 @@ export const defaultLevels = [
                 num: 14,
                 x: 160.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -372,7 +372,7 @@ export const defaultLevels = [
                 num: 15,
                 x: 160.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -380,7 +380,7 @@ export const defaultLevels = [
                 num: 16,
                 x: 160.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -388,7 +388,7 @@ export const defaultLevels = [
                 num: 17,
                 x: 160.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -396,7 +396,7 @@ export const defaultLevels = [
                 num: 18,
                 x: 1109.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -404,7 +404,7 @@ export const defaultLevels = [
                 num: 19,
                 x: 1109.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -412,7 +412,7 @@ export const defaultLevels = [
                 num: 20,
                 x: 1109.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -420,7 +420,7 @@ export const defaultLevels = [
                 num: 21,
                 x: 1109.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -428,7 +428,7 @@ export const defaultLevels = [
                 num: 22,
                 x: 1109.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -436,7 +436,7 @@ export const defaultLevels = [
                 num: 23,
                 x: 1109.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -444,7 +444,7 @@ export const defaultLevels = [
                 num: 24,
                 x: 296,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -452,7 +452,7 @@ export const defaultLevels = [
                 num: 25,
                 x: 296,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -460,7 +460,7 @@ export const defaultLevels = [
                 num: 26,
                 x: 296,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -468,7 +468,7 @@ export const defaultLevels = [
                 num: 27,
                 x: 296,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -476,7 +476,7 @@ export const defaultLevels = [
                 num: 28,
                 x: 296,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -484,7 +484,7 @@ export const defaultLevels = [
                 num: 29,
                 x: 296,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -492,7 +492,7 @@ export const defaultLevels = [
                 num: 30,
                 x: 974,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -500,7 +500,7 @@ export const defaultLevels = [
                 num: 31,
                 x: 974,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -508,7 +508,7 @@ export const defaultLevels = [
                 num: 32,
                 x: 974,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -516,7 +516,7 @@ export const defaultLevels = [
                 num: 33,
                 x: 974,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -524,7 +524,7 @@ export const defaultLevels = [
                 num: 34,
                 x: 974,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -532,7 +532,7 @@ export const defaultLevels = [
                 num: 35,
                 x: 974,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -540,7 +540,7 @@ export const defaultLevels = [
                 num: 36,
                 x: 431.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -548,7 +548,7 @@ export const defaultLevels = [
                 num: 37,
                 x: 431.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -556,7 +556,7 @@ export const defaultLevels = [
                 num: 38,
                 x: 431.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -564,7 +564,7 @@ export const defaultLevels = [
                 num: 39,
                 x: 431.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -572,7 +572,7 @@ export const defaultLevels = [
                 num: 40,
                 x: 431.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -580,7 +580,7 @@ export const defaultLevels = [
                 num: 41,
                 x: 431.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -588,7 +588,7 @@ export const defaultLevels = [
                 num: 42,
                 x: 838.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -596,7 +596,7 @@ export const defaultLevels = [
                 num: 43,
                 x: 838.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -604,7 +604,7 @@ export const defaultLevels = [
                 num: 44,
                 x: 838.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -612,7 +612,7 @@ export const defaultLevels = [
                 num: 45,
                 x: 838.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -620,7 +620,7 @@ export const defaultLevels = [
                 num: 46,
                 x: 838.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -628,7 +628,7 @@ export const defaultLevels = [
                 num: 47,
                 x: 838.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -636,7 +636,7 @@ export const defaultLevels = [
                 num: 48,
                 x: 567,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -644,7 +644,7 @@ export const defaultLevels = [
                 num: 49,
                 x: 567,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -652,7 +652,7 @@ export const defaultLevels = [
                 num: 50,
                 x: 567,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -660,7 +660,7 @@ export const defaultLevels = [
                 num: 51,
                 x: 567,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -668,7 +668,7 @@ export const defaultLevels = [
                 num: 52,
                 x: 567,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -676,7 +676,7 @@ export const defaultLevels = [
                 num: 53,
                 x: 567,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -684,7 +684,7 @@ export const defaultLevels = [
                 num: 54,
                 x: 703,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -692,7 +692,7 @@ export const defaultLevels = [
                 num: 55,
                 x: 703,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -700,7 +700,7 @@ export const defaultLevels = [
                 num: 56,
                 x: 703,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -708,7 +708,7 @@ export const defaultLevels = [
                 num: 57,
                 x: 703,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -716,7 +716,7 @@ export const defaultLevels = [
                 num: 58,
                 x: 703,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -724,7 +724,7 @@ export const defaultLevels = [
                 num: 59,
                 x: 703,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -761,7 +761,7 @@ export const defaultLevels = [
                 num: 0,
                 x: 25,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -769,7 +769,7 @@ export const defaultLevels = [
                 num: 1,
                 x: 25,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -777,7 +777,7 @@ export const defaultLevels = [
                 num: 2,
                 x: 25,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -785,7 +785,7 @@ export const defaultLevels = [
                 num: 3,
                 x: 25,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -793,7 +793,7 @@ export const defaultLevels = [
                 num: 4,
                 x: 25,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -801,7 +801,7 @@ export const defaultLevels = [
                 num: 5,
                 x: 25,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -809,7 +809,7 @@ export const defaultLevels = [
                 num: 6,
                 x: 1245,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -817,7 +817,7 @@ export const defaultLevels = [
                 num: 7,
                 x: 1245,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -825,7 +825,7 @@ export const defaultLevels = [
                 num: 8,
                 x: 1245,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -833,7 +833,7 @@ export const defaultLevels = [
                 num: 9,
                 x: 1245,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -841,7 +841,7 @@ export const defaultLevels = [
                 num: 10,
                 x: 1245,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -849,7 +849,7 @@ export const defaultLevels = [
                 num: 11,
                 x: 1245,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -857,7 +857,7 @@ export const defaultLevels = [
                 num: 12,
                 x: 160.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -865,7 +865,7 @@ export const defaultLevels = [
                 num: 13,
                 x: 160.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -873,7 +873,7 @@ export const defaultLevels = [
                 num: 14,
                 x: 160.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -881,7 +881,7 @@ export const defaultLevels = [
                 num: 15,
                 x: 160.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -889,7 +889,7 @@ export const defaultLevels = [
                 num: 16,
                 x: 160.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -897,7 +897,7 @@ export const defaultLevels = [
                 num: 17,
                 x: 160.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -905,7 +905,7 @@ export const defaultLevels = [
                 num: 18,
                 x: 1109.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -913,7 +913,7 @@ export const defaultLevels = [
                 num: 19,
                 x: 1109.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -921,7 +921,7 @@ export const defaultLevels = [
                 num: 20,
                 x: 1109.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -929,7 +929,7 @@ export const defaultLevels = [
                 num: 21,
                 x: 1109.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -937,7 +937,7 @@ export const defaultLevels = [
                 num: 22,
                 x: 1109.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -945,7 +945,7 @@ export const defaultLevels = [
                 num: 23,
                 x: 1109.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -953,7 +953,7 @@ export const defaultLevels = [
                 num: 24,
                 x: 296,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -961,7 +961,7 @@ export const defaultLevels = [
                 num: 25,
                 x: 296,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -969,7 +969,7 @@ export const defaultLevels = [
                 num: 26,
                 x: 296,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -977,7 +977,7 @@ export const defaultLevels = [
                 num: 27,
                 x: 296,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -985,7 +985,7 @@ export const defaultLevels = [
                 num: 28,
                 x: 296,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -993,7 +993,7 @@ export const defaultLevels = [
                 num: 29,
                 x: 296,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1001,7 +1001,7 @@ export const defaultLevels = [
                 num: 30,
                 x: 974,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1009,7 +1009,7 @@ export const defaultLevels = [
                 num: 31,
                 x: 974,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1017,7 +1017,7 @@ export const defaultLevels = [
                 num: 32,
                 x: 974,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1025,7 +1025,7 @@ export const defaultLevels = [
                 num: 33,
                 x: 974,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1033,7 +1033,7 @@ export const defaultLevels = [
                 num: 34,
                 x: 974,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1041,7 +1041,7 @@ export const defaultLevels = [
                 num: 35,
                 x: 974,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1049,7 +1049,7 @@ export const defaultLevels = [
                 num: 36,
                 x: 431.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1057,7 +1057,7 @@ export const defaultLevels = [
                 num: 37,
                 x: 431.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1065,7 +1065,7 @@ export const defaultLevels = [
                 num: 38,
                 x: 431.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1073,7 +1073,7 @@ export const defaultLevels = [
                 num: 39,
                 x: 431.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1081,7 +1081,7 @@ export const defaultLevels = [
                 num: 40,
                 x: 431.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1089,7 +1089,7 @@ export const defaultLevels = [
                 num: 41,
                 x: 431.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1097,7 +1097,7 @@ export const defaultLevels = [
                 num: 42,
                 x: 838.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1105,7 +1105,7 @@ export const defaultLevels = [
                 num: 43,
                 x: 838.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1113,7 +1113,7 @@ export const defaultLevels = [
                 num: 44,
                 x: 838.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1121,7 +1121,7 @@ export const defaultLevels = [
                 num: 45,
                 x: 838.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1129,7 +1129,7 @@ export const defaultLevels = [
                 num: 46,
                 x: 838.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1137,7 +1137,7 @@ export const defaultLevels = [
                 num: 47,
                 x: 838.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1145,7 +1145,7 @@ export const defaultLevels = [
                 num: 48,
                 x: 567,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1153,7 +1153,7 @@ export const defaultLevels = [
                 num: 49,
                 x: 567,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1161,7 +1161,7 @@ export const defaultLevels = [
                 num: 50,
                 x: 567,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1169,7 +1169,7 @@ export const defaultLevels = [
                 num: 51,
                 x: 567,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1177,7 +1177,7 @@ export const defaultLevels = [
                 num: 52,
                 x: 567,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1185,7 +1185,7 @@ export const defaultLevels = [
                 num: 53,
                 x: 567,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1193,7 +1193,7 @@ export const defaultLevels = [
                 num: 54,
                 x: 703,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1201,7 +1201,7 @@ export const defaultLevels = [
                 num: 55,
                 x: 703,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1209,7 +1209,7 @@ export const defaultLevels = [
                 num: 56,
                 x: 703,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1217,7 +1217,7 @@ export const defaultLevels = [
                 num: 57,
                 x: 703,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1225,7 +1225,7 @@ export const defaultLevels = [
                 num: 58,
                 x: 703,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1233,7 +1233,7 @@ export const defaultLevels = [
                 num: 59,
                 x: 703,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1286,7 +1286,7 @@ export const defaultLevels = [
                 num: 0,
                 x: 25,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1294,7 +1294,7 @@ export const defaultLevels = [
                 num: 1,
                 x: 25,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1302,7 +1302,7 @@ export const defaultLevels = [
                 num: 2,
                 x: 25,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1310,7 +1310,7 @@ export const defaultLevels = [
                 num: 3,
                 x: 25,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1318,7 +1318,7 @@ export const defaultLevels = [
                 num: 4,
                 x: 25,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1326,7 +1326,7 @@ export const defaultLevels = [
                 num: 5,
                 x: 25,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1334,7 +1334,7 @@ export const defaultLevels = [
                 num: 6,
                 x: 1245,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1342,7 +1342,7 @@ export const defaultLevels = [
                 num: 7,
                 x: 1245,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1350,7 +1350,7 @@ export const defaultLevels = [
                 num: 8,
                 x: 1245,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1358,7 +1358,7 @@ export const defaultLevels = [
                 num: 9,
                 x: 1245,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1366,7 +1366,7 @@ export const defaultLevels = [
                 num: 10,
                 x: 1245,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1374,7 +1374,7 @@ export const defaultLevels = [
                 num: 11,
                 x: 1245,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1382,7 +1382,7 @@ export const defaultLevels = [
                 num: 12,
                 x: 160.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1390,7 +1390,7 @@ export const defaultLevels = [
                 num: 13,
                 x: 160.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1398,7 +1398,7 @@ export const defaultLevels = [
                 num: 14,
                 x: 160.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1406,7 +1406,7 @@ export const defaultLevels = [
                 num: 15,
                 x: 160.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1414,7 +1414,7 @@ export const defaultLevels = [
                 num: 16,
                 x: 160.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1422,7 +1422,7 @@ export const defaultLevels = [
                 num: 17,
                 x: 160.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1430,7 +1430,7 @@ export const defaultLevels = [
                 num: 18,
                 x: 1109.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1438,7 +1438,7 @@ export const defaultLevels = [
                 num: 19,
                 x: 1109.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1446,7 +1446,7 @@ export const defaultLevels = [
                 num: 20,
                 x: 1109.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1454,7 +1454,7 @@ export const defaultLevels = [
                 num: 21,
                 x: 1109.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1462,7 +1462,7 @@ export const defaultLevels = [
                 num: 22,
                 x: 1109.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1470,7 +1470,7 @@ export const defaultLevels = [
                 num: 23,
                 x: 1109.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1478,7 +1478,7 @@ export const defaultLevels = [
                 num: 24,
                 x: 296,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1486,7 +1486,7 @@ export const defaultLevels = [
                 num: 25,
                 x: 296,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1494,7 +1494,7 @@ export const defaultLevels = [
                 num: 26,
                 x: 296,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1502,7 +1502,7 @@ export const defaultLevels = [
                 num: 27,
                 x: 296,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1510,7 +1510,7 @@ export const defaultLevels = [
                 num: 28,
                 x: 296,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1518,7 +1518,7 @@ export const defaultLevels = [
                 num: 29,
                 x: 296,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1526,7 +1526,7 @@ export const defaultLevels = [
                 num: 30,
                 x: 974,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1534,7 +1534,7 @@ export const defaultLevels = [
                 num: 31,
                 x: 974,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1542,7 +1542,7 @@ export const defaultLevels = [
                 num: 32,
                 x: 974,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1550,7 +1550,7 @@ export const defaultLevels = [
                 num: 33,
                 x: 974,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1558,7 +1558,7 @@ export const defaultLevels = [
                 num: 34,
                 x: 974,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1566,7 +1566,7 @@ export const defaultLevels = [
                 num: 35,
                 x: 974,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1574,7 +1574,7 @@ export const defaultLevels = [
                 num: 36,
                 x: 431.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1582,7 +1582,7 @@ export const defaultLevels = [
                 num: 37,
                 x: 431.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1590,7 +1590,7 @@ export const defaultLevels = [
                 num: 38,
                 x: 431.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1598,7 +1598,7 @@ export const defaultLevels = [
                 num: 39,
                 x: 431.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1606,7 +1606,7 @@ export const defaultLevels = [
                 num: 40,
                 x: 431.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1614,7 +1614,7 @@ export const defaultLevels = [
                 num: 41,
                 x: 431.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1622,7 +1622,7 @@ export const defaultLevels = [
                 num: 42,
                 x: 838.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1630,7 +1630,7 @@ export const defaultLevels = [
                 num: 43,
                 x: 838.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1638,7 +1638,7 @@ export const defaultLevels = [
                 num: 44,
                 x: 838.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1646,7 +1646,7 @@ export const defaultLevels = [
                 num: 45,
                 x: 838.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1654,7 +1654,7 @@ export const defaultLevels = [
                 num: 46,
                 x: 838.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1662,7 +1662,7 @@ export const defaultLevels = [
                 num: 47,
                 x: 838.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1670,7 +1670,7 @@ export const defaultLevels = [
                 num: 48,
                 x: 567,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1678,7 +1678,7 @@ export const defaultLevels = [
                 num: 49,
                 x: 567,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1686,7 +1686,7 @@ export const defaultLevels = [
                 num: 50,
                 x: 567,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1694,7 +1694,7 @@ export const defaultLevels = [
                 num: 51,
                 x: 567,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1702,7 +1702,7 @@ export const defaultLevels = [
                 num: 52,
                 x: 567,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1710,7 +1710,7 @@ export const defaultLevels = [
                 num: 53,
                 x: 567,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1718,7 +1718,7 @@ export const defaultLevels = [
                 num: 54,
                 x: 703,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1726,7 +1726,7 @@ export const defaultLevels = [
                 num: 55,
                 x: 703,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1734,7 +1734,7 @@ export const defaultLevels = [
                 num: 56,
                 x: 703,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1742,7 +1742,7 @@ export const defaultLevels = [
                 num: 57,
                 x: 703,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1750,7 +1750,7 @@ export const defaultLevels = [
                 num: 58,
                 x: 703,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1758,7 +1758,7 @@ export const defaultLevels = [
                 num: 59,
                 x: 703,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1803,7 +1803,7 @@ export const defaultLevels = [
                 num: 0,
                 x: 25,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1811,7 +1811,7 @@ export const defaultLevels = [
                 num: 1,
                 x: 25,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1819,7 +1819,7 @@ export const defaultLevels = [
                 num: 2,
                 x: 25,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1827,7 +1827,7 @@ export const defaultLevels = [
                 num: 3,
                 x: 25,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1835,7 +1835,7 @@ export const defaultLevels = [
                 num: 4,
                 x: 25,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1843,7 +1843,7 @@ export const defaultLevels = [
                 num: 5,
                 x: 25,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1851,7 +1851,7 @@ export const defaultLevels = [
                 num: 6,
                 x: 1245,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1859,7 +1859,7 @@ export const defaultLevels = [
                 num: 7,
                 x: 1245,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1867,7 +1867,7 @@ export const defaultLevels = [
                 num: 8,
                 x: 1245,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1875,7 +1875,7 @@ export const defaultLevels = [
                 num: 9,
                 x: 1245,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1883,7 +1883,7 @@ export const defaultLevels = [
                 num: 10,
                 x: 1245,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1891,7 +1891,7 @@ export const defaultLevels = [
                 num: 11,
                 x: 1245,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1899,7 +1899,7 @@ export const defaultLevels = [
                 num: 12,
                 x: 160.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1907,7 +1907,7 @@ export const defaultLevels = [
                 num: 13,
                 x: 160.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1915,7 +1915,7 @@ export const defaultLevels = [
                 num: 14,
                 x: 160.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1923,7 +1923,7 @@ export const defaultLevels = [
                 num: 15,
                 x: 160.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1931,7 +1931,7 @@ export const defaultLevels = [
                 num: 16,
                 x: 160.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1939,7 +1939,7 @@ export const defaultLevels = [
                 num: 17,
                 x: 160.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1947,7 +1947,7 @@ export const defaultLevels = [
                 num: 18,
                 x: 1109.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1955,7 +1955,7 @@ export const defaultLevels = [
                 num: 19,
                 x: 1109.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1963,7 +1963,7 @@ export const defaultLevels = [
                 num: 20,
                 x: 1109.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1971,7 +1971,7 @@ export const defaultLevels = [
                 num: 21,
                 x: 1109.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1979,7 +1979,7 @@ export const defaultLevels = [
                 num: 22,
                 x: 1109.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1987,7 +1987,7 @@ export const defaultLevels = [
                 num: 23,
                 x: 1109.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -1995,7 +1995,7 @@ export const defaultLevels = [
                 num: 24,
                 x: 296,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2003,7 +2003,7 @@ export const defaultLevels = [
                 num: 25,
                 x: 296,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2011,7 +2011,7 @@ export const defaultLevels = [
                 num: 26,
                 x: 296,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2019,7 +2019,7 @@ export const defaultLevels = [
                 num: 27,
                 x: 296,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2027,7 +2027,7 @@ export const defaultLevels = [
                 num: 28,
                 x: 296,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2035,7 +2035,7 @@ export const defaultLevels = [
                 num: 29,
                 x: 296,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2043,7 +2043,7 @@ export const defaultLevels = [
                 num: 30,
                 x: 974,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2051,7 +2051,7 @@ export const defaultLevels = [
                 num: 31,
                 x: 974,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2059,7 +2059,7 @@ export const defaultLevels = [
                 num: 32,
                 x: 974,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2067,7 +2067,7 @@ export const defaultLevels = [
                 num: 33,
                 x: 974,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2075,7 +2075,7 @@ export const defaultLevels = [
                 num: 34,
                 x: 974,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2083,7 +2083,7 @@ export const defaultLevels = [
                 num: 35,
                 x: 974,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2091,7 +2091,7 @@ export const defaultLevels = [
                 num: 36,
                 x: 431.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2099,7 +2099,7 @@ export const defaultLevels = [
                 num: 37,
                 x: 431.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2107,7 +2107,7 @@ export const defaultLevels = [
                 num: 38,
                 x: 431.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2115,7 +2115,7 @@ export const defaultLevels = [
                 num: 39,
                 x: 431.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2123,7 +2123,7 @@ export const defaultLevels = [
                 num: 40,
                 x: 431.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2131,7 +2131,7 @@ export const defaultLevels = [
                 num: 41,
                 x: 431.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2139,7 +2139,7 @@ export const defaultLevels = [
                 num: 42,
                 x: 838.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2147,7 +2147,7 @@ export const defaultLevels = [
                 num: 43,
                 x: 838.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2155,7 +2155,7 @@ export const defaultLevels = [
                 num: 44,
                 x: 838.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2163,7 +2163,7 @@ export const defaultLevels = [
                 num: 45,
                 x: 838.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2171,7 +2171,7 @@ export const defaultLevels = [
                 num: 46,
                 x: 838.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2179,7 +2179,7 @@ export const defaultLevels = [
                 num: 47,
                 x: 838.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2187,7 +2187,7 @@ export const defaultLevels = [
                 num: 48,
                 x: 567,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2195,7 +2195,7 @@ export const defaultLevels = [
                 num: 49,
                 x: 567,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2203,7 +2203,7 @@ export const defaultLevels = [
                 num: 50,
                 x: 567,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2211,7 +2211,7 @@ export const defaultLevels = [
                 num: 51,
                 x: 567,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2219,7 +2219,7 @@ export const defaultLevels = [
                 num: 52,
                 x: 567,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2227,7 +2227,7 @@ export const defaultLevels = [
                 num: 53,
                 x: 567,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2235,7 +2235,7 @@ export const defaultLevels = [
                 num: 54,
                 x: 703,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2243,7 +2243,7 @@ export const defaultLevels = [
                 num: 55,
                 x: 703,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2251,7 +2251,7 @@ export const defaultLevels = [
                 num: 56,
                 x: 703,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2259,7 +2259,7 @@ export const defaultLevels = [
                 num: 57,
                 x: 703,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2267,7 +2267,7 @@ export const defaultLevels = [
                 num: 58,
                 x: 703,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2275,7 +2275,7 @@ export const defaultLevels = [
                 num: 59,
                 x: 703,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2360,7 +2360,7 @@ export const defaultLevels = [
                 num: 0,
                 x: 25,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2368,7 +2368,7 @@ export const defaultLevels = [
                 num: 1,
                 x: 25,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2376,7 +2376,7 @@ export const defaultLevels = [
                 num: 2,
                 x: 25,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2384,7 +2384,7 @@ export const defaultLevels = [
                 num: 3,
                 x: 25,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2392,7 +2392,7 @@ export const defaultLevels = [
                 num: 4,
                 x: 25,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2400,7 +2400,7 @@ export const defaultLevels = [
                 num: 5,
                 x: 25,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2408,7 +2408,7 @@ export const defaultLevels = [
                 num: 6,
                 x: 1245,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2416,7 +2416,7 @@ export const defaultLevels = [
                 num: 7,
                 x: 1245,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2424,7 +2424,7 @@ export const defaultLevels = [
                 num: 8,
                 x: 1245,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2432,7 +2432,7 @@ export const defaultLevels = [
                 num: 9,
                 x: 1245,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2440,7 +2440,7 @@ export const defaultLevels = [
                 num: 10,
                 x: 1245,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2448,7 +2448,7 @@ export const defaultLevels = [
                 num: 11,
                 x: 1245,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2456,7 +2456,7 @@ export const defaultLevels = [
                 num: 12,
                 x: 160.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2464,7 +2464,7 @@ export const defaultLevels = [
                 num: 13,
                 x: 160.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2472,7 +2472,7 @@ export const defaultLevels = [
                 num: 14,
                 x: 160.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2480,7 +2480,7 @@ export const defaultLevels = [
                 num: 15,
                 x: 160.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2488,7 +2488,7 @@ export const defaultLevels = [
                 num: 16,
                 x: 160.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2496,7 +2496,7 @@ export const defaultLevels = [
                 num: 17,
                 x: 160.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2504,7 +2504,7 @@ export const defaultLevels = [
                 num: 18,
                 x: 1109.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2512,7 +2512,7 @@ export const defaultLevels = [
                 num: 19,
                 x: 1109.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2520,7 +2520,7 @@ export const defaultLevels = [
                 num: 20,
                 x: 1109.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2528,7 +2528,7 @@ export const defaultLevels = [
                 num: 21,
                 x: 1109.5,
                 y: 427,
-                r: 80,
+                r: 160,
                 type: "wall",
                 color: "black"
             },
@@ -2536,7 +2536,7 @@ export const defaultLevels = [
                 num: 22,
                 x: 1109.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2544,7 +2544,7 @@ export const defaultLevels = [
                 num: 23,
                 x: 1109.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2552,7 +2552,7 @@ export const defaultLevels = [
                 num: 24,
                 x: 296,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2560,7 +2560,7 @@ export const defaultLevels = [
                 num: 25,
                 x: 296,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2568,7 +2568,7 @@ export const defaultLevels = [
                 num: 26,
                 x: 296,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2576,7 +2576,7 @@ export const defaultLevels = [
                 num: 27,
                 x: 296,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2584,7 +2584,7 @@ export const defaultLevels = [
                 num: 28,
                 x: 296,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2592,7 +2592,7 @@ export const defaultLevels = [
                 num: 29,
                 x: 296,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2600,7 +2600,7 @@ export const defaultLevels = [
                 num: 30,
                 x: 974,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2608,7 +2608,7 @@ export const defaultLevels = [
                 num: 31,
                 x: 974,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2616,7 +2616,7 @@ export const defaultLevels = [
                 num: 32,
                 x: 974,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2624,7 +2624,7 @@ export const defaultLevels = [
                 num: 33,
                 x: 974,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2632,7 +2632,7 @@ export const defaultLevels = [
                 num: 34,
                 x: 974,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2640,7 +2640,7 @@ export const defaultLevels = [
                 num: 35,
                 x: 974,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2648,7 +2648,7 @@ export const defaultLevels = [
                 num: 36,
                 x: 431.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2656,7 +2656,7 @@ export const defaultLevels = [
                 num: 37,
                 x: 431.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2664,7 +2664,7 @@ export const defaultLevels = [
                 num: 38,
                 x: 431.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2672,7 +2672,7 @@ export const defaultLevels = [
                 num: 39,
                 x: 431.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2680,7 +2680,7 @@ export const defaultLevels = [
                 num: 40,
                 x: 431.5,
                 y: 561,
-                r: 80,
+                r: 160,
                 type: "wall",
                 color: "black"
             },
@@ -2688,7 +2688,7 @@ export const defaultLevels = [
                 num: 41,
                 x: 431.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2696,7 +2696,7 @@ export const defaultLevels = [
                 num: 42,
                 x: 838.5,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2704,7 +2704,7 @@ export const defaultLevels = [
                 num: 43,
                 x: 838.5,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2712,7 +2712,7 @@ export const defaultLevels = [
                 num: 44,
                 x: 838.5,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2720,7 +2720,7 @@ export const defaultLevels = [
                 num: 45,
                 x: 838.5,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2728,7 +2728,7 @@ export const defaultLevels = [
                 num: 46,
                 x: 838.5,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2736,7 +2736,7 @@ export const defaultLevels = [
                 num: 47,
                 x: 838.5,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2744,7 +2744,7 @@ export const defaultLevels = [
                 num: 48,
                 x: 567,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2752,7 +2752,7 @@ export const defaultLevels = [
                 num: 49,
                 x: 567,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2760,7 +2760,7 @@ export const defaultLevels = [
                 num: 50,
                 x: 567,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2768,7 +2768,7 @@ export const defaultLevels = [
                 num: 51,
                 x: 567,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2776,7 +2776,7 @@ export const defaultLevels = [
                 num: 52,
                 x: 567,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2784,7 +2784,7 @@ export const defaultLevels = [
                 num: 53,
                 x: 567,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2792,7 +2792,7 @@ export const defaultLevels = [
                 num: 54,
                 x: 703,
                 y: 25,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2800,7 +2800,7 @@ export const defaultLevels = [
                 num: 55,
                 x: 703,
                 y: 159,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2808,7 +2808,7 @@ export const defaultLevels = [
                 num: 56,
                 x: 703,
                 y: 293,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2816,7 +2816,7 @@ export const defaultLevels = [
                 num: 57,
                 x: 703,
                 y: 427,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2824,7 +2824,7 @@ export const defaultLevels = [
                 num: 58,
                 x: 703,
                 y: 561,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2832,7 +2832,7 @@ export const defaultLevels = [
                 num: 59,
                 x: 703,
                 y: 695,
-                r: 10,
+                r: 20,
                 type: "wall",
                 color: "black"
             },
@@ -2901,7 +2901,7 @@ export const defaultLevels = [
                 num: 0,
                 x: 70,
                 y: 350,
-                r: 8,
+                r: 16,
                 type: "wall",
                 color: "black"
             },
@@ -2909,7 +2909,7 @@ export const defaultLevels = [
                 num: 1,
                 x: 130,
                 y: 350,
-                r: 8,
+                r: 16,
                 type: "wall",
                 color: "black"
             },
@@ -2917,7 +2917,7 @@ export const defaultLevels = [
                 num: 2,
                 x: 310,
                 y: 350,
-                r: 8,
+                r: 16,
                 type: "wall",
                 color: "black"
             },
@@ -2925,7 +2925,7 @@ export const defaultLevels = [
                 num: 3,
                 x: 470,
                 y: 350,
-                r: 8,
+                r: 16,
                 type: "wall",
                 color: "black"
             },
@@ -2941,7 +2941,7 @@ export const defaultLevels = [
                 num: 5,
                 x: 730,
                 y: 350,
-                r: 8,
+                r: 16,
                 type: "wall",
                 color: "black"
             },
@@ -2949,7 +2949,7 @@ export const defaultLevels = [
                 num: 6,
                 x: 890,
                 y: 350,
-                r: 8,
+                r: 16,
                 type: "wall",
                 color: "black"
             },
@@ -2957,7 +2957,7 @@ export const defaultLevels = [
                 num: 7,
                 x: 1070,
                 y: 350,
-                r: 8,
+                r: 16,
                 type: "wall",
                 color: "black"
             },
@@ -2973,7 +2973,7 @@ export const defaultLevels = [
                 num: 9,
                 x: 1240,
                 y: 350,
-                r: 8,
+                r: 16,
                 type: "wall",
                 color: "black"
             },

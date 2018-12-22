@@ -2,11 +2,12 @@ import Game from "./Game";
 
 import MultiplayerLogic from "./multiplayer_components/MultiplayerLogic";
 import MultiplayerScene from "./multiplayer_components/MultiplayerScene";
-import {LEVEL_COMPLETE, LEVEL_FAILED, LEVEL_LOAD, LEVEL_SHOW_PREVIEW, LEVEL_START} from "./single_components/Events";
-import {LEVEL_NUMBER_FONT_SIZE, LEVEL_SHOW_LINE_FAILED_TIME, LEVEL_SHOW_TIME} from "../configs/config";
+import {LEVEL_LOAD} from "./single_components/Events";
+import {DEFAULT_WINDOW, LEVEL_SHOW_TIME} from "../configs/config";
 import {defaultLevels} from "../configs/defaultLevels";
 import MultiplayerControl from "./multiplayer_components/MultiplayerControl";
 import {
+    CANVAS_RESIZE,
     LINE_ENEMY_CREATE, LINE_REFRESH,
     MULT_COMP_START,
     PLAYER_FAILURE,
@@ -22,7 +23,7 @@ import {
     SERVER_START_GAME,
     SERVER_START_INPUT,
     SERVER_STATUS_SUCCESS,
-    STATE_CHANGE
+    STATE_CHANGE, TUTOR_NOT_SHOW, TUTOR_SHOW
 } from "./multiplayer_components/MultiplayerEvents";
 import Emitter from "../../../modules/Emitter";
 import User from "../models/User/User";
@@ -40,6 +41,8 @@ export default class Multiplayer extends Game {
         this._logic = new MultiplayerLogic(this);
         this._scene = new MultiplayerScene(this);
         this._control = new MultiplayerControl();
+
+        Emitter.on("mult-message", this.manageServer.bind(this), false);
     }
 
     static get STATES() {
@@ -56,15 +59,43 @@ export default class Multiplayer extends Game {
         };
     }
 
-    init(ws, canvas, {width, height}) {
+    init(canvas, {width, height}) {
         super.init({width, height});
 
-        this._ws = ws;
+        window.addEventListener("resize", () => {
+            const height_ = window.innerHeight;
+            const width_ = window.innerWidth;
+            const canvas_ = document.getElementById("canvas-mult");
+
+            let newH = height_;
+            let newW = width_;
+
+            if (canvas_) {
+                if (width_ / height_ > 16 / 9) {
+                    newW = Math.round(height_ * 16 / 9);
+                    newH = height_;
+
+                    canvas.width = newW;
+                    canvas.height = newH;
+                } else {
+                    newW = width_;
+                    newH = Math.round(width_ * 9 / 16);
+
+                    canvas.width = newW;
+                    canvas.height = newH;
+                }
+            }
+
+            const newScale = width_ / DEFAULT_WINDOW.width;
+            const resizeScale = newScale / this._scale;
+            super.resize(resizeScale);
+            super.init({width: newW, height: newH});
+            this.emit(CANVAS_RESIZE, {newLevel: this._level, resizeScale: resizeScale});
+        });
 
         this.on(STATE_CHANGE, this.changeState.bind(this), false);
         this.on(PLAYER_SUCCESS, Multiplayer.sendPlayerSuccess.bind(this));
         this.on(PLAYER_FAILURE, Multiplayer.sendPlayerFailure.bind(this), false);
-        Emitter.on("mult-message", this.manageServer.bind(this), false);
 
         const ctx = canvas.getContext('2d');
 
@@ -77,7 +108,6 @@ export default class Multiplayer extends Game {
         // this.setLevel(Multiplayer.loadLevel(3));
         // this.emit(LEVEL_LOAD, this._level);
 
-        console.log("MULT_START");
         this.emit(MULT_COMP_START);
     }
 
@@ -87,9 +117,12 @@ export default class Multiplayer extends Game {
                 this.changeState(Multiplayer.STATES.WAITING_PLAYERS);
                 break;
             case SERVER_LOADING:
-                this.setLevel(data.level);
                 this._player = new User({nickname: data.players[0]});
                 this._enemy = new User({nickname: data.players[1]});
+
+                Emitter.emit("mult-enemy-connected", {username: data.players[1]});
+
+                this.setLevel(data.level);
 
                 this.changeState(Multiplayer.STATES.PRESENTATION_PLAYERS);
 
@@ -98,20 +131,26 @@ export default class Multiplayer extends Game {
             case SERVER_START_INPUT:
                 this.emit(LEVEL_LOAD, this._level);
                 this.emit(LINE_REFRESH);
+                Emitter.emit("start-timer", 10000);
 
+                this.emit(TUTOR_SHOW);
                 this.changeState(Multiplayer.STATES.INPUTTING_LINE);
                 break;
             case SERVER_FINISH_INPUT:
                 // eslint-disable-next-line no-case-declarations
-                let line_obj = null;
+                let lineObj = null;
                 if (this._logic._player.line) {
-                    console.log(this._logic._player.line);
-                    line_obj = this._logic._player.line._originLine.makeJsonObj();
+                    if (this._logic._player.line._inputting) {
+                        this._logic._player.line.finishLine();
+                    }
+                    lineObj = this._logic._player.line._originLine.makeJsonObj();
+                    this.scaleLineToDefault(lineObj);
                 }
 
-                Emitter.emit("mult-send", {event: SERVER_INPUTTED_LINE, line: line_obj});
+                Emitter.emit("mult-send", {event: SERVER_INPUTTED_LINE, line: lineObj});
                 break;
             case SERVER_START_GAME:
+                this.scaleLineToCurrent(data.line);
                 this.emit(LINE_ENEMY_CREATE, data.line);
                 this.changeState(Multiplayer.STATES.GAME_PROCESSING);
                 break;
@@ -122,6 +161,7 @@ export default class Multiplayer extends Game {
                 } else {
                     this.changeState(Multiplayer.STATES.END_FAILURE);
                 }
+                Emitter.emit("mult-close");
         }
     }
 
@@ -143,12 +183,38 @@ export default class Multiplayer extends Game {
     }
 
     static sendPlayerSuccess() {
-        console.log("PLAYER_SUCCESS");
         Emitter.emit("mult-send", {event: SERVER_PLAYER_SUCCESS});
     }
 
     static sendPlayerFailure() {
-        console.log("PLAYER_FAILURE");
         Emitter.emit("mult-send", {event: SERVER_PLAYER_FAILURE});
+    }
+
+    scaleLineToDefault(jsonLine) {
+        if (!jsonLine) {
+            return;
+        }
+
+        jsonLine.base_point.x = Math.round(jsonLine.base_point.x / this._scale);
+        jsonLine.base_point.y = Math.round(jsonLine.base_point.y / this._scale);
+
+        jsonLine.points.forEach((point) => {
+            point.x = Math.round(point.x / this._scale);
+            point.y = Math.round(point.y / this._scale);
+        });
+    }
+
+    scaleLineToCurrent(jsonLine) {
+        if (!jsonLine) {
+            return;
+        }
+
+        jsonLine.base_point.x = Math.round(jsonLine.base_point.x * this._scale);
+        jsonLine.base_point.y = Math.round(jsonLine.base_point.y * this._scale);
+
+        jsonLine.points.forEach((point) => {
+            point.x = Math.round(point.x * this._scale);
+            point.y = Math.round(point.y * this._scale);
+        });
     }
 }

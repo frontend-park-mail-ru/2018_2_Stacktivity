@@ -79,7 +79,6 @@ export default class Game extends Emitter {
             width: width,
             height: height
         };
-
         this._scale = width / DEFAULT_WINDOW.width;
     }
 
@@ -104,6 +103,18 @@ export default class Game extends Emitter {
                 type: circle.type,
                 color: circle.color
             });
+        });
+    }
+
+    resize(resizeScale) {
+        if (!this._level) {
+            return;
+        }
+
+        this._level.circles.forEach((circle) => {
+            circle.x = Math.round(circle.x * resizeScale);
+            circle.y = Math.round(circle.y * resizeScale);
+            circle.r = Math.round(circle.r * resizeScale);
         });
     }
 

@@ -3,7 +3,7 @@
 
 <main class="content content_with-borders">
     <div class="leaderboard">
-        <div class="leaderboard__header">Username</div>
+        <div class="leaderboard__header"  style="grid-column-start: 2;">Username</div>
         <div class="leaderboard__header">Scores</div>
         <div class="leaderboard__body">
             {{> LeaderboardList}}
@@ -11,8 +11,9 @@
     </div>
 
     <ul class="pagination leaderboard__pagination">
-        <li class="pagination__button"><a href="#" id="prev_page_link"><-</a></li>
-        <li class="pagination__button"><a href="#" id="next_page_link">-></a></li>
+        <li class="pagination__button"><a href="#" id="prev_page_link"><i class="fa fa-chevron-left"></i></a></li>
+        <li class="pagination__button js-leaderboard-page">0</li>
+        <li class="pagination__button"><a href="#" id="next_page_link"><i class="fa fa-chevron-right"></i></a></li>
     </ul>
 </main>
 

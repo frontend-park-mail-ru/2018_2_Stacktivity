@@ -65,6 +65,10 @@ export class Emitter {
 
         return this;
     }
+
+    wipe(event) {
+        this._listeners[event] = [];
+    }
 }
 
 export default new Emitter();

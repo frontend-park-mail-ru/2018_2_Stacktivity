@@ -13,10 +13,13 @@ export default class LeaderboardController {
      */
     constructor() {
         this._currentPage = 1;
+        this._lastContentPage = 1;
 
         Emitter.on("leaderboard-next-page", this._nextPage.bind(this), false);
         Emitter.on("leaderboard-prev-page", this._prevPage.bind(this), false);
         Emitter.on("leaderboard-set-page", this._setPage.bind(this), false);
+        Emitter.on("leaderboard-open-last", this._loadLast.bind(this), false);
+        Emitter.on("done-leaderboard-fetch-page", this._updateLast.bind(this), false);
         Emitter.on("leaderboard-load", this._loadPage.bind(this), false);
     }
 
@@ -27,6 +30,30 @@ export default class LeaderboardController {
      */
     _loadPage() {
         Emitter.emit("leaderboard-fetch", this._currentPage);
+    }
+
+    /**
+     * @return {undefined}
+     * Emits event on Leaderboard Model
+     * @private
+     */
+    _loadLast() {
+        this._currentPage = this._lastContentPage;
+        Emitter.emit("leaderboard-fetch", this._lastContentPage);
+    }
+
+    /**
+     * @return {undefined}
+     * @param {string|number} page page number
+     * Set page counter to stable
+     * @private
+     */
+    _updateLast(page) {
+        document.getElementsByClassName("js-leaderboard-page")[0].innerHTML = page;
+
+        if (this._lastContentPage < page) {
+            this._lastContentPage = page;
+        }
     }
 
     /**

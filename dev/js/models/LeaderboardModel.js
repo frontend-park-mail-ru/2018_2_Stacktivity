@@ -28,11 +28,31 @@ export default class LeaderboardModel {
                 if (resp.status === 200) {
                     return resp.json();
                 }
-
-                Emitter.emit("error"); // TODO errors
             }).
             then((data) => {
-                Emitter.emit("done-leaderboard-fetch", data);
+                if (data.length === 0) {
+                    Emitter.emit("leaderboard-open-last");
+                } else {
+                    data = data.map((user, index) => {
+                        if (leaderboardLimit * (page - 1) + index + 1 === 1) {
+                            user.first = true;
+                        }
+
+                        if (leaderboardLimit * (page - 1) + index + 1 === 2) {
+                            user.second = true;
+                        }
+
+                        if (leaderboardLimit * (page - 1) + index + 1 === 3) {
+                            user.third = true;
+                        }
+
+                        user.place = leaderboardLimit * (page - 1) + index + 1;
+                        return user;
+                    });
+
+                    Emitter.emit("done-leaderboard-fetch", data);
+                    Emitter.emit("done-leaderboard-fetch-page", page);
+                }
             });
     }
 }

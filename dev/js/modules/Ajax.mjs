@@ -30,8 +30,8 @@ export default class AjaxModule {
                 method: method,
                 mode: "cors",
                 credentials: "include",
-            }).catch((err) => {
-                Emitter.emit("error", err);
+            }).catch(() => {
+                Emitter.emit("warn", "Can't recieve server response");
             });
         } else {
             let headers = {}, sendBody = "";
@@ -49,8 +49,8 @@ export default class AjaxModule {
                 body: sendBody,
                 mode: "cors",
                 credentials: "include",
-            }).catch((err) => {
-                Emitter.emit("error", err);
+            }).catch(() => {
+                Emitter.emit("warn", "Can't re  cieve server response");
             });
         }
     }

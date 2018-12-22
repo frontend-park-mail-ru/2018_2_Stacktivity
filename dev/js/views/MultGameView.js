@@ -9,6 +9,7 @@ import FormController from "../controllers/FormController.mjs";
 import Emitter from "../modules/Emitter.js";
 import {WSPathMultiplayer} from "../config";
 import Multiplayer from "../components/game/game_modes/Multiplayer";
+import Router from "../modules/Router.mjs";
 
 /**
  * View of the game page
@@ -50,7 +51,7 @@ export default class MultGameView extends BaseView {
         }, false);
 
         Emitter.on("mult-render-game", () => {
-            this.renderGame()
+            this.renderGame();
         }, false);
 
         Emitter.on("mult-enemy-connected", (enemy) => {
@@ -62,12 +63,25 @@ export default class MultGameView extends BaseView {
                 Emitter.emit("mult-render-game");
             }, false
         );
+
+        Emitter.on("start-timer", (time) => {
+            const timer = this.viewSection.getElementsByClassName("js-game-timer")[0];
+            let iId = setInterval(function () {
+                time -= 1000;
+                if (time < 0) {
+                    clearInterval(iId);
+                } else {
+                    timer.innerHTML = `${time / 1000}`;
+                }
+            }, 1000);
+        }, false);
+
+        Emitter.on("done-check-user-login", this.checkLogin.bind(this));
     }
 
     setFirstPlayer(user) {
         this._players.first = {
-            username: user.username,
-            score: user.score
+            username: user.username
         };
     }
 
@@ -76,36 +90,53 @@ export default class MultGameView extends BaseView {
      * @return {undefined}
      */
     show() {
-        if (!this._players.first) {
-            Emitter.on("done-get-user", (user) => {
-                this.setFirstPlayer(user);
-            });
-
-            Emitter.emit("get-user");
-        }
-
-        this._ws.connect(WSPathMultiplayer);
-        this._game = new Multiplayer();
-
-        // this.viewSection.innerHTML = `
-        //     <div class="game-loading">
-        //         <img src="https://i.redd.it/u0tcjayept5z.gif" />
-        //     </div>
-        // `;
-
-        // setTimeout(() => {
-        //     console.log("enemy-commected emit");
-        //     Emitter.emit("info", "Other player has connected");
-        //     Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
-        // }, 10000);
-            Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
-
         super.show();
+
+        if (this._players.first) {
+            this._ws.connect(WSPathMultiplayer);
+            this._game = new Multiplayer();
+
+            this.viewSection.innerHTML = Handlebars.templates.GameLoading();
+
+            // setTimeout(() => {
+            //     console.log("enemy-commected emit");
+            //     Emitter.emit("info", "Other player has connected");
+            //     Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
+            // }, 10000);
+
+            //Emitter.emit("mult-enemy-connected", {username: "ere", score: 12});
+        } else {
+            Emitter.emit("check-user-login");
+        }
+    }
+
+    /**
+     * Callback on checking login
+     * @param {boolean} isLogin true is user is logged in
+     * @return {undefined}
+     */
+    checkLogin(isLogin) {
+        if (!isLogin) {
+            Emitter.emit("warn", "You must login to preform this action");
+            Router.open("/");
+        } else {
+            if (!this._players.first) {
+                Emitter.on("done-get-user", (user) => {
+                    this.setFirstPlayer(user);
+                    this.show();
+                });
+
+                Emitter.emit("get-user");
+            }
+        }
     }
 
     hide() {
         super.hide();
+
         this._ws.close();
+        Emitter.wipe("mult-message");
+
         this.viewSection.innerHTML = "";
     }
 
@@ -130,12 +161,12 @@ export default class MultGameView extends BaseView {
             canvas.width = width;
         }
 
-        canvas.id = "canvas-single";
+        canvas.id = "canvas-mult";
         canvas.style = "border-left: 4px solid #00000082;border-right: 3px solid #00000082;display: block;box-shadow: inset 0 0 20px #00000085;position: relative;background: #fff;";
 
         this.viewSection.getElementsByClassName("js-canvas-wrapper")[0].appendChild(canvas);
 
-        this._game.init(this._ws, canvas, {width: canvas.width, height: canvas.height});
+        this._game.init(canvas, {width: canvas.width, height: canvas.height});
         this._game.start();
     }
 
@@ -158,15 +189,17 @@ export default class MultGameView extends BaseView {
         window.addEventListener("resize", () => {
             const height = window.innerHeight;
             const width = window.innerWidth;
-            const canvas = document.getElementById("canvas-single");
+            const canvas = document.getElementById("canvas-mult");
 
-            if (width / height > 16 / 9) {
-                canvas.width = height * 16 / 9;
-                canvas.height = height;
+            if (canvas) {
+                if (width / height > 16 / 9) {
+                    canvas.width = height * 16 / 9;
+                    canvas.height = height;
 
-            } else {
-                canvas.height = width * 9 / 16;
-                canvas.width = width;
+                } else {
+                    canvas.height = width * 9 / 16;
+                    canvas.width = width;
+                }
             }
         });
     }

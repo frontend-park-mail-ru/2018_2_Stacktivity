@@ -1,6 +1,18 @@
 /* ~~~~ reset styles import ~~~~~ */
 @import "reset.css";
 
+/* latin */
+@font-face {
+  font-family: 'Quantico';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Quantico'), local('Quantico-Regular'), url(/resources/Quantico/Quantico-Regular.ttf);
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+$fa-font-path: "~font-awesome/fonts";
+@import '~font-awesome/scss/font-awesome.scss';
+
 /* ~~~~~~ global variables ~~~~~~ */
 $main-width-content: 70vmin;
 
@@ -102,6 +114,7 @@ $circle-color-grey: #aaaaaa;
     border-right: 0.3vmin #fff solid;
     border-radius: 8vmin;
     width: 90vmin;
+    background: url("/resources/opacity.png");
 
     @media (min-aspect-ratio: 2/3) {
       width: $main-width-content;
@@ -113,7 +126,6 @@ $circle-color-grey: #aaaaaa;
 }
 
 .content-wrapper {
-  overflow: hidden;
   display: flex;
   align-items: center;
   height: 60vh;
@@ -391,4 +403,18 @@ $chat-room-public: #900;
   flex-direction: column;
   align-items: center;
   height: 100%;
+  opacity: 0;
+  transition: opacity 0.2s;
+  transition-timing-function: ease;
+}
+
+#rootElem section.js-show {
+  opacity: 1;
+}
+
+
+.js-circle-animation {
+  top: 0;
+  left: 0;
+  z-index: -1;
 }

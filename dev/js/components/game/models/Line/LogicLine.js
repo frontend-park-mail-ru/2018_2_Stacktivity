@@ -26,6 +26,15 @@ export default class LogicLine extends Line {
         }
     }
 
+    finishLine() {
+        this._inputting = false;
+
+        if (!this._inputting) {
+            this._originLine = this._beginLine.copy();
+            this.constructEndLine();
+        }
+    }
+
     addPoint(point, relative) {
         if (!this._inputting || Point.equal(point, this.getLastPoint())) {
             return;

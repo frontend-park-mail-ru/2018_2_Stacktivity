@@ -78,6 +78,7 @@ class Router {
 
         if (viewEntity === null) {
             viewEntity = new View();
+            this._routes[path] = {View, viewEntity};
         }
 
         if (page) {
@@ -95,7 +96,6 @@ class Router {
             this._updateRender();
         }
 
-        this._routes[path] = {View, viewEntity};
     }
 
     /**

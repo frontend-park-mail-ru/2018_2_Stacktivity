@@ -2,3 +2,4 @@
 node_modules
 out
 dev/js/handlebars.precompile.js
+public/static_files_list.js

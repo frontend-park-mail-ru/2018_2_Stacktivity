@@ -37,6 +37,9 @@ export default class BaseView {
      */
     show() {
         this.viewSection.style.display = 'flex';
+        setTimeout(() => {
+            this.viewSection.classList.add("js-show");
+        }, 200);
     }
 
     /**
@@ -44,7 +47,10 @@ export default class BaseView {
      * @return {undefined}
      */
     hide() {
-        this.viewSection.style.display = 'none';
+        this.viewSection.classList.remove("js-show");
+        setTimeout(() => {
+            this.viewSection.style.display = 'none';
+        }, 200);
     }
 
     /**
