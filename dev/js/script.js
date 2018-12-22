@@ -183,3 +183,17 @@ function run() {
     }
     window.requestAnimationFrame(run);
 }
+
+document.getElementsByClassName("js-donate_section")[0].style.display = "none";
+const don = document.getElementsByClassName("js-donate_link");
+if (don) {
+    don[0].addEventListener("click", () => {
+        event.preventDefault();
+        const donate = document.getElementsByClassName("js-donate_section")[0];
+        if (donate.style.display === "none") {
+            donate.style.display = "block";
+        } else {
+            donate.style.display = "none";
+        }
+    });
+}
