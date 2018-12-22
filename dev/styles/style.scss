@@ -418,3 +418,48 @@ $chat-room-public: #900;
   left: 0;
   z-index: -1;
 }
+
+.vk_link {
+  position: absolute;
+  background: #597da3;
+  color: #fff;
+  bottom: 1vmin;
+  left: 1vmin;
+  font-size: 3vmin;
+  opacity: 0.7;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s, transform 0.5s;
+  transition-timing-function: cubic-bezier(0.86, -1.21, 0.13, 2.05);
+
+  &:hover, &:focus {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+.js-donate_link {
+  position: absolute;
+  background: #ddd url("/resources/yandex_dengi_product_icon_rgb.png") 50% 50% no-repeat;
+  background-size: 4vmin 4vmin;
+  bottom: 1vmin;
+  left: 8vmin;
+  opacity: 0.7;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s, transform 0.5s;
+  transition-timing-function: cubic-bezier(0.86, -1.21, 0.13, 2.05);
+  cursor: pointer;
+
+  &:hover, &:focus {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+.js-donate_section {
+  position: absolute;
+  bottom: 8vmin;
+  left: 1vmin;
+  display: none;
+}
