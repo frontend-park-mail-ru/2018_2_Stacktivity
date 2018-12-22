@@ -24,8 +24,6 @@ export default class GameView extends BaseView {
         this._navigationController = new NavigationController();
         this.registerEvents();
 
-        this._ws = new WebSocks("game");
-
         this._player = null;
 
         Emitter.on("single-player-got-scores", (user) => {
@@ -67,7 +65,6 @@ export default class GameView extends BaseView {
             Emitter.emit("get-user");
         }
 
-        this._ws.connect(WSPathSingleplayer);
         this._game = new Single();
 
         Emitter.emit("single-render-game");
@@ -75,7 +72,6 @@ export default class GameView extends BaseView {
     }
 
     hide() {
-        this._ws.close();
         Emitter.wipe("game-message");
         super.hide();
     }
