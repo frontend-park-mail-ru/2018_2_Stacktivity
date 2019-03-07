@@ -3,7 +3,7 @@
  */
 
 import Emitter from "../modules/Emitter.js";
-import AjaxModule from "../modules/Ajax.mjs";
+import AjaxModule from "../modules/Ajax.js";
 import {leaderboardLimit} from "../config.js";
 
 /**

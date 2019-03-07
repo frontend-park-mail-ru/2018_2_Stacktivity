@@ -2,8 +2,8 @@
  * @module models/UserModel
  */
 
-import AjaxModule from "../modules/Ajax.mjs";
-import Emitter from "../modules/Emitter.js";
+import AjaxModule from "../modules/Ajax";
+import Emitter from "../modules/Emitter";
 
 /**
  * User model

@@ -1,8 +1,7 @@
 /** @module modules/Ajax */
 
 const basePath = "https://blep.me/api";
-
-import Emitter from "./Emitter.js";
+import Emitter from "./Emitter";
 
 /** AjaxModule is providing http requests to the backend server */
 export default class AjaxModule {
