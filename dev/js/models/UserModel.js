@@ -109,12 +109,12 @@ class UserModel {
         return AjaxModule.doPut({path: `/user/${UserModel.__data.id}`, body: data}).
             then((resp) => {
                 if (resp.status === 200) {
-                    // Emitter.emit("update-success", resp);
+                    Emitter.emit("update-success", resp);
                     Emitter.emit("wipe-views");
                     UserModel.__data = {};
                 }
 
-                // Emitter.emit("update-error", resp.status);
+                Emitter.emit("update-error", resp.status);
             });
     }
 

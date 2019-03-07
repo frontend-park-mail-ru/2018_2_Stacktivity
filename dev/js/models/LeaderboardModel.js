@@ -29,7 +29,9 @@ export default class LeaderboardModel {
                     return resp.json();
                 }
 
-                Emitter.emit("error"); // TODO errors
+                if (resp.status === 500) {
+                    Emitter.emit("leaderboard-error", "Bad request")
+                }
             }).
             then((data) => {
                 Emitter.emit("done-leaderboard-fetch", data);
