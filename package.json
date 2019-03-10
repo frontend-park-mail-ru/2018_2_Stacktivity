@@ -20,12 +20,9 @@
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.5",
-    "autoprefixer": "^9.3.1",
+    "@babel/polyfill": "^7.2.5",
     "babel-loader": "^8.0.4",
-    "babel-plugin-transform-remove-console": "^6.9.4",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-es2016": "^6.24.1",
+    "autoprefixer": "^9.3.1",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "css-loader": "^1.0.0",
@@ -42,7 +39,6 @@
     "jest": "^24.3.0",
     "bili": "^3.1.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "jest-fetch-mock": "^2.1.1",
     "node-sass": "^4.10.0",
     "postcss-preset-env": "^6.4.0",
     "postcss-simple-trig": "^0.1.4",
@@ -50,10 +46,5 @@
     "sass-loader": "^7.1.0",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2"
-  },
-  "jest": {
-    "setupFiles": [
-      "./setupJest.js"
-    ]
   }
 }

@@ -108,13 +108,13 @@ export default class UserModel {
      * @return {Promise}
      * Send updated data to server
      */
-    update(data) {
+    update(data, {updateSuccess = "update-success"} = {}) {
         return AjaxModule.doPut({path: `/user/${this._data.id}`, body: data}).
             then((resp) => {
                 if (resp.status === 200) {
-                    Emitter.emit("update-success", resp);
-                    Emitter.emit("wipe-views");
                     this._data = {};
+                    Emitter.emit(updateSuccess, resp);
+                    Emitter.emit("wipe-views");
                 }
 
                 Emitter.emit("update-error", resp.status);
